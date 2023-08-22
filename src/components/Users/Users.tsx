@@ -1,22 +1,29 @@
-import { UserType, UsersType } from "../../redux/usersReducer"
-import s from "./Users.module.css"
-import AvatarUnknownUser from "../../imgs//UnknownUser.png";
+import axios from "axios";
 import { useEffect } from "react";
+import AvatarUnknownUser from "../../imgs//UnknownUser.png";
+import { UserType, UsersType } from "../../redux/usersReducer";
+import s from "./Users.module.css";
 
 export type UsersPropsType = {
     usersData: UsersType
     dispatchFollow: (userId: number) => void
-    dispatchNewUsers: (users: UserType[])=> void
+    dispatchNewUsers: (users: UserType[]) => void
 }
 
+type UsersDomainType = UsersType
+
+export type BaseResponseType<D = {}> = {
+    data: D;
+};
+
 export const Users = ({ usersData, dispatchFollow, dispatchNewUsers }: UsersPropsType) => {
+    useEffect(() => {
+        axios.get("https://social-network.samuraijs.com/api/1.0/users").then((res: BaseResponseType<{ items: UserType[] }>) => {
+            console.log(res)
+            dispatchNewUsers(res.data.items.map((u) => ({ ...u, location: { country: "Belarus", city: "Minsk" } })))
+        })
+    }, [])
 
-    useEffect(()=>{dispatchNewUsers( [{ id: 1, fullName: "Artur", userAvatar: AvatarUnknownUser, status: "I love work!", location: { city: "Astana", country: "Kazakhstan" }, follow: true },
-    { id: 2, fullName: "Matvey", userAvatar: AvatarUnknownUser, status: "My life my rules", location: { city: "Tbilisi", country: "Georgia" }, follow: false },
-    { id: 3, fullName: "Maria", userAvatar: AvatarUnknownUser, status: "Live without regrets", location: { city: "Altai", country: "Kazakhstan" }, follow: true },])},[])
-
-     
-     
     return <div>
         {usersData.users.map(u => {
             const onClickFollow = () => {
@@ -25,15 +32,15 @@ export const Users = ({ usersData, dispatchFollow, dispatchNewUsers }: UsersProp
             return (<div key={u.id}>
                 <span>
                     <div>
-                        <img className={s.userAvatar} src={u.userAvatar} alt="#" />
+                        <img className={s.userAvatar} src={u.photos.small == null ? AvatarUnknownUser : u.photos.small} alt="#" />
                     </div>
                     <div>
-                        <button onClick={onClickFollow}>{u.follow ? "Follow" : "Unfollow"}</button>
+                        <button onClick={onClickFollow}>{u.followed ? "Follow" : "Unfollow"}</button>
                     </div>
                 </span>
                 <span>
                     <span>
-                        <div>{u.fullName}</div>
+                        <div>{u.name}</div>
                         <div>{u.status}</div>
                     </span>
                     <span>
@@ -41,10 +48,11 @@ export const Users = ({ usersData, dispatchFollow, dispatchNewUsers }: UsersProp
                         <div>{u.location.city}</div>
                     </span>
                 </span>
-    
-            </div>)}
+
+            </div>)
+        }
         )
         }
-        
+
     </div>
 }

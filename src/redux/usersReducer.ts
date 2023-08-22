@@ -12,11 +12,11 @@ export type LocationUserType = {
 
 export type UserType = {
     id: number
-    fullName: string
-    userAvatar: string
+    name: string
+    photos: {small:string | null, large:string | null}
     status: string
     location: LocationUserType
-    follow: boolean
+    followed: boolean
 }
 
 
@@ -37,7 +37,8 @@ type UsersAtionType = FollowACType | SetUsersACACType
 export const usersReducer = (state = initialState, action: UsersAtionType): UsersType => {
     switch (action.type) {
         case FOLLOW:
-            return { ...state, users: state.users.map(u => u.id === action.payload.userId ? { ...u, follow: !u.follow } : u) }
+            
+            return { ...state, users: state.users.map(u => u.id === action.payload.userId ? { ...u, followed: !u.followed } : u) }
 
         case SET_USERS:
             

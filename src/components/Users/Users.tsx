@@ -24,6 +24,7 @@ export const Users = ({ usersData, dispatchFollow, dispatchNewUsers }: UsersProp
         })
     }, [])
 
+
     return <div>
         {usersData.users.map(u => {
             const onClickFollow = () => {

@@ -3,6 +3,7 @@ import { Users } from "./Users"
 import { useSelector } from "react-redux"
 import { ReducersType } from "../../redux/reduxStore"
 import { UserType, UsersType, followAC, setUsersAC } from "../../redux/usersReducer"
+import { UsersClass } from "./UsersClass"
 
 export const UsersContainer = () => {
 
@@ -17,5 +18,5 @@ export const UsersContainer = () => {
         }
     
 
-    return <Users usersData={usersData} dispatchFollow={dispatchFollow} dispatchNewUsers={dispatchNewUsers}/>
+    return <UsersClass usersData={usersData} dispatchFollow={dispatchFollow} dispatchNewUsers={dispatchNewUsers}/>
 }

@@ -16,9 +16,7 @@ export type BaseResponseType<D = {}> = {
 
 export class UsersClass extends React.Component<UsersPropsType> {
 
-    constructor(props: UsersPropsType) {
-        super(props);
-        
+    componentDidMount(): void {
         axios.get("https://social-network.samuraijs.com/api/1.0/users").then((res: BaseResponseType<{ items: UserType[] }>) => {
             const modifiedUsers = res.data.items.map(u => ({ ...u, location: { country: "Belarus", city: "Minsk" } }));
             this.props.dispatchNewUsers(modifiedUsers);

@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux"
 import { Users } from "./Users"
 import { useSelector } from "react-redux"
-import { ReducersType } from "../../redux/reduxStore"
-import { UserType, UsersType, followAC, setUsersAC } from "../../redux/usersReducer"
+import { ReducersType } from "redux/reduxStore"
+import { UserType, UsersType, followAC, setCurrentPageAC, setUsersAC } from "redux/usersReducer"
 import { UsersClass } from "./UsersClass"
 
 export const UsersContainer = () => {
@@ -16,7 +16,10 @@ export const UsersContainer = () => {
         const dispatchNewUsers = (users: UserType[]) => {
             dispatch(setUsersAC(users))
         }
+        const dispatchNewCurrentPage = (currentPage: number) => {
+            dispatch(setCurrentPageAC(currentPage))
+        }
     
 
-    return <UsersClass usersData={usersData} dispatchFollow={dispatchFollow} dispatchNewUsers={dispatchNewUsers}/>
+    return <UsersClass usersData={usersData} dispatchFollow={dispatchFollow} dispatchNewUsers={dispatchNewUsers} dispatchNewCurrentPage={dispatchNewCurrentPage}/>
 }

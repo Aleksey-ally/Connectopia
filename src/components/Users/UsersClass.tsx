@@ -9,6 +9,7 @@ export type UsersPropsType = {
     dispatchFollow: (userId: number) => void
     dispatchNewUsers: (users: UserType[]) => void
     dispatchNewCurrentPage: (currentPage: number) => void
+    dispatchNewTotalUsersCount: (totalUsersCount: number) => void
 }
 
 export type BaseResponseType<D = {}> = {
@@ -25,7 +26,7 @@ export class UsersClass extends React.Component<UsersPropsType> {
     componentDidMount(): void {
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersData.pageSize}&page=${this.props.usersData.currentPage}`).then((res: BaseResponseType<UsersResponseType>) => {
             this.props.dispatchNewUsers(res.data.items.map(u => ({ ...u, location: { country: "Belarus", city: "Minsk" } })));
-            this.props.usersData.totalUsersCount = res.data.totalCount
+            this.props.dispatchNewTotalUsersCount(res.data.totalCount)
         });
     }
 

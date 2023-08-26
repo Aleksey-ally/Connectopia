@@ -1,5 +1,3 @@
-import AvatarUnknownUser from "../imgs//UnknownUser.png";
-
 
 export type UsersType = {
     users: UserType[]
@@ -26,6 +24,7 @@ export type UserType = {
 const FOLLOW = "FOLLOW"
 const SET_USERS = "SET-USERS"
 const SET_CURRENT_PAGE = "SET-CURRENT-PAGE"
+const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT"
 
 const initialState: UsersType = {
     users: [],
@@ -35,7 +34,7 @@ const initialState: UsersType = {
 }
 
 
-type UsersAtionType = FollowACType | SetUsersACType | SetCurrentPageACType
+type UsersAtionType = FollowACType | SetUsersACType | SetCurrentPageACType | setTotalUsersCountACType
 
 
 export const usersReducer = (state = initialState, action: UsersAtionType): UsersType => {
@@ -44,16 +43,19 @@ export const usersReducer = (state = initialState, action: UsersAtionType): User
 
             return {
                 ...state,
-                users: state.users.map(u => u.id === action.payload.userId ? {...u, followed: !u.followed} : u)
+                users: state.users.map(u => u.id === action.payload.userId ? { ...u, followed: !u.followed } : u)
             }
 
         case SET_USERS:
 
-            return {...state, users: action.payload.users}
+            return { ...state, users: action.payload.users }
 
         case SET_CURRENT_PAGE:
 
-            return {...state, currentPage: action.payload.currentPage}
+            return { ...state, currentPage: action.payload.currentPage }
+
+            case SET_TOTAL_USERS_COUNT:
+                return {...state, totalUsersCount : action.payload.totalUsersCount}
 
         default:
             return state
@@ -63,6 +65,7 @@ export const usersReducer = (state = initialState, action: UsersAtionType): User
 export type FollowACType = ReturnType<typeof followAC>
 export type SetUsersACType = ReturnType<typeof setUsersAC>
 export type SetCurrentPageACType = ReturnType<typeof setCurrentPageAC>
+export type setTotalUsersCountACType = ReturnType<typeof setTotalUsersCountAC>
 
 export const followAC = (userId: number) => ({
     type: FOLLOW,
@@ -82,5 +85,12 @@ export const setCurrentPageAC = (currentPage: number) => ({
     type: SET_CURRENT_PAGE,
     payload: {
         currentPage
+    }
+} as const)
+
+export const setTotalUsersCountAC = (totalUsersCount: number) => ({
+    type: SET_TOTAL_USERS_COUNT,
+    payload: {
+        totalUsersCount
     }
 } as const)

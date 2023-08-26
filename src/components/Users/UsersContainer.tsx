@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux"
 import { Users } from "./Users"
 import { useSelector } from "react-redux"
 import { ReducersType } from "redux/reduxStore"
-import { UserType, UsersType, followAC, setCurrentPageAC, setUsersAC } from "redux/usersReducer"
+import { UserType, UsersType, followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC } from "redux/usersReducer"
 import { UsersClass } from "./UsersClass"
 
 export const UsersContainer = () => {
@@ -19,7 +19,10 @@ export const UsersContainer = () => {
         const dispatchNewCurrentPage = (currentPage: number) => {
             dispatch(setCurrentPageAC(currentPage))
         }
+        const dispatchNewTotalUsersCount = (totalUsersCount: number) => {
+            dispatch(setTotalUsersCountAC(totalUsersCount))
+        }
     
 
-    return <UsersClass usersData={usersData} dispatchFollow={dispatchFollow} dispatchNewUsers={dispatchNewUsers} dispatchNewCurrentPage={dispatchNewCurrentPage}/>
+    return <UsersClass usersData={usersData} dispatchFollow={dispatchFollow} dispatchNewUsers={dispatchNewUsers} dispatchNewCurrentPage={dispatchNewCurrentPage} dispatchNewTotalUsersCount={dispatchNewTotalUsersCount}/>
 }

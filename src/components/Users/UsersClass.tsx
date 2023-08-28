@@ -1,7 +1,7 @@
 import axios from "axios";
-import React, { ChangeEvent } from "react";
+import React from "react";
 import AvatarUnknownUser from "../../imgs//UnknownUser.png";
-import { UserType, UsersType } from "redux/usersReducer";
+import {UsersType, UserType} from "redux/usersReducer";
 import s from "./Users.module.css";
 
 export type UsersPropsType = {
@@ -34,6 +34,13 @@ export class UsersClass extends React.Component<UsersPropsType> {
         this.props.dispatchFollow(userId);
     }
 
+    onClickPageHandler = (page: number) => {
+        this.props.dispatchNewCurrentPage(page)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersData.pageSize}&page=${page}`).then((res: BaseResponseType<UsersResponseType>) => {
+            this.props.dispatchNewUsers(res.data.items.map(u => ({ ...u, location: { country: "Belarus", city: "Minsk" } })));
+            this.props.dispatchNewTotalUsersCount(res.data.totalCount)
+        });
+    }
 
     render() {
 
@@ -44,15 +51,13 @@ export class UsersClass extends React.Component<UsersPropsType> {
             pages.push(i)
         }
 
-        const onClickPageHandler = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-            this.props.dispatchNewCurrentPage(+e.currentTarget.innerHTML)
-        }
+       
 
         return (
             <div>
                 <div>
                     {pages.map(p =>
-                        <span className={this.props.usersData.currentPage === p ? s.selectedPage : ""} onClick={onClickPageHandler}>
+                        <span className={this.props.usersData.currentPage === p ? s.selectedPage : ""} onClick={()=>this.onClickPageHandler(p)}>
                             {p}
                         </span>
                     )}

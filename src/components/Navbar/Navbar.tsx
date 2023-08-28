@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { UsersDataType } from "../../redux/messagesReducer";
-import { ReducersType } from '../../redux/reduxStore';
+import { UsersDataType } from "redux/messagesReducer";
+import { ReducersType } from 'redux/reduxStore';
 import { FriendsSection } from "./FriendsSection/FriendsSection";
 import s from './Navbar.module.css';
 

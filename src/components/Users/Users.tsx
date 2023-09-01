@@ -17,21 +17,22 @@ export const Users = ({ usersData, onClickFollow, onClickPageHandler }: UsersPro
 
     const pagesCount = Math.ceil(usersData.totalUsersCount / usersData.pageSize)
     const pages: number[] = []
-
-    for (let i = 1; i <= pagesCount; i++) {
+    for (let i = 1; i <= 10; i++) {
         pages.push(i)
     }
+    // pages.push(pagesCount)
 
     return (
         <div className={s.users}>
             <div>
                 <div>
                     {pages.map(p =>
-                        <span className={usersData.currentPage === p ? s.selectedPage : ""}
+                        <span className={`${s.page} ${usersData.currentPage === p ? s.selectedPage : ""}`}
                             onClick={() => onClickPageHandler(p)}>
-                            {p}
+                            {p} 
                         </span>
                     )}
+                    <span className={`${s.page} ${usersData.currentPage === pagesCount ? s.selectedPage : ""}`} onClick={() => onClickPageHandler(pagesCount)}>...{pagesCount}</span>
                 </div>
                 {usersData.users.map(u => (
                     <div key={u.id}>

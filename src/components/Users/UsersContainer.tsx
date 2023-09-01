@@ -1,10 +1,10 @@
 import axios from "axios"
-import { Preloader } from "components/common/Preloader/Preloader"
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { ReducersType } from "redux/reduxStore"
-import { UserType, UsersType, followAC, setCurrentPageAC, setFetchingAC, setTotalUsersCountAC, setUsersAC } from "redux/usersReducer"
+import { UserType, UsersType, follow, setCurrentPage, setFetching, setTotalUsersCount, setUsers } from "redux/usersReducer"
 import { Users } from "./Users"
+import { Preloader } from "components/common/Preloader/Preloader"
 
 export type UsersPropsType = {
     usersData: UsersType
@@ -62,19 +62,19 @@ export const UsersContainer = () => {
     const dispatch = useDispatch()
 
     const dispatchFollow = (userId: number) => {
-        dispatch(followAC(userId))
+        dispatch(follow(userId))
     }
     const dispatchNewUsers = (users: UserType[]) => {
-        dispatch(setUsersAC(users))
+        dispatch(setUsers(users))
     }
     const dispatchNewCurrentPage = (currentPage: number) => {
-        dispatch(setCurrentPageAC(currentPage))
+        dispatch(setCurrentPage(currentPage))
     }
     const dispatchNewTotalUsersCount = (totalUsersCount: number) => {
-        dispatch(setTotalUsersCountAC(totalUsersCount))
+        dispatch(setTotalUsersCount(totalUsersCount))
     }
     const dispatchFetch = (isFething: boolean) => {
-        dispatch(setFetchingAC(isFething))
+        dispatch(setFetching(isFething))
     }
 
     return <UsersAPIClassContainer usersData={usersData} dispatchFollow={dispatchFollow} dispatchNewUsers={dispatchNewUsers} dispatchNewCurrentPage={dispatchNewCurrentPage} dispatchNewTotalUsersCount={dispatchNewTotalUsersCount} dispatchFetch={dispatchFetch} />

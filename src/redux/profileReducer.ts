@@ -1,7 +1,7 @@
 const ADD_POST = "ADD-POST";
 const CHANGE_POST_TEXT = "CHANGE-POST-TEXT";
 
-export type ActionType = AddPostActionType | ChangePostTextActionType
+export type ActionType = AddPostType | ChangePostTextType
 
 
 export type ProfileDataType = {
@@ -51,15 +51,13 @@ export const profileReducer = (state = initialState, action: ActionType): Profil
 };
 
 
-export type AddPostActionType = ReturnType<typeof addPostAC>
+type AddPostType = ReturnType<typeof addPost>
+type ChangePostTextType = ReturnType<typeof changePostText>
 
 
-export type ChangePostTextActionType = ReturnType<typeof changePostTextAC>
+export const addPost = () => ({ type: ADD_POST } as const);
 
-
-export const addPostAC = () => ({ type: ADD_POST } as const);
-
-export const changePostTextAC = (newText: string) =>
+export const changePostText = (newText: string) =>
 ({
     type: CHANGE_POST_TEXT,
     payload: {

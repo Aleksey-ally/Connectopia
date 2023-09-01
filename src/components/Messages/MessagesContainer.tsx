@@ -1,7 +1,7 @@
-import { connect, useDispatch, useSelector } from "react-redux";
-import { MessagesReducerActionType, addMessageAC, changeMessageTextAC, MessagesDataType } from "../../redux/messagesReducer";
-import { ReducersType } from "../../redux/reduxStore";
-import { Messages } from "./Messages";
+import {connect} from "react-redux";
+import {addMessage, changeMessageText, MessagesDataType, MessagesReducerActionType} from "redux/messagesReducer";
+import {ReducersType} from "redux/reduxStore";
+import {Messages} from "./Messages";
 
 
 // export const MessagesContainer = () => {
@@ -36,15 +36,15 @@ const mapStateToProps = (state: ReducersType): MapStateToPropsType => {
     }
 }
 
-const mapDispatchtoProps = (dispatch: (action: MessagesReducerActionType) => void): MapDispatchtoPropsType => {
+const mapDispatchToProps = (dispatch: (action: MessagesReducerActionType) => void): MapDispatchtoPropsType => {
     return {
         dispatchNewTextInput: (newText: string) => {
-            dispatch(changeMessageTextAC(newText))
+            dispatch(changeMessageText(newText))
         },
         addMessage: () => {
-            dispatch(addMessageAC())
+            dispatch(addMessage())
         }
     }
 }
 
-export const MessagesContainer = connect(mapStateToProps, mapDispatchtoProps)(Messages)
+export const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(Messages)

@@ -7,8 +7,8 @@ const ADD_MESSAGE = "ADD-MESSAGE";
 const CHANGE_MESSAGE_TEXT = "CHANGE-MESSAGE-TEXT";
 
 export type MessagesReducerActionType =
-  | ChangeMessageTextActionType
-  | AddMessageActionType;
+  | ChangeMessageTextType
+  | AddMessageType;
 
 export type MessagesDataType = {
   messagesUsersData: UsersDataType[];
@@ -75,15 +75,12 @@ export const messagesReducer = (
   }
 };
 
-export type AddMessageActionType = ReturnType<typeof addMessageAC>;
+type AddMessageType = ReturnType<typeof addMessage>;
+type ChangeMessageTextType = ReturnType<typeof changeMessageText>;
 
-export type ChangeMessageTextActionType = ReturnType<
-  typeof changeMessageTextAC
->;
+export const addMessage = () => ({ type: ADD_MESSAGE } as const);
 
-export const addMessageAC = () => ({ type: ADD_MESSAGE } as const);
-
-export const changeMessageTextAC = (newText: string) =>
+export const changeMessageText = (newText: string) =>
   ({
     type: CHANGE_MESSAGE_TEXT,
     payload: {

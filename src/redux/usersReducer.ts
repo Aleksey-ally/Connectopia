@@ -37,7 +37,7 @@ const initialState: UsersType = {
 }
 
 
-type UsersAtionType = FollowACType | SetUsersACType | SetCurrentPageACType | setTotalUsersCountACType | setFetchingACType
+type UsersAtionType = FollowType | SetUsersType | SetCurrentPageType | setTotalUsersCountType | setFetchingType
 
 
 export const usersReducer = (state = initialState, action: UsersAtionType): UsersType => {
@@ -68,41 +68,41 @@ export const usersReducer = (state = initialState, action: UsersAtionType): User
     }
 }
 
-export type FollowACType = ReturnType<typeof followAC>
-export type SetUsersACType = ReturnType<typeof setUsersAC>
-export type SetCurrentPageACType = ReturnType<typeof setCurrentPageAC>
-export type setTotalUsersCountACType = ReturnType<typeof setTotalUsersCountAC>
-export type setFetchingACType = ReturnType<typeof setFetchingAC>
+type FollowType = ReturnType<typeof follow>
+type SetUsersType = ReturnType<typeof setUsers>
+type SetCurrentPageType = ReturnType<typeof setCurrentPage>
+type setTotalUsersCountType = ReturnType<typeof setTotalUsersCount>
+type setFetchingType = ReturnType<typeof setFetching>
 
-export const followAC = (userId: number) => ({
+export const follow = (userId: number) => ({
     type: FOLLOW,
     payload: {
         userId
     }
 } as const)
 
-export const setUsersAC = (users: UserType[]) => ({
+export const setUsers = (users: UserType[]) => ({
     type: SET_USERS,
     payload: {
         users
     }
 } as const)
 
-export const setCurrentPageAC = (currentPage: number) => ({
+export const setCurrentPage = (currentPage: number) => ({
     type: SET_CURRENT_PAGE,
     payload: {
         currentPage
     }
 } as const)
 
-export const setTotalUsersCountAC = (totalUsersCount: number) => ({
+export const setTotalUsersCount = (totalUsersCount: number) => ({
     type: SET_TOTAL_USERS_COUNT,
     payload: {
         totalUsersCount
     }
 } as const)
 
-export const setFetchingAC = (isFetching: boolean) => ({
+export const setFetching = (isFetching: boolean) => ({
     type: SET_FETCHING,
     payload: {
         isFetching

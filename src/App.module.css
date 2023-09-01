@@ -3,7 +3,7 @@
   grid-template-areas: 
   "header header"
   "navbar content";
-  grid-template-rows: 60px 1frs;
+  grid-template-rows: 60px 1fr;
   grid-template-columns: 2fr 14fr;
   grid-gap: 10px;
   background-color: lightgoldenrodyellow;

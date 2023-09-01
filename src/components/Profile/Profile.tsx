@@ -6,7 +6,7 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 //     profileData: ProfileDataType
 //     dispatch: (action: ActionType) => void
 // }
-export const Profile = ({}) => {
+export const Profile = () => {
     return (
         <div>
             <ProfileInformation/>

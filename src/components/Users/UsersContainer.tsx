@@ -1,8 +1,9 @@
 import axios from "axios"
+import { Preloader } from "components/common/Preloader/Preloader"
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { ReducersType } from "redux/reduxStore"
-import { UserType, UsersType, followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC } from "redux/usersReducer"
+import { UserType, UsersType, followAC, setCurrentPageAC, setFetchingAC, setTotalUsersCountAC, setUsersAC } from "redux/usersReducer"
 import { Users } from "./Users"
 
 export type UsersPropsType = {
@@ -11,6 +12,7 @@ export type UsersPropsType = {
     dispatchNewUsers: (users: UserType[]) => void
     dispatchNewCurrentPage: (currentPage: number) => void
     dispatchNewTotalUsersCount: (totalUsersCount: number) => void
+    dispatchFetch: (isFething: boolean) => void
 }
 
 export type BaseResponseType<D = {}> = {
@@ -25,9 +27,11 @@ type UsersResponseType = {
 export class UsersAPIClassContainer extends React.Component<UsersPropsType> {
 
     componentDidMount(): void {
+        this.props.dispatchFetch(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersData.pageSize}&page=${this.props.usersData.currentPage}`).then((res: BaseResponseType<UsersResponseType>) => {
             this.props.dispatchNewUsers(res.data.items.map(u => ({ ...u, location: { country: "Belarus", city: "Minsk" } })));
             this.props.dispatchNewTotalUsersCount(res.data.totalCount)
+            this.props.dispatchFetch(false)
         });
     }
 
@@ -36,15 +40,19 @@ export class UsersAPIClassContainer extends React.Component<UsersPropsType> {
     }
 
     onClickPageHandler = (page: number) => {
+        this.props.dispatchFetch(true)
         this.props.dispatchNewCurrentPage(page)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersData.pageSize}&page=${page}`).then((res: BaseResponseType<UsersResponseType>) => {
             this.props.dispatchNewUsers(res.data.items.map(u => ({ ...u, location: { country: "Belarus", city: "Minsk" } })));
             this.props.dispatchNewTotalUsersCount(res.data.totalCount)
+            this.props.dispatchFetch(false)
         });
     }
 
     render() {
-        return <Users usersData={this.props.usersData} onClickFollow={this.onClickFollow} onClickPageHandler={this.onClickPageHandler} />
+        return <>
+            {this.props.usersData.isFetching ? <Preloader /> : <Users usersData={this.props.usersData} onClickFollow={this.onClickFollow} onClickPageHandler={this.onClickPageHandler} />}
+        </>
     }
 }
 
@@ -65,7 +73,10 @@ export const UsersContainer = () => {
     const dispatchNewTotalUsersCount = (totalUsersCount: number) => {
         dispatch(setTotalUsersCountAC(totalUsersCount))
     }
+    const dispatchFetch = (isFething: boolean) => {
+        dispatch(setFetchingAC(isFething))
+    }
 
+    return <UsersAPIClassContainer usersData={usersData} dispatchFollow={dispatchFollow} dispatchNewUsers={dispatchNewUsers} dispatchNewCurrentPage={dispatchNewCurrentPage} dispatchNewTotalUsersCount={dispatchNewTotalUsersCount} dispatchFetch={dispatchFetch} />
 
-    return <UsersAPIClassContainer usersData={usersData} dispatchFollow={dispatchFollow} dispatchNewUsers={dispatchNewUsers} dispatchNewCurrentPage={dispatchNewCurrentPage} dispatchNewTotalUsersCount={dispatchNewTotalUsersCount} />
 }

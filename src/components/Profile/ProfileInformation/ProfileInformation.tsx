@@ -1,11 +1,19 @@
+import { UtilityProfileUserType } from 'redux/profileReducer';
 import ElephantBackground from '../../../imgs/ElephantBackground.png';
 import s from './ProfileInformation.module.css';
 
-export const ProfileInformation = () => {
+type Props = {
+  profile:UtilityProfileUserType
+}
+
+export const ProfileInformation = ({profile}:Props) => {
   return (
     <div className={s.description}>
       <img src={ElephantBackground} alt="Elephant background" />
-      <div>Avatar + description</div>
+      <div>
+        <img src={profile.photos?.small} alt="" />
+        Avatar + description
+        </div>
     </div>
   )
 }

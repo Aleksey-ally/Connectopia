@@ -1,11 +1,11 @@
-import {ProfileInformation} from './ProfileInformation/ProfileInformation';
-import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
+import { MyPostsContainer } from "./MyPosts/MyPostsContainer";
+import { ProfileInformationContainer } from './ProfileInformation/ProfileInformationContainer';
 
 export const Profile = () => {
     return (
         <div>
-            <ProfileInformation/>
-            <MyPostsContainer/>
+            <ProfileInformationContainer />
+            <MyPostsContainer />
         </div>
     )
 }

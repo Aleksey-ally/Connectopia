@@ -1,6 +1,8 @@
 import AvatarUnknownUser from "../../imgs//UnknownUser.png";
 import { UsersType } from "redux/usersReducer";
 import s from "./Users.module.css";
+import { Routes } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export type UsersPropsType = {
     usersData: UsersType
@@ -20,7 +22,6 @@ export const Users = ({ usersData, onClickFollow, onClickPageHandler }: UsersPro
     for (let i = 1; i <= 10; i++) {
         pages.push(i)
     }
-    // pages.push(pagesCount)
 
     return (
         <div className={s.users}>
@@ -38,8 +39,10 @@ export const Users = ({ usersData, onClickFollow, onClickPageHandler }: UsersPro
                     <div key={u.id}>
                         <span>
                             <div>
-                                <img className={s.userAvatar}
+                            <NavLink to={'/profile/' +u.id}>
+                            <img className={s.userAvatar}
                                     src={u.photos.small == null ? AvatarUnknownUser : u.photos.small} alt="#" />
+                          </NavLink>
                             </div>
                             <div>
                                 <button onClick={() => onClickFollow(u.id)}>{u.followed ? "Follow" : "Unfollow"}</button>

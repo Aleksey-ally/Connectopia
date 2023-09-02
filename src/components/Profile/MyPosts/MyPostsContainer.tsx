@@ -12,10 +12,10 @@ export const MyPostsContainer = () => {
         dispatch(changePostText(newText))
     }
 
-    const addPostOnPage = () => {
+    const addPostCallBack = () => {
         dispatch(addPost())
     }
 
-    return <MyPosts profileData={profileData} dispatchNewTextInput={dispatchNewTextInput} addPost={addPostOnPage} />
+    return <MyPosts profileData={profileData} dispatchNewTextInput={dispatchNewTextInput} addPost={addPostCallBack} />
 
 }

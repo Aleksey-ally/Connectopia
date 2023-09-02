@@ -1,12 +1,13 @@
+import { ProfileUserResponseType } from "components/Profile/ProfileInformation/ProfileInformationContainer";
+
 const ADD_POST = "ADD-POST";
 const CHANGE_POST_TEXT = "CHANGE-POST-TEXT";
-
-export type ActionType = AddPostType | ChangePostTextType
-
+const SET_USER_PROFILE = "SET-USER-PROFILE";
 
 export type ProfileDataType = {
     postData: PostDataType[]
     textPost: string
+    profile: UtilityProfileUserType
 }
 
 export type PostDataType = {
@@ -15,13 +16,19 @@ export type PostDataType = {
     likeCounter: number
 }
 
+export type UtilityProfileUserType = Partial<ProfileUserResponseType>
+
 const initialState: ProfileDataType = {
     postData: [
         { id: 1, message: "Beautiful!", likeCounter: 9 },
         { id: 2, message: "Have a nice day!", likeCounter: 5 },
     ],
-    textPost: ""
+    textPost: "",
+    profile: {}
 }
+
+type ActionType = AddPostType | ChangePostTextType | setUserProfileType
+
 
 export const profileReducer = (state = initialState, action: ActionType): ProfileDataType => {
 
@@ -45,6 +52,10 @@ export const profileReducer = (state = initialState, action: ActionType): Profil
 
             return { ...state, textPost: action.payload.newText };
 
+        case SET_USER_PROFILE:
+
+            return { ...state, profile: action.payload.profile }
+
         default:
             return state;
     }
@@ -53,14 +64,21 @@ export const profileReducer = (state = initialState, action: ActionType): Profil
 
 type AddPostType = ReturnType<typeof addPost>
 type ChangePostTextType = ReturnType<typeof changePostText>
+type setUserProfileType = ReturnType<typeof setUserProfile>
 
 
 export const addPost = () => ({ type: ADD_POST } as const);
 
-export const changePostText = (newText: string) =>
-({
+export const changePostText = (newText: string) => ({
     type: CHANGE_POST_TEXT,
     payload: {
         newText,
+    },
+} as const);
+
+export const setUserProfile = (profile: ProfileUserResponseType) => ({
+    type: SET_USER_PROFILE,
+    payload: {
+        profile,
     },
 } as const);

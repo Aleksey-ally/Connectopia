@@ -6,7 +6,7 @@ import { UserType, UsersType, follow, setCurrentPage, setFetching, setTotalUsers
 import { Users } from "./Users"
 import { Preloader } from "components/common/Preloader/Preloader"
 
-export type UsersPropsType = {
+export type Props = {
     usersData: UsersType
     dispatchFollow: (userId: number) => void
     dispatchNewUsers: (users: UserType[]) => void
@@ -15,7 +15,7 @@ export type UsersPropsType = {
     dispatchFetch: (isFething: boolean) => void
 }
 
-export type BaseResponseType<D = {}> = {
+ type BaseResponseType<D = {}> = {
     data: D;
 };
 
@@ -24,7 +24,7 @@ type UsersResponseType = {
     totalCount: number
 }
 
-export class UsersAPIClassContainer extends React.Component<UsersPropsType> {
+export class UsersAPIClassContainer extends React.Component<Props> {
 
     componentDidMount(): void {
         this.props.dispatchFetch(true)

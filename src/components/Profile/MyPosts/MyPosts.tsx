@@ -3,12 +3,12 @@ import s from './MyPosts.module.css';
 import {Post} from './Post/Post';
 import {ProfileDataType} from "../../../redux/profileReducer";
 
-type MyPostsPropsType = {
+type Props = {
     profileData: ProfileDataType
     dispatchNewTextInput: (newText: string) => void
     addPost: () => void
 }
-export const MyPosts = ({profileData, dispatchNewTextInput, addPost}: MyPostsPropsType) => {
+export const MyPosts = ({profileData, dispatchNewTextInput, addPost}: Props) => {
 
     const onChangeInputPostHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         dispatchNewTextInput(e.currentTarget.value)

@@ -40,6 +40,7 @@ export const ProfileInformationContainer = () => {
   useEffect(() => {
     axios.get('https://social-network.samuraijs.com/api/1.0/profile/2')
       .then((res: BaseResponseType<ProfileUserResponseType>) => {
+        console.log(res.data)
         dispatch(setUserProfile(res.data))
       })
   }, [])

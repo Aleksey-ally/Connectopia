@@ -20,7 +20,7 @@ const App = () => {
                 <Routes>
                     <Route path='/messages/*'
                         element={<MessagesContainer />} />
-                    <Route path='/profile/*' element={<Profile />} />
+                    <Route path='/profile/:id?' element={<Profile />} />
                     <Route path='/users' element={<UsersContainer />} />
                     <Route path='/news' element={<News />} />
                     <Route path='/music' element={<Music />} />

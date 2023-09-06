@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { UtilityProfileUserType, setUserProfile } from 'redux/profileReducer';
 import { useSelector } from 'react-redux';
 import { ReducersType } from 'redux/reduxStore';
+import { useParams } from 'react-router-dom';
 
 type BaseResponseType<D = {}> = {
   data: D;
@@ -34,16 +35,17 @@ export type ProfileUserResponseType = {
 
 export const ProfileInformationContainer = () => {
 
-  const profile = useSelector<ReducersType, UtilityProfileUserType>(state=> state.profileData.profile)
+  const profile = useSelector<ReducersType, UtilityProfileUserType>(state => state.profileData.profile)
   const dispatch = useDispatch()
 
+  const { id } = useParams()
+
   useEffect(() => {
-    axios.get('https://social-network.samuraijs.com/api/1.0/profile/2')
+    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${id}`)
       .then((res: BaseResponseType<ProfileUserResponseType>) => {
-        console.log(res.data)
         dispatch(setUserProfile(res.data))
       })
   }, [])
 
-  return <ProfileInformation profile={profile}/>
+  return <ProfileInformation profile={profile} />
 }

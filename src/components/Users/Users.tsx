@@ -28,9 +28,9 @@ export const Users = ({ usersData, onClickFollow, onClickPageHandler }: UsersPro
             <div>
                 <div>
                     {pages.map(p =>
-                        <span className={`${s.page} ${usersData.currentPage === p ? s.selectedPage : ""}`}
+                        <span  className={`${s.page} ${usersData.currentPage === p ? s.selectedPage : ""}`}
                             onClick={() => onClickPageHandler(p)}>
-                            {p} 
+                            {p}
                         </span>
                     )}
                     <span className={`${s.page} ${usersData.currentPage === pagesCount ? s.selectedPage : ""}`} onClick={() => onClickPageHandler(pagesCount)}>...{pagesCount}</span>
@@ -39,10 +39,10 @@ export const Users = ({ usersData, onClickFollow, onClickPageHandler }: UsersPro
                     <div key={u.id}>
                         <span>
                             <div>
-                            <NavLink to={'/profile/' +u.id}>
-                            <img className={s.userAvatar}
-                                    src={u.photos.small == null ? AvatarUnknownUser : u.photos.small} alt="#" />
-                          </NavLink>
+                                <NavLink to={'/profile/' + u.id}>
+                                    <img className={s.userAvatar}
+                                        src={u.photos.small == null ? AvatarUnknownUser : u.photos.small} alt="#" />
+                                </NavLink>
                             </div>
                             <div>
                                 <button onClick={() => onClickFollow(u.id)}>{u.followed ? "Follow" : "Unfollow"}</button>

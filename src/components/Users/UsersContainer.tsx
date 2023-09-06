@@ -1,10 +1,10 @@
 import axios from "axios"
+import { Preloader } from "components/common/Preloader/Preloader"
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { ReducersType } from "redux/reduxStore"
 import { UserType, UsersType, follow, setCurrentPage, setFetching, setTotalUsersCount, setUsers } from "redux/usersReducer"
 import { Users } from "./Users"
-import { Preloader } from "components/common/Preloader/Preloader"
 
 export type Props = {
     usersData: UsersType
@@ -15,7 +15,7 @@ export type Props = {
     dispatchFetch: (isFething: boolean) => void
 }
 
- type BaseResponseType<D = {}> = {
+type BaseResponseType<D = {}> = {
     data: D;
 };
 

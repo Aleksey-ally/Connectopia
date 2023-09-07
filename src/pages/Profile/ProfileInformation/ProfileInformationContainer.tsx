@@ -38,10 +38,14 @@ export const ProfileInformationContainer = () => {
   const profile = useSelector<ReducersType, UtilityProfileUserType>(state => state.profileData.profile)
   const dispatch = useDispatch()
 
-  const { id } = useParams()
+  let { uId } = useParams()
+
+  if (!uId){
+    uId = '17450'
+  }
 
   useEffect(() => {
-    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${id}`)
+    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${uId}`)
       .then((res: BaseResponseType<ProfileUserResponseType>) => {
         dispatch(setUserProfile(res.data))
       })

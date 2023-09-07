@@ -1,12 +1,14 @@
 import React from "react";
 import s from './UserMessage.module.css'
-import {useLocation} from "react-router-dom";
-import {TextDataType} from "../../../redux/messagesReducer";
+import { useLocation, useParams } from "react-router-dom";
+import { TextDataType } from "../../../redux/messagesReducer";
 
 
-export const UserMessage = ({id, messageText}: TextDataType) => {
-    const urlCurrentId = Number(useLocation().pathname[useLocation().pathname.length - 1])
+export const UserMessage = ({ id, messageText }: TextDataType) => {  
+    const { uId } = useParams()
+    const style = (uId !== undefined && id === +uId) ? s.currentCircle : s.circle
+
     return <div className={s.messageItem}>
-        <div className={id === urlCurrentId ? s.currentCircle : s.circle}></div>
-        {messageText}</div>
+        <div className={style}></div>
+        {messageText}</div >
 }

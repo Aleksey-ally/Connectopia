@@ -38,7 +38,7 @@ export const Users = ({ usersData, onClickFollow, onClickPageHandler }: UsersPro
                     <div key={u.id}>
                         <span>
                             <NavLink to={'/profile/' + u.id}>
-                                <UserAvatar photos={u.photos.small} />
+                                <UserAvatar key={u.id} photos={u.photos.small} />
                             </NavLink>
                             <div>
                                 <button onClick={() => onClickFollow(u.id)}>{u.followed ? "Follow" : "Unfollow"}</button>

@@ -1,4 +1,4 @@
-import PreloaderGif from "../../../imgs/Preloader.gif";
+import PreloaderGif from "imgs/Preloader.gif";
 import s from './Preloader.module.css';
 
 export const Preloader = () => {

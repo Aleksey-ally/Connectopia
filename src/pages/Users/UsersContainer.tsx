@@ -1,5 +1,5 @@
 import axios from "axios"
-import { Preloader } from "components/common/Preloader/Preloader"
+import { Preloader } from "components/Preloader/Preloader"
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { ReducersType } from "redux/reduxStore"

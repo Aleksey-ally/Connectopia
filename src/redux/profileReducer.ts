@@ -1,4 +1,4 @@
-import { ProfileUserResponseType } from "components/Profile/ProfileInformation/ProfileInformationContainer";
+import { ProfileUserResponseType } from "pages/Profile/ProfileInformation/ProfileInformationContainer";
 
 const ADD_POST = "ADD-POST";
 const CHANGE_POST_TEXT = "CHANGE-POST-TEXT";

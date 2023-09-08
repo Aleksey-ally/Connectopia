@@ -1,9 +1,21 @@
-.header{
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   grid-area: header;
   background-color: brown;
 }
 
-.logoZoo{
+.logoZoo {
   max-width: 140px;
   margin: -25px -45px;
+}
+
+.loginBlock {
+  margin-right: 10px;
+}
+
+.login {
+  color:wheat;
+  text-decoration: none;
 }

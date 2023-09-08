@@ -27,7 +27,10 @@ const initialState: ProfileDataType = {
     profile: {}
 }
 
-type ActionType = AddPostType | ChangePostTextType | setUserProfileType
+type ActionType = 
+| AddPostType 
+| ChangePostTextType
+| setUserProfileType
 
 
 export const profileReducer = (state = initialState, action: ActionType): ProfileDataType => {

@@ -37,10 +37,15 @@ const initialState: UsersType = {
 }
 
 
-type UsersAtionType = FollowType | SetUsersType | SetCurrentPageType | setTotalUsersCountType | setFetchingType
+type ActionType = 
+| FollowType 
+| SetUsersType 
+| SetCurrentPageType 
+| setTotalUsersCountType 
+| setFetchingType
 
 
-export const usersReducer = (state = initialState, action: UsersAtionType): UsersType => {
+export const usersReducer = (state = initialState, action: ActionType): UsersType => {
     switch (action.type) {
         case FOLLOW:
 

@@ -6,10 +6,6 @@ import AvatarWolf from "../imgs/Wolf.png";
 const ADD_MESSAGE = "ADD-MESSAGE";
 const CHANGE_MESSAGE_TEXT = "CHANGE-MESSAGE-TEXT";
 
-export type MessagesReducerActionType =
-  | ChangeMessageTextType
-  | AddMessageType;
-
 export type MessagesDataType = {
   messagesUsersData: UsersDataType[];
   messagesTextData: TextDataType[];
@@ -45,10 +41,12 @@ const initialState: MessagesDataType = {
   messageText: "",
 };
 
-export const messagesReducer = (
-  state = initialState,
-  action: MessagesReducerActionType
-): MessagesDataType => {
+export type ActionType =
+  | ChangeMessageTextType
+  | AddMessageType;
+
+export const messagesReducer = (state = initialState, action: ActionType): MessagesDataType => {
+
   switch (action.type) {
     case CHANGE_MESSAGE_TEXT:
       return { ...state, messageText: action.payload.newText };
@@ -81,9 +79,9 @@ type ChangeMessageTextType = ReturnType<typeof changeMessageText>;
 export const addMessage = () => ({ type: ADD_MESSAGE } as const);
 
 export const changeMessageText = (newText: string) =>
-  ({
-    type: CHANGE_MESSAGE_TEXT,
-    payload: {
-      newText,
-    },
-  } as const);
+({
+  type: CHANGE_MESSAGE_TEXT,
+  payload: {
+    newText,
+  },
+} as const);

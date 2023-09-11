@@ -1,4 +1,4 @@
-import { Header } from "components/Header/Header";
+import { HeaderContainer } from "components/Header/HeaderContainer";
 import { MessagesContainer } from "pages/Messages/MessagesContainer";
 import { Music } from 'pages/Music/Music';
 import { Navbar } from "pages/Navbar/Navbar";
@@ -14,11 +14,11 @@ const App = () => {
     return (
 
         <div className={s.appWrapper}>
-            <Header />
+            <HeaderContainer />
             <Navbar />
             <div className={s.content}>
                 <Routes>
-                    <Route path='/messages/:uId?' 
+                    <Route path='/messages/:uId?'
                         element={<MessagesContainer />} />
                     <Route path={'/profile/:uId?'} element={<Profile />} />
                     <Route path='/users' element={<UsersContainer />} />

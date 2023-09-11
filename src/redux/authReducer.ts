@@ -1,21 +1,9 @@
-
-// export type Auth = {
-//     data: {
-//         id: number
-//         login: string
-//         email: string
-//     }
-//     messages: string[]
-//     fieldsErrors: string[]
-//     resultCode: number
-// }
-
 export type Auth = {
     id: number | null
     login: string | null
     email: string | null
+    isAuth: boolean
 }
-
 
 const SET_USER_DATA = "SET-USER-DATA"
 
@@ -23,10 +11,11 @@ const initialState: Auth = {
     id: null,
     login: null,
     email: null,
+    isAuth:false
 }
 
 
-type Action = setUserData
+type Action = setAuthUserData
 
 export const authReducer = (state = initialState, action: Action): Auth => {
     switch (action.type) {
@@ -34,7 +23,8 @@ export const authReducer = (state = initialState, action: Action): Auth => {
 
             return {
                 ...state,
-                ...action.payload.data
+                ...action.payload.data,
+                isAuth:true
             }
 
         default:
@@ -42,9 +32,9 @@ export const authReducer = (state = initialState, action: Action): Auth => {
     }
 }
 
-type setUserData = ReturnType<typeof setUserData>
+type setAuthUserData = ReturnType<typeof setAuthUserData>
 
-export const setUserData = (data : Auth) => ({
+export const setAuthUserData = (data : Auth ) => ({
     type: SET_USER_DATA,
     payload: {
         data

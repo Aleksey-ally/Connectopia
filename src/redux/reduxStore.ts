@@ -13,3 +13,6 @@ const reducers = combineReducers({
     auth: authReducer
 })
 export const reduxStore = createStore(reducers)
+
+// @ts-ignore
+window.reduxStore = reduxStore;

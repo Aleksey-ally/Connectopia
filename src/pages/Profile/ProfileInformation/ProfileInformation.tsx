@@ -12,7 +12,7 @@ export const ProfileInformation = ({ profile }: Props) => {
     <div className={s.description}>
       <img src={ElephantBackground} alt="Elephant background" />
       <div>
-        <UserAvatar photos={profile.photos?.small} /> 
+        <UserAvatar size={'medium'} photos={profile.photos?.small} /> 
        <ol>Name: {profile.fullName}</ol>
        <ol>About me: {profile.aboutMe}</ol>
        <ol>Looking job: {profile.lookingForAJob}</ol>

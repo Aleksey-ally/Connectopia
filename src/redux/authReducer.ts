@@ -11,7 +11,7 @@ const initialState: Auth = {
     id: null,
     login: null,
     email: null,
-    isAuth:false
+    isAuth: false
 }
 
 
@@ -23,8 +23,7 @@ export const authReducer = (state = initialState, action: Action): Auth => {
 
             return {
                 ...state,
-                ...action.payload.data,
-                isAuth:true
+                ...action.payload.data
             }
 
         default:
@@ -34,7 +33,7 @@ export const authReducer = (state = initialState, action: Action): Auth => {
 
 type setAuthUserData = ReturnType<typeof setAuthUserData>
 
-export const setAuthUserData = (data : Auth ) => ({
+export const setAuthUserData = (data: Auth) => ({
     type: SET_USER_DATA,
     payload: {
         data

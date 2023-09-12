@@ -2,12 +2,13 @@ import AvatarUnknownUser from "imgs/UnknownUser.png";
 import s from './UserAvatar.module.css'
 
 type Props = {
-    photos: string | null | undefined
+    photos?: string | null
+    size:'medium' | 'small'
 }
 
-export const UserAvatar = ({ photos }: Props) => {
-    return <div>
-        <img className={s.userAvatar}
+export const UserAvatar = ({ photos, size }: Props) => {
+    return <>
+        <img className={s[size]}
             src={photos || AvatarUnknownUser} alt="User avatar" />
-    </div>
+    </>
 }

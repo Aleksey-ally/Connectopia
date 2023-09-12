@@ -36,5 +36,5 @@ export const HeaderContainer: React.FC = () => {
     }, [])
 
 
-    return <Header />
+    return <Header auth={auth} />
 }

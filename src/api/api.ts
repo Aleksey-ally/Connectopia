@@ -10,6 +10,17 @@ type ResponseUsersType = {
     totalCount: number
 }
 
+export type ResponseAuth = {
+    data: {
+        id: number
+        login: string
+        email: string
+    }
+    messages: string[]
+    fieldsErrors: string[]
+    resultCode: number
+}
+
 const instance = axios.create(
     {
         baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -22,9 +33,14 @@ const instance = axios.create(
 
 export const usersAPI = {
     getUsers(pageSize: number, currentPage: number) {
-        return instance.get<ResponseUsersType>(`users?count=${pageSize}&page=${currentPage}`,
-            { withCredentials: true })
+        return instance.get<ResponseUsersType>(`users?count=${pageSize}&page=${currentPage}`)
             .then((res) => res.data)
     }
 }
 
+export const authAPI = {
+    auth(){
+        return instance.get<ResponseAuth>('auth/me')
+        .then(res=>res.data)
+    }
+}

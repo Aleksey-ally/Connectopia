@@ -1,4 +1,4 @@
-import axios from "axios"
+import { usersAPI } from "api/api"
 import { Preloader } from "components/Preloader/Preloader"
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
@@ -16,24 +16,19 @@ export type Props = {
     dispatchFetch: (isFething: boolean) => void
 }
 
-type BaseResponseType<D = {}> = {
-    data: D;
-};
 
-type ResponseUsersType = {
-    items: UserType[]
-    totalCount: number
-}
 
 export class UsersAPIClassContainer extends React.Component<Props> {
 
     componentDidMount(): void {
         this.props.dispatchFetch(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersData.pageSize}&page=${this.props.usersData.currentPage}`, { withCredentials: true }).then((res: BaseResponseType<ResponseUsersType>) => {
-            this.props.dispatchNewUsers(res.data.items.map(u => ({ ...u, location: { country: "Belarus", city: "Minsk" } })));
-            this.props.dispatchNewTotalUsersCount(res.data.totalCount)
-            this.props.dispatchFetch(false)
-        });
+
+        usersAPI.getUsers(this.props.usersData.pageSize, this.props.usersData.currentPage)
+            .then((data) => {
+                this.props.dispatchNewUsers(data.items.map(u => ({ ...u, location: { country: "Belarus", city: "Minsk" } })));
+                this.props.dispatchNewTotalUsersCount(data.totalCount)
+                this.props.dispatchFetch(false)
+            });
     }
 
     follow = (userId: number) => {
@@ -47,11 +42,13 @@ export class UsersAPIClassContainer extends React.Component<Props> {
     onClickPageHandler = (page: number) => {
         this.props.dispatchFetch(true)
         this.props.dispatchNewCurrentPage(page)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.usersData.pageSize}&page=${page}`, { withCredentials: true }).then((res: BaseResponseType<ResponseUsersType>) => {
-            this.props.dispatchNewUsers(res.data.items.map(u => ({ ...u, location: { country: "Belarus", city: "Minsk" } })));
-            this.props.dispatchNewTotalUsersCount(res.data.totalCount)
-            this.props.dispatchFetch(false)
-        });
+
+        usersAPI.getUsers(this.props.usersData.pageSize, page)
+            .then((data) => {
+                this.props.dispatchNewUsers(data.items.map(u => ({ ...u, location: { country: "Belarus", city: "Minsk" } })));
+                this.props.dispatchNewTotalUsersCount(data.totalCount)
+                this.props.dispatchFetch(false)
+            });
     }
 
     render() {

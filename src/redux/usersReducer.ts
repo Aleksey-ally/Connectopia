@@ -23,6 +23,7 @@ export type UserType = {
 
 
 const FOLLOW = "FOLLOW"
+const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET-USERS"
 const SET_CURRENT_PAGE = "SET-CURRENT-PAGE"
 const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT"
@@ -37,79 +38,78 @@ const initialState: UsersType = {
 }
 
 
-type ActionType = 
-| FollowType 
-| SetUsersType 
-| SetCurrentPageType 
-| setTotalUsersCountType 
-| setFetchingType
+type ActionType =
+    | Follow
+    | UnFollow
+    | SetUsers
+    | SetCurrentPage
+    | setTotalUsersCount
+    | setFetching
 
 
 export const usersReducer = (state = initialState, action: ActionType): UsersType => {
     switch (action.type) {
         case FOLLOW:
-
             return {
                 ...state,
-                users: state.users.map(u => u.id === action.payload.userId ? { ...u, followed: !u.followed } : u)
+                users: state.users.map(u => u.id === action.userId ? { ...u, followed: true } : u)
+            }
+
+        case UNFOLLOW:
+            return {
+                ...state, users: state.users.map(u => u.id === action.userId? {...u, followed: false}: u)
             }
 
         case SET_USERS:
-
-            return { ...state, users: action.payload.users }
+            return { ...state, users: action.users }
 
         case SET_CURRENT_PAGE:
-
-            return { ...state, currentPage: action.payload.currentPage }
+            return { ...state, currentPage: action.currentPage }
 
         case SET_TOTAL_USERS_COUNT:
-            return { ...state, totalUsersCount: action.payload.totalUsersCount }
+            return { ...state, totalUsersCount: action.totalUsersCount }
 
         case SET_FETCHING:
-            return { ...state, isFetching: action.payload.isFetching }
+            return { ...state, isFetching: action.isFetching }
 
         default:
             return state
     }
 }
 
-type FollowType = ReturnType<typeof follow>
-type SetUsersType = ReturnType<typeof setUsers>
-type SetCurrentPageType = ReturnType<typeof setCurrentPage>
-type setTotalUsersCountType = ReturnType<typeof setTotalUsersCount>
-type setFetchingType = ReturnType<typeof setFetching>
+type Follow = ReturnType<typeof follow>
+type UnFollow = ReturnType<typeof unFollow>
+type SetUsers = ReturnType<typeof setUsers>
+type SetCurrentPage = ReturnType<typeof setCurrentPage>
+type setTotalUsersCount = ReturnType<typeof setTotalUsersCount>
+type setFetching = ReturnType<typeof setFetching>
 
 export const follow = (userId: number) => ({
     type: FOLLOW,
-    payload: {
-        userId
-    }
+    userId
+} as const)
+
+export const unFollow = (userId: number) => ({
+    type: UNFOLLOW,
+    userId
 } as const)
 
 export const setUsers = (users: UserType[]) => ({
     type: SET_USERS,
-    payload: {
-        users
-    }
+    users
 } as const)
 
 export const setCurrentPage = (currentPage: number) => ({
     type: SET_CURRENT_PAGE,
-    payload: {
-        currentPage
-    }
+    currentPage
 } as const)
 
 export const setTotalUsersCount = (totalUsersCount: number) => ({
     type: SET_TOTAL_USERS_COUNT,
-    payload: {
-        totalUsersCount
-    }
+    totalUsersCount
 } as const)
 
 export const setFetching = (isFetching: boolean) => ({
     type: SET_FETCHING,
-    payload: {
-        isFetching
-    }
+    isFetching
 } as const)

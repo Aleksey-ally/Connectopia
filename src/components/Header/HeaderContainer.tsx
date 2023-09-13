@@ -26,9 +26,8 @@ export const HeaderContainer: React.FC = () => {
     const auth = useSelector<ReducersType, Auth>(state => state.auth)
     const dispatch = useDispatch()
 
-    console.log(auth)
     useEffect(() => {
-        axios('https://social-network.samuraijs.com/api/1.0/auth/me', { withCredentials: true }).then((res: BaseResponseType<ResponseAuth>) => {
+        axios.get('https://social-network.samuraijs.com/api/1.0/auth/me', { withCredentials: true }).then((res: BaseResponseType<ResponseAuth>) => {
             if (res.data.resultCode === 0) {
                 dispatch(setAuthUserData({ ...res.data.data, isAuth: true }))
             }

@@ -1,4 +1,4 @@
-import { ProfileUserResponseType } from "pages/Profile/ProfileInformation/ProfileInformationContainer";
+import { ProfileUserResponseType } from "api/api";
 
 const ADD_POST = "ADD-POST";
 const CHANGE_POST_TEXT = "CHANGE-POST-TEXT";
@@ -27,10 +27,10 @@ const initialState: ProfileDataType = {
     profile: {}
 }
 
-type ActionType = 
-| AddPostType 
-| ChangePostTextType
-| setUserProfileType
+type ActionType =
+    | AddPostType
+    | ChangePostTextType
+    | setUserProfileType
 
 
 export const profileReducer = (state = initialState, action: ActionType): ProfileDataType => {

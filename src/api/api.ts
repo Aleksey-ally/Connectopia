@@ -10,7 +10,7 @@ type ResponseUsersType = {
     totalCount: number
 }
 
-export type ResponseAuth = {
+type ResponseAuth = {
     data: {
         id: number
         login: string
@@ -19,6 +19,28 @@ export type ResponseAuth = {
     messages: string[]
     fieldsErrors: string[]
     resultCode: number
+}
+
+export type ProfileUserResponseType = {
+    userId: number
+    aboutMe: string
+    contacts: {
+        github: string
+        vk: string
+        facebook: string
+        instagram: string
+        twitter: string
+        website: string
+        youtube: string
+        mainLink: string
+    }
+    fullName: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    photos: {
+        large: string
+        small: string
+    }
 }
 
 const instance = axios.create(
@@ -34,13 +56,20 @@ const instance = axios.create(
 export const usersAPI = {
     getUsers(pageSize: number, currentPage: number) {
         return instance.get<ResponseUsersType>(`users?count=${pageSize}&page=${currentPage}`)
-            .then((res) => res.data)
+            .then(res => res.data)
     }
 }
 
 export const authAPI = {
-    auth(){
+    auth() {
         return instance.get<ResponseAuth>('auth/me')
-        .then(res=>res.data)
+            .then(res => res.data)
+    }
+}
+
+export const profileAPI = {
+    getProfile(uID: string ) {
+        return instance.get<ProfileUserResponseType>(`profile/${uID}`)
+            .then(res => res.data)
     }
 }

@@ -18,9 +18,9 @@ const App = () => {
             <Navbar />
             <div className={s.content}>
                 <Routes>
-                    <Route path='/messages/:uId?'
+                    <Route path='/messages/:uID?'
                         element={<MessagesContainer />} />
-                    <Route path={'/profile/:uId?'} element={<Profile />} />
+                    <Route path={'/profile/:uID?'} element={<Profile />} />
                     <Route path='/users' element={<UsersContainer />} />
                     <Route path='/news' element={<News />} />
                     <Route path='/music' element={<Music />} />

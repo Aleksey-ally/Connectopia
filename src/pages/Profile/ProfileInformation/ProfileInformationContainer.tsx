@@ -1,53 +1,27 @@
+import { profileAPI } from 'api/api';
 import { useEffect } from 'react';
-import axios from 'axios';
-import { ProfileInformation } from './ProfileInformation';
-import { useDispatch } from 'react-redux';
-import { UtilityProfileUserType, setUserProfile } from 'redux/profileReducer';
-import { useSelector } from 'react-redux';
-import { ReducersType } from 'redux/reduxStore';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-
-type BaseResponseType<D = {}> = {
-  data: D;
-};
-
-export type ProfileUserResponseType = {
-  userId: number
-  aboutMe: string
-  contacts: {
-    github: string
-    vk: string
-    facebook: string
-    instagram: string
-    twitter: string
-    website: string
-    youtube: string
-    mainLink: string
-  }
-  fullName: string
-  lookingForAJob: boolean
-  lookingForAJobDescription: string
-  photos: {
-    large: string
-    small: string
-  }
-};
+import { UtilityProfileUserType, setUserProfile } from 'redux/profileReducer';
+import { ReducersType } from 'redux/reduxStore';
+import { ProfileInformation } from './ProfileInformation';
 
 export const ProfileInformationContainer = () => {
 
   const profile = useSelector<ReducersType, UtilityProfileUserType>(state => state.profileData.profile)
+  const currentUserID = useSelector<ReducersType, number | null>(state => state.auth.id)
   const dispatch = useDispatch()
 
-  let { uId } = useParams()
+  let { uID } = useParams()
 
-  if (!uId){
-    uId = '17450'
+  if (!uID) {
+    uID = currentUserID?.toString()
   }
 
   useEffect(() => {
-    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${uId}`)
-      .then((res: BaseResponseType<ProfileUserResponseType>) => {
-        dispatch(setUserProfile(res.data))
+    profileAPI.getProfile(uID as string)
+      .then(data => {
+        dispatch(setUserProfile(data))
       })
   }, [])
 

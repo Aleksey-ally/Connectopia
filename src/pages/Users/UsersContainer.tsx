@@ -63,7 +63,7 @@ export const UsersContainer = () => {
     const usersData = useSelector<ReducersType, UsersType>(state => state.usersData)
     const dispatch = useDispatch()
 
-    const dispatchFollow = (userId: number) => {
+     const dispatchFollow = (userId: number) => {
         dispatch(follow(userId))
     }
     const dispatchUnFollow = (userId: number) => {

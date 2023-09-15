@@ -1,5 +1,5 @@
 import axios from "axios";
-import { UserType } from "redux/usersReducer";
+import { UserType, follow } from "redux/usersReducer";
 
 type BaseResponseType<D = {}> = {
     data: D;
@@ -73,3 +73,13 @@ export const profileAPI = {
             .then(res => res.data)
     }
 }
+
+export const followAPI = {
+    follow(uID : number) {
+        return instance.post(`follow/${uID}`)
+    },
+    unFollow(uID:number) {
+        return instance.delete(`follow/${uID}`)
+    }
+} 
+

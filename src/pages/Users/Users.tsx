@@ -1,8 +1,8 @@
+import { followAPI } from "api/api";
 import { UserAvatar } from "components/UserAvatar/UserAvatar";
 import { NavLink } from "react-router-dom";
 import { UsersType } from "redux/usersReducer";
 import s from "./Users.module.css";
-import axios from "axios";
 
 export type UsersPropsType = {
     usersData: UsersType
@@ -41,16 +41,12 @@ export const Users = ({ usersData, follow, unFollow, onClickPageHandler }: Users
                             <div>
                                 {u.followed
                                     ? <button onClick={() => {
-                                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, { withCredentials: true })
-                                            .then(res => {
-                                                unFollow(u.id)
-                                            })
+                                        followAPI.unFollow(u.id)
+                                            .then(() => { unFollow(u.id) })
                                     }}>Unfollow</button>
                                     : <button onClick={() => {
-                                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, null, { withCredentials: true, headers: { 'API-KEY': 'bfc1e1b1-e625-4414-a10c-6bab615df806' } })
-                                            .then(res => {
-                                                follow(u.id)
-                                            })
+                                        followAPI.follow(u.id)
+                                            .then(() => { follow(u.id) })
                                     }}>Follow</button>}
                             </div>
                         </span>
@@ -65,8 +61,9 @@ export const Users = ({ usersData, follow, unFollow, onClickPageHandler }: Users
                             </span>
                         </span>
                     </div>
-                ))}
-            </div>
-        </div>
+                ))
+                }
+            </div >
+        </div >
     )
 }

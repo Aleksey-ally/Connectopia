@@ -1,4 +1,3 @@
-import { followAPI } from "api/api";
 import { UserAvatar } from "components/UserAvatar/UserAvatar";
 import { NavLink } from "react-router-dom";
 import { UsersType } from "redux/usersReducer";
@@ -6,8 +5,8 @@ import s from "./Users.module.css";
 
 export type UsersPropsType = {
     usersData: UsersType
-    follow: (userId: number) => void
-    unFollow: (userId: number) => void
+    follow: (userID: number) => void
+    unFollow: (userID: number) => void
     onClickPageHandler: (page: number) => void
 }
 
@@ -18,7 +17,6 @@ export const Users = ({ usersData, follow, unFollow, onClickPageHandler }: Users
     for (let i = 1; i <= 10; i++) {
         pages.push(i)
     }
-
 
     return (
         <div className={s.users}>
@@ -40,14 +38,8 @@ export const Users = ({ usersData, follow, unFollow, onClickPageHandler }: Users
                             </NavLink>
                             <div>
                                 {u.followed
-                                    ? <button onClick={() => {
-                                        followAPI.unFollow(u.id)
-                                            .then(() => { unFollow(u.id) })
-                                    }}>Unfollow</button>
-                                    : <button onClick={() => {
-                                        followAPI.follow(u.id)
-                                            .then(() => { follow(u.id) })
-                                    }}>Follow</button>}
+                                    ? <button onClick={() => unFollow(u.id)} disabled={u.toggleFollowing}>Unfollow</button>
+                                    : <button onClick={() => follow(u.id)} disabled={u.toggleFollowing}>Follow</button>}
                             </div>
                         </span>
                         <span>

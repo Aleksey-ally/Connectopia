@@ -1,0 +1,60 @@
+.container {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  height: 24px;
+}
+
+.paginationRange {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+
+  .item:disabled & {
+    color: var(--color-dark-100);
+  }
+}
+
+.item {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+
+  border-radius: 2px;
+
+  transition: 0.4s ease-out;
+
+  &:disabled {
+    cursor: initial;
+  }
+
+  &.selected {
+    color: var(--color-dark-900);
+    background-color: var(--color-light-100);
+  }
+
+  &:focus-within {
+    border-radius: 4px;
+    outline: 2px solid var(--color-info-900);
+  }
+
+  &:hover:not(&:disabled) {
+    background-color: var(--color-dark-500);
+  }
+}
+
+.selectBox {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}

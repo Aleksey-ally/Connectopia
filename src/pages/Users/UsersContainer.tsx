@@ -13,7 +13,7 @@ export type Props = {
     dispatchNewUsers: (users: UserType[]) => void
     dispatchNewCurrentPage: (currentPage: number) => void
     dispatchNewTotalUsersCount: (totalUsersCount: number) => void
-    dispatchFetch: (isFething: boolean) => void
+    dispatchFetch: (isFetching: boolean) => void
     dispatchToggleFollowing: (userID: number, toggleFollowing: boolean) => void
 }
 
@@ -91,8 +91,8 @@ export const UsersContainer = () => {
     const dispatchNewTotalUsersCount = (totalUsersCount: number) => {
         dispatch(setTotalUsersCount(totalUsersCount))
     }
-    const dispatchFetch = (isFething: boolean) => {
-        dispatch(setFetching(isFething))
+    const dispatchFetch = (isFetching: boolean) => {
+        dispatch(setFetching(isFetching))
     }
     const dispatchToggleFollowing = (userID: number, toggleFollowing: boolean) => {
         dispatch(setToggleFollowing(userID, toggleFollowing))

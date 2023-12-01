@@ -30,6 +30,7 @@ const SET_CURRENT_PAGE = "SET-CURRENT-PAGE"
 const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT"
 const SET_FETCHING = "SET-FETCHING"
 const TOGGLE_FOLLOWING = "TOGGLE-FOLLOWING"
+const SET_PAGE_SIZE = "SET-PAGE-SIZE"
 
 const initialState: UsersType = {
     users: [],
@@ -48,6 +49,7 @@ type ActionType =
     | setTotalUsersCount
     | setFetching
     | SetToggleFollowing
+    | SetPageSize
 
 
 export const usersReducer = (state = initialState, action: ActionType): UsersType => {
@@ -80,6 +82,10 @@ export const usersReducer = (state = initialState, action: ActionType): UsersTyp
             return {...state, users: state.users.map(u=> u.id === action.userID? {...u, toggleFollowing: action.toggleFollowing} : u)}
         }
 
+        case SET_PAGE_SIZE : {
+            return {...state, pageSize : action.pageSize}
+        }
+
         default:
             return state
     }
@@ -92,6 +98,7 @@ type SetCurrentPage = ReturnType<typeof setCurrentPage>
 type setTotalUsersCount = ReturnType<typeof setTotalUsersCount>
 type setFetching = ReturnType<typeof setFetching>
 type SetToggleFollowing = ReturnType<typeof setToggleFollowing>
+type SetPageSize = ReturnType<typeof setPageSize>
 
 export const follow = (userID: number) => ({
     type: FOLLOW,
@@ -127,4 +134,9 @@ export const setToggleFollowing = (userID: number, toggleFollowing: boolean) => 
     type: TOGGLE_FOLLOWING,
     userID,
     toggleFollowing
+} as const)
+
+export const setPageSize = (pageSize: number) => ({
+    type: SET_PAGE_SIZE,
+    pageSize,
 } as const)

@@ -9,16 +9,17 @@ export type UsersPropsType = {
     follow: (userID: number) => void
     unFollow: (userID: number) => void
     onClickPageHandler: (page: number) => void
+    setItemsPerPage:(pageSize:number) => void
 }
 
-export const Users = ({ usersData, follow, unFollow, onClickPageHandler }: UsersPropsType) => {
+export const Users = ({ usersData, follow, unFollow, onClickPageHandler, setItemsPerPage }: UsersPropsType) => {
 
     const pagesCount = Math.ceil(usersData.totalUsersCount / usersData.pageSize)
 
     return (
         <div className={s.users}>
             <div>
-                <Pagination count={pagesCount} page={usersData.currentPage} onChange={onClickPageHandler}/>
+                <Pagination count={pagesCount} page={usersData.currentPage} onChange={onClickPageHandler} perPage={usersData.pageSize} onPerPageChange={(pageSize)=>setItemsPerPage(Number(pageSize))} perPageOptions={[5, 10, 20, 30, 40, 50]} />
                 {usersData.users.map(u => (
                     <div key={u.id}>
                         <span>

@@ -7,6 +7,10 @@ import { Profile } from "pages/Profile/Profile";
 import { Settings } from 'pages/Settings/Settings';
 import { UsersContainer } from 'pages/Users/UsersContainer';
 import { Route, Routes } from 'react-router-dom';
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/700.css'
+import './styles/index.scss'
+
 import s from './App.module.css';
 
 

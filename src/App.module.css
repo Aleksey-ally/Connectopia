@@ -1,15 +1,14 @@
 .appWrapper {
   display: grid;
-  grid-template-areas: 
+  grid-template-areas:
   "header header"
   "navbar content";
   grid-template-rows: 60px 1fr;
   grid-template-columns: 2fr 14fr;
   grid-gap: 10px;
-  background-color: lightgoldenrodyellow;
 }
 
 .content{
   grid-area: content;
-  background-color: chartreuse;
+  background-color: var(--color-second);
 }

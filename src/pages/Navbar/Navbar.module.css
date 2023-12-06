@@ -1,6 +1,6 @@
 .navbar {
   grid-area: navbar;
-  background-color: darkblue;
+  background-color: var(--color-second);
   padding: 15px 20px;
 }
 

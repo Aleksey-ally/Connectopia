@@ -13,7 +13,6 @@ import './styles/index.scss'
 
 import s from './App.module.css';
 
-
 const App = () => {
     return (
 

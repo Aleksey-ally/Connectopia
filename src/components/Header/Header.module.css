@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   grid-area: header;
-  background-color: brown;
+  background-color: var(--color-second);
 }
 
 .logoZoo {

@@ -15,9 +15,9 @@ import s from './App.module.css';
 
 const App = () => {
     return (
-
-        <div className={s.appWrapper}>
+        <>
             <HeaderContainer />
+            <main className={s.appWrapper}>
             <Navbar />
             <div className={s.content}>
                 <Routes>
@@ -30,7 +30,8 @@ const App = () => {
                     <Route path='/settings' element={<Settings />} />
                 </Routes>
             </div>
-        </div>
+            </main>
+        </>
     )
 }
 

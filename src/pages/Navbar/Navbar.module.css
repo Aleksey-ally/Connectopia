@@ -1,7 +1,10 @@
 .navbar {
+  position: fixed;
+  margin-top: 70px;
   grid-area: navbar;
   background-color: var(--color-second);
   padding: 15px 20px;
+  border-radius: 4px;
 }
 
 .item {

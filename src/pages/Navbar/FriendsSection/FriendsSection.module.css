@@ -1,21 +1,30 @@
-.friendSection img{
-    display: flex;
-    height: 50px;
-    width: 50px;
-    border-radius: 25px;
-    background: white;
+.friendSection{
+
+    .label{
+        font-size: 0.75em;
+        color: var(--color-menu-label);
+        font-weight: var(--font-weight-semi-bold);
+        text-transform: uppercase;
+        letter-spacing:0.0625em;
+        line-height: 1.75;
+    }
+
+    .item {
+        display: inline-block;
+        margin-left: 5px;
+        text-align: center;
+
+        .avatar{
+            display: flex;
+            height: 50px;
+            width: 50px;
+            border-radius: 25px;
+            background: white;
+        }
+
+        &:hover {
+            color: var(--color-light-100);
+        }
+    }
 }
 
-.title{
-
-}
-
-.friendSection div {
-    display: inline-block;
-    margin-left: 5px;
-    text-align: center;
-}
-
-.friendSection div:hover {
-    color: gold;
-}

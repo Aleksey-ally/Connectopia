@@ -1,23 +1,54 @@
 .navbar {
   position: fixed;
-  margin-top: 70px;
   grid-area: navbar;
+  margin-top: 70px;
   background-color: var(--color-second);
-  padding: 15px 20px;
+
+  padding: 15px 10px;
   border-radius: 4px;
+  .label{
+    font-size: 0.75em;
+    color: var(--color-menu-label);
+    font-weight: var(--font-weight-semi-bold);
+    text-transform: uppercase;
+    letter-spacing:0.0625em;
+    line-height: 1.75;
+  }
+
+  .navButtonsSection{
+    display: flex;
+    flex-direction: column;
+    gap: 0.6em;
+
+    .item {
+      display: flex;
+      color: var(--color-font-global);
+      text-decoration-line: none;
+      padding: 0.625em 1em;
+      font-size: var(--font-size-s);
+      font-weight: var(--font-weight-semi-bold);
+      line-height: 1.6em;
+      transition: all 0.45s ease;
+
+      &:hover {
+        background-color: var(--color-hover-link);
+        color: var(--color-light-100);
+        border-radius: var(--border-radius);
+      }
+
+      &:focus {
+        color: var(--color-light-100);
+        text-decoration-line: none;
+        background-color: var(--color-active-link);
+        border-radius: var(--border-radius);
+      }
+    }
+
+  }
+
 }
 
-.item {
-  color: white;
-  text-decoration-line: none;
-}
 
-.active {
-  color: gold;
-  text-decoration-line: none;
-}
 
-.navFriendSection{
-  height: 100px;
-  color: white;
-}
+
+

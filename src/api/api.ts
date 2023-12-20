@@ -1,5 +1,5 @@
 import axios from "axios";
-import { UserType } from "redux/usersReducer";
+import {UserType} from "redux/usersReducer";
 
 type ResponseUsersType = {
     items: UserType[]
@@ -48,6 +48,12 @@ const instance = axios.create(
         }
     })
 
+export const authAPI = {
+    auth() {
+        return instance.get<ResponseAuth>('auth/me')
+            .then(res => res.data)
+    }
+}
 
 export const usersAPI = {
     getUsers(pageSize: number, currentPage: number) {
@@ -56,15 +62,10 @@ export const usersAPI = {
     }
 }
 
-export const authAPI = {
-    auth() {
-        return instance.get<ResponseAuth>('auth/me')
-            .then(res => res.data)
-    }
-}
+
 
 export const profileAPI = {
-    getProfile(uID: string) {
+    getProfile(uID: number) {
         return instance.get<ProfileUserResponseType>(`profile/${uID}`)
             .then(res => res.data)
     }

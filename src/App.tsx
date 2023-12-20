@@ -1,35 +1,53 @@
-import { HeaderContainer } from "components/Header/HeaderContainer";
-import { MessagesContainer } from "pages/Messages/MessagesContainer";
-import { Music } from 'pages/Music/Music';
-import { Navbar } from "pages/Navbar/Navbar";
-import { News } from 'pages/News/News';
-import { Profile } from "pages/Profile/Profile";
-import { Settings } from 'pages/Settings/Settings';
-import { UsersContainer } from 'pages/Users/UsersContainer';
-import { Route, Routes } from 'react-router-dom';
+import {HeaderContainer} from "components/Header/HeaderContainer";
+import {MessagesContainer} from "pages/Messages/MessagesContainer";
+import {Music} from 'pages/Music/Music';
+import {Navbar} from "pages/Navbar/Navbar";
+import {News} from 'pages/News/News';
+import {Profile} from "pages/Profile/Profile";
+import {Settings} from 'pages/Settings/Settings';
+import {UsersContainer} from 'pages/Users/UsersContainer';
+import {Route, Routes} from 'react-router-dom';
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/700.css'
 import './styles/index.scss'
 
 import s from './App.module.css';
+import {useEffect} from "react";
+import {authAPI} from "api/api";
+import {Auth, setAuthUserData} from "redux/authReducer";
+import {useDispatch, useSelector} from "react-redux";
+import {ReducersType} from "redux/reduxStore";
+
 
 const App = () => {
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        authAPI.auth()
+            .then((data) => {
+                if (data.resultCode === 0) {
+                    dispatch(setAuthUserData({...data.data, isAuth: true}))
+                }
+            })
+    }, [])
+    const auth = useSelector<ReducersType, Auth>(state => state.auth)
+
     return (
         <>
-            <HeaderContainer />
+            <HeaderContainer/>
             <main className={s.appWrapper}>
-            <Navbar />
-            <div className={s.content}>
-                <Routes>
-                    <Route path='/messages/:uID?'
-                        element={<MessagesContainer />} />
-                    <Route path={'/profile/:uID?'} element={<Profile />} />
-                    <Route path='/users' element={<UsersContainer />} />
-                    <Route path='/news' element={<News />} />
-                    <Route path='/music' element={<Music />} />
-                    <Route path='/settings' element={<Settings />} />
-                </Routes>
-            </div>
+                <Navbar/>
+                <div className={s.content}>
+                    <Routes>
+                        <Route path='/messages/:uID? =12'
+                               element={<MessagesContainer/>}/>
+                        <Route path={'/profile/:uID?'} element={<Profile/>}/>
+                        <Route path='/users' element={<UsersContainer/>}/>
+                        <Route path='/news' element={<News/>}/>
+                        <Route path='/music' element={<Music/>}/>
+                        <Route path='/settings' element={<Settings/>}/>
+                    </Routes>
+                </div>
             </main>
         </>
     )

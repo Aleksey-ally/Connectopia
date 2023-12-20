@@ -1,34 +1,27 @@
-import { UserAvatar } from 'components/UserAvatar/UserAvatar';
-import { UtilityProfileUserType } from 'redux/profileReducer';
-import ElephantBackground from '../../../imgs/ElephantBackground.png';
+import {UserAvatar} from 'components/UserAvatar/UserAvatar';
+import {UtilityProfileUserType} from 'redux/profileReducer';
+import UserCover from 'imgs/userCover_1.jpg';
 import s from './ProfileInformation.module.css';
+import {Typography} from "components/Typography/Typography";
 
 type Props = {
-  profile: UtilityProfileUserType
+    profile: UtilityProfileUserType
 }
 
-export const ProfileInformation = ({ profile }: Props) => {
-  return (
-    <div className={s.description}>
-      <img src={ElephantBackground} alt="Elephant background" />
-      <div>
-        <UserAvatar size={'medium'} photos={profile.photos?.small} /> 
-       <ol>Name: {profile.fullName}</ol>
-       <ol>About me: {profile.aboutMe}</ol>
-       <ol>Looking job: {profile.lookingForAJob}</ol>
-       <ol>Description: {profile.lookingForAJobDescription}</ol>
-        <div>
-          Contacts:
-          <ol>{profile.contacts?.facebook}</ol>
-          <ol>{profile.contacts?.github}</ol>
-          <ol>{profile.contacts?.instagram}</ol>
-          <ol>{profile.contacts?.mainLink}</ol>
-          <ol>{profile.contacts?.twitter}</ol>
-          <ol>{profile.contacts?.vk}</ol>
-          <ol>{profile.contacts?.website}</ol>
-          <ol>{profile.contacts?.youtube}</ol>
+export const ProfileInformation = ({profile}: Props) => {
+    return (
+        <div className={s.description}>
+            <div className={s.userCover} style={{backgroundImage: `url(${UserCover})`}}>
+                <div className={s.userInfo}>
+                    <UserAvatar className={s.userAvatar} size={'medium'} photos={profile.photos?.small}/>
+                    <div className={s.userInfoBody}>
+                        <Typography variant={'h3'}>{profile.fullName}</Typography>
+                        <Typography variant={'subtitle2'}>Status</Typography>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
-      </div>
-    </div>
-  )
+    )
 }

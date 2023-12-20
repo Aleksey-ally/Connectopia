@@ -1,3 +1,42 @@
-.description{
+.description {
     padding: 5px;
+
+    .userCover {
+        max-height: 350px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        border-radius: 8px;
+        padding: 180px 35px 35px 50px;
+        position: relative;
+        margin-bottom: 30px;
+        z-index: 0;
+
+        &::before {
+            content: "";
+            height: 100%;
+            width: 100%;
+            background-image: linear-gradient(to top, rgba(0, 0, 0, .9), transparent);
+            border-radius: var(--border-radius-box);
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+
+        .userInfo {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            .userAvatar{
+                margin-right: 1.875em;
+            }
+            .userInfoBody{
+                display: flex;
+                flex-direction: column;
+                gap:0.0015em;
+            }
+        }
+    }
 }

@@ -1,4 +1,3 @@
-import {HeaderContainer} from "components/Header/HeaderContainer";
 import {MessagesContainer} from "pages/Messages/MessagesContainer";
 import {Music} from 'pages/Music/Music';
 import {Navbar} from "pages/Navbar/Navbar";
@@ -17,6 +16,7 @@ import {authAPI} from "api/api";
 import {Auth, setAuthUserData} from "redux/authReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {ReducersType} from "redux/reduxStore";
+import {Header} from "components/Header/Header";
 
 
 const App = () => {
@@ -34,7 +34,7 @@ const App = () => {
 
     return (
         <>
-            <HeaderContainer/>
+            <Header auth={auth}/>
             <main className={s.appWrapper}>
                 <Navbar/>
                 <div className={s.content}>

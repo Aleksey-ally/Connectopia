@@ -7,9 +7,9 @@ type Props = {
     size:'medium' | 'small'
 } & ComponentPropsWithoutRef<'img'>
 
-export const UserAvatar = ({ photos, size, className, ...rest }: Props) => {
+export const UserAvatar = ({ photos, size, className ='', ...rest }: Props) => {
     return <>
-        <img  className={`${s[size]} ${className}`} {...rest}
+        <img  className={`${s.avatar} ${s[size]} ${className}`} {...rest}
             src={photos || AvatarUnknownUser} alt="User avatar" />
     </>
 }

@@ -21,6 +21,10 @@
   @include typography(var(--font-size-m), var(--line-height-m), var(--font-weight-bold));
 }
 
+.h5 {
+  @include typography(var(--font-size-h5), var(--font-line-height-h5), var(--font-weight-medium));
+}
+
 .body1 {
   @include typography(var(--font-size-m), var(--line-height-m), var(--font-weight-regular));
 }

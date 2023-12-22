@@ -1,13 +1,16 @@
-.medium{
-    height: 100px;
-    width: 100px;
-    border-radius: 50px;
-    background: white;
+.avatar{
+    object-fit: cover;
+    background: var(--color-light-100);
+    border-radius: 50%;
+
+    &.medium{
+        height: 5em;
+        width: 5em;
+    }
+    &.small{
+        height: 3.125em;
+        width: 3.125em;
+    }
 }
 
-.small{
-    height: 50px;
-    width: 50px;
-    border-radius: 25px;
-    background: white;
-}
+

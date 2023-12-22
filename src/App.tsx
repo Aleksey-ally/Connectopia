@@ -39,7 +39,7 @@ const App = () => {
                 <Navbar/>
                 <div className={s.content}>
                     <Routes>
-                        <Route path='/messages/:uID? =12'
+                        <Route path='/messages/:uID?'
                                element={<MessagesContainer/>}/>
                         <Route path={'/profile/:uID?'} element={<Profile/>}/>
                         <Route path='/users' element={<UsersContainer/>}/>
@@ -52,5 +52,4 @@ const App = () => {
         </>
     )
 }
-
 export default App;

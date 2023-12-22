@@ -1,1 +1,16 @@
-.users{}
+.users {
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+
+    .user {
+        display: flex;
+        gap: 1em;
+        border-radius: var(--border-radius-box);
+        padding: 1.5em;
+        margin-bottom: 2em;
+        align-items: center;
+        background-color: var(--color-main);
+        transition: all 0.45s ease;
+    }
+}

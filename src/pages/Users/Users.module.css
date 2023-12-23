@@ -5,12 +5,33 @@
 
     .user {
         display: flex;
-        gap: 1em;
+        align-items: flex-start;
+        justify-content: space-between;
+
         border-radius: var(--border-radius-box);
         padding: 1.5em;
         margin-bottom: 2em;
-        align-items: center;
         background-color: var(--color-main);
         transition: all 0.45s ease;
+
+        .userInfo {
+            display: flex;
+            gap: 1em;
+
+            .linkAvatar {
+                display: flex;
+            }
+
+            .description {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                .item {
+                    margin-bottom: 0.375em;
+                }
+            }
+        }
     }
+
 }

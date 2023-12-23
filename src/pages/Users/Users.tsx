@@ -4,6 +4,7 @@ import {UsersType} from "redux/usersReducer";
 import s from "./Users.module.css";
 import {Pagination} from "components/Pagination/Pagination";
 import {Typography} from "components/Typography/Typography";
+import Button from "components/Button/Button";
 
 export type UsersPropsType = {
     usersData: UsersType
@@ -24,23 +25,23 @@ export const Users = ({usersData, follow, unFollow, onClickPageHandler, setItems
                         perPageOptions={[5, 10, 20, 30, 40, 50]}/>
             {usersData.users.map(u => (
                 <div className={s.user} key={u.id}>
-                        <span>
-                            <NavLink to={'/profile/' + u.id}>
-                                <UserAvatar size={'medium'} key={u.id} photos={u.photos.small}/>
-                            </NavLink>
-                            <div>
-                                {u.followed
-                                    ? <button onClick={() => unFollow(u.id)}
-                                              disabled={u.toggleFollowing}>Unfollow</button>
-                                    : <button onClick={() => follow(u.id)} disabled={u.toggleFollowing}>Follow</button>}
-                            </div>
-                        </span>
-                    <span>
-                            <span>
-                                <Typography variant={'h5'}>{u.name}</Typography>
-                            </span>
+                    <div className={s.userInfo}>
+                        <NavLink className={s.linkAvatar} to={'/profile/' + u.id}>
+                            <UserAvatar size={'medium'} key={u.id} photos={u.photos.small}/>
+                        </NavLink>
+                        <div className={s.description}>
+                            <Typography className={s.item} as={'h5'} variant={'h5'}>{u.name}</Typography>
+                            <Typography className={s.item} variant={'h5'}>Status</Typography>
+                        </div>
+                    </div>
 
-                        </span>
+                    {u.followed
+                        ? <Button onClick={() => unFollow(u.id)}
+                                  disabled={u.toggleFollowing}>Unfollow</Button>
+                        : <Button variant={'secondary'} onClick={() => follow(u.id)}
+                                  disabled={u.toggleFollowing}>Follow</Button>}
+
+
                 </div>
             ))}
         </div>

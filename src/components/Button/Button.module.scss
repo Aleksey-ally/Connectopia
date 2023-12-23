@@ -1,0 +1,138 @@
+@mixin button(
+  $default-background-color,
+  $box-shadow-color,
+  $text-color,
+  $active-background-color,
+  $hover-background-color,
+  $focus-border-color,
+  $disabled-background-color,
+  $disabled-text-color
+) {
+  all: unset;
+
+  cursor: pointer;
+
+  padding: 0.375rem 1.75rem;
+
+  color: $text-color;
+
+  background-color: $default-background-color;
+  border: 2px solid $default-background-color;
+  border-radius: 0.25rem;
+  box-shadow: 0 4px 18px 0 rgba($box-shadow-color, 0.35);
+
+  &:focus {
+    border-color: $focus-border-color;
+  }
+
+  &:hover {
+    background-color: $hover-background-color;
+    border-color: $hover-background-color;
+  }
+
+  &:active {
+    background-color: $active-background-color;
+    border-color: $active-background-color;
+  }
+
+  &:disabled {
+    color: $disabled-text-color;
+    background-color: $disabled-background-color;
+    border-color: $disabled-background-color;
+  }
+}
+
+.primary {
+  @include button(
+    var(--color-accent-500),
+    var(--color-accent-500),
+    var(--color-light-100),
+    var(--color-accent-700),
+    var(--color-accent-300),
+    var(--color-info-700),
+    var(--color-accent-900),
+    var(--color-light-900)
+  );
+}
+
+.secondary {
+  @include button(
+    var(--color-dark-300),
+    rgb(129, 129, 129),
+    var(--color-light-100),
+    var(--color-dark-500),
+    var(--color-dark-100),
+    var(--color-info-700),
+    var(--color-dark-300),
+    var(--color-light-900)
+  );
+}
+
+.tertiary {
+  @include button(
+    transparent,
+    transparent,
+    var(--color-accent-500),
+    var(--color-accent-900),
+    var(--color-dark-500),
+    #9747ff,
+    transparent,
+    var(--color-accent-900)
+  );
+
+  border: 1px solid var(--color-accent-500);
+
+  &:active {
+    border-color: var(--color-accent-500);
+  }
+
+  &:hover {
+    border-color: var(--color-accent-500);
+  }
+
+  &:focus {
+    border: 2px solid var(--color-info-700);
+  }
+
+  &:disabled {
+    color: var(--color-accent-900);
+    border-color: var(--color-accent-900);
+  }
+}
+
+.link {
+  @include button(
+    transparent,
+    transparent,
+    var(--color-accent-500),
+    transparent,
+    transparent,
+    var(--color-info-700),
+    transparent,
+    var(--color-accent-900)
+  );
+
+  font-weight: 700;
+
+  &:active {
+    color: yellow;
+  }
+
+  &:hover {
+    color: var(--color-accent-300);
+  }
+
+  &:focus {
+    color: var(--color-accent-500);
+    border-radius: 130px;
+  }
+
+  &:disabled {
+    color: var(--color-accent-900);
+  }
+}
+
+.fullWidth {
+  width: 100%;
+  text-align: center;
+}

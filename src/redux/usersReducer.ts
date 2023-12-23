@@ -1,4 +1,3 @@
-
 export type UsersType = {
     users: UserType[]
     pageSize: number
@@ -7,17 +6,11 @@ export type UsersType = {
     isFetching: boolean
 }
 
-export type LocationUserType = {
-    city: string
-    country: string
-}
-
 export type UserType = {
     id: number
     name: string
     photos: { small: string | null, large: string | null }
     status: string
-    location: LocationUserType
     followed: boolean
     toggleFollowing: boolean
 }
@@ -53,37 +46,42 @@ type ActionType =
 
 
 export const usersReducer = (state = initialState, action: ActionType): UsersType => {
-    
+
     switch (action.type) {
         case FOLLOW:
             return {
                 ...state,
-                users: state.users.map(u => u.id === action.userID ? { ...u, followed: true } : u)
+                users: state.users.map(u => u.id === action.userID ? {...u, followed: true} : u)
             }
 
         case UNFOLLOW:
             return {
-                ...state, users: state.users.map(u => u.id === action.userID ? { ...u, followed: false } : u)
+                ...state, users: state.users.map(u => u.id === action.userID ? {...u, followed: false} : u)
             }
 
         case SET_USERS:
-            return { ...state, users: action.users }
+            return {...state, users: action.users}
 
         case SET_CURRENT_PAGE:
-            return { ...state, currentPage: action.currentPage }
+            return {...state, currentPage: action.currentPage}
 
         case SET_TOTAL_USERS_COUNT:
-            return { ...state, totalUsersCount: action.totalUsersCount }
+            return {...state, totalUsersCount: action.totalUsersCount}
 
         case SET_FETCHING:
-            return { ...state, isFetching: action.isFetching }
+            return {...state, isFetching: action.isFetching}
 
         case TOGGLE_FOLLOWING: {
-            return {...state, users: state.users.map(u=> u.id === action.userID? {...u, toggleFollowing: action.toggleFollowing} : u)}
+            return {...state,
+                users: state.users.map(u => u.id === action.userID ? {
+                    ...u,
+                    toggleFollowing: action.toggleFollowing
+                } : u)
+            }
         }
 
         case SET_PAGE_SIZE : {
-            return {...state, pageSize : action.pageSize}
+            return {...state, pageSize: action.pageSize}
         }
 
         default:

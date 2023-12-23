@@ -38,7 +38,7 @@ export class UsersAPIClassContainer extends React.Component<Props> {
 
         usersAPI.getUsers(this.props.usersData.pageSize, this.props.usersData.currentPage)
             .then((data) => {
-                this.props.dispatchNewUsers(data.items.map(u => ({ ...u, location: { country: "Belarus", city: "Minsk" }, toggleFollowing: false })));
+                this.props.dispatchNewUsers(data.items);
                 this.props.dispatchNewTotalUsersCount(data.totalCount)
                 this.props.dispatchFetch(false)
             });
@@ -70,7 +70,7 @@ export class UsersAPIClassContainer extends React.Component<Props> {
 
         usersAPI.getUsers(this.props.usersData.pageSize, page)
             .then((data) => {
-                this.props.dispatchNewUsers(data.items.map(u => ({ ...u, location: { country: "Belarus", city: "Minsk" } })));
+                this.props.dispatchNewUsers(data.items);
                 this.props.dispatchNewTotalUsersCount(data.totalCount)
                 this.props.dispatchFetch(false)
             });
@@ -82,7 +82,7 @@ export class UsersAPIClassContainer extends React.Component<Props> {
 
         usersAPI.getUsers(pageSize, this.props.usersData.currentPage)
             .then((data)=>{
-                this.props.dispatchNewUsers(data.items.map(u => ({ ...u, location: { country: "Belarus", city: "Minsk" } })));
+                this.props.dispatchNewUsers(data.items);
                 this.props.dispatchNewTotalUsersCount(data.totalCount)
                 this.props.dispatchFetch(false)
             })

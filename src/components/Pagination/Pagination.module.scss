@@ -1,19 +1,19 @@
 .container {
   display: flex;
-  gap: 24px;
+  gap: 1.5em;
   align-items: center;
-  height: 24px;
+  margin-bottom: 2em;
 }
 
 .paginationRange {
   display: flex;
-  gap: 12px;
+  gap: 0.625em;
   align-items: center;
 }
 
 .icon {
-  width: 16px;
-  height: 16px;
+  width: 1em;
+  height: 1em;
 
   .item:disabled & {
     color: var(--color-dark-100);
@@ -27,34 +27,37 @@
   align-items: center;
   justify-content: center;
 
-  width: 24px;
-  height: 24px;
+  width: 2.813em;
+  height: 2.813em;
 
-  border-radius: 2px;
+  border: 0.0625em solid var(--color-dark-800);
+  border-radius: var(--border-radius);
 
-  transition: 0.4s ease-out;
+  transition: all 0.45s ease;
+
+  background-color: var(--color-main);
 
   &:disabled {
     cursor: initial;
   }
 
   &.selected {
-    color: var(--color-dark-900);
-    background-color: var(--color-light-100);
+    color: var(--color-light-100);
+    background-color: var(--color-accent);
   }
 
   &:focus-within {
-    border-radius: 4px;
-    outline: 2px solid var(--color-info-900);
+    border-radius: 0.25em;
+    outline: 0.125em solid var(--color-info-900);
   }
 
   &:hover:not(&:disabled) {
-    background-color: var(--color-dark-500);
+    background-color: var(--color-accent-900);
   }
 }
 
 .selectBox {
   display: flex;
-  gap: 6px;
+  gap: 0.625em;
   align-items: center;
 }

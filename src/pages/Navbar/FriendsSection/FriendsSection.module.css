@@ -5,7 +5,7 @@
         color: var(--color-menu-label);
         font-weight: var(--font-weight-semi-bold);
         text-transform: uppercase;
-        letter-spacing:0.0625em;
+        letter-spacing:var(--letter-spacing);
         line-height: 1.75;
     }
 

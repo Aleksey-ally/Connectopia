@@ -36,9 +36,9 @@ export const Users = ({usersData, follow, unFollow, onClickPageHandler, setItems
                     </div>
 
                     {u.followed
-                        ? <Button onClick={() => unFollow(u.id)}
+                        ? <Button variant={'secondary'} onClick={() => unFollow(u.id)}
                                   disabled={u.toggleFollowing}>Unfollow</Button>
-                        : <Button variant={'secondary'} onClick={() => follow(u.id)}
+                        : <Button onClick={() => follow(u.id)}
                                   disabled={u.toggleFollowing}>Follow</Button>}
 
 

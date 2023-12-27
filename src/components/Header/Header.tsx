@@ -13,10 +13,12 @@ type Props = {
 export const Header = ({auth}: Props) => {
     return (
         <header className={s.header}>
-            <div className={s.logo}>
-                <CICon/>
-                <Typography className={s.title} as={'h4'} variant={'h4'}>onnectopia</Typography>
-            </div>
+            <NavLink to={'/'}>
+                <div className={s.logo}>
+                    <CICon/>
+                    <Typography className={s.title} as={'h4'} variant={'h4'}>onnectopia</Typography>
+                </div>
+            </NavLink>
 
             <div className={s.loginBlock}>
                 {auth.isAuth ?

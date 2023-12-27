@@ -1,27 +1,33 @@
 .header {
-  position: fixed;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  grid-area: header;
+    position: fixed;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    grid-area: header;
 
-  padding: 0 15px;
-  align-items: center;
+    padding: 0 15px;
+    align-items: center;
 
-  background-color: var(--color-second);
-  border-radius: 4px;
+    background-color: var(--color-second);
+    border-radius: 4px;
+    z-index: 99;
 }
 
-.logoZoo {
-  max-width: 140px;
-  margin: -25px -45px;
+.logo {
+    display: flex;
+    align-items: center;
+
+    .title {
+        margin-left: -0.25em;
+    }
+
 }
 
 .loginBlock {
-  margin-right: 10px;
+    margin-right: 10px;
 }
 
 .login {
-  color:wheat;
-  text-decoration: none;
+    color: wheat;
+    text-decoration: none;
 }

@@ -35,7 +35,7 @@ export const Navbar = () => {
                              className={s.item}>Settings</NavLink>
                 </span>
             </div>
-                <FriendsSection friendsData={friendsData}/>
+            <FriendsSection friendsData={friendsData}/>
         </nav>
     )
 }

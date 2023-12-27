@@ -27,7 +27,7 @@
                 flex-direction: column;
                 justify-content: center;
 
-                & a{
+                & a {
                     text-decoration: none;
                 }
 
@@ -40,8 +40,6 @@
                             transition: all 0.45s ease;
                         }
                     }
-
-
 
                     &.status {
                         color: var(--color-font-global)

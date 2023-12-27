@@ -1,8 +1,8 @@
-import { followAPI, usersAPI } from "api/api"
-import { Preloader } from "components/Preloader/Preloader"
+import {followAPI, usersAPI} from "api/api"
+import {Preloader} from "components/Preloader/Preloader"
 import React from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { ReducersType } from "redux/reduxStore"
+import {useDispatch, useSelector} from "react-redux"
+import {ReducersType} from "redux/reduxStore"
 import {
     UserType,
     UsersType,
@@ -15,7 +15,7 @@ import {
     unFollow,
     setPageSize
 } from "redux/usersReducer"
-import { Users } from "./Users"
+import {Users} from "./Users"
 
 export type Props = {
     usersData: UsersType
@@ -26,9 +26,8 @@ export type Props = {
     dispatchNewTotalUsersCount: (totalUsersCount: number) => void
     dispatchFetch: (isFetching: boolean) => void
     dispatchToggleFollowing: (userID: number, toggleFollowing: boolean) => void
-    dispatchItemsPerPage: (pageSize:number)=>void
+    dispatchItemsPerPage: (pageSize: number) => void
 }
-
 
 
 export class UsersAPIClassContainer extends React.Component<Props> {
@@ -76,12 +75,12 @@ export class UsersAPIClassContainer extends React.Component<Props> {
             });
     }
 
-    setItemsPerPage = (pageSize:number) => {
+    setItemsPerPage = (pageSize: number) => {
         this.props.dispatchFetch(true)
         this.props.dispatchItemsPerPage(pageSize)
 
         usersAPI.getUsers(pageSize, this.props.usersData.currentPage)
-            .then((data)=>{
+            .then((data) => {
                 this.props.dispatchNewUsers(data.items);
                 this.props.dispatchNewTotalUsersCount(data.totalCount)
                 this.props.dispatchFetch(false)
@@ -92,7 +91,9 @@ export class UsersAPIClassContainer extends React.Component<Props> {
 
     render() {
         return <>
-            {this.props.usersData.isFetching ? <Preloader /> : <Users usersData={this.props.usersData} follow={this.follow} unFollow={this.unFollow} onClickPageHandler={this.onClickPageHandler} setItemsPerPage={this.setItemsPerPage} />}
+            {this.props.usersData.isFetching ? <Preloader/> :
+                <Users usersData={this.props.usersData} follow={this.follow} unFollow={this.unFollow}
+                       onClickPageHandler={this.onClickPageHandler} setItemsPerPage={this.setItemsPerPage}/>}
         </>
     }
 }
@@ -127,6 +128,11 @@ export const UsersContainer = () => {
         dispatch(setPageSize(pageSize))
     }
 
-    return <UsersAPIClassContainer usersData={usersData} dispatchFollow={dispatchFollow} dispatchUnFollow={dispatchUnFollow} dispatchNewUsers={dispatchNewUsers} dispatchNewCurrentPage={dispatchNewCurrentPage} dispatchNewTotalUsersCount={dispatchNewTotalUsersCount} dispatchFetch={dispatchFetch} dispatchToggleFollowing={dispatchToggleFollowing} dispatchItemsPerPage={dispatchItemsPerPage} />
+    return <UsersAPIClassContainer usersData={usersData} dispatchFollow={dispatchFollow}
+                                   dispatchUnFollow={dispatchUnFollow} dispatchNewUsers={dispatchNewUsers}
+                                   dispatchNewCurrentPage={dispatchNewCurrentPage}
+                                   dispatchNewTotalUsersCount={dispatchNewTotalUsersCount} dispatchFetch={dispatchFetch}
+                                   dispatchToggleFollowing={dispatchToggleFollowing}
+                                   dispatchItemsPerPage={dispatchItemsPerPage}/>
 
 }

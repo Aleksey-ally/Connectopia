@@ -27,11 +27,24 @@
                 flex-direction: column;
                 justify-content: center;
 
+                & a{
+                    text-decoration: none;
+                }
+
                 .item {
                     margin-bottom: 0.375em;
 
-                    &.status{
-                        color:var(--color-font-global)
+                    &.name {
+                        &:hover {
+                            color: var(--color-accent-900);
+                            transition: all 0.45s ease;
+                        }
+                    }
+
+
+
+                    &.status {
+                        color: var(--color-font-global)
                     }
                 }
             }

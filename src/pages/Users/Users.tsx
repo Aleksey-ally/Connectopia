@@ -26,11 +26,13 @@ export const Users = ({usersData, follow, unFollow, onClickPageHandler, setItems
             {usersData.users.map(u => (
                 <div className={s.user} key={u.id}>
                     <div className={s.userInfo}>
-                        <NavLink className={s.linkAvatar} to={'/profile/' + u.id}>
+                        <NavLink className={s.linkAvatar} to={`/profile/${u.id}`}>
                             <UserAvatar size={'medium'} key={u.id} photos={u.photos.small}/>
                         </NavLink>
                         <div className={s.description}>
-                            <Typography className={s.item} as={'h5'} variant={'h5'}>{u.name}</Typography>
+                           <NavLink to={`/profile/${u.id}`}>
+                               <Typography className={`${s.item} ${s.name}`} as={'h5'} variant={'h5'}>{u.name}</Typography>
+                           </NavLink>
                             <Typography className={`${s.item} ${s.status}`} as={'span'} variant={'subtitle2'}>{u.status}</Typography>
                         </div>
                     </div>

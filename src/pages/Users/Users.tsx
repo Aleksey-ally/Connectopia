@@ -31,7 +31,7 @@ export const Users = ({usersData, follow, unFollow, onClickPageHandler, setItems
                         </NavLink>
                         <div className={s.description}>
                             <Typography className={s.item} as={'h5'} variant={'h5'}>{u.name}</Typography>
-                            <Typography className={s.item} variant={'h5'}>Status</Typography>
+                            <Typography className={`${s.item} ${s.status}`} as={'span'} variant={'subtitle2'}>{u.status}</Typography>
                         </div>
                     </div>
 

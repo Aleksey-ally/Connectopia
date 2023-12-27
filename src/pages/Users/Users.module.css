@@ -29,6 +29,10 @@
 
                 .item {
                     margin-bottom: 0.375em;
+
+                    &.status{
+                        color:var(--color-font-global)
+                    }
                 }
             }
         }

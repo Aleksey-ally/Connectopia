@@ -12,7 +12,7 @@ export const ProfileInformationContainer = () => {
     const currentUserID = useSelector<ReducersType, number | null>(state => state.auth.id)
     const dispatch = useDispatch()
 
-    let {uID} = useParams()
+    const {uID} = useParams()
 
     const userID = Number(uID) || currentUserID
 

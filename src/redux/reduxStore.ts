@@ -1,8 +1,8 @@
 import {combineReducers, legacy_createStore as createStore} from "redux";
 import {profileReducer} from "./profileReducer";
 import {messagesReducer} from "./messagesReducer";
-import { usersReducer } from "./usersReducer";
-import { authReducer } from "./authReducer";
+import {usersReducer} from "./usersReducer";
+import {authReducer} from "./authReducer";
 
 export type ReducersType = ReturnType<typeof reducers>
 
@@ -14,5 +14,5 @@ const reducers = combineReducers({
 })
 export const reduxStore = createStore(reducers)
 
-// @ts-ignore
+// @ts-expect-error:old
 window.reduxStore = reduxStore;

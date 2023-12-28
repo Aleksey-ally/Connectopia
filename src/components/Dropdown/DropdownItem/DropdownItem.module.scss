@@ -1,0 +1,35 @@
+.item {
+  cursor: pointer;
+
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  width: 100%;
+
+  outline: none;
+
+  fill: var(--color-light-100);
+
+  transition: opacity 0.4s ease-in-out;
+
+  &:not(:last-child) {
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--color-dark-500);
+  }
+
+  &:not(:first-child) {
+    padding-top: 12px;
+  }
+
+  &:hover,
+  &:focus {
+    opacity: 0.3;
+  }
+
+  .itemIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

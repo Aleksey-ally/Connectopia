@@ -1,0 +1,36 @@
+.trigger {
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.content {
+  position: relative;
+
+  margin-top: 1px;
+  padding: 12px;
+
+  background-color: var(--color-dark-700);
+  border: 1px solid var(--color-dark-500);
+  border-radius: 4px;
+}
+
+.arrow {
+  position: absolute;
+  top: -4px;
+  left: calc(50% - 4px);
+  transform: rotate(45deg);
+
+  width: 10px;
+  height: 10px;
+
+  background-color: var(--color-dark-700);
+  border: 1.2px solid var(--color-dark-500);
+  border-top: none;
+  border-left: none;
+
+  fill: var(--color-dark-700);
+}

@@ -1,5 +1,3 @@
-import {MotionProps} from 'framer-motion'
-
 const menu = {
     initial: 'closed',
     exit: 'closed',
@@ -16,7 +14,7 @@ const menu = {
             },
         },
     },
-} satisfies MotionProps
+}
 
 const item = {
     variants: {
@@ -24,6 +22,6 @@ const item = {
         open: {x: 0, opacity: 1},
     },
     transition: {opacity: {duration: 0.15}},
-} satisfies MotionProps
+}
 
 export const dropdownAnimations = {menu, item}

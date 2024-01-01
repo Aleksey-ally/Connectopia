@@ -13,9 +13,10 @@ import {DropdownItem} from "components/Dropdown/DropdownItem";
 
 type Props = {
     auth: Auth
+    currentUserAvatar: string | undefined
 }
 
-export const Header = ({auth}: Props) => {
+export const Header = ({auth, currentUserAvatar}: Props) => {
     return (
         <header className={s.header}>
             <NavLink to={'/'}>
@@ -30,15 +31,10 @@ export const Header = ({auth}: Props) => {
                     <>
                         <Dropdown trigger={<span>Hello <b>{auth?.login}</b><UserAvatar size={'small'}/></span>}>
                             <DropdownItem>
-                                <UserAvatar
-                                    photos={
-                                        'https://fikiwiki.com/uploads/posts/2022-02/1644918620_17-fikiwiki-com-p-krasivie-kartinki-visokogo-razresheniya-19.jpg'
-                                    }
-                                    size={'small'}
-                                />
-
+                                <UserAvatar photos={currentUserAvatar} size={'small'}/>
                                 <div>
-                                    <Typography variant="subtitle2"> {auth?.login ? auth.login : 'User Name'}</Typography>
+                                    <Typography
+                                        variant="subtitle2"> {auth?.login ? auth.login : 'User Name'}</Typography>
                                     <Typography variant="caption" style={{color: 'var(--color-dark-100)'}}>
                                         {auth?.email ? auth.email : 'User Name'}
                                     </Typography>

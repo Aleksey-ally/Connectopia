@@ -16,7 +16,7 @@ import {authAPI} from "api/api";
 import {Auth, setAuthUserData} from "redux/authReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {ReducersType} from "redux/reduxStore";
-import {Header} from "components/Header/Header";
+import {HeaderContainer} from "components/Header/HeaderContainer";
 
 
 const App = () => {
@@ -34,7 +34,7 @@ const App = () => {
 
     return (
         <>
-            <Header auth={auth}/>
+            <HeaderContainer auth={auth}/>
             <main className={s.appWrapper}>
                 <Navbar/>
                 <div className={s.content}>

@@ -1,15 +1,16 @@
 import AvatarUnknownUser from "imgs/UnknownUser.png";
 import s from './UserAvatar.module.css'
-import {ComponentPropsWithoutRef} from "react";
+import {ComponentPropsWithoutRef, ElementRef, forwardRef} from "react";
 
 type Props = {
     photos?: string | null
     size:'medium' | 'small'
 } & ComponentPropsWithoutRef<'img'>
 
-export const UserAvatar = ({ photos, size, className ='', ...rest }: Props) => {
+export const UserAvatar = forwardRef<ElementRef<'img'>, Props>(
+    ({ photos, size, className ='', ...rest }, ref) => {
     return <>
-        <img  className={`${s.avatar} ${s[size]} ${className}`} {...rest}
+        <img ref={ref}  className={`${s.avatar} ${s[size]} ${className}`} {...rest}
             src={photos || AvatarUnknownUser} alt="User avatar" />
     </>
-}
+})

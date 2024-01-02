@@ -18,7 +18,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {ReducersType} from "redux/reduxStore";
 import {HeaderContainer} from "components/Header/HeaderContainer";
 
-
 const App = () => {
     const dispatch = useDispatch()
 

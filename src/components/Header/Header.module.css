@@ -10,7 +10,7 @@
 
     background-color: var(--color-second);
     border-radius: 4px;
-    z-index: 99;
+    z-index: 1;
 
     & a {
         text-decoration: none;

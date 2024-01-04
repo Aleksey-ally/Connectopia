@@ -63,10 +63,13 @@ export const usersAPI = {
 }
 
 
-
 export const profileAPI = {
     getProfile(uID: number) {
         return instance.get<ProfileUserResponseType>(`profile/${uID}`)
+            .then(res => res.data)
+    },
+    getStatus(uID: number) {
+        return instance.get<string>(`profile/status/${uID}`)
             .then(res => res.data)
     }
 }

@@ -10,7 +10,7 @@ export type UserType = {
     id: number
     name: string
     photos: { small: string | null, large: string | null }
-    status: string
+    status?: string | undefined
     followed: boolean
     toggleFollowing: boolean
 }
@@ -72,7 +72,8 @@ export const usersReducer = (state = initialState, action: ActionType): UsersTyp
             return {...state, isFetching: action.isFetching}
 
         case TOGGLE_FOLLOWING: {
-            return {...state,
+            return {
+                ...state,
                 users: state.users.map(u => u.id === action.userID ? {
                     ...u,
                     toggleFollowing: action.toggleFollowing
@@ -97,6 +98,7 @@ type setTotalUsersCount = ReturnType<typeof setTotalUsersCount>
 type setFetching = ReturnType<typeof setFetching>
 type SetToggleFollowing = ReturnType<typeof setToggleFollowing>
 type SetPageSize = ReturnType<typeof setPageSize>
+
 
 export const follow = (userID: number) => ({
     type: FOLLOW,
@@ -138,3 +140,24 @@ export const setPageSize = (pageSize: number) => ({
     type: SET_PAGE_SIZE,
     pageSize,
 } as const)
+
+
+// const SET_STATUS = "SET-STATUS"
+//
+// type ActionUserStatusType = SetStatus
+//
+// export const userStatusReducer = (state: string, action: ActionUserStatusType): string => {
+//     switch (action.type) {
+//         case SET_STATUS:
+//             return {
+//                 state = action.id
+//             }
+//     }
+// }
+//
+// type SetStatus = ReturnType<typeof setStatus>
+//
+// export const setStatus = (id: number) => ({
+//     type: SET_STATUS,
+//     id
+// } as const)

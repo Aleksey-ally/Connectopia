@@ -71,7 +71,13 @@ export const profileAPI = {
     getStatus(uID: number) {
         return instance.get<string>(`profile/status/${uID}`)
             .then(res => res.data)
+    },
+    updateStatus(newStatus:string){
+        return instance.put('profile/status',{status:newStatus})
+            .then(res=>res.data)
     }
+
+
 }
 
 export const followAPI = {

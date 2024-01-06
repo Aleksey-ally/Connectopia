@@ -22,7 +22,7 @@ export const Header = ({auth, currentUserAvatar}: Props) => {
             <NavLink to={'/'}>
                 <div className={s.logo}>
                     <CICon/>
-                    <Typography className={s.title} as={'h4'} variant={'h4'}>onnectopia</Typography>
+                    <Typography className={s.title} as={'h4'} variant={'h4-header'}>onnectopia</Typography>
                 </div>
             </NavLink>
 

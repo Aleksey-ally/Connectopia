@@ -22,7 +22,11 @@
 }
 
 .h4 {
-  @include typography(var(--font-size-h4), var(--font-line-height-h4), var(--font-weight-semi-bold));
+  @include typography(var(--font-size-h4), var(--font-line-height-h4), var(--font-weight-medium));
+}
+
+.h4-header {
+  @include typography(var(--font-size-h4-header), var(--font-line-height-h4), var(--font-weight-semi-bold));
 }
 
 .h5 {

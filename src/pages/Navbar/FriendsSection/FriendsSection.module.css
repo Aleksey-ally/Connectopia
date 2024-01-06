@@ -6,7 +6,7 @@
         font-weight: var(--font-weight-semi-bold);
         text-transform: uppercase;
         letter-spacing:var(--letter-spacing);
-        line-height: 1.75;
+        line-height: var(--line-height-m);
     }
 
     .item {

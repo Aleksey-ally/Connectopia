@@ -1,0 +1,50 @@
+.settingsPage {
+  padding: 2em;
+  border-radius: var(--border-radius-box);
+
+  .title {
+    margin-bottom: 2em;
+    padding: 0 0 1.25em;
+    border-bottom: .0625em solid var(--color-dark-800);
+  }
+
+  .item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .input {
+      padding: 1em;
+      background: transparent;
+      border: 0.0625em solid var(--color-dark-800);
+      border-radius: var(--border-radius);
+      height: 3.123em;
+      line-height: 3.123em;
+      width: 100%;
+    }
+
+    .label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 0 0.5em;
+      line-height: 1.1em;
+      letter-spacing: 0.1em;
+      background-color: var(--color-second);
+      transform: scale(0.75) translateY(-0.7em) translateX(0.5em);
+      font-size: var(--font-size-s);
+      border-left: 0.0625em solid var(--color-dark-800);
+      border-right: 0.0625em solid var(--color-dark-800);
+    }
+
+    .button {
+      margin-top: 0.8em;
+      text-transform: uppercase;
+      line-height: var(--line-height-m);
+      margin-left: auto;
+    }
+
+  }
+
+}

@@ -1,5 +1,5 @@
 import {profileAPI} from 'api/api';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useParams} from 'react-router-dom';
 import {UtilityProfileUserType, setUserProfile} from 'redux/profileReducer';
@@ -16,6 +16,8 @@ export const ProfileInformationContainer = () => {
 
     const userID = Number(uID) || currentUserID
 
+    const [status, setStatus] = useState<string>('')
+
     useEffect(() => {
         if(userID === null) return
 
@@ -23,7 +25,11 @@ export const ProfileInformationContainer = () => {
             .then(data => {
                 dispatch(setUserProfile(data))
             })
+        profileAPI.getStatus(userID as number)
+            .then(data => {
+                setStatus(data)
+            })
     }, [userID])
 
-    return <ProfileInformation profile={profile}/>
+    return <ProfileInformation profile={profile} status={status}/>
 }

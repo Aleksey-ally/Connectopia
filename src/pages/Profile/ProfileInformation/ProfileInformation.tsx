@@ -6,21 +6,26 @@ import {Typography} from "components/Typography/Typography";
 
 type Props = {
     profile: UtilityProfileUserType
+    status: string
 }
 
-export const ProfileInformation = ({profile}: Props) => {
+export const ProfileInformation = ({profile, status}: Props) => {
     return (
         <div className={s.description}>
+
             <div className={s.userCover} style={{backgroundImage: `url(${UserCover})`}}>
+
                 <div className={s.userInfo}>
+
                     <UserAvatar className={s.userAvatar} size={'medium'} photos={profile.photos?.small}/>
                     <div className={s.userInfoBody}>
                         <Typography variant={'h3'}>{profile.fullName}</Typography>
-                        <Typography variant={'subtitle2'}>Status</Typography>
+                        <Typography variant={'subtitle2'}>{status}</Typography>
                     </div>
-                </div>
-            </div>
 
+                </div>
+
+            </div>
 
         </div>
     )

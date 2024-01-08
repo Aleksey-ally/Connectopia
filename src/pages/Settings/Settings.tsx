@@ -1,15 +1,18 @@
 import s from './Settings.module.scss'
 import {ChangeEvent, FC, useEffect, useState} from "react";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {ReducersType} from "redux/reduxStore";
 import Button from "components/Button/Button";
 import {profileAPI} from "api/api";
 import {Typography} from "components/Typography/Typography";
+import {setUserProfile, UtilityProfileUserType} from "redux/profileReducer";
 
 export const Settings: FC = () => {
+    const dispatch = useDispatch()
     const userID = useSelector<ReducersType, number>(state => state.auth.id as number)
+    const user = useSelector<ReducersType, UtilityProfileUserType>(state => state.profileData.profile)
     const [status, setStatus] = useState<string>('')
-
+    console.log(user.fullName)
 
     useEffect(() => {
         if (userID === null) return
@@ -17,6 +20,11 @@ export const Settings: FC = () => {
         profileAPI.getStatus(userID)
             .then((data) => {
                 setStatus(data)
+            })
+
+        profileAPI.getProfile(userID)
+            .then(data => {
+                dispatch(setUserProfile(data))
             })
 
     }, [userID]);
@@ -30,6 +38,15 @@ export const Settings: FC = () => {
             .catch(() => alert('An unexpected error occurred'))
     }
 
+    const inputNameHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        dispatch(setUserProfile({fullName:e.currentTarget.value}))
+    }
+
+    const buttonNameHandler = () => {
+        profileAPI.updateProfile(user.fullName as string)
+            .catch(() => alert('An unexpected error occurred'))
+    }
+
     return (
         <div className={s.settingsPage}>
            <Typography className={s.title} as={'h4'} variant={'h4'}>Personal Information:</Typography>
@@ -38,6 +55,11 @@ export const Settings: FC = () => {
                 <input className={s.input} id='status' type='text' value={status} onChange={inputStatusHandler}></input>
                 <label className={s.label} htmlFor='status'>Status</label>
                 <Button className={s.button} variant={'secondary'} onClick={buttonStatusHandler}>Change</Button>
+            </div>
+            <div className={s.item}>
+                <input className={s.input} id='name' type='text' value={user.fullName} onChange={inputNameHandler}></input>
+                <label className={s.label} htmlFor='name'>Name</label>
+                <Button className={s.button} variant={'secondary'} onClick={buttonNameHandler}>Change</Button>
             </div>
 
         </div>

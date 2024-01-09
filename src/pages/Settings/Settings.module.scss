@@ -13,6 +13,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    margin-top: 0.8em;
+
 
     .input {
       padding: 1em;
@@ -44,7 +46,6 @@
       line-height: var(--line-height-m);
       margin-left: auto;
     }
-
   }
 
 }

@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {usersAPI} from "api/api";
+
 export type UsersType = {
     users: UserType[]
     pageSize: number
@@ -142,22 +145,17 @@ export const setPageSize = (pageSize: number) => ({
 } as const)
 
 
-// const SET_STATUS = "SET-STATUS"
-//
-// type ActionUserStatusType = SetStatus
-//
-// export const userStatusReducer = (state: string, action: ActionUserStatusType): string => {
-//     switch (action.type) {
-//         case SET_STATUS:
-//             return {
-//                 state = action.id
-//             }
-//     }
-// }
-//
-// type SetStatus = ReturnType<typeof setStatus>
-//
-// export const setStatus = (id: number) => ({
-//     type: SET_STATUS,
-//     id
-// } as const)
+export const getUsers = (pageSize: number, currentPage: number) => {
+
+    return (dispatch: Dispatch<ActionType>) => {
+        dispatch(setFetching(true))
+
+        usersAPI.getUsers(pageSize, currentPage)
+            .then((data) => {
+                dispatch(setCurrentPage(currentPage))
+                dispatch(setUsers(data.items))
+                dispatch(setTotalUsersCount(data.totalCount))
+                dispatch(setFetching(false))
+            });
+    }
+}

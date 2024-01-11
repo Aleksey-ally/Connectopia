@@ -13,12 +13,14 @@ import {
     setUsers,
     setToggleFollowing,
     unFollow,
-    setPageSize
+    setPageSize, getUsers
 } from "redux/usersReducer"
 import {Users} from "./Users"
+import {Dispatch} from "redux";
 
 export type Props = {
     usersData: UsersType
+    dispatch: Dispatch
     dispatchFollow: (userID: number) => void
     dispatchUnFollow: (userID: number) => void
     dispatchNewUsers: (users: UserType[]) => void
@@ -27,20 +29,14 @@ export type Props = {
     dispatchFetch: (isFetching: boolean) => void
     dispatchToggleFollowing: (userID: number, toggleFollowing: boolean) => void
     dispatchItemsPerPage: (pageSize: number) => void
+    getUsers: (pageSize: number, currentPage: number) => (dispatch: Dispatch) => void;
 }
 
 
 export class UsersAPIClassContainer extends React.Component<Props> {
 
     componentDidMount(): void {
-        this.props.dispatchFetch(true)
-
-        usersAPI.getUsers(this.props.usersData.pageSize, this.props.usersData.currentPage)
-            .then((data) => {
-                this.props.dispatchNewUsers(data.items);
-                this.props.dispatchNewTotalUsersCount(data.totalCount)
-                this.props.dispatchFetch(false)
-            });
+        this.props.dispatch(this.props.getUsers(this.props.usersData.pageSize, this.props.usersData.currentPage))
     }
 
     follow = (userID: number) => {
@@ -133,6 +129,8 @@ export const UsersContainer = () => {
                                    dispatchNewCurrentPage={dispatchNewCurrentPage}
                                    dispatchNewTotalUsersCount={dispatchNewTotalUsersCount} dispatchFetch={dispatchFetch}
                                    dispatchToggleFollowing={dispatchToggleFollowing}
-                                   dispatchItemsPerPage={dispatchItemsPerPage}/>
+                                   dispatchItemsPerPage={dispatchItemsPerPage}
+                                   getUsers={getUsers}
+                                   dispatch={dispatch}/>
 
 }

@@ -1,9 +1,10 @@
-import {applyMiddleware, combineReducers, legacy_createStore as createStore} from "redux";
+import {AnyAction, applyMiddleware, combineReducers, legacy_createStore as createStore} from "redux";
 import {profileReducer} from "./profileReducer";
 import {messagesReducer} from "./messagesReducer";
 import {usersReducer} from "./usersReducer";
 import {authReducer} from "./authReducer";
-import {thunk} from "redux-thunk";
+import {thunk, ThunkDispatch} from "redux-thunk";
+import {useDispatch} from "react-redux";
 
 export type ReducersType = ReturnType<typeof reducers>
 
@@ -14,6 +15,12 @@ const reducers = combineReducers({
     auth: authReducer
 })
 export const reduxStore = createStore(reducers, applyMiddleware(thunk))
+export type AppRootStateType = ReturnType<typeof reducers>
+
+export type AppThunkDispatch = ThunkDispatch<AppRootStateType, any, AnyAction>
+export const useAppDispatch = () => useDispatch<AppThunkDispatch>();
+
+
 
 // @ts-expect-error:old
 window.reduxStore = reduxStore;

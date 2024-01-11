@@ -1,19 +1,20 @@
 import {followAPI, usersAPI} from "api/api"
 import {Preloader} from "components/Preloader/Preloader"
 import React from "react"
-import {useDispatch, useSelector} from "react-redux"
-import {ReducersType} from "redux/reduxStore"
+import {useSelector} from "react-redux"
+import {ReducersType, useAppDispatch} from "redux/reduxStore"
 import {
-    UserType,
-    UsersType,
     follow,
+    getUsers,
     setCurrentPage,
     setFetching,
+    setPageSize,
+    setToggleFollowing,
     setTotalUsersCount,
     setUsers,
-    setToggleFollowing,
     unFollow,
-    setPageSize, getUsers
+    UsersType,
+    UserType
 } from "redux/usersReducer"
 import {Users} from "./Users"
 import {Dispatch} from "redux";
@@ -97,7 +98,7 @@ export class UsersAPIClassContainer extends React.Component<Props> {
 export const UsersContainer = () => {
 
     const usersData = useSelector<ReducersType, UsersType>(state => state.usersData)
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const dispatchFollow = (userID: number) => {
         dispatch(follow(userID))

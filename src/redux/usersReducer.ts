@@ -1,5 +1,5 @@
-import {Dispatch} from "redux";
 import {usersAPI} from "api/api";
+import {AppThunkDispatch} from "redux/reduxStore";
 
 export type UsersType = {
     users: UserType[]
@@ -147,7 +147,7 @@ export const setPageSize = (pageSize: number) => ({
 
 export const getUsers = (pageSize: number, currentPage: number) => {
 
-    return (dispatch: Dispatch<ActionType>) => {
+    return (dispatch: AppThunkDispatch) => {
         dispatch(setFetching(true))
 
         usersAPI.getUsers(pageSize, currentPage)

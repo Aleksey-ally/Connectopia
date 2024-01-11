@@ -14,12 +14,12 @@ import s from './App.module.css';
 import {useEffect} from "react";
 import {authAPI} from "api/api";
 import {Auth, setAuthUserData} from "redux/authReducer";
-import {useDispatch, useSelector} from "react-redux";
-import {ReducersType} from "redux/reduxStore";
+import {useSelector} from "react-redux";
+import {ReducersType, useAppDispatch} from "redux/reduxStore";
 import {HeaderContainer} from "components/Header/HeaderContainer";
 
 const App = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
         authAPI.auth()

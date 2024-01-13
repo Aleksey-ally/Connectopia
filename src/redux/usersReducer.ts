@@ -1,4 +1,4 @@
-import {usersAPI} from "api/api";
+import {followAPI, usersAPI} from "api/api";
 import {AppThunkDispatch} from "redux/reduxStore";
 
 export type UsersType = {
@@ -102,8 +102,7 @@ type setFetching = ReturnType<typeof setFetching>
 type SetToggleFollowing = ReturnType<typeof setToggleFollowing>
 type SetPageSize = ReturnType<typeof setPageSize>
 
-
-export const follow = (userID: number) => ({
+const follow = (userID: number) => ({
     type: FOLLOW,
     userID
 } as const)
@@ -157,5 +156,29 @@ export const getUsers = (pageSize: number, currentPage: number) => {
                 dispatch(setTotalUsersCount(data.totalCount))
                 dispatch(setFetching(false))
             });
+    }
+}
+
+export const followOnUser = (userID: number) => {
+    return (dispatch: AppThunkDispatch) => {
+        setToggleFollowing(userID, true)
+
+        followAPI.follow(userID)
+            .then(data=>{
+                dispatch(follow(userID))
+                setToggleFollowing(userID, false)
+            })
+    }
+}
+
+export const unfollowOnUser = (userID: number) => {
+    return (dispatch: AppThunkDispatch) => {
+        setToggleFollowing(userID, true)
+
+        followAPI.unFollow(userID)
+            .then(data=>{
+                dispatch(unFollow(userID))
+                setToggleFollowing(userID, false)
+            })
     }
 }

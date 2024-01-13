@@ -1,10 +1,10 @@
-import {followAPI, usersAPI} from "api/api"
+import {usersAPI} from "api/api"
 import {Preloader} from "components/Preloader/Preloader"
 import React from "react"
 import {useSelector} from "react-redux"
-import {ReducersType, useAppDispatch} from "redux/reduxStore"
+import {AppThunkDispatch, ReducersType, useAppDispatch} from "redux/reduxStore"
 import {
-    follow,
+    followOnUser,
     getUsers,
     setCurrentPage,
     setFetching,
@@ -12,7 +12,7 @@ import {
     setToggleFollowing,
     setTotalUsersCount,
     setUsers,
-    unFollow,
+    unfollowOnUser,
     UsersType,
     UserType
 } from "redux/usersReducer"
@@ -21,9 +21,9 @@ import {Dispatch} from "redux";
 
 export type Props = {
     usersData: UsersType
-    dispatch: Dispatch
-    dispatchFollow: (userID: number) => void
-    dispatchUnFollow: (userID: number) => void
+    dispatch: AppThunkDispatch
+    follow: (userID: number) => void
+    unfollow: (userID: number) => void
     dispatchNewUsers: (users: UserType[]) => void
     dispatchNewCurrentPage: (currentPage: number) => void
     dispatchNewTotalUsersCount: (totalUsersCount: number) => void
@@ -41,23 +41,12 @@ export class UsersAPIClassContainer extends React.Component<Props> {
     }
 
     follow = (userID: number) => {
-        this.props.dispatchToggleFollowing(userID, true)
-
-        followAPI.follow(userID)
-            .then(() => {
-                this.props.dispatchFollow(userID)
-                this.props.dispatchToggleFollowing(userID, false)
-            })
+        this.props.dispatch(this.props.follow(userID))
     }
 
     unFollow = (userID: number) => {
-        this.props.dispatchToggleFollowing(userID, true)
+        this.props.dispatch(this.props.unfollow(userID))
 
-        followAPI.unFollow(userID)
-            .then(() => {
-                this.props.dispatchUnFollow(userID)
-                this.props.dispatchToggleFollowing(userID, false)
-            })
     }
 
     onClickPageHandler = (page: number) => {
@@ -100,12 +89,6 @@ export const UsersContainer = () => {
     const usersData = useSelector<ReducersType, UsersType>(state => state.usersData)
     const dispatch = useAppDispatch()
 
-    const dispatchFollow = (userID: number) => {
-        dispatch(follow(userID))
-    }
-    const dispatchUnFollow = (userID: number) => {
-        dispatch(unFollow(userID))
-    }
     const dispatchNewUsers = (users: UserType[]) => {
         dispatch(setUsers(users))
     }
@@ -125,8 +108,8 @@ export const UsersContainer = () => {
         dispatch(setPageSize(pageSize))
     }
 
-    return <UsersAPIClassContainer usersData={usersData} dispatchFollow={dispatchFollow}
-                                   dispatchUnFollow={dispatchUnFollow} dispatchNewUsers={dispatchNewUsers}
+    return <UsersAPIClassContainer usersData={usersData} follow={followOnUser}
+                                   unfollow={unfollowOnUser} dispatchNewUsers={dispatchNewUsers}
                                    dispatchNewCurrentPage={dispatchNewCurrentPage}
                                    dispatchNewTotalUsersCount={dispatchNewTotalUsersCount} dispatchFetch={dispatchFetch}
                                    dispatchToggleFollowing={dispatchToggleFollowing}

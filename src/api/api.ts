@@ -1,5 +1,13 @@
 import axios from "axios";
-import {UserType} from "redux/usersReducer";
+import {
+    setCurrentPage,
+    setFetching,
+    setToggleFollowing,
+    setTotalUsersCount,
+    setUsers,
+    UserType
+} from "redux/usersReducer";
+import {AppThunkDispatch} from "redux/reduxStore";
 
 type ResponseUsersType = {
     items: UserType[]
@@ -92,4 +100,22 @@ export const followAPI = {
         return instance.delete(`follow/${uID}`)
     }
 }
+
+
+// export const getUsers = (pageSize: number, currentPage: number) => {
+//
+//     return (dispatch: AppThunkDispatch) => {
+//         dispatch(setFetching(true))
+//
+//         usersAPI.getUsers(pageSize, currentPage)
+//             .then((data) => {
+//                 dispatch(setCurrentPage(currentPage))
+//                 dispatch(setUsers(data.items))
+//                 dispatch(setTotalUsersCount(data.totalCount))
+//                 dispatch(setFetching(false))
+//             });
+//     }
+// }
+
+
 

@@ -145,7 +145,6 @@ export const setPageSize = (pageSize: number) => ({
 
 
 export const getUsers = (pageSize: number, currentPage: number) => {
-
     return (dispatch: AppThunkDispatch) => {
         dispatch(setFetching(true))
 
@@ -155,30 +154,31 @@ export const getUsers = (pageSize: number, currentPage: number) => {
                 dispatch(setUsers(data.items))
                 dispatch(setTotalUsersCount(data.totalCount))
                 dispatch(setFetching(false))
-            });
+            })
     }
 }
 
 export const followOnUser = (userID: number) => {
     return (dispatch: AppThunkDispatch) => {
-        setToggleFollowing(userID, true)
+        dispatch(setToggleFollowing(userID, true))
 
         followAPI.follow(userID)
-            .then(data=>{
+            .then(() => {
                 dispatch(follow(userID))
-                setToggleFollowing(userID, false)
+                dispatch(setToggleFollowing(userID, false))
+                return {}
             })
     }
 }
 
 export const unfollowOnUser = (userID: number) => {
     return (dispatch: AppThunkDispatch) => {
-        setToggleFollowing(userID, true)
+        dispatch(setToggleFollowing(userID, true))
 
         followAPI.unFollow(userID)
-            .then(data=>{
+            .then(() => {
                 dispatch(unFollow(userID))
-                setToggleFollowing(userID, false)
+                dispatch(setToggleFollowing(userID, false))
             })
     }
 }

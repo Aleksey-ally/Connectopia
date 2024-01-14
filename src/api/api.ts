@@ -1,13 +1,5 @@
 import axios from "axios";
-import {
-    setCurrentPage,
-    setFetching,
-    setToggleFollowing,
-    setTotalUsersCount,
-    setUsers,
-    UserType
-} from "redux/usersReducer";
-import {AppThunkDispatch} from "redux/reduxStore";
+import {UserType} from "redux/usersReducer";
 
 type ResponseUsersType = {
     items: UserType[]
@@ -47,6 +39,12 @@ export type ProfileUserResponseType = {
     }
 }
 
+export type FollowingResponseType = {
+    resultCode: 1 | 0
+    messages: string[],
+    data: object
+}
+
 const instance = axios.create(
     {
         baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -77,7 +75,12 @@ export const profileAPI = {
             .then(res => res.data)
     },
     updateProfile(newName: string) {
-        return instance.put('profile', {fullName: newName, lookingForAJob: true, LookingForAJobDescription:'Yes', aboutMe: 'Hey0'})
+        return instance.put('profile', {
+            fullName: newName,
+            lookingForAJob: true,
+            LookingForAJobDescription: 'Yes',
+            aboutMe: 'Hey0'
+        })
             .then(res => res.data)
     },
     getStatus(uID: number) {
@@ -94,28 +97,14 @@ export const profileAPI = {
 
 export const followAPI = {
     follow(uID: number) {
-        return instance.post(`follow/${uID}`)
+        return instance.post<FollowingResponseType>(`follow/${uID}`)
+            .then(res => res.data)
     },
     unFollow(uID: number) {
-        return instance.delete(`follow/${uID}`)
+        return instance.delete<FollowingResponseType>(`follow/${uID}`)
+            .then(res => res.data)
     }
 }
-
-
-// export const getUsers = (pageSize: number, currentPage: number) => {
-//
-//     return (dispatch: AppThunkDispatch) => {
-//         dispatch(setFetching(true))
-//
-//         usersAPI.getUsers(pageSize, currentPage)
-//             .then((data) => {
-//                 dispatch(setCurrentPage(currentPage))
-//                 dispatch(setUsers(data.items))
-//                 dispatch(setTotalUsersCount(data.totalCount))
-//                 dispatch(setFetching(false))
-//             });
-//     }
-// }
 
 
 

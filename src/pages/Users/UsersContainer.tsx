@@ -17,26 +17,25 @@ import {
     UserType
 } from "redux/usersReducer"
 import {Users} from "./Users"
-import {Dispatch} from "redux";
 
 export type Props = {
     usersData: UsersType
     dispatch: AppThunkDispatch
-    follow: (userID: number) => void
-    unfollow: (userID: number) => void
+    follow: (userID: number) => (dispatch: AppThunkDispatch) => void
+    unfollow: (userID: number) => (dispatch: AppThunkDispatch) => void
     dispatchNewUsers: (users: UserType[]) => void
     dispatchNewCurrentPage: (currentPage: number) => void
     dispatchNewTotalUsersCount: (totalUsersCount: number) => void
     dispatchFetch: (isFetching: boolean) => void
     dispatchToggleFollowing: (userID: number, toggleFollowing: boolean) => void
     dispatchItemsPerPage: (pageSize: number) => void
-    getUsers: (pageSize: number, currentPage: number) => (dispatch: Dispatch) => void;
+    getUsers: (pageSize: number, currentPage: number) => (dispatch: AppThunkDispatch) => void;
 }
 
 
 export class UsersAPIClassContainer extends React.Component<Props> {
 
-    componentDidMount(): void {
+    componentDidMount() {
         this.props.dispatch(this.props.getUsers(this.props.usersData.pageSize, this.props.usersData.currentPage))
     }
 
@@ -46,7 +45,6 @@ export class UsersAPIClassContainer extends React.Component<Props> {
 
     unFollow = (userID: number) => {
         this.props.dispatch(this.props.unfollow(userID))
-
     }
 
     onClickPageHandler = (page: number) => {

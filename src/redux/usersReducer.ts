@@ -158,6 +158,35 @@ export const getUsers = (pageSize: number, currentPage: number) => {
     }
 }
 
+export const setPagination = (pageSize: number, page: number) => {
+    return (dispatch: AppThunkDispatch) => {
+        dispatch(setFetching(true))
+        dispatch(setCurrentPage(page))
+
+        usersAPI.getUsers(pageSize, page)
+            .then((data) => {
+                dispatch(setUsers(data.items))
+                dispatch(setTotalUsersCount(data.totalCount))
+                dispatch(setFetching(false))
+            });
+    }
+}
+
+export const setItemsPerPage = (pageSize: number, currentPage: number) => {
+    return (dispatch: AppThunkDispatch) => {
+        dispatch(setFetching(true))
+        dispatch(setPageSize(pageSize))
+
+        usersAPI.getUsers(pageSize, currentPage)
+            .then((data) => {
+                dispatch(setUsers(data.items))
+                dispatch(setTotalUsersCount(data.totalCount))
+                dispatch(setFetching(false))
+            })
+    }
+}
+
+
 export const followOnUser = (userID: number) => {
     return (dispatch: AppThunkDispatch) => {
         dispatch(setToggleFollowing(userID, true))

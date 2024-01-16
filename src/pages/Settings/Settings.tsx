@@ -3,14 +3,14 @@ import {ChangeEvent, FC, useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {ReducersType, useAppDispatch} from "redux/reduxStore";
 import Button from "components/Button/Button";
-import {profileAPI} from "api/api";
 import {Typography} from "components/Typography/Typography";
 import {
-    setUserStatus,
+    changeUserName,
+    changeUserStatus,
     setProfile,
     setUserProfile,
-    UtilityProfileUserType,
-    changeUserStatus
+    setUserStatus,
+    UtilityProfileUserType
 } from "redux/profileReducer";
 
 export const Settings: FC = () => {
@@ -19,7 +19,6 @@ export const Settings: FC = () => {
     const user = useSelector<ReducersType, UtilityProfileUserType>(state => state.profileData.profile)
     const userStatus = useSelector<ReducersType, string>(state => state.profileData.status)
     const [status, setStatus] = useState<string>('')
-
 
     useEffect(() => {
         if (userID === null) return
@@ -44,8 +43,7 @@ export const Settings: FC = () => {
     }
 
     const buttonNameHandler = () => {
-        profileAPI.updateProfile(user.fullName as string)
-            .catch(() => alert('An unexpected error occurred'))
+        dispatch(changeUserName(user.fullName as string))
     }
 
     return (

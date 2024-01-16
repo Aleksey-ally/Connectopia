@@ -126,7 +126,16 @@ export const changeUserStatus = (status: string) => {
                     dispatch(setStatus(status))
                 }
             })
-
     }
+}
 
+export const changeUserName = (fullName: string) => {
+    return (dispatch: AppThunkDispatch) => {
+        profileAPI.updateProfile(fullName)
+            .then(res => {
+                if (res.resultCode === 0 ){
+                    dispatch(setUserProfile({fullName}))
+                }
+            })
+    }
 }

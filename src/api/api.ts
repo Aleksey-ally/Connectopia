@@ -84,7 +84,7 @@ export const profileAPI = {
             .then(res => res.data)
     },
     updateProfile(newName: string) {
-        return instance.put('profile', {
+        return instance.put<DefaultResponseType>('profile', {
             fullName: newName,
             lookingForAJob: true,
             LookingForAJobDescription: 'Yes',

@@ -1,4 +1,4 @@
-import {followAPI, usersAPI} from "api/api";
+import {usersAPI} from "api/api";
 import {AppThunkDispatch} from "redux/reduxStore";
 
 export type UsersType = {
@@ -191,7 +191,7 @@ export const followOnUser = (userID: number) => {
     return (dispatch: AppThunkDispatch) => {
         dispatch(setToggleFollowing(userID, true))
 
-        followAPI.follow(userID)
+        usersAPI.follow(userID)
             .then(() => {
                 dispatch(follow(userID))
                 dispatch(setToggleFollowing(userID, false))
@@ -204,7 +204,7 @@ export const unfollowOnUser = (userID: number) => {
     return (dispatch: AppThunkDispatch) => {
         dispatch(setToggleFollowing(userID, true))
 
-        followAPI.unFollow(userID)
+        usersAPI.unFollow(userID)
             .then(() => {
                 dispatch(unFollow(userID))
                 dispatch(setToggleFollowing(userID, false))

@@ -65,6 +65,14 @@ export const usersAPI = {
     getUsers(pageSize: number, currentPage: number) {
         return instance.get<ResponseUsersType>(`users?count=${pageSize}&page=${currentPage}`)
             .then(res => res.data)
+    },
+    follow(uID: number) {
+        return instance.post<FollowingResponseType>(`follow/${uID}`)
+            .then(res => res.data)
+    },
+    unFollow(uID: number) {
+        return instance.delete<FollowingResponseType>(`follow/${uID}`)
+            .then(res => res.data)
     }
 }
 
@@ -93,17 +101,6 @@ export const profileAPI = {
     }
 
 
-}
-
-export const followAPI = {
-    follow(uID: number) {
-        return instance.post<FollowingResponseType>(`follow/${uID}`)
-            .then(res => res.data)
-    },
-    unFollow(uID: number) {
-        return instance.delete<FollowingResponseType>(`follow/${uID}`)
-            .then(res => res.data)
-    }
 }
 
 

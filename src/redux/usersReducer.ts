@@ -149,10 +149,12 @@ export const getUsers = (pageSize: number, currentPage: number) => {
         dispatch(setFetching(true))
 
         usersAPI.getUsers(pageSize, currentPage)
-            .then((data) => {
-                dispatch(setCurrentPage(currentPage))
-                dispatch(setUsers(data.items))
-                dispatch(setTotalUsersCount(data.totalCount))
+            .then((res) => {
+                if (!res.error) {
+                    dispatch(setCurrentPage(currentPage))
+                    dispatch(setUsers(res.items))
+                    dispatch(setTotalUsersCount(res.totalCount))
+                }
                 dispatch(setFetching(false))
             })
     }
@@ -164,9 +166,11 @@ export const setPagination = (pageSize: number, page: number) => {
         dispatch(setCurrentPage(page))
 
         usersAPI.getUsers(pageSize, page)
-            .then((data) => {
-                dispatch(setUsers(data.items))
-                dispatch(setTotalUsersCount(data.totalCount))
+            .then((res) => {
+                if (!res.error) {
+                    dispatch(setUsers(res.items))
+                    dispatch(setTotalUsersCount(res.totalCount))
+                }
                 dispatch(setFetching(false))
             });
     }
@@ -178,9 +182,11 @@ export const setItemsPerPage = (pageSize: number, currentPage: number) => {
         dispatch(setPageSize(pageSize))
 
         usersAPI.getUsers(pageSize, currentPage)
-            .then((data) => {
-                dispatch(setUsers(data.items))
-                dispatch(setTotalUsersCount(data.totalCount))
+            .then((res) => {
+                if (!res.error) {
+                    dispatch(setUsers(res.items))
+                    dispatch(setTotalUsersCount(res.totalCount))
+                }
                 dispatch(setFetching(false))
             })
     }
@@ -192,8 +198,10 @@ export const followOnUser = (userID: number) => {
         dispatch(setToggleFollowing(userID, true))
 
         usersAPI.follow(userID)
-            .then(() => {
-                dispatch(follow(userID))
+            .then((res) => {
+                if (res.resultCode === 0) {
+                    dispatch(follow(userID))
+                }
                 dispatch(setToggleFollowing(userID, false))
                 return {}
             })
@@ -205,8 +213,10 @@ export const unfollowOnUser = (userID: number) => {
         dispatch(setToggleFollowing(userID, true))
 
         usersAPI.unFollow(userID)
-            .then(() => {
-                dispatch(unFollow(userID))
+            .then((res) => {
+                if (res.resultCode === 0) {
+                    dispatch(unFollow(userID))
+                }
                 dispatch(setToggleFollowing(userID, false))
             })
     }

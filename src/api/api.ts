@@ -4,6 +4,7 @@ import {UserType} from "redux/usersReducer";
 type ResponseUsersType = {
     items: UserType[]
     totalCount: number
+    error: null | number
 }
 
 type ResponseAuth = {

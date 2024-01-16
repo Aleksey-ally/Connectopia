@@ -26,6 +26,7 @@ export const ProfileInformationContainer = () => {
             .then(data => {
                 dispatch(setUserProfile(data))
             })
+
         profileAPI.getStatus(userID as number)
             .then(data => {
                 setStatus(data)

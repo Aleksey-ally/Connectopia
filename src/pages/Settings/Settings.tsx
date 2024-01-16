@@ -5,36 +5,38 @@ import {ReducersType, useAppDispatch} from "redux/reduxStore";
 import Button from "components/Button/Button";
 import {profileAPI} from "api/api";
 import {Typography} from "components/Typography/Typography";
-import {setUserProfile, UtilityProfileUserType} from "redux/profileReducer";
+import {
+    setUserStatus,
+    setProfile,
+    setUserProfile,
+    UtilityProfileUserType,
+    changeUserStatus
+} from "redux/profileReducer";
 
 export const Settings: FC = () => {
     const dispatch = useAppDispatch()
     const userID = useSelector<ReducersType, number>(state => state.auth.id as number)
     const user = useSelector<ReducersType, UtilityProfileUserType>(state => state.profileData.profile)
+    const userStatus = useSelector<ReducersType, string>(state => state.profileData.status)
     const [status, setStatus] = useState<string>('')
+
 
     useEffect(() => {
         if (userID === null) return
 
-        profileAPI.getStatus(userID)
-            .then((data) => {
-                setStatus(data)
-            })
+        dispatch(setProfile(userID))
+        dispatch(setUserStatus(userID))
+        setStatus(userStatus);
 
-        profileAPI.getProfile(userID)
-            .then(data => {
-                dispatch(setUserProfile(data))
-            })
+    }, [userID, userStatus]);
 
-    }, [userID]);
 
     const inputStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setStatus(e.currentTarget.value)
     }
 
     const buttonStatusHandler = () => {
-        profileAPI.updateStatus(status)
-            .catch(() => alert('An unexpected error occurred'))
+        dispatch(changeUserStatus(status))
     }
 
     const inputNameHandler = (e: ChangeEvent<HTMLInputElement>) => {

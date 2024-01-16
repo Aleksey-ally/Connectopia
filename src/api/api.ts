@@ -40,7 +40,7 @@ export type ProfileUserResponseType = {
     }
 }
 
-export type FollowingResponseType = {
+export type DefaultResponseType = {
     resultCode: 1 | 0
     messages: string[],
     data: object
@@ -68,11 +68,11 @@ export const usersAPI = {
             .then(res => res.data)
     },
     follow(uID: number) {
-        return instance.post<FollowingResponseType>(`follow/${uID}`)
+        return instance.post<DefaultResponseType>(`follow/${uID}`)
             .then(res => res.data)
     },
     unFollow(uID: number) {
-        return instance.delete<FollowingResponseType>(`follow/${uID}`)
+        return instance.delete<DefaultResponseType>(`follow/${uID}`)
             .then(res => res.data)
     }
 }
@@ -97,7 +97,7 @@ export const profileAPI = {
             .then(res => res.data)
     },
     updateStatus(newStatus: string) {
-        return instance.put('profile/status', {status: newStatus})
+        return instance.put<DefaultResponseType>('profile/status', {status: newStatus})
             .then(res => res.data)
     }
 

@@ -12,8 +12,7 @@ import './styles/index.scss'
 
 import s from './App.module.css';
 import {useEffect} from "react";
-import {authAPI} from "api/api";
-import {Auth, setAuthUserData} from "redux/authReducer";
+import {Auth, getAuthUserData} from "redux/authReducer";
 import {useSelector} from "react-redux";
 import {ReducersType, useAppDispatch} from "redux/reduxStore";
 import {HeaderContainer} from "components/Header/HeaderContainer";
@@ -22,12 +21,7 @@ const App = () => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        authAPI.auth()
-            .then((data) => {
-                if (data.resultCode === 0) {
-                    dispatch(setAuthUserData({...data.data, isAuth: true}))
-                }
-            })
+        dispatch(getAuthUserData)
     }, [])
     const auth = useSelector<ReducersType, Auth>(state => state.auth)
 

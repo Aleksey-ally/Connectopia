@@ -1,3 +1,6 @@
+import {AppThunkDispatch} from "redux/reduxStore";
+import {authAPI} from "api/api";
+
 export type Auth = {
     id: number | null
     login: string | null
@@ -39,3 +42,12 @@ export const setAuthUserData = (data: Auth) => ({
         data
     }
 } as const)
+
+export const getAuthUserData = (dispatch: AppThunkDispatch) => {
+    authAPI.me()
+        .then((data) => {
+            if (data.resultCode === 0) {
+                dispatch(setAuthUserData({...data.data, isAuth: true}))
+            }
+        })
+}

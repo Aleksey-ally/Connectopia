@@ -7,11 +7,11 @@ import {Typography} from "components/Typography/Typography";
 import {
     changeUserName,
     changeUserStatus,
-    setProfile,
+    getUserProfile,
     setUserProfile,
-    setUserStatus,
+    getUserStatus,
     UtilityProfileUserType
-} from "redux/profileReducer";
+} from "redux/profileReducer"
 
 export const Settings: FC = () => {
     const dispatch = useAppDispatch()
@@ -23,8 +23,8 @@ export const Settings: FC = () => {
     useEffect(() => {
         if (userID === null) return
 
-        dispatch(setProfile(userID))
-        dispatch(setUserStatus(userID))
+        dispatch(getUserProfile(userID))
+        dispatch(getUserStatus(userID))
         setStatus(userStatus);
 
     }, [userID, userStatus]);

@@ -1,15 +1,13 @@
-import {profileAPI} from 'api/api';
-
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import {useParams} from 'react-router-dom';
-import {setUserProfile, UtilityProfileUserType} from 'redux/profileReducer';
+import {getUserProfile, getUserStatus, ProfileDataType} from 'redux/profileReducer';
 import {ReducersType, useAppDispatch} from 'redux/reduxStore';
 import {ProfileInformation} from './ProfileInformation';
 
 export const ProfileInformationContainer = () => {
 
-    const profile = useSelector<ReducersType, UtilityProfileUserType>(state => state.profileData.profile)
+    const {profile, status} = useSelector<ReducersType, ProfileDataType>(state => state.profileData)
     const currentUserID = useSelector<ReducersType, number | null>(state => state.auth.id)
     const dispatch = useAppDispatch()
 
@@ -17,20 +15,12 @@ export const ProfileInformationContainer = () => {
 
     const userID = Number(uID) || currentUserID
 
-    const [status, setStatus] = useState<string>('')
-
     useEffect(() => {
         if (userID === null) return
 
-        profileAPI.getProfile(userID as number)
-            .then(data => {
-                dispatch(setUserProfile(data))
-            })
+        dispatch(getUserProfile(userID))
+        dispatch(getUserStatus(userID))
 
-        profileAPI.getStatus(userID as number)
-            .then(data => {
-                setStatus(data)
-            })
     }, [userID])
 
     return <ProfileInformation profile={profile} status={status}/>

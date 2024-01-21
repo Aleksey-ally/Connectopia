@@ -16,6 +16,7 @@ import {Auth, getAuthUserData} from "redux/authReducer";
 import {useSelector} from "react-redux";
 import {ReducersType, useAppDispatch} from "redux/reduxStore";
 import {HeaderContainer} from "components/Header/HeaderContainer";
+import {Login} from "pages/Login/Login";
 
 const App = () => {
     const dispatch = useAppDispatch()
@@ -39,6 +40,7 @@ const App = () => {
                         <Route path='/news' element={<News/>}/>
                         <Route path='/music' element={<Music/>}/>
                         <Route path='/settings' element={<Settings/>}/>
+                        <Route path='/login' element={<Login/>}/>
                     </Routes>
                 </div>
             </main>

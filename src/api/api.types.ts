@@ -17,7 +17,7 @@ export type ResponseAuth = {
     resultCode: number
 }
 
- export type ProfileUserResponseType = {
+export type ProfileUserResponseType = {
     userId: number
     aboutMe: string
     contacts: {

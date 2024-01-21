@@ -1,5 +1,6 @@
-import {profileAPI, ProfileUserResponseType} from "api/api";
+import {profileAPI} from "api/api";
 import {AppThunkDispatch} from "redux/reduxStore";
+import {ProfileUserResponseType} from "api/api.types";
 
 const ADD_POST = "ADD-POST";
 const CHANGE_POST_TEXT = "CHANGE-POST-TEXT";
@@ -122,7 +123,7 @@ export const changeUserStatus = (status: string) => {
     return (dispatch: AppThunkDispatch) => {
         profileAPI.updateStatus(status)
             .then(res => {
-                if (res.resultCode === 0 ){
+                if (res.resultCode === 0) {
                     dispatch(setStatus(status))
                 }
             })
@@ -133,7 +134,7 @@ export const changeUserName = (fullName: string) => {
     return (dispatch: AppThunkDispatch) => {
         profileAPI.updateProfile(fullName)
             .then(res => {
-                if (res.resultCode === 0 ){
+                if (res.resultCode === 0) {
                     dispatch(setUserProfile({fullName}))
                 }
             })

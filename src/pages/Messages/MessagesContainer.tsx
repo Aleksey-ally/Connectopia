@@ -22,6 +22,7 @@ import {Messages} from "./Messages";
 
 type MapStateToPropsType = {
     messagesData: MessagesDataType
+    isAuth: boolean
 }
 
 type MapDispatchtoPropsType = {
@@ -32,7 +33,8 @@ type MapDispatchtoPropsType = {
 
 const mapStateToProps = (state: ReducersType): MapStateToPropsType => {
     return {
-        messagesData: state.messagesData
+        messagesData: state.messagesData,
+        isAuth: state.auth.isAuth
     }
 }
 

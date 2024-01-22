@@ -26,6 +26,7 @@ const App = () => {
     }, [])
     const auth = useSelector<ReducersType, Auth>(state => state.auth)
 
+
     return (
         <>
             <HeaderContainer auth={auth}/>
@@ -41,6 +42,7 @@ const App = () => {
                         <Route path='/music' element={<Music/>}/>
                         <Route path='/settings' element={<Settings/>}/>
                         <Route path='/login' element={<Login/>}/>
+
                     </Routes>
                 </div>
             </main>

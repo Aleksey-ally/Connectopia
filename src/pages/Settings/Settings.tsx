@@ -1,7 +1,7 @@
 import s from './Settings.module.scss'
 import {ChangeEvent, FC, useEffect, useState} from "react";
 import {useSelector} from "react-redux";
-import {ReducersType, useAppDispatch} from "redux/reduxStore";
+import {AppRootStateType, ReducersType, useAppDispatch} from "redux/reduxStore";
 import Button from "components/Button/Button";
 import {Typography} from "components/Typography/Typography";
 import {
@@ -12,9 +12,11 @@ import {
     getUserStatus,
     UtilityProfileUserType
 } from "redux/profileReducer"
+import {Navigate} from "react-router-dom";
 
 export const Settings: FC = () => {
     const dispatch = useAppDispatch()
+    const isAuth = useSelector<AppRootStateType, boolean>(state => state.auth.isAuth)
     const userID = useSelector<ReducersType, number>(state => state.auth.id as number)
     const user = useSelector<ReducersType, UtilityProfileUserType>(state => state.profileData.profile)
     const userStatus = useSelector<ReducersType, string>(state => state.profileData.status)
@@ -45,6 +47,8 @@ export const Settings: FC = () => {
     const buttonNameHandler = () => {
         dispatch(changeUserName(user.fullName as string))
     }
+
+    if (!isAuth) return <Navigate to={'/login'}/>
 
     return (
         <div className={s.settingsPage}>

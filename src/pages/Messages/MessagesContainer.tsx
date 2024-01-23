@@ -2,6 +2,7 @@ import {connect} from "react-redux";
 import {addMessage, changeMessageText, MessagesDataType, ActionType} from "redux/messagesReducer";
 import {ReducersType} from "redux/reduxStore";
 import {Messages} from "./Messages";
+import {WthAuthRedirect} from "utils/WithAuthRedirect";
 
 
 // export const MessagesContainer = () => {
@@ -22,10 +23,9 @@ import {Messages} from "./Messages";
 
 type MapStateToPropsType = {
     messagesData: MessagesDataType
-    isAuth: boolean
 }
 
-type MapDispatchtoPropsType = {
+type MapDispatchToPropsType = {
     dispatchNewTextInput: (newText: string) => void
     addMessage: () => void
 }
@@ -34,11 +34,10 @@ type MapDispatchtoPropsType = {
 const mapStateToProps = (state: ReducersType): MapStateToPropsType => {
     return {
         messagesData: state.messagesData,
-        isAuth: state.auth.isAuth
     }
 }
 
-const mapDispatchToProps = (dispatch: (action: ActionType) => void): MapDispatchtoPropsType => {
+const mapDispatchToProps = (dispatch: (action: ActionType) => void): MapDispatchToPropsType => {
     return {
         dispatchNewTextInput: (newText: string) => {
             dispatch(changeMessageText(newText))
@@ -49,4 +48,4 @@ const mapDispatchToProps = (dispatch: (action: ActionType) => void): MapDispatch
     }
 }
 
-export const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(Messages)
+export const MessagesContainer = WthAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(Messages))

@@ -1,13 +1,8 @@
 import React from "react";
-import {useSelector} from "react-redux";
-import {AppRootStateType} from "redux/reduxStore";
-import {Navigate} from "react-router-dom";
+import {WthAuthRedirect} from "utils/WithAuthRedirect";
 
-export const News : React.FC = () => {
-    const isAuth = useSelector<AppRootStateType, boolean>(state => state.auth.isAuth)
-    if (!isAuth) return <Navigate to={'/login'}/>
-
+export const News: React.FC = WthAuthRedirect(() => {
     return (
         <div>News</div>
     )
-}
+})

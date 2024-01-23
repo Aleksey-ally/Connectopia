@@ -1,13 +1,12 @@
 import {Preloader} from "components/Preloader/Preloader"
 import React, {useEffect} from "react"
 import {useSelector} from "react-redux"
-import {AppRootStateType, ReducersType, useAppDispatch} from "redux/reduxStore"
+import { ReducersType, useAppDispatch} from "redux/reduxStore"
 import {followOnUser, getUsers, setItemsPerPage, setPagination, unfollowOnUser, UsersType} from "redux/usersReducer"
 import {Users} from "./Users"
-import {Navigate} from "react-router-dom";
+import {WthAuthRedirect} from "utils/WithAuthRedirect";
 
-export const UsersContainer = () => {
-    const isAuth = useSelector<AppRootStateType, boolean>(state => state.auth.isAuth)
+export const UsersContainer = WthAuthRedirect(() => {
     const usersData = useSelector<ReducersType, UsersType>(state => state.usersData)
     const dispatch = useAppDispatch()
 
@@ -31,13 +30,10 @@ export const UsersContainer = () => {
         dispatch(setItemsPerPage(pageSize, usersData.currentPage))
     }
 
-    if (!isAuth) return <Navigate to={'/login'}/>
-
-
     return <>
         {usersData.isFetching ? <Preloader/> :
             <Users usersData={usersData} follow={follow} unFollow={unfollow}
                    setCurrentPage={setCurrentPage} setPageSize={setPageSize}/>}
     </>
 
-}
+})

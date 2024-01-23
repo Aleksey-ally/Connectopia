@@ -1,22 +1,21 @@
 import s from './Settings.module.scss'
 import {ChangeEvent, FC, useEffect, useState} from "react";
 import {useSelector} from "react-redux";
-import {AppRootStateType, ReducersType, useAppDispatch} from "redux/reduxStore";
+import {ReducersType, useAppDispatch} from "redux/reduxStore";
 import Button from "components/Button/Button";
 import {Typography} from "components/Typography/Typography";
 import {
     changeUserName,
     changeUserStatus,
     getUserProfile,
-    setUserProfile,
     getUserStatus,
+    setUserProfile,
     UtilityProfileUserType
 } from "redux/profileReducer"
-import {Navigate} from "react-router-dom";
+import {WthAuthRedirect} from "utils/WithAuthRedirect";
 
-export const Settings: FC = () => {
+export const Settings: FC = WthAuthRedirect(() => {
     const dispatch = useAppDispatch()
-    const isAuth = useSelector<AppRootStateType, boolean>(state => state.auth.isAuth)
     const userID = useSelector<ReducersType, number>(state => state.auth.id as number)
     const user = useSelector<ReducersType, UtilityProfileUserType>(state => state.profileData.profile)
     const userStatus = useSelector<ReducersType, string>(state => state.profileData.status)
@@ -48,8 +47,6 @@ export const Settings: FC = () => {
         dispatch(changeUserName(user.fullName as string))
     }
 
-    if (!isAuth) return <Navigate to={'/login'}/>
-
     return (
         <div className={s.settingsPage}>
             <Typography className={s.title} as={'h4'} variant={'h4'}>Personal Information:</Typography>
@@ -68,4 +65,4 @@ export const Settings: FC = () => {
 
         </div>
     )
-}
+})

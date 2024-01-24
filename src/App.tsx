@@ -1,4 +1,3 @@
-import {MessagesContainer} from "pages/Messages/MessagesContainer";
 import {Music} from 'pages/Music/Music';
 import {Navbar} from "pages/Navbar/Navbar";
 import {News} from 'pages/News/News';
@@ -17,6 +16,7 @@ import {useSelector} from "react-redux";
 import {ReducersType, useAppDispatch} from "redux/reduxStore";
 import {HeaderContainer} from "components/Header/HeaderContainer";
 import {Login} from "pages/Login/Login";
+import {MessagesContainer} from "pages/Messages/MessagesContainer";
 
 const App = () => {
     const dispatch = useAppDispatch()

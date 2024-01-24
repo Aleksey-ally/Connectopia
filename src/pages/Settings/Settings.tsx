@@ -13,8 +13,11 @@ import {
     UtilityProfileUserType
 } from "redux/profileReducer"
 import {WthAuthRedirect} from "utils/WithAuthRedirect";
+import {compose} from "redux";
 
-export const Settings: FC = WthAuthRedirect(() => {
+export const Settings: FC = compose(
+    WthAuthRedirect
+)(() => {
     const dispatch = useAppDispatch()
     const userID = useSelector<ReducersType, number>(state => state.auth.id as number)
     const user = useSelector<ReducersType, UtilityProfileUserType>(state => state.profileData.profile)

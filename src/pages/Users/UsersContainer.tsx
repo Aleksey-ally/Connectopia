@@ -1,12 +1,15 @@
 import {Preloader} from "components/Preloader/Preloader"
 import React, {useEffect} from "react"
 import {useSelector} from "react-redux"
-import { ReducersType, useAppDispatch} from "redux/reduxStore"
+import {ReducersType, useAppDispatch} from "redux/reduxStore"
 import {followOnUser, getUsers, setItemsPerPage, setPagination, unfollowOnUser, UsersType} from "redux/usersReducer"
 import {Users} from "./Users"
 import {WthAuthRedirect} from "utils/WithAuthRedirect";
+import {compose} from "redux";
 
-export const UsersContainer = WthAuthRedirect(() => {
+export const UsersContainer = compose(
+    WthAuthRedirect
+)(() => {
     const usersData = useSelector<ReducersType, UsersType>(state => state.usersData)
     const dispatch = useAppDispatch()
 

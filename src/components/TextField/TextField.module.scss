@@ -1,0 +1,111 @@
+.TextFieldContainer {
+  position: relative;
+  width: 100%;
+}
+
+%field-styles {
+  width: 100%;
+  padding: 6px 12px;
+
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--color-light-100);
+
+  background: transparent;
+  border: 1px solid var(--color-dark-300);
+  border-radius: 2px;
+  outline: 0;
+
+  &::placeholder {
+    color: var(--color-dark-100);
+  }
+
+  &:active {
+    border-color: var(--color-light-100);
+    outline: 1px solid var(--color-light-100);
+    transition: 1s ease-out;
+  }
+
+  &:focus {
+    border-color: var(--color-info-700);
+    outline: 1px solid var(--color-info-700);
+  }
+
+  &:hover {
+    background: var(--color-dark-700);
+  }
+
+  &.error {
+    color: var(--color-danger-300);
+    border-color: var(--color-danger-300);
+  }
+}
+
+.label {
+  margin-bottom: 1px;
+  color: var(--color-dark-100);
+}
+
+.showPassword {
+  cursor: pointer;
+
+  position: absolute;
+  top: 50%;
+  right: 0;
+  bottom: 50%;
+  transform: translateY(-50%);
+
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+  padding: 0;
+
+  background: transparent;
+  border: 0;
+  outline: 0;
+}
+
+.disabled {
+  color: var(--color-dark-300);
+  border-color: var(--color-dark-300);
+
+  &::placeholder {
+    color: var(--color-dark-300);
+  }
+}
+
+.disabled .label {
+  color: var(--color-dark-300);
+}
+
+.disabled .error {
+  color: var(--color-dark-300);
+  border-color: var(--color-dark-300);
+}
+
+.field {
+  @extend %field-styles;
+}
+
+.searchCont {
+  @extend %field-styles;
+
+  padding-left: 40px;
+}
+
+.search {
+  position: absolute;
+  inset: 50% 0;
+  transform: translateY(-50%);
+
+  width: 20px;
+  height: 20px;
+  margin-left: 12px;
+  padding: 0;
+
+  background: transparent;
+  border: 0;
+  outline: 0;
+}

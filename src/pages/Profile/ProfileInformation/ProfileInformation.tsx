@@ -20,6 +20,7 @@ export const ProfileInformation = ({profile, status}: Props) => {
                     <UserAvatar className={s.userAvatar} size={'medium'} photos={profile.photos?.small}/>
                     <div className={s.userInfoBody}>
                         <Typography variant={'h3'}>{profile.fullName}</Typography>
+                        <input type="text" value={status}/>
                         <Typography variant={'subtitle2'}>{status}</Typography>
                     </div>
 

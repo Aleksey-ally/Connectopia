@@ -3,13 +3,20 @@ import {UtilityProfileUserType} from 'redux/profileReducer';
 import UserCover from 'imgs/userCover_1.jpg';
 import s from './ProfileInformation.module.css';
 import {Typography} from "components/Typography/Typography";
+import {TextField} from "components/TextField/TextField";
+import {ChangeEvent} from "react";
 
 type Props = {
     profile: UtilityProfileUserType
     status: string
+    edit: boolean
+    toggleEditHandler: () => void
+    changeStatusHandler: (value: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const ProfileInformation = ({profile, status}: Props) => {
+export const ProfileInformation = ({profile, status, edit, changeStatusHandler, toggleEditHandler}: Props) => {
+
+
     return (
         <div className={s.description}>
 
@@ -20,8 +27,11 @@ export const ProfileInformation = ({profile, status}: Props) => {
                     <UserAvatar className={s.userAvatar} size={'medium'} photos={profile.photos?.small}/>
                     <div className={s.userInfoBody}>
                         <Typography variant={'h3'}>{profile.fullName}</Typography>
-                        <input type="text" value={status}/>
-                        <Typography variant={'subtitle2'}>{status}</Typography>
+                        {edit &&
+                            <TextField onBlur={toggleEditHandler} autoFocus value={status}
+                                       onChange={changeStatusHandler}/>}
+                        {!edit &&
+                            <Typography variant={'subtitle2'} onDoubleClick={toggleEditHandler}>{status}</Typography>}
                     </div>
 
                 </div>

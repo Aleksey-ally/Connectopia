@@ -1,15 +1,28 @@
-import {useEffect} from 'react';
+import {ChangeEvent, useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {useParams} from 'react-router-dom';
-import {getUserProfile, getUserStatus, ProfileDataType} from 'redux/profileReducer';
+import {changeUserStatus, getUserProfile, getUserStatus, ProfileDataType} from 'redux/profileReducer';
 import {ReducersType, useAppDispatch} from 'redux/reduxStore';
 import {ProfileInformation} from './ProfileInformation';
 
 export const ProfileInformationContainer = () => {
+    const dispatch = useAppDispatch()
+
 
     const {profile, status} = useSelector<ReducersType, ProfileDataType>(state => state.profileData)
     const currentUserID = useSelector<ReducersType, number | null>(state => state.auth.id)
-    const dispatch = useAppDispatch()
+
+    const [localStatus, setLocalStatus] = useState<string>('')
+    const [edit, setEdit] = useState<boolean>(false)
+
+    const toggleEditHandler = () => {
+        setEdit(!edit)
+        status !== localStatus && dispatch(changeUserStatus(localStatus))
+    }
+    const changeStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setLocalStatus(e.currentTarget.value)
+    }
+
 
     const {uID} = useParams()
 
@@ -20,8 +33,11 @@ export const ProfileInformationContainer = () => {
 
         dispatch(getUserProfile(userID))
         dispatch(getUserStatus(userID))
+        setLocalStatus(status)
 
-    }, [userID])
+    }, [userID, status])
 
-    return <ProfileInformation profile={profile} status={status}/>
+    return <ProfileInformation profile={profile} status={localStatus} edit={edit}
+                               toggleEditHandler={toggleEditHandler}
+                               changeStatusHandler={changeStatusHandler}/>
 }

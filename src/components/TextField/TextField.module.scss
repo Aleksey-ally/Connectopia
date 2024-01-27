@@ -5,13 +5,12 @@
 
 %field-styles {
   width: 100%;
-  padding: 6px 12px;
+  margin-left: -12px;
 
-  font-family: inherit;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-m);
   color: var(--color-light-100);
+  text-indent: 12px;
 
   background: transparent;
   border: 1px solid var(--color-dark-300);
@@ -29,12 +28,13 @@
   }
 
   &:focus {
+    transition: all .3s ease-in-out;
     border-color: var(--color-info-700);
-    outline: 1px solid var(--color-info-700);
+    outline: 1px solid var(--color-dark-700);
   }
 
   &:hover {
-    background: var(--color-dark-700);
+    background: var(--color-main);
   }
 
   &.error {

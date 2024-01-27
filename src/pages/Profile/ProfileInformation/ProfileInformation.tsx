@@ -9,9 +9,9 @@ import {ChangeEvent} from "react";
 type Props = {
     profile: UtilityProfileUserType
     status: string
-    edit: boolean
+    edit:boolean
     toggleEditHandler: () => void
-    changeStatusHandler: (value: ChangeEvent<HTMLInputElement>) => void
+    changeStatusHandler: (value:ChangeEvent<HTMLInputElement>) => void
 }
 
 export const ProfileInformation = ({profile, status, edit, changeStatusHandler, toggleEditHandler}: Props) => {
@@ -28,8 +28,7 @@ export const ProfileInformation = ({profile, status, edit, changeStatusHandler, 
                     <div className={s.userInfoBody}>
                         <Typography variant={'h3'}>{profile.fullName}</Typography>
                         {edit &&
-                            <TextField onBlur={toggleEditHandler} autoFocus value={status}
-                                       onChange={changeStatusHandler}/>}
+                            <TextField onBlur={toggleEditHandler} autoFocus value={status} onChange={changeStatusHandler}/>}
                         {!edit &&
                             <Typography variant={'subtitle2'} onDoubleClick={toggleEditHandler}>{status}</Typography>}
                     </div>

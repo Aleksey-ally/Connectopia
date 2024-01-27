@@ -1,21 +1,20 @@
+import s from './App.module.css';
+
+import {useEffect} from "react";
+import {useSelector} from "react-redux";
+import {ReducersType, useAppDispatch} from "redux/reduxStore";
+import {Route, Routes} from 'react-router-dom';
+
+import {Auth, getAuthUserData} from "redux/authReducer";
+
 import {Music} from 'pages/Music/Music';
 import {Navbar} from "pages/Navbar/Navbar";
 import {News} from 'pages/News/News';
 import {Profile} from "pages/Profile/Profile";
 import {Settings} from 'pages/Settings/Settings';
-import {UsersContainer} from 'pages/Users/UsersContainer';
-import {Route, Routes} from 'react-router-dom';
-import '@fontsource/roboto/400.css'
-import '@fontsource/roboto/700.css'
-import './styles/index.scss'
-
-import s from './App.module.css';
-import {useEffect} from "react";
-import {Auth, getAuthUserData} from "redux/authReducer";
-import {useSelector} from "react-redux";
-import {ReducersType, useAppDispatch} from "redux/reduxStore";
-import {HeaderContainer} from "components/Header/HeaderContainer";
 import {Login} from "pages/Login/Login";
+import {UsersContainer} from 'pages/Users/UsersContainer';
+import {HeaderContainer} from "components/Header/HeaderContainer";
 import {MessagesContainer} from "pages/Messages/MessagesContainer";
 
 const App = () => {

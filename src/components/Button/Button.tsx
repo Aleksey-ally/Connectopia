@@ -8,7 +8,7 @@ export type ButtonProps<T extends ElementType = 'button'> = {
     fullWidth?: boolean
 } & ComponentPropsWithoutRef<T>
 
-const Button = <T extends ElementType = 'button'>(
+export const Button = forwardRef(<T extends ElementType = 'button'>(
     props: ButtonProps<T>,
     ref: ForwardedRef<HTMLButtonElement>
 ) => {
@@ -21,6 +21,4 @@ const Button = <T extends ElementType = 'button'>(
             ref={ref}
         />
     )
-}
-
-export default forwardRef(Button)
+})

@@ -2,7 +2,6 @@ import s from './Settings.module.scss'
 import {ChangeEvent, FC, useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {ReducersType, useAppDispatch} from "redux/reduxStore";
-import Button from "components/Button/Button";
 import {Typography} from "components/Typography/Typography";
 import {
     changeUserName,
@@ -14,6 +13,8 @@ import {
 } from "redux/profileReducer"
 import {WthAuthRedirect} from "utils/WithAuthRedirect";
 import {compose} from "redux";
+import {Button} from "components/Button";
+
 
 export const Settings: FC = compose(
     WthAuthRedirect

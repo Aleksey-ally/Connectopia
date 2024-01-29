@@ -4,7 +4,7 @@ import {UsersType} from "redux/usersReducer";
 import s from "./Users.module.css";
 import {Pagination} from "components/Pagination/Pagination";
 import {Typography} from "components/Typography/Typography";
-import Button from "components/Button/Button";
+import {Button} from "components/Button";
 
 export type UsersPropsType = {
     usersData: UsersType

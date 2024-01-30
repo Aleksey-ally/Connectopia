@@ -14,7 +14,7 @@ import {Profile} from "pages/Profile/Profile";
 import {Settings} from 'pages/Settings/Settings';
 import {Login} from "pages/Login/Login";
 import {UsersContainer} from 'pages/Users/UsersContainer';
-import {HeaderContainer} from "components/Header/HeaderContainer";
+import {HeaderContainer} from "components/Header";
 import {MessagesContainer} from "pages/Messages/MessagesContainer";
 
 const App = () => {

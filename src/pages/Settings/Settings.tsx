@@ -2,7 +2,7 @@ import s from './Settings.module.scss'
 import {ChangeEvent, FC, useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {ReducersType, useAppDispatch} from "redux/reduxStore";
-import {Typography} from "components/Typography/Typography";
+import {Typography} from "components/Typography";
 import {
     changeUserName,
     changeUserStatus,

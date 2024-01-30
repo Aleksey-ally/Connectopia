@@ -1,9 +1,9 @@
-import {UserAvatar} from 'components/UserAvatar/UserAvatar';
+import {UserAvatar} from 'components/UserAvatar';
 import {UtilityProfileUserType} from 'redux/profileReducer';
 import UserCover from 'imgs/userCover_1.jpg';
 import s from './ProfileInformation.module.css';
-import {Typography} from "components/Typography/Typography";
-import {TextField} from "components/TextField/TextField";
+import {Typography} from "components/Typography";
+import {TextField} from "components/TextField";
 import {ChangeEvent} from "react";
 
 type Props = {
@@ -15,7 +15,6 @@ type Props = {
 }
 
 export const ProfileInformation = ({profile, status, edit, changeStatusHandler, toggleEditHandler}: Props) => {
-
 
     return (
         <div className={s.description}>

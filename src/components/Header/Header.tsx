@@ -2,8 +2,8 @@ import {NavLink} from 'react-router-dom';
 
 import s from './Header.module.css'
 import {Auth} from 'redux/authReducer';
-import {UserAvatar} from 'components/UserAvatar/UserAvatar';
-import {Typography} from "components/Typography/Typography";
+import {UserAvatar} from 'components/UserAvatar';
+import {Typography} from "components/Typography";
 import {CICon} from "assets/icons/CIcon";
 import {Dropdown} from "components/Dropdown";
 import {DropdownItemWithIcon} from "components/Dropdown/DropdownItem/DropdownItemWithIcon";

@@ -2,12 +2,9 @@ import { useState } from 'react'
 
 import * as SelectRadix from '@radix-ui/react-select'
 
-
-
 import s from 'components/Select/Select.module.scss'
 import {ArrowDown, ArrowUp} from "assets/icons";
-import {Typography} from "components/Typography/Typography";
-
+import {Typography} from "components/Typography";
 
 type Item = {
   value: string | number

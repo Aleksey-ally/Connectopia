@@ -1,9 +1,9 @@
-import {UserAvatar} from "components/UserAvatar/UserAvatar";
+import {UserAvatar} from "components/UserAvatar";
 import {NavLink} from "react-router-dom";
 import {UsersType} from "redux/usersReducer";
 import s from "./Users.module.css";
-import {Pagination} from "components/Pagination/Pagination";
-import {Typography} from "components/Typography/Typography";
+import {Pagination} from "components/Pagination";
+import {Typography} from "components/Typography";
 import {Button} from "components/Button";
 
 export type UsersPropsType = {

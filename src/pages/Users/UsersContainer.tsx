@@ -1,4 +1,4 @@
-import {Preloader} from "components/Preloader/Preloader"
+import {Preloader} from "components/Preloader"
 import React, {useEffect} from "react"
 import {useSelector} from "react-redux"
 import {ReducersType, useAppDispatch} from "redux/reduxStore"

@@ -1,11 +1,8 @@
 import { ChangeEvent, ComponentProps, ComponentPropsWithoutRef, forwardRef, useState } from 'react'
 
-
-
 import s from 'components/TextField/TextField.module.scss'
 
-
-import {Typography} from "components/Typography/Typography";
+import {Typography} from "components/Typography";
 import {Eye, EyeOff, Search} from "assets/icons";
 
 export type TextFieldProps = {

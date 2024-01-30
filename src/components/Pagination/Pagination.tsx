@@ -1,16 +1,11 @@
 import { FC } from 'react'
 
-
-
 import s from 'components/Pagination/Pagination.module.scss'
-
-
 
 import {ArrowLeft} from "assets/icons";
 import {ArrowRight} from 'assets/icons'
 import {usePagination} from "components/Pagination/usePagination";
-import {Select} from "components/Select/Select";
-
+import {Select} from "components/Select";
 
 export type PaginationProps = {
   count: number

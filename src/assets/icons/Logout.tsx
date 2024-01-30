@@ -1,5 +1,5 @@
 import { SVGProps, Ref, forwardRef, memo } from 'react'
-const SvgComponent = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+export const Logout = memo(forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     width="16"
     height="16"
@@ -25,7 +25,4 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) =
       </clipPath>
     </defs>
   </svg>
-)
-const ForwardRef = forwardRef(SvgComponent)
-
-export default memo(ForwardRef)
+)))

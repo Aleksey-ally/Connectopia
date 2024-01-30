@@ -1,8 +1,9 @@
 import { SVGProps, Ref, forwardRef, memo } from 'react'
-const SvgComponent = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+
+export const ArrowRight = memo(forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} fill="none" ref={ref} {...props}>
     <g clipPath="url(#a)">
-      <path fill="currentColor" d="m10.3 11-3-3 3-3-1-1-4 4 4 4 1-1Z" />
+      <path fill="currentColor" d="m5.7 11 3-3-3-3 1-1 4 4-4 4-1-1Z" />
     </g>
     <defs>
       <clipPath id="a">
@@ -10,8 +11,8 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) =
       </clipPath>
     </defs>
   </svg>
-)
-const ForwardRef = forwardRef(SvgComponent)
-const Memo = memo(ForwardRef)
+)))
+// const ForwardRef = forwardRef(SvgComponent)
+// const Memo = memo(ForwardRef)
 
-export default Memo
+// export default

@@ -1,7 +1,7 @@
 import {ChangeEvent} from "react";
 import s from './MyPosts.module.css';
-import {Post} from './Post/Post';
-import {ProfileDataType} from "../../../redux/profileReducer";
+import {Post} from './Post';
+import {ProfileDataType} from "redux/profileReducer";
 
 type Props = {
     profileData: ProfileDataType

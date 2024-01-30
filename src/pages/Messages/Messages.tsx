@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from "react";
-import {DialogUser} from './DialogUser/DialogUser';
+import {DialogUser} from './DialogUser';
 import s from './Messages.module.css';
-import {UserMessage} from './UserMessage/UserMessage';
+import {UserMessage} from './UserMessage';
 import {MessagesDataType} from "redux/messagesReducer";
 
 type MessagesPropsType = {

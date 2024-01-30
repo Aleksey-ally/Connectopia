@@ -1,5 +1,5 @@
-import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
-import {ProfileInformationContainer} from './ProfileInformation/ProfileInformationContainer';
+import {MyPostsContainer} from "./MyPosts";
+import {ProfileInformationContainer} from './ProfileInformation';
 import React from "react";
 import {WthAuthRedirect} from "utils/WithAuthRedirect";
 import {compose} from "redux";

@@ -7,15 +7,15 @@ import {Route, Routes} from 'react-router-dom';
 
 import {Auth, getAuthUserData} from "redux/authReducer";
 
-import {Music} from 'pages/Music/Music';
-import {Navbar} from "pages/Navbar/Navbar";
-import {News} from 'pages/News/News';
-import {Profile} from "pages/Profile/Profile";
-import {Settings} from 'pages/Settings/Settings';
-import {Login} from "pages/Login/Login";
-import {UsersContainer} from 'pages/Users/UsersContainer';
+import {Music} from 'pages/Music';
+import {Navbar} from "pages/Navbar";
+import {News} from 'pages/News';
+import {Profile} from "pages/Profile";
+import {Settings} from 'pages/Settings';
+import {Login} from "pages/Login";
+import {UsersContainer} from 'pages/Users';
 import {HeaderContainer} from "components/Header";
-import {MessagesContainer} from "pages/Messages/MessagesContainer";
+import {MessagesContainer} from "pages/Messages";
 
 const App = () => {
     const dispatch = useAppDispatch()

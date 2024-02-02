@@ -1,3 +1,5 @@
+import s from  './LoginForm.module.scss'
+
 import {TextField} from "components/TextField";
 import {Button} from "components/Button";
 import {useForm} from "react-hook-form";
@@ -15,10 +17,10 @@ export const LoginForm = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form className={s.loginForm} onSubmit={handleSubmit(onSubmit)}>
             <TextField label={'Login'} {...register('login', {required:true})}></TextField>
             <TextField label={'Password'} {...register('password', {required:true})}></TextField>
-            <Button type='submit'>Send</Button>
+            <Button className={s.button} type='submit' fullWidth>Send</Button>
         </form>
     )
 }

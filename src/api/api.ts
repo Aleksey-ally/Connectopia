@@ -1,5 +1,11 @@
 import axios from "axios";
-import {DefaultResponseType, ProfileUserResponseType, ResponseAuth, ResponseUsersType} from "api/api.types";
+import {
+    DefaultResponseType,
+    ProfileUserResponseType, PropertiesLogin,
+    ResponseAuth,
+    ResponseLogin,
+    ResponseUsersType
+} from "api/api.types";
 
 const instance = axios.create(
     {
@@ -14,6 +20,10 @@ export const authAPI = {
     me() {
         return instance.get<ResponseAuth>('auth/me')
             .then(res => res.data)
+    },
+    login(payload : PropertiesLogin){
+        return instance.post<DefaultResponseType<ResponseLogin>>('auth/login',{...payload})
+            .then(res=>res.data)
     }
 }
 

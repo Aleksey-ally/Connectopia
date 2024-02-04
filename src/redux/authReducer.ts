@@ -1,5 +1,7 @@
 import {AppThunkDispatch} from "redux/reduxStore";
 import {authAPI} from "api/api";
+import {PropertiesLogin} from "api/api.types";
+
 
 export type Auth = {
     id: number | null
@@ -51,3 +53,13 @@ export const getAuthUserData = (dispatch: AppThunkDispatch) => {
             }
         })
 }
+
+export const login = (payload: PropertiesLogin) =>
+    (dispatch: AppThunkDispatch) => {
+        authAPI.login(payload)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(getAuthUserData)
+                }
+            })
+    }

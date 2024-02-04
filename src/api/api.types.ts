@@ -1,5 +1,11 @@
 import {UserType} from "redux/usersReducer";
 
+export type DefaultResponseType<T = {}> = {
+    resultCode: 1 | 0
+    messages: string[],
+    data: T
+}
+
 export type ResponseUsersType = {
     items: UserType[]
     totalCount: number
@@ -15,6 +21,16 @@ export type ResponseAuth = {
     messages: string[]
     fieldsErrors: string[]
     resultCode: number
+}
+
+export type ResponseLogin = {
+    userId: number
+}
+
+export type PropertiesLogin = {
+    email: string
+    password: number
+    rememberMe: boolean
 }
 
 export type ProfileUserResponseType = {
@@ -39,8 +55,3 @@ export type ProfileUserResponseType = {
     }
 }
 
-export type DefaultResponseType = {
-    resultCode: 1 | 0
-    messages: string[],
-    data: object
-}

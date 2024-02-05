@@ -1,7 +1,7 @@
 import {NavLink} from 'react-router-dom';
 
 import s from './Header.module.css'
-import {Auth} from 'redux/authReducer';
+import {Auth, logout} from 'redux/authReducer';
 import {UserAvatar} from 'components/UserAvatar';
 import {Typography} from "components/Typography";
 import {CIcon} from "assets/icons";
@@ -10,6 +10,7 @@ import {DropdownItemWithIcon} from "components/Dropdown/DropdownItem/DropdownIte
 import {PersonOutline} from "assets/icons";
 import {Logout} from "assets/icons";
 import {DropdownItem} from "components/Dropdown/DropdownItem";
+import {useAppDispatch} from "redux/reduxStore";
 
 type Props = {
     auth: Auth
@@ -17,6 +18,13 @@ type Props = {
 }
 
 export const Header = ({auth, currentUserAvatar}: Props) => {
+
+    const dispatch = useAppDispatch()
+
+    const logoutHandler = () =>{
+        dispatch(logout)
+    }
+
     return (
         <header className={s.header}>
             <NavLink to={'/'}>
@@ -42,7 +50,7 @@ export const Header = ({auth, currentUserAvatar}: Props) => {
                                 </div>
                             </DropdownItem>
                             <DropdownItemWithIcon icon={<PersonOutline/>} text={'My Profile'}/>
-                            <DropdownItemWithIcon icon={<Logout/>} text="Sign Out"/>
+                            <DropdownItemWithIcon onClick={logoutHandler} icon={<Logout/>} text="Sign Out"/>
                         </Dropdown>
                     </> :
                     <NavLink className={s.login} to='/login'>Login</NavLink>

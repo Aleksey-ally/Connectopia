@@ -21,9 +21,13 @@ export const authAPI = {
         return instance.get<ResponseAuth>('auth/me')
             .then(res => res.data)
     },
-    login(payload : PropertiesLogin){
-        return instance.post<DefaultResponseType<ResponseLogin>>('auth/login',{...payload})
-            .then(res=>res.data)
+    login(payload: PropertiesLogin) {
+        return instance.post<DefaultResponseType<ResponseLogin>>('auth/login', {...payload})
+            .then(res => res.data)
+    },
+    logout() {
+        return instance.delete<DefaultResponseType>('auth/login')
+            .then(res => console.log(res.status))
     }
 }
 

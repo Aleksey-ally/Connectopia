@@ -63,3 +63,15 @@ export const login = (payload: PropertiesLogin) =>
                 }
             })
     }
+
+export const logout = (dispatch: AppThunkDispatch) => {
+    authAPI.logout()
+        .then(() => {
+            dispatch(setAuthUserData({
+                id: null,
+                login: null,
+                email: null,
+                isAuth: false
+            }))
+        })
+}

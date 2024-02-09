@@ -25,27 +25,27 @@ const App = () => {
     }, [])
     const auth = useSelector<ReducersType, Auth>(state => state.auth)
 
-
     return (
-        <>
+        <main>
             <HeaderContainer auth={auth}/>
-            <main className={s.appWrapper}>
-                <Navbar/>
-                <div className={s.content}>
-                    <Routes>
-                        <Route path='/messages/:uID?'
-                               element={<MessagesContainer/>}/>
-                        <Route path={'/profile/:uID?'} element={<Profile/>}/>
-                        <Route path='/users' element={<UsersContainer/>}/>
-                        <Route path='/news' element={(<News/>)}/>
-                        <Route path='/music' element={<Music/>}/>
-                        <Route path='/settings' element={<Settings/>}/>
-                        <Route path='/login' element={<Login/>}/>
+            {auth.isAuth ? <div className={s.appWrapper}>
 
-                    </Routes>
+                    <Navbar/>
+                    <div className={s.content}>
+                        <Routes>
+                            <Route path='/messages/:uID?'
+                                   element={<MessagesContainer/>}/>
+                            <Route path={'/profile/:uID?'} element={<Profile/>}/>
+                            <Route path='/users' element={<UsersContainer/>}/>
+                            <Route path='/news' element={(<News/>)}/>
+                            <Route path='/music' element={<Music/>}/>
+                            <Route path='/settings' element={<Settings/>}/>
+                        </Routes>
+                    </div>
+
                 </div>
-            </main>
-        </>
+                : <Login/>}
+        </main>
     )
 }
 export default App;

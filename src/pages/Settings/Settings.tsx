@@ -17,7 +17,7 @@ import {Button} from "components/Button";
 
 
 export const Settings: FC = compose(
-    WthAuthRedirect
+
 )(() => {
     const dispatch = useAppDispatch()
     const userID = useSelector<ReducersType, number>(state => state.auth.id as number)

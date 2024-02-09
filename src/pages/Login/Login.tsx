@@ -11,7 +11,6 @@ export const Login = () => {
 
     if (isAuth) return <Navigate to={'/profile'}/>
 
-
     return (
         <div className={s.login}>
             <LoginForm/>

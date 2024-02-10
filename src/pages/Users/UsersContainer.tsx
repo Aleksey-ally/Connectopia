@@ -4,12 +4,8 @@ import {useSelector} from "react-redux"
 import {ReducersType, useAppDispatch} from "redux/reduxStore"
 import {followOnUser, getUsers, setItemsPerPage, setPagination, unfollowOnUser, UsersType} from "redux/usersReducer"
 import {Users} from "./Users"
-import {WthAuthRedirect} from "utils/WithAuthRedirect";
-import {compose} from "redux";
 
-export const UsersContainer = compose(
-    WthAuthRedirect
-)(() => {
+export const UsersContainer = () => {
     const usersData = useSelector<ReducersType, UsersType>(state => state.usersData)
     const dispatch = useAppDispatch()
 
@@ -39,4 +35,4 @@ export const UsersContainer = compose(
                    setCurrentPage={setCurrentPage} setPageSize={setPageSize}/>}
     </>
 
-})
+}

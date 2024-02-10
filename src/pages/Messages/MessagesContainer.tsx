@@ -1,8 +1,7 @@
 import {connect} from "react-redux";
-import {addMessage, changeMessageText, MessagesDataType, ActionType} from "redux/messagesReducer";
+import {ActionType, addMessage, changeMessageText, MessagesDataType} from "redux/messagesReducer";
 import {ReducersType} from "redux/reduxStore";
 import {Messages} from "./Messages";
-import {WthAuthRedirect} from "utils/WithAuthRedirect";
 import {compose} from "redux";
 import {FC} from "react";
 
@@ -51,6 +50,5 @@ const mapDispatchToProps = (dispatch: (action: ActionType) => void): MapDispatch
 }
 
 export const MessagesContainer = compose<FC>(
-    WthAuthRedirect,
     connect(mapStateToProps, mapDispatchToProps)
 )(Messages)

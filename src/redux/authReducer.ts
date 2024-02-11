@@ -1,6 +1,7 @@
 import {AppThunkDispatch} from "redux/reduxStore";
 import {authAPI} from "api/api";
 import {PropertiesLogin} from "api/api.types";
+import {setApp} from "redux/appReducer";
 
 export type Auth = {
     id: number | null
@@ -45,11 +46,13 @@ export const setAuthUserData = (data: Auth) => ({
 } as const)
 
 export const getAuthUserData = (dispatch: AppThunkDispatch) => {
+    dispatch(setApp(false))
     authAPI.me()
         .then((data) => {
             if (data.resultCode === 0) {
                 dispatch(setAuthUserData({...data.data, isAuth: true}))
             }
+            dispatch(setApp(true))
         })
 }
 

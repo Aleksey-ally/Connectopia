@@ -16,6 +16,8 @@ import {Login} from "pages/Login";
 import {UsersContainer} from 'pages/Users';
 import {HeaderContainer} from "components/Header";
 import {MessagesContainer} from "pages/Messages";
+import {Preloader} from "components/Preloader";
+import {setApp} from "redux/appReducer";
 
 const App = () => {
     const dispatch = useAppDispatch()
@@ -23,7 +25,12 @@ const App = () => {
     useEffect(() => {
         dispatch(getAuthUserData)
     }, [])
+    const initializingApp = useSelector<ReducersType, boolean>(state=> state.app.initializing)
     const auth = useSelector<ReducersType, Auth>(state => state.auth)
+
+    if (!initializingApp){
+        return <Preloader/>
+    }
 
     return (
         <main>

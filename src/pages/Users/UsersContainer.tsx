@@ -6,7 +6,9 @@ import {followOnUser, getUsers, setItemsPerPage, setPagination, unfollowOnUser, 
 import {Users} from "./Users"
 
 export const UsersContainer = () => {
+
     const usersData = useSelector<ReducersType, UsersType>(state => state.usersData)
+
     const dispatch = useAppDispatch()
 
     useEffect(() => {

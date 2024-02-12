@@ -18,7 +18,6 @@ export type UserType = {
     toggleFollowing: boolean
 }
 
-
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET-USERS"
@@ -92,7 +91,6 @@ export const usersReducer = (state = initialState, action: ActionType): UsersTyp
             return state
     }
 }
-
 type Follow = ReturnType<typeof follow>
 type UnFollow = ReturnType<typeof unFollow>
 type SetUsers = ReturnType<typeof setUsers>

@@ -1,6 +1,15 @@
-import PreloaderGif from "imgs/Preloader.gif";
-import s from './Preloader.module.css';
+import s from './Preloader.module.scss'
 
 export const Preloader = () => {
-    return <div className={s.preloader}><img src={PreloaderGif} alt="Preloader" /></div>
+    return (
+        <div className={s.loader}>
+            <div className={s.segment}></div>
+            <div className={s.segment}></div>
+            <div className={s.segment}></div>
+            <div className={s.segment}></div>
+            <div className={s.segment}></div>
+            <div className={s.segment}></div>
+            <div className={s.segment}></div>
+        </div>
+    )
 }

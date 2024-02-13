@@ -1,0 +1,60 @@
+.loader {
+   position: relative;
+
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   width: 100px;
+   height: 100px;
+   margin: 15% auto;
+
+   animation: rotate 2s linear infinite;
+}
+
+.segment {
+   position: absolute;
+
+   width: 20px;
+   height: 20px;
+
+   background-color: var(--color-accent-500);
+   border-radius: 50%;
+
+   animation: color-change 2s linear infinite;
+}
+
+@for $i from 1 through 7 {
+   .loader .segment:nth-child(#{$i}) {
+      transform: rotate((360deg / 7) * $i) translate(40px) rotate(-((360deg / 7) * $i));
+   }
+}
+
+@keyframes rotate {
+   to {
+      transform: rotate(1turn);
+   }
+}
+
+@keyframes color-change {
+   0%,
+   100% {
+      background-color: var(--color-accent-500);
+   }
+
+   20% {
+      background-color: var(--color-info-500);
+   }
+
+   40% {
+      background-color: var(--color-light-500);
+   }
+
+   60% {
+      background-color: var(--color-danger-300);
+   }
+
+   80% {
+      background-color: var(--color-accent-300);
+   }
+}

@@ -1,10 +1,10 @@
-import React from "react";
+import React, {memo} from "react";
 import {NavLink} from 'react-router-dom'
 import s from './DialogUser.module.css'
 import {UsersDataType} from "../../../redux/messagesReducer";
 
 
-export const DialogUser = ({id, animalName, photoAvatar}: UsersDataType) => {
+export const DialogUser = memo(({id, animalName, photoAvatar}: UsersDataType) => {
     return (
         <div className={s.dialogItem}>
             <NavLink to={`/messages/${id}`}
@@ -13,4 +13,4 @@ export const DialogUser = ({id, animalName, photoAvatar}: UsersDataType) => {
                 <span>{animalName}</span></NavLink>
         </div>
     )
-}
+})

@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, memo} from "react";
 import {DialogUser} from './DialogUser';
 import s from './Messages.module.css';
 import {UserMessage} from './UserMessage';
@@ -9,7 +9,7 @@ type MessagesPropsType = {
     dispatchNewTextInput: (newText: string) => void
     addMessage: () => void
 }
-export const Messages = ({messagesData, dispatchNewTextInput, addMessage}: MessagesPropsType) => {
+export const Messages = memo(({messagesData, dispatchNewTextInput, addMessage}: MessagesPropsType) => {
     const onChangeMessageTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         dispatchNewTextInput(e.currentTarget.value)
     }
@@ -30,4 +30,4 @@ export const Messages = ({messagesData, dispatchNewTextInput, addMessage}: Messa
 
         </div>
     )
-}
+})

@@ -1,8 +1,9 @@
 import AvatarElephant from '../../../../imgs/Elephant.png';
 import { PostDataType } from "../../../../redux/profileReducer";
 import s from './Post.module.css';
+import {memo} from "react";
 
-export const Post = ({ message, likeCounter }: PostDataType) => {
+export const Post = memo(({ message, likeCounter }: PostDataType) => {
     return (
         <div>
             <div className={s.item}>
@@ -14,4 +15,4 @@ export const Post = ({ message, likeCounter }: PostDataType) => {
             </div>
         </div>
     )
-}
+})

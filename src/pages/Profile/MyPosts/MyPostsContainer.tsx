@@ -11,7 +11,6 @@ export const MyPostsContainer = () => {
     const dispatchNewTextInput = (newText: string) => {
         dispatch(changePostText(newText))
     }
-
     const addPostCallBack = () => {
         dispatch(addPost())
     }

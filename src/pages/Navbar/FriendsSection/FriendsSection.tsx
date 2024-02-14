@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import s from "./FriendsSection.module.css";
 import {UsersDataType} from "redux/messagesReducer";
 
@@ -6,7 +6,7 @@ import {UsersDataType} from "redux/messagesReducer";
 type FriendsSectionPropsType = {
     friendsData: UsersDataType[]
 }
-export const FriendsSection = ({friendsData}: FriendsSectionPropsType) => {
+export const FriendsSection = memo(({friendsData}: FriendsSectionPropsType) => {
     return (
         <div className={s.friendSection}>
             <h3 className={s.label}>Friends</h3>
@@ -18,4 +18,4 @@ export const FriendsSection = ({friendsData}: FriendsSectionPropsType) => {
 
         </div>
     )
-}
+})

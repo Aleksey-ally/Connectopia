@@ -4,7 +4,7 @@ import UserCover from 'imgs/userCover_1.jpg';
 import s from './ProfileInformation.module.css';
 import {Typography} from "components/Typography";
 import {TextField} from "components/TextField";
-import {ChangeEvent} from "react";
+import {ChangeEvent, memo} from "react";
 
 type Props = {
     profile: UtilityProfileUserType
@@ -14,8 +14,8 @@ type Props = {
     changeStatusHandler: (value:ChangeEvent<HTMLInputElement>) => void
 }
 
-export const ProfileInformation = ({profile, status, edit, changeStatusHandler, toggleEditHandler}: Props) => {
-
+export const ProfileInformation = memo(({profile, status, edit, changeStatusHandler, toggleEditHandler}: Props) => {
+    console.log('ProfileInformation')
     return (
         <div className={s.description}>
 
@@ -38,4 +38,4 @@ export const ProfileInformation = ({profile, status, edit, changeStatusHandler, 
 
         </div>
     )
-}
+})

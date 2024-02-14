@@ -8,6 +8,7 @@ import {Button} from "components/Button";
 import {createSelector} from "reselect";
 import {ReducersType} from "redux/reduxStore";
 import {useSelector} from "react-redux";
+import {memo} from "react";
 
 export type UsersPropsType = {
     usersData: UsersType
@@ -22,7 +23,7 @@ const usersSelectorMemoized = createSelector(
     (users: UserType[]) => users.filter(() => true)
 )
 
-export const Users = ({usersData, follow, unFollow, setCurrentPage, setPageSize}: UsersPropsType) => {
+export const Users = memo(({usersData, follow, unFollow, setCurrentPage, setPageSize}: UsersPropsType) => {
 
     const users = useSelector(usersSelectorMemoized)
 
@@ -60,4 +61,4 @@ export const Users = ({usersData, follow, unFollow, setCurrentPage, setPageSize}
             ))}
         </div>
     )
-}
+})

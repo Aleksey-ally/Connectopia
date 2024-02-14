@@ -1,4 +1,4 @@
-import {ChangeEvent} from "react";
+import {ChangeEvent, memo} from "react";
 import s from './MyPosts.module.css';
 import {Post} from './Post';
 import {ProfileDataType} from "redux/profileReducer";
@@ -8,11 +8,13 @@ type Props = {
     dispatchNewTextInput: (newText: string) => void
     addPost: () => void
 }
-export const MyPosts = ({profileData, dispatchNewTextInput, addPost}: Props) => {
+export const MyPosts = memo(({profileData, dispatchNewTextInput, addPost}: Props) => {
 
     const onChangeInputPostHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         dispatchNewTextInput(e.currentTarget.value)
     }
+
+    console.log('MyPosts')
 
     return (
         <div className={s.posts}>
@@ -31,4 +33,4 @@ export const MyPosts = ({profileData, dispatchNewTextInput, addPost}: Props) => 
 
         </div>
     )
-}
+})

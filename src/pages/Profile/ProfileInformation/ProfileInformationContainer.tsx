@@ -1,4 +1,4 @@
-import {ChangeEvent, useEffect, useState} from 'react';
+import {ChangeEvent, useCallback, useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {useParams} from 'react-router-dom';
 import {changeUserStatus, getUserProfile, getUserStatus, ProfileDataType} from 'redux/profileReducer';
@@ -15,13 +15,13 @@ export const ProfileInformationContainer = () => {
     const [localStatus, setLocalStatus] = useState<string>('')
     const [edit, setEdit] = useState<boolean>(false)
 
-    const toggleEditHandler = () => {
+    const toggleEditHandler = useCallback(() => {
         setEdit(!edit)
         status !== localStatus && dispatch(changeUserStatus(localStatus))
-    }
-    const changeStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    }, [edit])
+    const changeStatusHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setLocalStatus(e.currentTarget.value)
-    }
+    },[localStatus])
 
 
     const {uID} = useParams()

@@ -24,7 +24,6 @@ const usersSelectorMemoized = createSelector(
 )
 
 export const Users = memo(({usersData, follow, unFollow, setCurrentPage, setPageSize}: UsersPropsType) => {
-
     const users = useSelector(usersSelectorMemoized)
 
     const pagesCount = Math.ceil(usersData.totalUsersCount / usersData.pageSize)

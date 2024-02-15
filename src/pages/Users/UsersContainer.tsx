@@ -1,5 +1,5 @@
 import {Preloader} from "components/Preloader"
-import React, {useEffect} from "react"
+import React, {useCallback, useEffect} from "react"
 import {useSelector} from "react-redux"
 import {ReducersType, useAppDispatch} from "redux/reduxStore"
 import {followOnUser, getUsers, setItemsPerPage, setPagination, unfollowOnUser, UsersType} from "redux/usersReducer"
@@ -15,21 +15,21 @@ export const UsersContainer = () => {
         dispatch(getUsers(usersData.pageSize, usersData.currentPage))
     }, []);
 
-    const follow = (userID: number) => {
+    const follow = useCallback((userID: number) => {
         dispatch(followOnUser(userID))
-    }
+    },[dispatch])
 
-    const unfollow = (userID: number) => {
+    const unfollow = useCallback((userID: number) => {
         dispatch(unfollowOnUser(userID))
-    }
+    },[dispatch])
 
-    const setCurrentPage = (page: number) => {
+    const setCurrentPage = useCallback((page: number) => {
         dispatch(setPagination(usersData.pageSize, page))
-    }
+    },[dispatch])
 
-    const setPageSize = (pageSize: number) => {
+    const setPageSize = useCallback((pageSize: number) => {
         dispatch(setItemsPerPage(pageSize, usersData.currentPage))
-    }
+    },[dispatch])
 
     return <>
         {usersData.isFetching ? <Preloader/> :

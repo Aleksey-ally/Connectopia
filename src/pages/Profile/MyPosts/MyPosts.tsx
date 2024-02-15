@@ -14,8 +14,6 @@ export const MyPosts = memo(({profileData, dispatchNewTextInput, addPost}: Props
         dispatchNewTextInput(e.currentTarget.value)
     }
 
-    console.log('MyPosts')
-
     return (
         <div className={s.posts}>
             <div>

@@ -1,5 +1,5 @@
 import AvatarElephant from '../../../../imgs/Elephant.png';
-import { PostDataType } from "../../../../redux/profileReducer";
+import { PostDataType } from "redux/profileReducer";
 import s from './Post.module.css';
 import {memo} from "react";
 

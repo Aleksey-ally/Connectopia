@@ -1,7 +1,7 @@
 import React, {memo} from "react";
 import s from './UserMessage.module.css'
 import {useParams} from "react-router-dom";
-import {TextDataType} from "../../../redux/messagesReducer";
+import {TextDataType} from "redux/messagesReducer";
 
 
 export const UserMessage = memo(({id, messageText}: TextDataType) => {

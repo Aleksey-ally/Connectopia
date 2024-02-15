@@ -15,7 +15,6 @@ type Props = {
 }
 
 export const ProfileInformation = memo(({profile, status, edit, changeStatusHandler, toggleEditHandler}: Props) => {
-    console.log('ProfileInformation')
     return (
         <div className={s.description}>
 

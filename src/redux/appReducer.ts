@@ -1,13 +1,10 @@
-type App = {
-    initializing : boolean
+const initialState = {
+    initializing: false
 }
+
+export type App = typeof initialState
 
 const SET_APP = "SET-APP"
-
-const initialState: App = {
-    initializing : false
-}
-
 
 type Action = SetApp
 
@@ -26,7 +23,7 @@ export const appReducer = (state = initialState, action: Action): App => {
 
 type SetApp = ReturnType<typeof setApp>
 
-export const setApp = (initializing : boolean) => ({
+export const setApp = (initializing: boolean) => ({
     type: SET_APP,
     initializing
 } as const)

@@ -72,5 +72,10 @@
     "@types/react-test-renderer": "17.0.1",
     "@types/redux-form": "8.3.3",
     "@types/uuid": "8.3.4"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!axios)"
+    ]
   }
 }

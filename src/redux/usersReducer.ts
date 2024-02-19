@@ -100,7 +100,7 @@ type setFetching = ReturnType<typeof setFetching>
 type SetToggleFollowing = ReturnType<typeof setToggleFollowing>
 type SetPageSize = ReturnType<typeof setPageSize>
 
-const follow = (userID: number) => ({
+export const follow = (userID: number) => ({
     type: FOLLOW,
     userID
 } as const)

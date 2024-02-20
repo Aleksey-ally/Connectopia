@@ -101,42 +101,35 @@ export const setStatus = (status: string) => ({
     status
 } as const)
 
-export const getUserProfile = (id: number) => {
-    return (dispatch: AppThunkDispatch) => {
-        profileAPI.getProfile(id)
-            .then(res => {
-                dispatch(setUserProfile(res))
-            })
+export const getUserProfile = (id: number) =>
+    async (dispatch: AppThunkDispatch) => {
+        const res = await profileAPI.getProfile(id)
+        dispatch(setUserProfile(res))
     }
-}
 
-export const getUserStatus = (id: number) => {
-    return (dispatch: AppThunkDispatch) => {
-        profileAPI.getStatus(id)
-            .then(res => {
-                dispatch(setStatus(res))
-            })
-    }
-}
 
-export const changeUserStatus = (status: string) => {
-    return (dispatch: AppThunkDispatch) => {
-        profileAPI.updateStatus(status)
-            .then(res => {
-                if (res.resultCode === 0) {
-                    dispatch(setStatus(status))
-                }
-            })
+export const getUserStatus = (id: number) =>
+    async (dispatch: AppThunkDispatch) => {
+        const res = await profileAPI.getStatus(id)
+        dispatch(setStatus(res))
     }
-}
 
-export const changeUserName = (fullName: string) => {
-    return (dispatch: AppThunkDispatch) => {
-        profileAPI.updateProfile(fullName)
-            .then(res => {
-                if (res.resultCode === 0) {
-                    dispatch(setUserProfile({fullName}))
-                }
-            })
+
+export const changeUserStatus = (status: string) =>
+    async (dispatch: AppThunkDispatch) => {
+        const res = await profileAPI.updateStatus(status)
+
+        if (res.resultCode === 0) {
+            dispatch(setStatus(status))
+        }
     }
-}
+
+
+export const changeUserName = (fullName: string) =>
+    async (dispatch: AppThunkDispatch) => {
+        const res = await profileAPI.updateProfile(fullName)
+
+        if (res.resultCode === 0) {
+            dispatch(setUserProfile({fullName}))
+        }
+    }

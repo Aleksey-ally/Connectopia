@@ -142,80 +142,77 @@ export const setPageSize = (pageSize: number) => ({
 } as const)
 
 
-export const getUsers = (pageSize: number, currentPage: number) => {
-    return (dispatch: AppThunkDispatch) => {
+export const getUsers = (pageSize: number, currentPage: number) =>
+    async (dispatch: AppThunkDispatch) => {
         dispatch(setFetching(true))
 
-        usersAPI.getUsers(pageSize, currentPage)
-            .then((res) => {
-                if (!res.error) {
-                    dispatch(setCurrentPage(currentPage))
-                    dispatch(setUsers(res.items))
-                    dispatch(setTotalUsersCount(res.totalCount))
-                }
-                dispatch(setFetching(false))
-            })
-    }
-}
+        const res = await usersAPI.getUsers(pageSize, currentPage)
 
-export const setPagination = (pageSize: number, page: number) => {
-    return (dispatch: AppThunkDispatch) => {
+        if (!res.error) {
+            dispatch(setCurrentPage(currentPage))
+            dispatch(setUsers(res.items))
+            dispatch(setTotalUsersCount(res.totalCount))
+        }
+        dispatch(setFetching(false))
+    }
+
+
+export const setPagination = (pageSize: number, page: number) =>
+    async (dispatch: AppThunkDispatch) => {
         dispatch(setFetching(true))
         dispatch(setCurrentPage(page))
 
-        usersAPI.getUsers(pageSize, page)
-            .then((res) => {
-                if (!res.error) {
-                    dispatch(setUsers(res.items))
-                    dispatch(setTotalUsersCount(res.totalCount))
-                }
-                dispatch(setFetching(false))
-            });
-    }
-}
+        const res = await usersAPI.getUsers(pageSize, page)
 
-export const setItemsPerPage = (pageSize: number, currentPage: number) => {
-    return (dispatch: AppThunkDispatch) => {
+        if (!res.error) {
+            dispatch(setUsers(res.items))
+            dispatch(setTotalUsersCount(res.totalCount))
+        }
+
+        dispatch(setFetching(false))
+    }
+
+
+export const setItemsPerPage = (pageSize: number, currentPage: number) =>
+    async (dispatch: AppThunkDispatch) => {
         dispatch(setFetching(true))
         dispatch(setPageSize(pageSize))
 
-        usersAPI.getUsers(pageSize, currentPage)
-            .then((res) => {
-                if (!res.error) {
-                    dispatch(setUsers(res.items))
-                    dispatch(setTotalUsersCount(res.totalCount))
-                }
-                dispatch(setFetching(false))
-            })
+        const res = await usersAPI.getUsers(pageSize, currentPage)
+
+        if (!res.error) {
+            dispatch(setUsers(res.items))
+            dispatch(setTotalUsersCount(res.totalCount))
+        }
+
+        dispatch(setFetching(false))
     }
-}
 
 
-export const followOnUser = (userID: number) => {
-    return (dispatch: AppThunkDispatch) => {
+export const followOnUser = (userID: number) =>
+    async (dispatch: AppThunkDispatch) => {
         dispatch(setToggleFollowing(userID, true))
 
-        usersAPI.follow(userID)
-            .then((res) => {
-                if (res.resultCode === 0) {
-                    dispatch(follow(userID))
-                }
-                dispatch(setToggleFollowing(userID, false))
-                return {}
-            })
-    }
-}
+        const res = await usersAPI.follow(userID)
 
-export const unfollowOnUser = (userID: number) => {
-    return (dispatch: AppThunkDispatch) => {
+        if (res.resultCode === 0) {
+            dispatch(follow(userID))
+        }
+
+        dispatch(setToggleFollowing(userID, false))
+        return {}
+
+    }
+
+export const unfollowOnUser = (userID: number) =>
+    async (dispatch: AppThunkDispatch) => {
         dispatch(setToggleFollowing(userID, true))
 
-        usersAPI.unFollow(userID)
-            .then((res) => {
-                if (res.resultCode === 0) {
-                    dispatch(unFollow(userID))
-                }
-                dispatch(setToggleFollowing(userID, false))
-            })
+        const res = await usersAPI.unFollow(userID)
+
+        if (res.resultCode === 0) {
+            dispatch(unFollow(userID))
+        }
+
+        dispatch(setToggleFollowing(userID, false))
     }
-}

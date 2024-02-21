@@ -17,61 +17,58 @@ const instance = axios.create(
     })
 
 export const authAPI = {
-    me() {
-        return instance.get<ResponseAuth>('auth/me')
-            .then(res => res.data)
+    async me() {
+        const res = await instance.get<ResponseAuth>('auth/me')
+        return res.data
     },
-    login(payload: PropertiesLogin) {
-        return instance.post<DefaultResponseType<ResponseLogin>>('auth/login', {...payload})
-            .then(res => res.data)
+    async login(payload: PropertiesLogin) {
+        const res = await instance.post<DefaultResponseType<ResponseLogin>>('auth/login', {...payload})
+        return res.data
     },
-    logout() {
-        return instance.delete<DefaultResponseType>('auth/login')
-            .then(res => res.data)
+    async logout() {
+        const res = await instance.delete<DefaultResponseType>('auth/login')
+        return res.data
     }
 }
 
 export const usersAPI = {
-    getUsers(pageSize: number, currentPage: number) {
-        return instance.get<ResponseUsersType>(`users?count=${pageSize}&page=${currentPage}`)
-            .then(res => res.data)
+    async getUsers(pageSize: number, currentPage: number) {
+        const res = await instance.get<ResponseUsersType>(`users?count=${pageSize}&page=${currentPage}`)
+        return res.data
     },
-    follow(uID: number) {
-        return instance.post<DefaultResponseType>(`follow/${uID}`)
-            .then(res => res.data)
+    async follow(uID: number) {
+        const res = await instance.post<DefaultResponseType>(`follow/${uID}`)
+        return res.data
     },
-    unFollow(uID: number) {
-        return instance.delete<DefaultResponseType>(`follow/${uID}`)
-            .then(res => res.data)
+    async unFollow(uID: number) {
+        const res = await instance.delete<DefaultResponseType>(`follow/${uID}`)
+        return res.data
     }
 }
 
 
 export const profileAPI = {
-    getProfile(uID: number) {
-        return instance.get<ProfileUserResponseType>(`profile/${uID}`)
-            .then(res => res.data)
+    async getProfile(uID: number) {
+        const res = await instance.get<ProfileUserResponseType>(`profile/${uID}`)
+        return res.data
     },
-    updateProfile(newName: string) {
-        return instance.put<DefaultResponseType>('profile', {
+    async updateProfile(newName: string) {
+        const res = await instance.put<DefaultResponseType>('profile', {
             fullName: newName,
             lookingForAJob: true,
             LookingForAJobDescription: 'Yes',
             aboutMe: 'Hey0'
         })
-            .then(res => res.data)
+        return res.data
     },
-    getStatus(uID: number) {
-        return instance.get<string>(`profile/status/${uID}`)
-            .then(res => res.data)
+    async getStatus(uID: number) {
+        const res = await instance.get<string>(`profile/status/${uID}`)
+        return res.data
     },
-    updateStatus(newStatus: string) {
-        return instance.put<DefaultResponseType>('profile/status', {status: newStatus})
-            .then(res => res.data)
+    async updateStatus(newStatus: string) {
+        const res = await instance.put<DefaultResponseType>('profile/status', {status: newStatus})
+        return res.data
     }
-
-
 }
-
 
 

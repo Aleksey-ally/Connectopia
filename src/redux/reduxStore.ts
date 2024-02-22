@@ -6,6 +6,7 @@ import {authReducer} from "./authReducer";
 import {thunk, ThunkDispatch} from "redux-thunk";
 import {useDispatch} from "react-redux";
 import {appReducer} from "redux/appReducer";
+import {composeWithDevTools} from "@redux-devtools/extension";
 
 export type ReducersType = ReturnType<typeof reducers>
 
@@ -14,14 +15,15 @@ const reducers = combineReducers({
     messagesData: messagesReducer,
     usersData: usersReducer,
     auth: authReducer,
-    app:appReducer
+    app: appReducer
 })
-export const reduxStore = createStore(reducers, applyMiddleware(thunk))
+
+export const reduxStore = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)))
+
 export type AppRootStateType = ReturnType<typeof reducers>
 
 export type AppThunkDispatch = ThunkDispatch<AppRootStateType, any, AnyAction>
 export const useAppDispatch = () => useDispatch<AppThunkDispatch>();
-
 
 
 // @ts-expect-error:old

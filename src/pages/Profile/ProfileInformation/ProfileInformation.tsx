@@ -7,7 +7,7 @@ import {TextField} from "components/TextField";
 import {ChangeEvent, memo} from "react";
 
 type Props = {
-    profile: UtilityProfileUserType
+    profile?: UtilityProfileUserType
     status: string
     edit:boolean
     toggleEditHandler: () => void
@@ -22,9 +22,9 @@ export const ProfileInformation = memo(({profile, status, edit, changeStatusHand
 
                 <div className={s.userInfo}>
 
-                    <UserAvatar className={s.userAvatar} size={'medium'} photos={profile.photos?.small}/>
+                    <UserAvatar className={s.userAvatar} size={'medium'} photos={profile?.photos?.small}/>
                     <div className={s.userInfoBody}>
-                        <Typography variant={'h3'}>{profile.fullName}</Typography>
+                        <Typography variant={'h3'}>{profile?.fullName}</Typography>
                         {edit &&
                             <TextField onBlur={toggleEditHandler} autoFocus value={status} onChange={changeStatusHandler}/>}
                         {!edit &&

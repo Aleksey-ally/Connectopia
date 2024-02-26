@@ -18,7 +18,7 @@ export const ProfileInformationContainer = () => {
     const toggleEditHandler = useCallback(() => {
         setEdit(!edit)
         status !== localStatus && dispatch(changeUserStatus(localStatus))
-    }, [edit])
+    }, [edit, localStatus])
     const changeStatusHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setLocalStatus(e.currentTarget.value)
     },[localStatus])

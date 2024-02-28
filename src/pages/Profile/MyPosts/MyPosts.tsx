@@ -19,7 +19,7 @@ export const MyPosts = memo(({profileData, dispatchNewTextInput, addPost}: Props
             <div>
                 <h3>My posts</h3>
                 <div>
-                    <textarea value={profileData.textPost} onChange={onChangeInputPostHandler}/>
+                    <textarea placeholder={'type text'} value={profileData.textPost} onChange={onChangeInputPostHandler}/>
                 </div>
                 <div>
                     <button className={s.buttonPost} onClick={addPost}>Add post</button>

@@ -10,7 +10,7 @@ import {composeWithDevTools} from "@redux-devtools/extension";
 
 export type ReducersType = ReturnType<typeof reducers>
 
-const reducers = combineReducers({
+export const reducers = combineReducers({
     profileData: profileReducer,
     messagesData: messagesReducer,
     usersData: usersReducer,

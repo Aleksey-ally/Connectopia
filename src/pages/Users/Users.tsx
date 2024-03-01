@@ -1,13 +1,10 @@
 import {UserAvatar} from "components/UserAvatar";
 import {NavLink} from "react-router-dom";
-import {UsersType, UserType} from "redux/usersReducer";
+import {UsersType} from "redux/usersReducer";
 import s from "./Users.module.css";
 import {Pagination} from "components/Pagination";
 import {Typography} from "components/Typography";
 import {Button} from "components/Button";
-import {createSelector} from "reselect";
-import {ReducersType} from "redux/reduxStore";
-import {useSelector} from "react-redux";
 import {memo} from "react";
 
 export type UsersPropsType = {
@@ -18,13 +15,7 @@ export type UsersPropsType = {
     setPageSize: (pageSize: number) => void
 }
 
-const usersSelectorMemoized = createSelector(
-    (state: ReducersType) => state.usersData.users,
-    (users: UserType[]) => users.filter(() => true)
-)
-
 export const Users = memo(({usersData, follow, unFollow, setCurrentPage, setPageSize}: UsersPropsType) => {
-    const users = useSelector(usersSelectorMemoized)
 
     const pagesCount = Math.ceil(usersData.totalUsersCount / usersData.pageSize)
 
@@ -33,7 +24,7 @@ export const Users = memo(({usersData, follow, unFollow, setCurrentPage, setPage
             <Pagination count={pagesCount} page={usersData.currentPage} onChange={setCurrentPage}
                         perPage={usersData.pageSize} onPerPageChange={(pageSize) => setPageSize(Number(pageSize))}
                         perPageOptions={[5, 10, 20, 30, 40, 50]}/>
-            {users.map(u => (
+            {usersData.users.map(u => (
                 <div className={s.user} key={u.id}>
                     <div className={s.userInfo}>
                         <NavLink className={s.linkAvatar} to={`/profile/${u.id}`}>

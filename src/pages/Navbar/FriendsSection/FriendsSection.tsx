@@ -12,7 +12,7 @@ export const FriendsSection = memo(({friendsData}: FriendsSectionPropsType) => {
             <h3 className={s.label}>Friends</h3>
             {friendsData.map(fd =>
                 <div className={s.item} key={fd.id}>
-                    <img className={s.avatar} src={fd.photoAvatar} alt="#"/> <span>{fd.animalName}</span>
+                    <img className={s.avatar} src={fd.photoAvatar} alt={`${fd.animalName} avatar`}/> <span>{fd.animalName}</span>
                 </div>
             ).slice(0, 3)}
 

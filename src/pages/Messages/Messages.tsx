@@ -13,7 +13,6 @@ export const Messages = memo(({messagesData, dispatchNewTextInput, addMessage}: 
     const onChangeMessageTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         dispatchNewTextInput(e.currentTarget.value)
     }
-    console.log('Messages')
 
     return (
         <div className={s.dialogs}>

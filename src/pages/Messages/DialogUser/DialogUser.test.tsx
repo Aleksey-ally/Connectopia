@@ -8,9 +8,7 @@ describe('DialogUser component', () => {
         animalName: 'Buddy',
         photoAvatar: 'avatar.jpg'
     };
-    beforeEach(()=>{
 
-    })
     test('Renders with correct data', () => {
         render(
             <BrowserRouter>

@@ -1,7 +1,7 @@
-import {ChangeEvent, memo} from "react";
+import {ChangeEvent, lazy, memo} from "react";
 import s from './MyPosts.module.css';
-import {Post} from './Post';
 import {ProfileDataType} from "redux/profileReducer";
+import {withSuspense} from "utils/WithSuspense";
 
 type Props = {
     profileData: ProfileDataType
@@ -9,6 +9,13 @@ type Props = {
     addPost: () => void
 }
 export const MyPosts = memo(({profileData, dispatchNewTextInput, addPost}: Props) => {
+
+    const Post = withSuspense(
+        lazy(() =>
+            import('./Post')
+                .then(module => ({default: module.Post}))
+        )
+    )
 
     const onChangeInputPostHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         dispatchNewTextInput(e.currentTarget.value)
@@ -19,7 +26,8 @@ export const MyPosts = memo(({profileData, dispatchNewTextInput, addPost}: Props
             <div>
                 <h3>My posts</h3>
                 <div>
-                    <textarea placeholder={'type text'} value={profileData.textPost} onChange={onChangeInputPostHandler}/>
+                    <textarea placeholder={'type text'} value={profileData.textPost}
+                              onChange={onChangeInputPostHandler}/>
                 </div>
                 <div>
                     <button className={s.buttonPost} onClick={addPost}>Add post</button>

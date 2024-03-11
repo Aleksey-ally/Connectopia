@@ -1,8 +1,7 @@
-import React, {ChangeEvent, memo} from "react";
-import {DialogUser} from './DialogUser';
+import React, {ChangeEvent, lazy, memo} from "react";
 import s from './Messages.module.css';
-import {UserMessage} from './UserMessage';
 import {MessagesDataType} from "redux/messagesReducer";
+import {withSuspense} from "utils/WithSuspense";
 
 type MessagesPropsType = {
     messagesData: MessagesDataType
@@ -13,6 +12,18 @@ export const Messages = memo(({messagesData, dispatchNewTextInput, addMessage}: 
     const onChangeMessageTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         dispatchNewTextInput(e.currentTarget.value)
     }
+
+    const DialogUser = withSuspense(
+        lazy(() =>
+            import('./DialogUser')
+                .then(module => ({default: module.DialogUser}))
+        ));
+
+    const UserMessage = withSuspense(
+        lazy(() =>
+            import('./UserMessage')
+                .then(module => ({default: module.UserMessage}))
+        ));
 
     return (
         <div className={s.dialogs}>

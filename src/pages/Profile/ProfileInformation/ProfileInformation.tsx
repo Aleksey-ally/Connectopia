@@ -7,14 +7,28 @@ import {TextField} from "components/TextField";
 import {ChangeEvent, memo} from "react";
 
 type Props = {
+    uID?: string
     profile?: UtilityProfileUserType
     status: string
-    edit:boolean
+    edit: boolean
     toggleEditHandler: () => void
-    changeStatusHandler: (value:ChangeEvent<HTMLInputElement>) => void
+    changeStatusHandler: (value: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const ProfileInformation = memo(({profile, status, edit, changeStatusHandler, toggleEditHandler}: Props) => {
+export const ProfileInformation = memo(({
+                                            uID,
+                                            profile,
+                                            status,
+                                            edit,
+                                            changeStatusHandler,
+                                            toggleEditHandler
+                                        }: Props) => {
+    const userAvatarSelected = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.currentTarget.files){
+            console.log(e.currentTarget.files[0])
+        }
+    }
+
     return (
         <div className={s.description}>
 
@@ -23,10 +37,12 @@ export const ProfileInformation = memo(({profile, status, edit, changeStatusHand
                 <div className={s.userInfo}>
 
                     <UserAvatar className={s.userAvatar} size={'medium'} photos={profile?.photos?.small}/>
+                    {!uID && <input type="file" onChange={userAvatarSelected}/>}
                     <div className={s.userInfoBody}>
                         <Typography variant={'h3'}>{profile?.fullName}</Typography>
                         {edit &&
-                            <TextField onBlur={toggleEditHandler} autoFocus value={status} onChange={changeStatusHandler}/>}
+                            <TextField onBlur={toggleEditHandler} autoFocus value={status}
+                                       onChange={changeStatusHandler}/>}
                         {!edit &&
                             <Typography variant={'subtitle2'} onDoubleClick={toggleEditHandler}>{status}</Typography>}
                     </div>

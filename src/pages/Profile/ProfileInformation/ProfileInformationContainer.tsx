@@ -21,7 +21,7 @@ export const ProfileInformationContainer = () => {
     }, [edit, localStatus])
     const changeStatusHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setLocalStatus(e.currentTarget.value)
-    },[localStatus])
+    }, [localStatus])
 
 
     const {uID} = useParams()
@@ -37,7 +37,7 @@ export const ProfileInformationContainer = () => {
 
     }, [userID, status])
 
-    return <ProfileInformation profile={profile} status={localStatus} edit={edit}
+    return <ProfileInformation uID={uID} profile={profile} status={localStatus} edit={edit}
                                toggleEditHandler={toggleEditHandler}
                                changeStatusHandler={changeStatusHandler}/>
 }

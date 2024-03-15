@@ -133,3 +133,7 @@ export const changeUserName = (fullName: string) =>
             dispatch(setUserProfile({fullName}))
         }
     }
+export const setNewUserAvatar = (avatar:string) =>
+    async ()=>{
+        const res = await  profileAPI.setAvatar(avatar)
+    }

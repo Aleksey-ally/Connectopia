@@ -68,6 +68,11 @@ export const profileAPI = {
     async updateStatus(newStatus: string) {
         const res = await instance.put<DefaultResponseType>('profile/status', {status: newStatus})
         return res.data
+    },
+    async setAvatar (avatar:string) {
+        const formData = new FormData()
+        formData.append('image',avatar )
+        const res = await instance.put('profile/photo', formData)
     }
 }
 

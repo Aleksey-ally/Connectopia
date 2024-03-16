@@ -33,6 +33,11 @@ export type PropertiesLogin = {
     rememberMe: boolean
 }
 
+export type PhotosResponse = {
+    large: string
+    small: string
+}
+
 export type ProfileUserResponseType = {
     userId: number
     aboutMe: string
@@ -49,9 +54,6 @@ export type ProfileUserResponseType = {
     fullName: string
     lookingForAJob: boolean
     lookingForAJobDescription: string
-    photos: {
-        large: string
-        small: string
-    }
+    photos: PhotosResponse
 }
 

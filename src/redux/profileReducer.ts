@@ -1,11 +1,12 @@
 import {profileAPI} from "api/api";
 import {AppThunkDispatch} from "redux/reduxStore";
-import {ProfileUserResponseType} from "api/api.types";
+import {PhotosResponse, ProfileUserResponseType} from "api/api.types";
 
 const ADD_POST = "ADD-POST";
 const CHANGE_POST_TEXT = "CHANGE-POST-TEXT";
 const SET_USER_PROFILE = "SET-USER-PROFILE";
 const SET_STATUS = "SET-STATUS";
+const SET_AVATAR = "SET-AVATAR";
 
 export type ProfileDataType = {
     postData: PostDataType[]
@@ -37,6 +38,7 @@ type ActionType =
     | ChangePostTextType
     | SetUserProfileType
     | SetStatusType
+    | SetAvatarType
 
 
 export const profileReducer = (state = initialState, action: ActionType): ProfileDataType => {
@@ -68,6 +70,9 @@ export const profileReducer = (state = initialState, action: ActionType): Profil
         case SET_STATUS :
             return {...state, status: action.status}
 
+        case SET_AVATAR :
+            return {...state, profile: {...state.profile, photos: action.photos}}
+
         default:
             return state;
     }
@@ -78,6 +83,7 @@ type AddPostType = ReturnType<typeof addPost>
 type ChangePostTextType = ReturnType<typeof changePostText>
 type SetUserProfileType = ReturnType<typeof setUserProfile>
 type SetStatusType = ReturnType<typeof setStatus>
+type SetAvatarType = ReturnType<typeof setAvatar>
 
 
 export const addPost = () => ({type: ADD_POST} as const);
@@ -99,6 +105,11 @@ export const setUserProfile = (profile: Partial<ProfileUserResponseType>) => ({
 export const setStatus = (status: string) => ({
     type: SET_STATUS,
     status
+} as const)
+
+export const setAvatar = (photos: PhotosResponse) => ({
+    type: SET_AVATAR,
+    photos
 } as const)
 
 export const getUserProfile = (id: number) =>
@@ -133,7 +144,12 @@ export const changeUserName = (fullName: string) =>
             dispatch(setUserProfile({fullName}))
         }
     }
-export const setNewUserAvatar = (avatar:string) =>
-    async ()=>{
-        const res = await  profileAPI.setAvatar(avatar)
+
+export const setNewUserAvatar = (photos: PhotosResponse) =>
+    async (dispatch: AppThunkDispatch) => {
+        const res = await profileAPI.updateAvatar(photos)
+
+        if (res.resultCode === 0) {
+            dispatch(setAvatar(photos))
+        }
     }

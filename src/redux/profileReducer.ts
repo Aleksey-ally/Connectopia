@@ -1,6 +1,6 @@
 import {profileAPI} from "api/api";
-import {AppThunkDispatch} from "redux/reduxStore";
-import {PhotosResponse, ProfileUserResponseType} from "api/api.types";
+import {AppRootStateType, AppThunkDispatch} from "redux/reduxStore";
+import {ProfileUserResponseType} from "api/api.types";
 
 const ADD_POST = "ADD-POST";
 const CHANGE_POST_TEXT = "CHANGE-POST-TEXT";
@@ -71,7 +71,7 @@ export const profileReducer = (state = initialState, action: ActionType): Profil
             return {...state, status: action.status}
 
         case SET_AVATAR :
-            return {...state, profile: {...state.profile, photos: action.photos}}
+            return {...state, profile: {...state.profile, photos: {large:action.photos, small: action.photos}}}
 
         default:
             return state;
@@ -107,7 +107,7 @@ export const setStatus = (status: string) => ({
     status
 } as const)
 
-export const setAvatar = (photos: PhotosResponse) => ({
+export const setAvatar = (photos: string) => ({
     type: SET_AVATAR,
     photos
 } as const)
@@ -145,11 +145,10 @@ export const changeUserName = (fullName: string) =>
         }
     }
 
-export const setNewUserAvatar = (photos: PhotosResponse) =>
-    async (dispatch: AppThunkDispatch) => {
-        const res = await profileAPI.updateAvatar(photos)
-
-        if (res.resultCode === 0) {
-            dispatch(setAvatar(photos))
-        }
+export const setNewUserAvatar = (photos: File) =>
+    async (dispatch: AppThunkDispatch, getState: () => AppRootStateType) => {
+            const res = await profileAPI.updateAvatar(photos)
+            if (res.resultCode === 0) {
+                dispatch(getUserProfile(getState().auth.id as number))
+            }
     }

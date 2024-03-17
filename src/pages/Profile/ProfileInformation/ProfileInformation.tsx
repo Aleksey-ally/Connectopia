@@ -1,10 +1,11 @@
 import {UserAvatar} from 'components/UserAvatar';
-import {UtilityProfileUserType} from 'redux/profileReducer';
+import {setNewUserAvatar, UtilityProfileUserType} from 'redux/profileReducer';
 import UserCover from 'imgs/userCover_1.jpg';
 import s from './ProfileInformation.module.css';
 import {Typography} from "components/Typography";
 import {TextField} from "components/TextField";
 import {ChangeEvent, memo} from "react";
+import {AppThunkDispatch} from "redux/reduxStore";
 
 type Props = {
     uID?: string
@@ -13,6 +14,7 @@ type Props = {
     edit: boolean
     toggleEditHandler: () => void
     changeStatusHandler: (value: ChangeEvent<HTMLInputElement>) => void
+    dispatch: AppThunkDispatch
 }
 
 export const ProfileInformation = memo(({
@@ -21,11 +23,12 @@ export const ProfileInformation = memo(({
                                             status,
                                             edit,
                                             changeStatusHandler,
-                                            toggleEditHandler
+                                            toggleEditHandler,
+                                            dispatch
                                         }: Props) => {
     const userAvatarSelected = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.currentTarget.files){
-            console.log(e.currentTarget.files[0])
+            dispatch(setNewUserAvatar(e.currentTarget.files[0]))
         }
     }
 

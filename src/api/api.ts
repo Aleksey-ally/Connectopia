@@ -1,12 +1,12 @@
 import axios from "axios";
 import {
     DefaultResponseType,
-    ProfileUserResponseType, PropertiesLogin,
+    ProfileUserResponseType,
+    PropertiesLogin,
     ResponseAuth,
     ResponseLogin,
     ResponseUsersType
 } from "api/api.types";
-import {PhotosType} from "redux/profileReducer";
 
 const instance = axios.create(
     {
@@ -70,11 +70,10 @@ export const profileAPI = {
         const res = await instance.put<DefaultResponseType>('profile/status', {status: newStatus})
         return res.data
     },
-    async updateAvatar({photos}: PhotosType) {
+    async updateAvatar(photos: File) {
         if (photos){
             const formData = new FormData()
-            formData.append('image-large', photos.large)
-            formData.append('image-small', photos.small)
+            formData.append('photos', photos)
             const res = await instance.put('profile/photo', formData)
             return res.data
         }

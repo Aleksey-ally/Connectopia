@@ -2,10 +2,9 @@ import {UserAvatar} from 'components/UserAvatar';
 import {setNewUserAvatar, UtilityProfileUserType} from 'redux/profileReducer';
 import UserCover from 'imgs/userCover_1.jpg';
 import s from './ProfileInformation.module.css';
-import {Typography} from "components/Typography";
-import {TextField} from "components/TextField";
-import {ChangeEvent, memo, ReactNode} from "react";
+import {ChangeEvent, memo} from "react";
 import {AppThunkDispatch} from "redux/reduxStore";
+import {UserInfoBody} from "pages/Profile/ProfileInformation/UserInfoBody";
 
 type Props = {
     uID?: string
@@ -17,7 +16,7 @@ type Props = {
     dispatch: AppThunkDispatch
 }
 
-export const ProfileInformation = memo(({
+export const ProfileInformation = (({
                                             uID,
                                             profile,
                                             status,
@@ -41,45 +40,8 @@ export const ProfileInformation = memo(({
 
                     <UserAvatar className={s.userAvatar} size={'medium'} photos={profile?.photos?.small}/>
                     {!uID && <input type="file" onChange={userAvatarSelected}/>}
-                    <div className={s.userInfoBody}>
-                        <div>
-                            <b>Name: </b>
-                            <Typography variant={'h3'} as={'span'}>{profile?.fullName}</Typography>
-                        </div>
-                        {edit &&
-                            <div>
-                                <b>Status: </b>
-                                <TextField onBlur={toggleEditHandler} autoFocus value={status}
-                                           onChange={changeStatusHandler}/>
-                            </div>
-                        }
-
-                        {!edit &&
-                            <div>
-                                <b>Status: </b>
-                                <Typography variant={'subtitle2'}
-                                            as={'span'}
-                                            onDoubleClick={toggleEditHandler}>{status}</Typography>
-                            </div>
-                        }
-                        <div>
-                            <b>Looking for a job:</b> <Typography variant={'subtitle2'}
-                                                                  as={'span'}>{profile?.lookingForAJob}</Typography>
-                        </div>
-                        <div>
-                            <b>My professional skills:</b> <Typography variant={'subtitle2'}
-                                                                       as={'span'}>{profile?.lookingForAJobDescription}</Typography>
-                        </div>
-                        <div>
-                            <b>About me: </b> <Typography variant={'subtitle2'}
-                                                          as={'span'}>{profile?.aboutMe}</Typography>
-                        </div>
-                        <div>
-                            <b>Contacts: </b>{(profile?.contacts && Object.keys(profile.contacts).map(c => (
-                            <Typography key={c}>{profile.contacts[c] || 'не указано'}</Typography>
-                        ))) || null}
-                        </div>
-                    </div>
+                    <UserInfoBody profile={profile} status={status} edit={edit} toggleEditHandler={toggleEditHandler}
+                                  changeStatusHandler={changeStatusHandler}/>
 
                 </div>
 

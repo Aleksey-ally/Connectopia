@@ -33,7 +33,6 @@ export const UserInfoBody = memo(({
                                onChange={changeStatusHandler}/>
                 </div>
             }
-
             {!edit &&
                 <div>
                     <b>Status: </b>

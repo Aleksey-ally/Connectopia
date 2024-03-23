@@ -5,6 +5,7 @@ import s from './ProfileInformation.module.css';
 import {ChangeEvent, memo} from "react";
 import {AppThunkDispatch} from "redux/reduxStore";
 import {UserInfoBody} from "pages/Profile/ProfileInformation/UserInfoBody";
+import {UserInfoBodyForm} from "pages/Profile/ProfileInformation/UserInfoBodyForm";
 
 type Props = {
     uID?: string
@@ -40,7 +41,7 @@ export const ProfileInformation = (({
 
                     <UserAvatar className={s.userAvatar} size={'medium'} photos={profile?.photos?.small}/>
                     {!uID && <input type="file" onChange={userAvatarSelected}/>}
-                    <UserInfoBody profile={profile} status={status} edit={edit} toggleEditHandler={toggleEditHandler}
+                    <UserInfoBodyForm profile={profile} status={status} edit={edit} toggleEditHandler={toggleEditHandler}
                                   changeStatusHandler={changeStatusHandler}/>
 
                 </div>

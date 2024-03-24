@@ -38,19 +38,21 @@ export type PhotosResponse = {
     small: string
 }
 
+export type Contacts = {
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
+}
+
 export type ProfileUserResponseType = {
     userId: number
     aboutMe: string
-    contacts: {
-        github: string
-        vk: string
-        facebook: string
-        instagram: string
-        twitter: string
-        website: string
-        youtube: string
-        mainLink: string
-    }
+    contacts: Contacts
     fullName: string
     lookingForAJob: boolean
     lookingForAJobDescription: string

@@ -4,10 +4,11 @@ import s from 'components/Checkbox/Checkbox.module.scss'
 
 import { CheckMark } from 'assets/icons'
 import {Typography} from "components/Typography";
+import {ReactNode} from "react";
 
 export type CheckboxProps = {
   className?: string
-  label?: string
+  label?: string | ReactNode
   checked?: boolean
   onValueChange?: (checked: boolean) => void
   disabled?: boolean

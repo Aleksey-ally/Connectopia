@@ -3,7 +3,7 @@ import s from './ProfileInformation.module.css';
 import {TextField} from "components/TextField";
 import {ChangeEvent, memo} from "react";
 import {Checkbox} from "components/Checkbox";
-import {useForm} from "react-hook-form";
+import {useController, useForm} from "react-hook-form";
 import {ProfileUserResponseType} from "api/api.types";
 
 type Props = {
@@ -22,10 +22,19 @@ export const UserInfoBodyForm = memo(({
                                       }: Props) => {
 
     const {
+        control,
         register,
         handleSubmit,
         formState: {errors}
     } = useForm<ProfileUserResponseType>()
+
+    const {
+        field:{value, onChange}
+    } = useController({
+        name:'lookingForAJob',
+        control,
+        defaultValue:false
+    })
 
     const onSubmit = (e: ProfileUserResponseType) => {
         console.log(e)
@@ -44,7 +53,7 @@ export const UserInfoBodyForm = memo(({
                            name={'status'}/>
             </div>
             <div>
-                <b>Looking for a job:</b> <Checkbox checked={profile?.lookingForAJob}/>
+               <Checkbox label={<b>Looking for a job:</b>} {...register('lookingForAJob')} onValueChange={onChange} checked={value} />
             </div>
             <div>
                 <b>My professional skills:</b> <TextField {...register('lookingForAJobDescription')}/>

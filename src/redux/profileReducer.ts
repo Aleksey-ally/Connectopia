@@ -128,10 +128,19 @@ export const changeUserStatus = (status: string) =>
 
 export const changeUserName = (fullName: string) =>
     async (dispatch: AppThunkDispatch) => {
-        const res = await profileAPI.updateProfile(fullName)
+        const res = await profileAPI.updateProfileName(fullName)
 
         if (res.resultCode === 0) {
             dispatch(setUserProfile({fullName}))
+        }
+    }
+
+export const updateProfile = (userData: ProfileUserResponseType) =>
+    async (dispatch: AppThunkDispatch) => {
+        const res = await profileAPI.updateProfile(userData)
+
+        if (res.resultCode === 0) {
+            dispatch(setUserProfile({...userData}))
         }
     }
 

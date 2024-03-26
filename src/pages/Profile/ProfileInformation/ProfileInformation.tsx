@@ -6,6 +6,7 @@ import {ChangeEvent, memo} from "react";
 import {AppThunkDispatch} from "redux/reduxStore";
 import {UserInfoBody} from "pages/Profile/ProfileInformation/UserInfoBody";
 import {UserInfoBodyForm} from "pages/Profile/ProfileInformation/UserInfoBodyForm";
+import {ProfileUserResponseType} from "api/api.types";
 
 type Props = {
     uID?: string
@@ -15,17 +16,19 @@ type Props = {
     toggleEditHandler: () => void
     changeStatusHandler: (value: ChangeEvent<HTMLInputElement>) => void
     dispatch: AppThunkDispatch
+    handleSubmitProfileForm: (userData: ProfileUserResponseType) => void
 }
 
 export const ProfileInformation = (({
-                                            uID,
-                                            profile,
-                                            status,
-                                            edit,
-                                            changeStatusHandler,
-                                            toggleEditHandler,
-                                            dispatch
-                                        }: Props) => {
+                                        uID,
+                                        profile,
+                                        status,
+                                        edit,
+                                        changeStatusHandler,
+                                        toggleEditHandler,
+                                        dispatch,
+                                        handleSubmitProfileForm
+                                    }: Props) => {
     const userAvatarSelected = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.currentTarget.files) {
             dispatch(setNewUserAvatar(e.currentTarget.files[0]))
@@ -41,8 +44,10 @@ export const ProfileInformation = (({
 
                     <UserAvatar className={s.userAvatar} size={'medium'} photos={profile?.photos?.small}/>
                     {!uID && <input type="file" onChange={userAvatarSelected}/>}
-                    <UserInfoBodyForm profile={profile} status={status} edit={edit} toggleEditHandler={toggleEditHandler}
-                                  changeStatusHandler={changeStatusHandler}/>
+                    <UserInfoBodyForm profile={profile} status={status} edit={edit}
+                                      toggleEditHandler={toggleEditHandler}
+                                      changeStatusHandler={changeStatusHandler}
+                                      handleSubmitProfileForm={handleSubmitProfileForm}/>
 
                 </div>
 

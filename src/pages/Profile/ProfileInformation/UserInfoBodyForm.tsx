@@ -12,13 +12,15 @@ type Props = {
     edit: boolean
     toggleEditHandler: () => void
     changeStatusHandler: (value: ChangeEvent<HTMLInputElement>) => void
+    handleSubmitProfileForm: (userData: ProfileUserResponseType) => void
 }
 
 export const UserInfoBodyForm = memo(({
                                           profile,
                                           status,
                                           toggleEditHandler,
-                                          changeStatusHandler
+                                          changeStatusHandler,
+                                          handleSubmitProfileForm
                                       }: Props) => {
 
     const {
@@ -29,19 +31,15 @@ export const UserInfoBodyForm = memo(({
     } = useForm<ProfileUserResponseType>()
 
     const {
-        field:{value, onChange}
+        field: {value, onChange}
     } = useController({
-        name:'lookingForAJob',
+        name: 'lookingForAJob',
         control,
-        defaultValue:false
+        defaultValue: false
     })
 
-    const onSubmit = (e: ProfileUserResponseType) => {
-        console.log(e)
-    }
-
     return (
-        <form className={s.userInfoBody} onSubmit={handleSubmit(onSubmit)}>
+        <form className={s.userInfoBody} onSubmit={handleSubmit(handleSubmitProfileForm)}>
             <button>Save</button>
             <div>
                 <b>Name: </b>
@@ -53,7 +51,8 @@ export const UserInfoBodyForm = memo(({
                            name={'status'}/>
             </div>
             <div>
-               <Checkbox label={<b>Looking for a job:</b>} {...register('lookingForAJob')} onValueChange={onChange} checked={value} />
+                <Checkbox label={<b>Looking for a job:</b>} {...register('lookingForAJob')} onValueChange={onChange}
+                          checked={value}/>
             </div>
             <div>
                 <b>My professional skills:</b> <TextField {...register('lookingForAJobDescription')}/>

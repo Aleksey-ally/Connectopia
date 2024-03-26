@@ -53,13 +53,17 @@ export const profileAPI = {
         const res = await instance.get<ProfileUserResponseType>(`profile/${uID}`)
         return res.data
     },
-    async updateProfile(newName: string) {
+    async updateProfileName(newName: string) {
         const res = await instance.put<DefaultResponseType>('profile', {
             fullName: newName,
             lookingForAJob: true,
             LookingForAJobDescription: 'Yes',
             aboutMe: 'Hey0'
         })
+        return res.data
+    },
+    async updateProfile(userData: ProfileUserResponseType) {
+        const res = await instance.put<DefaultResponseType>('profile', userData)
         return res.data
     },
     async getStatus(uID: number) {

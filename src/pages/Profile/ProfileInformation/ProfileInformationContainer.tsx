@@ -1,9 +1,11 @@
 import {ChangeEvent, useCallback, useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {useParams} from 'react-router-dom';
-import {changeUserStatus, getUserProfile, getUserStatus, ProfileDataType} from 'redux/profileReducer';
+import {changeUserStatus, getUserProfile, getUserStatus, ProfileDataType, updateProfile} from 'redux/profileReducer';
 import {ReducersType, useAppDispatch} from 'redux/reduxStore';
 import {ProfileInformation} from './ProfileInformation';
+import {profileAPI} from "api/api";
+import {ProfileUserResponseType} from "api/api.types";
 
 export const ProfileInformationContainer = () => {
     const dispatch = useAppDispatch()
@@ -22,6 +24,9 @@ export const ProfileInformationContainer = () => {
     const changeStatusHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setLocalStatus(e.currentTarget.value)
     }, [localStatus])
+    const handleSubmitProfileForm = (userData:ProfileUserResponseType) => {
+        dispatch(updateProfile(userData))
+    }
 
 
     const {uID} = useParams()
@@ -40,5 +45,6 @@ export const ProfileInformationContainer = () => {
     return <ProfileInformation uID={uID} profile={profile} status={localStatus} edit={edit}
                                toggleEditHandler={toggleEditHandler}
                                changeStatusHandler={changeStatusHandler}
-                               dispatch={dispatch}/>
+                               dispatch={dispatch}
+                               handleSubmitProfileForm={handleSubmitProfileForm}/>
 }

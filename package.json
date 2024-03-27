@@ -1,6 +1,6 @@
 {
-  "name": "samurai-way",
-  "homepage": "https://Hacksways.github.io/The-Way-of-the-Samurai-TypeScript",
+  "name": "social-network",
+  "homepage": "https://Hacksways.github.io/social-network",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

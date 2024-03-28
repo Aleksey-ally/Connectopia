@@ -45,7 +45,7 @@ export const UserInfoBodyForm = memo(({
             <button>Save</button>
             <div>
                 <b>Name: </b>
-                <TextField value={profile?.fullName} {...register('fullName')}/>
+                <TextField {...register('fullName')} defaultValue={profile?.fullName}/>
             </div>
             <div>
                 <b>Status: </b>
@@ -57,10 +57,10 @@ export const UserInfoBodyForm = memo(({
                           checked={field.value}/>
             </div>
             <div>
-                <b>My professional skills:</b> <TextField {...register('lookingForAJobDescription')}/>
+                <b>My professional skills:</b> <TextField {...register('lookingForAJobDescription')} defaultValue={profile?.lookingForAJobDescription}/>
             </div>
             <div>
-                <b>About me: </b> <TextField {...register('aboutMe')} value={profile?.aboutMe}/>
+                <b>About me: </b> <TextField {...register('aboutMe')} defaultValue={profile?.aboutMe}/>
             </div>
             <div>
                 <b>Contacts: </b>

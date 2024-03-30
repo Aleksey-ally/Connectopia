@@ -10,8 +10,6 @@ type Props = {
     profile?: UtilityProfileUserType
     status: string
     edit: boolean
-    toggleEditHandler: () => void
-    changeStatusHandler: (value: ChangeEvent<HTMLInputElement>) => void
     handleSubmitProfileForm: (userData: ProfileUserResponseType) => void
 }
 
@@ -20,8 +18,6 @@ type Props = {
 export const UserInfoBodyForm = memo(({
                                           profile,
                                           status,
-                                          toggleEditHandler,
-                                          changeStatusHandler,
                                           handleSubmitProfileForm
                                       }: Props) => {
     console.log(profile?.lookingForAJob)

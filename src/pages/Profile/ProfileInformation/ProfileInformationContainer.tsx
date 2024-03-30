@@ -1,7 +1,14 @@
 import {ChangeEvent, useCallback, useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {useParams} from 'react-router-dom';
-import {changeUserStatus, getUserProfile, getUserStatus, ProfileDataType, updateProfile} from 'redux/profileReducer';
+import {
+    changeUserStatus,
+    getUserProfile,
+    getUserStatus,
+    ProfileDataType,
+    updateProfile,
+    UtilityProfileUserType
+} from 'redux/profileReducer';
 import {ReducersType, useAppDispatch} from 'redux/reduxStore';
 import {ProfileInformation} from './ProfileInformation';
 import {profileAPI} from "api/api";

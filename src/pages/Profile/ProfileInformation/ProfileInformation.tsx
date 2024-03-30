@@ -45,8 +45,6 @@ export const ProfileInformation = (({
                     <UserAvatar className={s.userAvatar} size={'medium'} photos={profile?.photos?.small}/>
                     {!uID && <input type="file" onChange={userAvatarSelected}/>}
                     <UserInfoBodyForm profile={profile} status={status} edit={edit}
-                                      toggleEditHandler={toggleEditHandler}
-                                      changeStatusHandler={changeStatusHandler}
                                       handleSubmitProfileForm={handleSubmitProfileForm}/>
 
                 </div>

@@ -10,6 +10,7 @@ type Props = {
     edit: boolean
     toggleEditHandler: () => void
     changeStatusHandler: (value: ChangeEvent<HTMLInputElement>) => void
+    setEditForm: (value: boolean) => void
 }
 
 export const UserInfoBody = memo(({
@@ -17,11 +18,12 @@ export const UserInfoBody = memo(({
                                       status,
                                       edit,
                                       toggleEditHandler,
-                                      changeStatusHandler
+                                      changeStatusHandler,
+                                      setEditForm
                                   }: Props) => {
 
     return (
-        <div className={s.userInfoBody}>
+        <form className={s.userInfoBody} onDoubleClick={() => setEditForm(true)}>
             <div>
                 <b>Name: </b>
                 <Typography variant={'h3'} as={'span'}>{profile?.fullName}</Typography>
@@ -58,6 +60,6 @@ export const UserInfoBody = memo(({
                 <Typography key={c}>{profile.contacts[c] || 'не указано'}</Typography>
             ))) || null}
             </div>
-        </div>
+        </form>
     )
 })

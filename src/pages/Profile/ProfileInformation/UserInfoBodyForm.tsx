@@ -14,7 +14,6 @@ type Props = {
 }
 
 
-
 export const UserInfoBodyForm = memo(({
                                           profile,
                                           status,
@@ -22,9 +21,9 @@ export const UserInfoBodyForm = memo(({
                                       }: Props) => {
     console.log(profile?.lookingForAJob)
 
-    const { control, register, handleSubmit, formState: { errors } } = useForm<ProfileUserResponseType>();
+    const {control, register, handleSubmit, formState: {errors}} = useForm<ProfileUserResponseType>();
 
-    const { field } = useController({
+    const {field} = useController({
         name: 'lookingForAJob',
         control,
         defaultValue: profile?.lookingForAJob
@@ -49,11 +48,13 @@ export const UserInfoBodyForm = memo(({
                            name={'status'}/>
             </div>
             <div>
-                <Checkbox label={<b>Looking for a job:</b>} {...register('lookingForAJob')} onValueChange={field.onChange}
+                <Checkbox label={<b>Looking for a job:</b>} {...register('lookingForAJob')}
+                          onValueChange={field.onChange}
                           checked={field.value}/>
             </div>
             <div>
-                <b>My professional skills:</b> <TextField {...register('lookingForAJobDescription')} defaultValue={profile?.lookingForAJobDescription}/>
+                <b>My professional skills:</b> <TextField {...register('lookingForAJobDescription')}
+                                                          defaultValue={profile?.lookingForAJobDescription}/>
             </div>
             <div>
                 <b>About me: </b> <TextField {...register('aboutMe')} defaultValue={profile?.aboutMe}/>

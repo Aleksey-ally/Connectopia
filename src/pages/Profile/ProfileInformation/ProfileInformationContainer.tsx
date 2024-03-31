@@ -23,6 +23,7 @@ export const ProfileInformationContainer = () => {
 
     const [localStatus, setLocalStatus] = useState<string>('')
     const [edit, setEdit] = useState<boolean>(false)
+    const [editForm, setEditForm] = useState<boolean>(false)
 
     const toggleEditHandler = useCallback(() => {
         setEdit(!edit)
@@ -31,8 +32,10 @@ export const ProfileInformationContainer = () => {
     const changeStatusHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setLocalStatus(e.currentTarget.value)
     }, [localStatus])
-    const handleSubmitProfileForm = (userData:ProfileUserResponseType) => {
+
+    const handleSubmitProfileForm = (userData: ProfileUserResponseType) => {
         dispatch(updateProfile(userData))
+        setEditForm(false)
     }
 
 
@@ -53,5 +56,6 @@ export const ProfileInformationContainer = () => {
                                toggleEditHandler={toggleEditHandler}
                                changeStatusHandler={changeStatusHandler}
                                dispatch={dispatch}
-                               handleSubmitProfileForm={handleSubmitProfileForm}/>
+                               handleSubmitProfileForm={handleSubmitProfileForm}
+                               editForm={editForm} setEditForm={setEditForm}/>
 }

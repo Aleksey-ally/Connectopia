@@ -2,7 +2,7 @@ import {UserAvatar} from 'components/UserAvatar';
 import {setNewUserAvatar, UtilityProfileUserType} from 'redux/profileReducer';
 import UserCover from 'imgs/userCover_1.jpg';
 import s from './ProfileInformation.module.css';
-import {ChangeEvent, memo} from "react";
+import {ChangeEvent, memo, useState} from "react";
 import {AppThunkDispatch} from "redux/reduxStore";
 import {UserInfoBody} from "pages/Profile/ProfileInformation/UserInfoBody";
 import {UserInfoBodyForm} from "pages/Profile/ProfileInformation/UserInfoBodyForm";
@@ -17,6 +17,8 @@ type Props = {
     changeStatusHandler: (value: ChangeEvent<HTMLInputElement>) => void
     dispatch: AppThunkDispatch
     handleSubmitProfileForm: (userData: ProfileUserResponseType) => void
+    editForm: boolean
+    setEditForm: (value: boolean) => void
 }
 
 export const ProfileInformation = (({
@@ -27,7 +29,9 @@ export const ProfileInformation = (({
                                         changeStatusHandler,
                                         toggleEditHandler,
                                         dispatch,
-                                        handleSubmitProfileForm
+                                        handleSubmitProfileForm,
+                                        editForm,
+                                        setEditForm
                                     }: Props) => {
     const userAvatarSelected = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.currentTarget.files) {
@@ -44,8 +48,13 @@ export const ProfileInformation = (({
 
                     <UserAvatar className={s.userAvatar} size={'medium'} photos={profile?.photos?.small}/>
                     {!uID && <input type="file" onChange={userAvatarSelected}/>}
-                    <UserInfoBodyForm profile={profile} status={status} edit={edit}
-                                      handleSubmitProfileForm={handleSubmitProfileForm}/>
+                    {!editForm &&
+                        <UserInfoBody profile={profile} status={status} changeStatusHandler={changeStatusHandler}
+                                      toggleEditHandler={toggleEditHandler} edit={edit}
+                                      setEditForm={setEditForm}/>}
+
+                    {editForm && <UserInfoBodyForm profile={profile} status={status} edit={edit}
+                                                   handleSubmitProfileForm={handleSubmitProfileForm}/>}
 
                 </div>
 

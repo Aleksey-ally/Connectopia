@@ -2,7 +2,7 @@ import {UserAvatar} from 'components/UserAvatar';
 import {setNewUserAvatar, UtilityProfileUserType} from 'redux/profileReducer';
 import UserCover from 'imgs/userCover_1.jpg';
 import s from './ProfileInformation.module.css';
-import {ChangeEvent, memo, useState} from "react";
+import {ChangeEvent, memo, MutableRefObject, useState} from "react";
 import {AppThunkDispatch} from "redux/reduxStore";
 import {UserInfoBody} from "pages/Profile/ProfileInformation/UserInfoBody";
 import {UserInfoBodyForm} from "pages/Profile/ProfileInformation/UserInfoBodyForm";
@@ -19,6 +19,7 @@ type Props = {
     handleSubmitProfileForm: (userData: ProfileUserResponseType) => void
     editForm: boolean
     setEditForm: (value: boolean) => void
+    testRef:MutableRefObject<any>
 }
 
 export const ProfileInformation = (({
@@ -31,7 +32,8 @@ export const ProfileInformation = (({
                                         dispatch,
                                         handleSubmitProfileForm,
                                         editForm,
-                                        setEditForm
+                                        setEditForm,
+                                        testRef
                                     }: Props) => {
     const userAvatarSelected = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.currentTarget.files) {
@@ -51,10 +53,11 @@ export const ProfileInformation = (({
                     {!editForm &&
                         <UserInfoBody profile={profile} status={status} changeStatusHandler={changeStatusHandler}
                                       toggleEditHandler={toggleEditHandler} edit={edit}
-                                      setEditForm={setEditForm}/>}
+                                      setEditForm={setEditForm} testRef={testRef}/>}
 
                     {editForm && <UserInfoBodyForm profile={profile} status={status} edit={edit}
-                                                   handleSubmitProfileForm={handleSubmitProfileForm}/>}
+                                                   handleSubmitProfileForm={handleSubmitProfileForm}
+                    setEditForm={setEditForm}/>}
 
                 </div>
 

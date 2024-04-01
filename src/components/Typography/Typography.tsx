@@ -1,4 +1,4 @@
-import {ComponentPropsWithoutRef, ElementType, ReactNode} from 'react'
+import {ComponentPropsWithoutRef, ElementType, forwardRef, ReactNode, Ref} from 'react'
 
 import s from 'components/Typography/Typography.module.scss'
 
@@ -25,13 +25,13 @@ export type TextProps<T extends ElementType> = {
     className?: string
 }
 
-export const Typography = <T extends ElementType = 'p'>({
-                                                            as,
-                                                            className,
-                                                            variant = 'body1',
-                                                            ...restProps
-                                                        }: TextProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof TextProps<T>>) => {
-    const Component = as || 'p'
+export const Typography = forwardRef(
+    <T extends ElementType>(
+        { as, className, variant = 'body1', ...restProps }: TextProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof TextProps<T>>,
+        ref: Ref<HTMLParagraphElement>
+    ) => {
+        const Component = as || 'p';
 
-    return <Component className={`${s[variant]} ${className}`} {...restProps} />
-}
+        return <Component className={`${s[variant]} ${className}`} {...restProps} ref={ref} />;
+    }
+);

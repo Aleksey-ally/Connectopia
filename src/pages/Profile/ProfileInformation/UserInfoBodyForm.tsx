@@ -11,13 +11,16 @@ type Props = {
     status: string
     edit: boolean
     handleSubmitProfileForm: (userData: ProfileUserResponseType) => void
+    setEditForm: (value: boolean) => void
+
 }
 
 
 export const UserInfoBodyForm = memo(({
                                           profile,
                                           status,
-                                          handleSubmitProfileForm
+                                          handleSubmitProfileForm,
+                                          setEditForm
                                       }: Props) => {
     console.log(profile?.lookingForAJob)
 
@@ -36,7 +39,7 @@ export const UserInfoBodyForm = memo(({
     }, [profile, field]);
 
     return (
-        <form className={s.userInfoBody} onSubmit={handleSubmit(handleSubmitProfileForm)}>
+        <form className={s.userInfoBody} onSubmit={handleSubmit(handleSubmitProfileForm)} onBlur={()=>setEditForm(false)}>
             <button>Save</button>
             <div>
                 <b>Name: </b>

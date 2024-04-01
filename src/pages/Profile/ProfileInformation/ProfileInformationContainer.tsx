@@ -1,4 +1,4 @@
-import {ChangeEvent, useCallback, useEffect, useState} from 'react';
+import {ChangeEvent, useCallback, useEffect, useRef, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {useParams} from 'react-router-dom';
 import {
@@ -24,6 +24,9 @@ export const ProfileInformationContainer = () => {
     const [localStatus, setLocalStatus] = useState<string>('')
     const [edit, setEdit] = useState<boolean>(false)
     const [editForm, setEditForm] = useState<boolean>(false)
+
+    const testRef = useRef<HTMLElement>(null);
+    console.log(testRef.current?.id)
 
     const toggleEditHandler = useCallback(() => {
         setEdit(!edit)
@@ -57,5 +60,5 @@ export const ProfileInformationContainer = () => {
                                changeStatusHandler={changeStatusHandler}
                                dispatch={dispatch}
                                handleSubmitProfileForm={handleSubmitProfileForm}
-                               editForm={editForm} setEditForm={setEditForm}/>
+                               editForm={editForm} setEditForm={setEditForm} testRef={testRef}/>
 }

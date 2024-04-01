@@ -2,7 +2,7 @@ import {UtilityProfileUserType} from 'redux/profileReducer';
 import s from './ProfileInformation.module.css';
 import {Typography} from "components/Typography";
 import {TextField} from "components/TextField";
-import {ChangeEvent, memo} from "react";
+import {ChangeEvent, memo, MutableRefObject} from "react";
 
 type Props = {
     profile?: UtilityProfileUserType
@@ -11,6 +11,8 @@ type Props = {
     toggleEditHandler: () => void
     changeStatusHandler: (value: ChangeEvent<HTMLInputElement>) => void
     setEditForm: (value: boolean) => void
+    testRef: MutableRefObject<any>
+
 }
 
 export const UserInfoBody = memo(({
@@ -19,14 +21,14 @@ export const UserInfoBody = memo(({
                                       edit,
                                       toggleEditHandler,
                                       changeStatusHandler,
-                                      setEditForm
+                                      setEditForm, testRef
                                   }: Props) => {
 
     return (
         <form className={s.userInfoBody} onDoubleClick={() => setEditForm(true)}>
             <div>
                 <b>Name: </b>
-                <Typography variant={'h3'} as={'span'}>{profile?.fullName}</Typography>
+                <Typography variant={'h3'} as={'span'} id={'fullName'} ref={testRef}>{profile?.fullName}</Typography>
             </div>
             {edit &&
                 <div>
@@ -46,7 +48,7 @@ export const UserInfoBody = memo(({
             <div>
                 <b>Looking for a job:</b> <Typography variant={'subtitle2'}
                                                       as={'span'}>{profile?.lookingForAJob}</Typography>
-            </div>
+            </div>а
             <div>
                 <b>My professional skills:</b> <Typography variant={'subtitle2'}
                                                            as={'span'}>{profile?.lookingForAJobDescription}</Typography>

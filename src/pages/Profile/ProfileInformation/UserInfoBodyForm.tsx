@@ -1,7 +1,7 @@
 import {UtilityProfileUserType} from 'redux/profileReducer';
 import s from './ProfileInformation.module.css';
 import {TextField} from "components/TextField";
-import {ChangeEvent, memo, useEffect} from "react";
+import {memo, useEffect} from "react";
 import {Checkbox} from "components/Checkbox";
 import {useController, useForm} from "react-hook-form";
 import {ProfileUserResponseType} from "api/api.types";
@@ -39,7 +39,8 @@ export const UserInfoBodyForm = memo(({
     }, [profile, field]);
 
     return (
-        <form className={s.userInfoBody} onSubmit={handleSubmit(handleSubmitProfileForm)} onBlur={()=>setEditForm(false)}>
+        <form className={s.userInfoBody} onSubmit={handleSubmit(handleSubmitProfileForm)}
+              onBlur={() => setEditForm(false)}>
             <button>Save</button>
             <div>
                 <b>Name: </b>

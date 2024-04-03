@@ -22,7 +22,7 @@ export const UserInfoBodyForm = memo(({
                                           handleSubmitProfileForm,
                                           setEditForm
                                       }: Props) => {
-    console.log(profile?.lookingForAJob)
+    // console.log(profile?.lookingForAJob)
 
     const {control, register, handleSubmit, formState: {errors}} = useForm<ProfileUserResponseType>();
 

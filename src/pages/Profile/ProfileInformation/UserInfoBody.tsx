@@ -11,8 +11,6 @@ type Props = {
     toggleEditHandler: () => void
     changeStatusHandler: (value: ChangeEvent<HTMLInputElement>) => void
     setEditForm: (value: boolean) => void
-    testRef: MutableRefObject<any>
-
 }
 
 export const UserInfoBody = memo(({
@@ -21,14 +19,14 @@ export const UserInfoBody = memo(({
                                       edit,
                                       toggleEditHandler,
                                       changeStatusHandler,
-                                      setEditForm, testRef
+                                      setEditForm
                                   }: Props) => {
 
     return (
         <form className={s.userInfoBody} onDoubleClick={() => setEditForm(true)}>
             <div>
                 <b>Name: </b>
-                <Typography variant={'h3'} as={'span'} id={'fullName'} ref={testRef}>{profile?.fullName}</Typography>
+                <Typography variant={'h3'} as={'span'} id={'fullName'}>{profile?.fullName}</Typography>
             </div>
             {edit &&
                 <div>

@@ -3,6 +3,7 @@ import s from './ProfileInformation.module.css';
 import {Typography} from "components/Typography";
 import {TextField} from "components/TextField";
 import {ChangeEvent, memo, MutableRefObject} from "react";
+import {Button} from "components/Button";
 
 type Props = {
     profile?: UtilityProfileUserType
@@ -23,7 +24,8 @@ export const UserInfoBody = memo(({
                                   }: Props) => {
 
     return (
-        <form className={s.userInfoBody} onDoubleClick={() => setEditForm(true)}>
+        <div className={s.userInfoBody}>
+            <Button onClick={() => setEditForm(true)}>Change</Button>
             <div>
                 <b>Name: </b>
                 <Typography variant={'h3'} as={'span'} id={'fullName'}>{profile?.fullName}</Typography>
@@ -60,6 +62,7 @@ export const UserInfoBody = memo(({
                 <Typography key={c}>{profile.contacts[c] || 'не указано'}</Typography>
             ))) || null}
             </div>
-        </form>
+
+        </div>
     )
 })

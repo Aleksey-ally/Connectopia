@@ -39,8 +39,7 @@ export const UserInfoBodyForm = memo(({
     }, [profile, field]);
 
     return (
-        <form className={s.userInfoBody} onSubmit={handleSubmit(handleSubmitProfileForm)}
-              onBlur={() => setEditForm(false)}>
+        <form className={s.userInfoBody} onSubmit={handleSubmit(handleSubmitProfileForm)}>
             <button>Save</button>
             <div>
                 <b>Name: </b>

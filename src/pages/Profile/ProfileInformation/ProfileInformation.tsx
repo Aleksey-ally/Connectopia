@@ -19,6 +19,7 @@ type Props = {
     handleSubmitProfileForm: (userData: ProfileUserResponseType) => void
     editForm: boolean
     setEditForm: (value: boolean) => void
+    errorMessage:string[]
 }
 
 export const ProfileInformation = (({
@@ -31,7 +32,8 @@ export const ProfileInformation = (({
                                         dispatch,
                                         handleSubmitProfileForm,
                                         editForm,
-                                        setEditForm
+                                        setEditForm,
+                                        errorMessage
                                     }: Props) => {
     const userAvatarSelected = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.currentTarget.files) {
@@ -55,7 +57,7 @@ export const ProfileInformation = (({
 
                     {editForm && <UserInfoBodyForm profile={profile} status={status} edit={edit}
                                                    handleSubmitProfileForm={handleSubmitProfileForm}
-                                                   setEditForm={setEditForm}/>}
+                                                   setEditForm={setEditForm} errorMessage={errorMessage}/>}
 
                 </div>
 

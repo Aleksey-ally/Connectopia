@@ -12,7 +12,7 @@ type Props = {
     edit: boolean
     handleSubmitProfileForm: (userData: ProfileUserResponseType) => void
     setEditForm: (value: boolean) => void
-
+    errorMessage:string[]
 }
 
 
@@ -20,7 +20,8 @@ export const UserInfoBodyForm = memo(({
                                           profile,
                                           status,
                                           handleSubmitProfileForm,
-                                          setEditForm
+                                          setEditForm,
+                                          errorMessage
                                       }: Props) => {
     // console.log(profile?.lookingForAJob)
 
@@ -72,6 +73,9 @@ export const UserInfoBodyForm = memo(({
                     />
                 ))}
             </div>
+            {errorMessage && errorMessage.map((mes)=>{
+                return <div>{mes}</div>
+            })}
         </form>
     )
 })

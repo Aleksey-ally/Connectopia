@@ -142,6 +142,9 @@ export const updateProfile = (userData: ProfileUserResponseType) =>
         if (res.resultCode === 0) {
             dispatch(setUserProfile({...userData}))
         }
+        if (res.resultCode === 1){
+            return res.messages
+        }
     }
 
 export const setNewUserAvatar = (photos: File) =>

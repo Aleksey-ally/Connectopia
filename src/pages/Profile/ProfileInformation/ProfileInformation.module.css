@@ -38,6 +38,10 @@
                 display: flex;
                 flex-direction: column;
                 gap: 0.0015em;
+
+                .errorMessage {
+                    color: red;
+                }
             }
         }
     }

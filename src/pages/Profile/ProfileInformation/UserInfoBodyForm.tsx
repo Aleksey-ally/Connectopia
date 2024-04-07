@@ -12,7 +12,7 @@ type Props = {
     edit: boolean
     handleSubmitProfileForm: (userData: ProfileUserResponseType) => void
     setEditForm: (value: boolean) => void
-    errorMessage:string[]
+    errorMessage: string[]
 }
 
 
@@ -73,8 +73,8 @@ export const UserInfoBodyForm = memo(({
                     />
                 ))}
             </div>
-            {errorMessage && errorMessage.map((mes)=>{
-                return <div>{mes}</div>
+            {errorMessage && errorMessage.map((mes) => {
+                return <div className={s.errorMessage}>{mes}</div>
             })}
         </form>
     )

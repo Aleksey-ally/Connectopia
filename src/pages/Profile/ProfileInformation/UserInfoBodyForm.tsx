@@ -39,8 +39,12 @@ export const UserInfoBodyForm = memo(({
         }
     }, [profile, field]);
 
+    const classes = {
+        form: `${s.userInfoBody} ${errorMessage.length && s.errorForm}`
+    }
+
     return (
-        <form className={s.userInfoBody} onSubmit={handleSubmit(handleSubmitProfileForm)}>
+        <form className={classes.form} onSubmit={handleSubmit(handleSubmitProfileForm)}>
             <button>Save</button>
             <div>
                 <b>Name: </b>

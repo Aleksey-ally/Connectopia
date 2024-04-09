@@ -27,7 +27,7 @@
 
         .userInfo {
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             align-items: center;
 
             .userAvatar {
@@ -40,9 +40,9 @@
 
             .userInfoBody {
                 display: flex;
-                flex-direction: column;
+                flex-direction: row;
                 gap: 0.0015em;
-
+                flex-wrap: wrap;
                 .errorMessage {
                     color: red;
                 }

@@ -4,6 +4,7 @@ import {Typography} from "components/Typography";
 import {TextField} from "components/TextField";
 import {ChangeEvent, memo, MutableRefObject} from "react";
 import {Button} from "components/Button";
+import {Edit} from "assets/icons/Edit";
 
 type Props = {
     profile?: UtilityProfileUserType

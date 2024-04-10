@@ -2,11 +2,12 @@ import {UserAvatar} from 'components/UserAvatar';
 import {setNewUserAvatar, UtilityProfileUserType} from 'redux/profileReducer';
 import UserCover from 'imgs/userCover_1.jpg';
 import s from './ProfileInformation.module.css';
-import {ChangeEvent} from "react";
+import {ChangeEvent, useState} from "react";
 import {AppThunkDispatch} from "redux/reduxStore";
 import {UserInfoBody} from "pages/Profile/ProfileInformation/UserInfoBody";
 import {UserInfoBodyForm} from "pages/Profile/ProfileInformation/UserInfoBodyForm";
 import {ProfileUserResponseType} from "api/api.types";
+import {Edit} from "assets/icons/Edit";
 
 type Props = {
     uID?: string
@@ -19,7 +20,7 @@ type Props = {
     handleSubmitProfileForm: (userData: ProfileUserResponseType) => void
     editForm: boolean
     setEditForm: (value: boolean) => void
-    errorMessage:string[]
+    errorMessage: string[]
 }
 
 export const ProfileInformation = (({
@@ -35,10 +36,21 @@ export const ProfileInformation = (({
                                         setEditForm,
                                         errorMessage
                                     }: Props) => {
+
+    const [isEditVisible, setEditVisible] = useState<boolean>(false);
+
     const userAvatarSelected = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.currentTarget.files) {
             dispatch(setNewUserAvatar(e.currentTarget.files[0]))
         }
+    }
+
+    const handleMouseOver = () => {
+        setEditVisible(true)
+    }
+
+    const handleMouseOut = () => {
+        setEditVisible(false)
     }
 
     return (
@@ -48,8 +60,10 @@ export const ProfileInformation = (({
 
                 <div className={s.userInfo}>
 
-                    <UserAvatar className={s.userAvatar} size={'medium'} photos={profile?.photos?.small}/>
-                    {!uID && <input type="file" onChange={userAvatarSelected}/>}
+                    <UserAvatar onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} className={s.userAvatar} size={'medium'}
+                                photos={profile?.photos?.small}/>
+                    {isEditVisible && <Edit/>}
+                    {/*{!uID && <input type="file" onChange={userAvatarSelected}/>}*/}
                     {!editForm &&
                         <UserInfoBody profile={profile} status={status} changeStatusHandler={changeStatusHandler}
                                       toggleEditHandler={toggleEditHandler} edit={edit}

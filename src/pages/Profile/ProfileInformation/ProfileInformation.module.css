@@ -31,11 +31,17 @@
             align-items: center;
 
             .userAvatar {
-                margin-right: 1.875em;
+                position: relative;
             }
 
             .errorForm{
                 border: 1px solid red;
+            }
+
+            .edit{
+                position: absolute;
+                top: 61%;
+                left: 50%;
             }
 
             .userInfoBody {

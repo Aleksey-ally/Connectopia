@@ -62,7 +62,7 @@ export const ProfileInformation = (({
 
                     <UserAvatar onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} className={s.userAvatar} size={'medium'}
                                 photos={profile?.photos?.small}/>
-                    {isEditVisible && <Edit/>}
+                    {isEditVisible && <Edit className={s.edit}/>}
                     {/*{!uID && <input type="file" onChange={userAvatarSelected}/>}*/}
                     {!editForm &&
                         <UserInfoBody profile={profile} status={status} changeStatusHandler={changeStatusHandler}

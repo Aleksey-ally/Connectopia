@@ -40,6 +40,7 @@ export const ProfileInformation = (({
     const [isEditVisible, setEditVisible] = useState<boolean>(false);
 
     const userAvatarSelected = (e: ChangeEvent<HTMLInputElement>) => {
+        console.log()
         if (e.currentTarget.files) {
             dispatch(setNewUserAvatar(e.currentTarget.files[0]))
         }
@@ -61,8 +62,8 @@ export const ProfileInformation = (({
                 <div className={s.userInfo}>
 
                     <UserAvatar onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} className={s.userAvatar} size={'medium'}
-                                photos={profile?.photos?.small}/>
-                    {isEditVisible && <Edit className={s.edit}/>}
+                                photos={profile?.photos?.small}></UserAvatar>
+                    {isEditVisible && <Edit className={s.edit} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}/>}
                     {/*{!uID && <input type="file" onChange={userAvatarSelected}/>}*/}
                     {!editForm &&
                         <UserInfoBody profile={profile} status={status} changeStatusHandler={changeStatusHandler}

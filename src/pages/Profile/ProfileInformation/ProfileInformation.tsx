@@ -60,11 +60,16 @@ export const ProfileInformation = (({
             <div className={s.userCover} style={{backgroundImage: `url(${UserCover})`}}>
 
                 <div className={s.userInfo}>
-
-                    <UserAvatar onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} className={s.userAvatar} size={'medium'}
+                    <input id="avatarInput" className={s.fileUploader} type="file" onChange={userAvatarSelected}/>
+                    <UserAvatar onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} className={s.userAvatar}
+                                size={'medium'}
                                 photos={profile?.photos?.small}></UserAvatar>
-                    {isEditVisible && <Edit className={s.edit} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}/>}
-                    {/*{!uID && <input type="file" onChange={userAvatarSelected}/>}*/}
+                    {isEditVisible && <label htmlFor="avatarInput" className={s.edit} onMouseOver={handleMouseOver}
+                                             onMouseOut={handleMouseOut}>
+                        <Edit/>
+                    </label>
+                    }
+                    {/*{!uID && <input id="avatarInput" type="file" onChange={userAvatarSelected}/>}*/}
                     {!editForm &&
                         <UserInfoBody profile={profile} status={status} changeStatusHandler={changeStatusHandler}
                                       toggleEditHandler={toggleEditHandler} edit={edit}

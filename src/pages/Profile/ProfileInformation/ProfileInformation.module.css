@@ -30,6 +30,10 @@
             flex-direction: column;
             align-items: center;
 
+            .fileUploader{
+                display: none;
+            }
+
             .userAvatar {
                 position: relative;
                 &:hover{

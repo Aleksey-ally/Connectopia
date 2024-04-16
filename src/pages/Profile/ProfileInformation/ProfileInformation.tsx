@@ -64,12 +64,12 @@ export const ProfileInformation = (({
                     <UserAvatar onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} className={s.userAvatar}
                                 size={'medium'}
                                 photos={profile?.photos?.small}></UserAvatar>
-                    {isEditVisible && <label htmlFor="avatarInput" className={s.edit} onMouseOver={handleMouseOver}
-                                             onMouseOut={handleMouseOut}>
-                        <Edit/>
-                    </label>
+                    {!uID && isEditVisible &&
+                        <label htmlFor="avatarInput" className={s.edit} onMouseOver={handleMouseOver}
+                               onMouseOut={handleMouseOut}>
+                            <Edit/>
+                        </label>
                     }
-                    {/*{!uID && <input id="avatarInput" type="file" onChange={userAvatarSelected}/>}*/}
                     {!editForm &&
                         <UserInfoBody profile={profile} status={status} changeStatusHandler={changeStatusHandler}
                                       toggleEditHandler={toggleEditHandler} edit={edit}

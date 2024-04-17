@@ -54,6 +54,10 @@ export const ProfileInformation = (({
         setEditVisible(false)
     }
 
+    const classNames = {
+        userAvatar: `${s.userAvatar}`
+    }
+
     return (
         <div className={s.description}>
 
@@ -61,7 +65,7 @@ export const ProfileInformation = (({
 
                 <div className={s.userInfo}>
                     <input id="avatarInput" className={s.fileUploader} type="file" onChange={userAvatarSelected}/>
-                    <UserAvatar onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} className={s.userAvatar}
+                    <UserAvatar className={classNames.userAvatar} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}
                                 size={'medium'}
                                 photos={profile?.photos?.small}></UserAvatar>
                     {!uID && isEditVisible &&

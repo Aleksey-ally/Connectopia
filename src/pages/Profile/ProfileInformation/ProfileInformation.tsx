@@ -55,7 +55,7 @@ export const ProfileInformation = (({
     }
 
     const classNames = {
-        userAvatar: `${s.userAvatar}`
+        userAvatar: `${s.userAvatar} ${isEditVisible ? s.opacity : ''}`
     }
 
     return (

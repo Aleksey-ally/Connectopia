@@ -8,6 +8,7 @@ import {UserInfoBody} from "pages/Profile/ProfileInformation/UserInfoBody";
 import {UserInfoBodyForm} from "pages/Profile/ProfileInformation/UserInfoBodyForm";
 import {ProfileUserResponseType} from "api/api.types";
 import {Edit} from "assets/icons/Edit";
+import {Typography} from "components/Typography";
 
 type Props = {
     uID?: string
@@ -65,7 +66,8 @@ export const ProfileInformation = (({
 
                 <div className={s.userInfo}>
                     <input id="avatarInput" className={s.fileUploader} type="file" onChange={userAvatarSelected}/>
-                    <UserAvatar className={classNames.userAvatar} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}
+                    <UserAvatar className={classNames.userAvatar} onMouseOver={handleMouseOver}
+                                onMouseOut={handleMouseOut}
                                 size={'medium'}
                                 photos={profile?.photos?.small}></UserAvatar>
                     {!uID && isEditVisible &&
@@ -74,17 +76,21 @@ export const ProfileInformation = (({
                             <Edit/>
                         </label>
                     }
-                    {!editForm &&
-                        <UserInfoBody profile={profile} status={status} changeStatusHandler={changeStatusHandler}
-                                      toggleEditHandler={toggleEditHandler} edit={edit}
-                                      setEditForm={setEditForm}/>}
-
-                    {editForm && <UserInfoBodyForm profile={profile} status={status} edit={edit}
-                                                   handleSubmitProfileForm={handleSubmitProfileForm}
-                                                   setEditForm={setEditForm} errorMessage={errorMessage}/>}
 
                 </div>
 
+            </div>
+
+            <div className={s.personalInfo}>
+                <Typography>Personal Information</Typography>
+                {!editForm &&
+                    <UserInfoBody profile={profile} status={status} changeStatusHandler={changeStatusHandler}
+                                  toggleEditHandler={toggleEditHandler} edit={edit}
+                                  setEditForm={setEditForm}/>}
+
+                {editForm && <UserInfoBodyForm profile={profile} status={status} edit={edit}
+                                               handleSubmitProfileForm={handleSubmitProfileForm}
+                                               setEditForm={setEditForm} errorMessage={errorMessage}/>}
             </div>
 
         </div>

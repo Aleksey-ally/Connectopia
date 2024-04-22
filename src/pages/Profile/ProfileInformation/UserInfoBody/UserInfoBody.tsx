@@ -25,53 +25,59 @@ export const UserInfoBody = memo(({
                                   }: Props) => {
 
     return (
+
         <div className={s.userInfoBody}>
-            <Button onClick={() => setEditForm(true)}>Change</Button>
+
+            <div className={s.title}>
+                <Typography>Personal Information</Typography>
+                <Button onClick={() => setEditForm(true)}>Change</Button>
+            </div>
+
             <ul className={s.personalInfoTable}>
                 <li>
                     <div>
-                        <b>Name: </b>
-                        <Typography variant={'h3'} as={'span'} id={'fullName'}>{profile?.fullName}</Typography>
+                        <label>Name: </label>
+                        <Typography variant={'h3'} as={'div'} id={'fullName'}>{profile?.fullName}</Typography>
                     </div>
                 </li>
                 <li>
                     {edit &&
                         <div>
-                            <b>Status: </b>
+                            <label>Status: </label>
                             <TextField onBlur={toggleEditHandler} autoFocus value={status}
                                        onChange={changeStatusHandler}/>
                         </div>
                     }
                     {!edit &&
                         <div>
-                            <b>Status: </b>
+                            <label>Status: </label>
                             <Typography variant={'subtitle2'}
-                                        as={'span'}
+                                        as={'div'}
                                         onDoubleClick={toggleEditHandler}>{status}</Typography>
                         </div>
                     }
                 </li>
                 <li>
                     <div>
-                        <b>Looking for a job:</b> <Typography variant={'subtitle2'}
-                                                              as={'span'}>{profile?.lookingForAJob}</Typography>
+                        <label>Looking for a job:</label> <Typography variant={'subtitle2'}
+                                                                      as={'div'}>{profile?.lookingForAJob}</Typography>
                     </div>
                 </li>
                 <li>
                     <div>
-                        <b>My professional skills:</b> <Typography variant={'subtitle2'}
-                                                                   as={'span'}>{profile?.lookingForAJobDescription}</Typography>
+                        <label>My professional skills:</label> <Typography variant={'subtitle2'}
+                                                                           as={'div'}>{profile?.lookingForAJobDescription}</Typography>
                     </div>
                 </li>
                 <li>
                     <div>
-                        <b>About me: </b> <Typography variant={'subtitle2'}
-                                                      as={'span'}>{profile?.aboutMe}</Typography>
+                        <label>About me: </label> <Typography variant={'subtitle2'}
+                                                              as={'div'}>{profile?.aboutMe}</Typography>
                     </div>
                 </li>
                 <li>
                     <div>
-                        <b>Contacts: </b>{(profile?.contacts && Object.keys(profile.contacts).map(c => (
+                        <label>Contacts: </label>{(profile?.contacts && Object.keys(profile.contacts).map(c => (
                         <Typography key={c}>{profile.contacts[c] || 'не указано'}</Typography>
                     ))) || null}
                     </div>
@@ -81,5 +87,6 @@ export const UserInfoBody = memo(({
 
 
         </div>
+
     )
 })

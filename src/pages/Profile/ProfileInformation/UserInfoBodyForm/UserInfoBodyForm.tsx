@@ -5,6 +5,7 @@ import {memo, useEffect} from "react";
 import {Checkbox} from "components/Checkbox";
 import {useController, useForm} from "react-hook-form";
 import {ProfileUserResponseType} from "api/api.types";
+import {Typography} from "components/Typography";
 
 type Props = {
     profile?: UtilityProfileUserType
@@ -23,8 +24,6 @@ export const UserInfoBodyForm = memo(({
                                           setEditForm,
                                           errorMessage
                                       }: Props) => {
-    // console.log(profile?.lookingForAJob)
-
     const {control, register, handleSubmit, formState: {errors}} = useForm<ProfileUserResponseType>();
 
     const {field} = useController({
@@ -45,7 +44,12 @@ export const UserInfoBodyForm = memo(({
 
     return (
         <form className={classes.form} onSubmit={handleSubmit(handleSubmitProfileForm)}>
-            <button>Save</button>
+
+            <div className={s.title}>
+                <Typography>Personal Information</Typography>
+                <button>Save</button>
+            </div>
+
             <div>
                 <b>Name: </b>
                 <TextField {...register('fullName')} defaultValue={profile?.fullName}/>

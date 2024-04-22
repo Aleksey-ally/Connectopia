@@ -8,7 +8,6 @@ import {UserInfoBody} from "pages/Profile/ProfileInformation/UserInfoBody/UserIn
 import {UserInfoBodyForm} from "pages/Profile/ProfileInformation/UserInfoBodyForm/UserInfoBodyForm";
 import {ProfileUserResponseType} from "api/api.types";
 import {Edit} from "assets/icons/Edit";
-import {Typography} from "components/Typography";
 
 type Props = {
     uID?: string
@@ -82,7 +81,7 @@ export const ProfileInformation = (({
             </div>
 
             <div className={s.personalInfo}>
-                <Typography>Personal Information</Typography>
+
                 {!editForm &&
                     <UserInfoBody profile={profile} status={status} changeStatusHandler={changeStatusHandler}
                                   toggleEditHandler={toggleEditHandler} edit={edit}

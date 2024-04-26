@@ -42,10 +42,6 @@
                 }
             }
 
-            .errorForm {
-                border: 1px solid red;
-            }
-
             .edit {
                 position: absolute;
                 top: 70.5%;
@@ -57,17 +53,13 @@
                 flex-direction: row;
                 gap: 0.0015em;
                 flex-wrap: wrap;
-
-                .errorMessage {
-                    color: red;
-                }
             }
         }
     }
 
     .personalInfo {
 
-        .title{
+        .title {
             display: flex;
             justify-content: space-between;
             padding: 2em 2em;
@@ -78,11 +70,20 @@
             display: flex;
             flex-wrap: wrap;
             list-style: none;
-            & li{
+
+            & li {
                 margin-bottom: 2.5em;
                 width: 50%;
                 padding: 0 1em;
             }
+        }
+
+        .errorForm {
+            border: 1px solid red;
+        }
+
+        .errorMessage {
+            color: red;
         }
     }
 }

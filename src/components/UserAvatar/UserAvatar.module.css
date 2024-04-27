@@ -3,6 +3,10 @@
     background: var(--color-light-100);
     border-radius: 50%;
 
+    &.large{
+        height: 7.188em;
+        width: 7.188em;
+    }
     &.medium{
         height: 5em;
         width: 5em;

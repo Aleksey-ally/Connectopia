@@ -4,7 +4,7 @@ import {ComponentPropsWithoutRef, ElementRef, forwardRef, memo} from "react";
 
 type Props = {
     photos?: string | null
-    size: 'medium' | 'small'
+    size: 'medium' | 'small' | 'large'
 } & ComponentPropsWithoutRef<'img'>
 
 export const UserAvatar = memo(forwardRef<ElementRef<'img'>, Props>(

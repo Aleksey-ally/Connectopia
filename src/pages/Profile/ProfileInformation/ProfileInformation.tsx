@@ -70,14 +70,15 @@ export const ProfileInformation = (({
                                 size={'large'}
                                 photos={profile?.photos?.small}>
 
+                        {!uID && isEditVisible &&
+                            <label htmlFor="avatarInput" className={s.edit} onMouseOver={handleMouseOver}
+                                   onMouseOut={handleMouseOut}>
+                                <Edit/>
+                            </label>
+                        }
+
                     </UserAvatar>
 
-                    {!uID && isEditVisible &&
-                        <label htmlFor="avatarInput" className={s.edit} onMouseOver={handleMouseOver}
-                               onMouseOut={handleMouseOut}>
-                            <Edit/>
-                        </label>
-                    }
                 </div>
 
             </div>

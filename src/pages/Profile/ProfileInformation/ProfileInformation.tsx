@@ -67,15 +67,17 @@ export const ProfileInformation = (({
                     <input id="avatarInput" className={s.fileUploader} type="file" onChange={userAvatarSelected}/>
                     <UserAvatar className={classNames.userAvatar} onMouseOver={handleMouseOver}
                                 onMouseOut={handleMouseOut}
-                                size={'medium'}
-                                photos={profile?.photos?.small}></UserAvatar>
+                                size={'large'}
+                                photos={profile?.photos?.small}>
+
+                    </UserAvatar>
+
                     {!uID && isEditVisible &&
                         <label htmlFor="avatarInput" className={s.edit} onMouseOver={handleMouseOver}
                                onMouseOut={handleMouseOut}>
                             <Edit/>
                         </label>
                     }
-
                 </div>
 
             </div>

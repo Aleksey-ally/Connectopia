@@ -1,4 +1,6 @@
 .avatar{
+    position: relative;
+
     object-fit: cover;
     background: var(--color-light-100);
     border-radius: 50%;

@@ -40,7 +40,6 @@ export const ProfileInformation = (({
     const [isEditVisible, setEditVisible] = useState<boolean>(false);
 
     const userAvatarSelected = (e: ChangeEvent<HTMLInputElement>) => {
-        console.log()
         if (e.currentTarget.files) {
             dispatch(setNewUserAvatar(e.currentTarget.files[0]))
         }

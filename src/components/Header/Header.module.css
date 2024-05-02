@@ -27,6 +27,10 @@
 }
 
 .loginBlock {
+    display: flex;
+    gap: 0.875em;
+    justify-content: center;
+    align-items: center;
     margin-right: 10px;
 }
 

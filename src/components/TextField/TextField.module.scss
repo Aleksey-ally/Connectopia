@@ -9,11 +9,11 @@
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-m);
   color: var(--color-light-100);
-  text-indent: 12px;
+  text-indent: 0.75em;
 
   background: transparent;
-  border: 1px solid var(--color-dark-300);
-  border-radius: 2px;
+  border: 0.063em solid var(--color-dark-300);
+  border-radius: 0.125em;
   outline: 0;
 
   &::placeholder {
@@ -22,14 +22,14 @@
 
   &:active {
     border-color: var(--color-light-100);
-    outline: 1px solid var(--color-light-100);
+    outline: 0.063em solid var(--color-light-100);
     transition: 1s ease-out;
   }
 
   &:focus {
     transition: all .3s ease-in-out;
     border-color: var(--color-info-700);
-    outline: 1px solid var(--color-dark-700);
+    outline: 0.063em solid var(--color-dark-700);
   }
 
   &:hover {
@@ -43,7 +43,7 @@
 }
 
 .label {
-  margin-bottom: 1px;
+  margin-bottom: 0.063em;
   color: var(--color-dark-100);
 }
 
@@ -56,9 +56,9 @@
   bottom: 50%;
   transform: translateY(-50%);
 
-  width: 20px;
-  height: 20px;
-  margin-right: 12px;
+  width: 1.25em;
+  height: 1.25em;
+  margin-right: 0.75em;
   padding: 0;
 
   background: transparent;
@@ -91,7 +91,7 @@
 .searchCont {
   @extend %field-styles;
 
-  padding-left: 40px;
+  padding-left: 2.5em;
 }
 
 .search {
@@ -99,9 +99,9 @@
   inset: 50% 0;
   transform: translateY(-50%);
 
-  width: 20px;
-  height: 20px;
-  margin-left: 12px;
+  width: 1.25em;
+  height: 1.25em;
+  margin-left: 0.75em;
   padding: 0;
 
   background: transparent;

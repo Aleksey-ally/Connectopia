@@ -5,8 +5,8 @@
    align-items: center;
    justify-content: center;
 
-   width: 100px;
-   height: 100px;
+   width: 6.25em;
+   height: 6.25em;
    margin: 15% auto;
 
    animation: rotate 2s linear infinite;
@@ -15,8 +15,8 @@
 .segment {
    position: absolute;
 
-   width: 20px;
-   height: 20px;
+   width: 1.25em;
+   height: 1.25em;
 
    background-color: var(--color-accent-500);
    border-radius: 50%;
@@ -26,7 +26,7 @@
 
 @for $i from 1 through 7 {
    .loader .segment:nth-child(#{$i}) {
-      transform: rotate((360deg / 7) * $i) translate(40px) rotate(-((360deg / 7) * $i));
+      transform: rotate((360deg / 7) * $i) translate(2.5em) rotate(-((360deg / 7) * $i));
    }
 }
 

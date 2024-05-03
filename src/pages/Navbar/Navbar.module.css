@@ -1,11 +1,11 @@
 .navbar {
     position: fixed;
     grid-area: navbar;
-    margin-top: 70px;
+    margin-top: 4.375em;
     background-color: var(--color-second);
 
-    padding: 15px 10px;
-    border-radius: 4px;
+    padding: 0.938em 0.625em;
+    border-radius: 0.25em;
 
     .label {
         font-size: 0.75em;

@@ -11,14 +11,14 @@
 
     .item {
         display: inline-block;
-        margin-left: 5px;
+        margin-left: 0.313em;
         text-align: center;
 
         .avatar{
             display: flex;
-            height: 50px;
-            width: 50px;
-            border-radius: 25px;
+            height: 3.125em;
+            width: 3.125em;
+            border-radius: 1.563em;
             background: white;
         }
 

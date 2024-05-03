@@ -3,7 +3,7 @@
     flex-direction: row;
     color: darkblue;
     text-decoration-line: none;
-    padding-bottom: 5px;
+    padding-bottom: 0.313em;
     align-items: center;
 }
 
@@ -12,16 +12,16 @@
     color: rgba(230, 42, 28, 0.616);
     text-decoration-line: none;
     align-items: center;
-    padding-bottom: 5px;
+    padding-bottom: 0.313em;
 }
 
 .dialogItem img {
-    width: 50px;
-    height: 50px;
-    border-radius: 30px;
+    width: 3.125em;
+    height: 3.125em;
+    border-radius: 1.875em;
     background-color: white;
 }
 
 .dialogItem span{
-    padding-left: 5px;
+    padding-left: 0.313em;
 }

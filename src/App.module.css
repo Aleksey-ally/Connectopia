@@ -3,10 +3,10 @@
   grid-template-areas:
   "header header"
   "navbar content";
-  grid-template-rows: 60px 1fr;
+  grid-template-rows: 3.75em 1fr;
   grid-template-columns: 2fr 14fr;
-  grid-gap: 10px;
-  @media screen and (max-width: 1430px) {
+  grid-gap: 0.625em;
+  @media screen and (max-width: 89.375em) {
     grid-template-columns: 2fr 10fr;
   }
 }

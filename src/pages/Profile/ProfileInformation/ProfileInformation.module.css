@@ -1,15 +1,15 @@
 .description {
-    padding: 5px;
+    padding: 0.313em;
 
     .userCover {
-        max-height: 350px;
+        max-height: 21.875em;
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
-        border-radius: 8px;
-        padding: 180px 35px 35px 50px;
+        border-radius: 0.5em;
+        padding: 11.25em 2.188em 2.188em 3.125em;
         position: relative;
-        margin-bottom: 30px;
+        margin-bottom: 1.875em;
         z-index: 0;
 
         &::before {
@@ -81,7 +81,7 @@
         }
 
         .errorForm {
-            border: 1px solid red;
+            border: 0.063em solid red;
         }
 
         .errorMessage {

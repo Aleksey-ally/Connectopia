@@ -6,8 +6,8 @@
 
   display: flex;
 
-  width: 36px;
-  height: 36px;
+  width: 2.25em;
+  height: 2.25em;
 
   background-color: $backgroundColor;
   border-radius: 50%;
@@ -23,11 +23,11 @@
   align-items: center;
   justify-content: center;
 
-  width: 18px;
-  height: 18px;
+  width: 1.125em;
+  height: 1.125em;
 
-  border: 2px solid var(--color-light-100);
-  border-radius: 2px;
+  border: 0.125em solid var(--color-light-100);
+  border-radius: 0.125em;
 
   &:hover::before {
     @include circle(var(--color-dark-500));
@@ -59,7 +59,7 @@
   cursor: pointer;
 
   display: flex;
-  gap: 11px;
+  gap: 0.688em;
   align-items: center;
 
   width: fit-content;

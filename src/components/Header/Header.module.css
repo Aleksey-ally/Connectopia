@@ -4,11 +4,11 @@
     display: flex;
     justify-content: space-between;
 
-    padding: 0 15px;
+    padding: 0 0.938em;
     align-items: center;
 
     background-color: var(--color-second);
-    border-radius: 4px;
+    border-radius: 0.25em;
     z-index: 1;
 
     & a {
@@ -31,7 +31,7 @@
     gap: 0.875em;
     justify-content: center;
     align-items: center;
-    margin-right: 10px;
+    margin-right: 0.625em;
 }
 
 .login {

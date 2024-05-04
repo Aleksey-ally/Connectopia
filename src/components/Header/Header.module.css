@@ -14,27 +14,33 @@
     & a {
         text-decoration: none;
     }
-}
 
-.logo {
-    display: flex;
-    align-items: center;
+    .logo {
+        display: flex;
+        align-items: center;
 
-    .title {
-        margin-left: -0.25em;
+        .title {
+            margin-left: -0.25em;
+        }
+
+    }
+
+    .loginBlock {
+        display: flex;
+        gap: 0.875em;
+        justify-content: center;
+        align-items: center;
+        margin-right: 0.625em;
+
+        .login {
+            color: wheat;
+        }
     }
 
 }
 
-.loginBlock {
-    display: flex;
-    gap: 0.875em;
-    justify-content: center;
-    align-items: center;
-    margin-right: 0.625em;
-}
 
-.login {
-    color: wheat;
-    text-decoration: none;
-}
+
+
+
+

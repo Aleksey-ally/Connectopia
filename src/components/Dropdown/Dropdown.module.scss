@@ -17,22 +17,24 @@
   border: 0.063em solid var(--color-dark-500);
   border-radius: 0.25em;
   z-index: 2;
+
+  .arrow {
+    position: absolute;
+    top: -0.25em;
+    left: calc(50% - 0.25em);
+    transform: rotate(45deg);
+
+    width: 0.625em;
+    height: 0.625em;
+
+    background-color: var(--color-second);
+    border: 0.075em solid var(--color-dark-500);
+    border-top: none;
+    border-left: none;
+
+    fill: var(--color-second);
+
+  }
 }
 
-.arrow {
-  position: absolute;
-  top: -0.25em;
-  left: calc(50% - 0.25em);
-  transform: rotate(45deg);
 
-  width: 0.625em;
-  height: 0.625em;
-
-  background-color: var(--color-second);
-  border: 0.075em solid var(--color-dark-500);
-  border-top: none;
-  border-left: none;
-
-  fill: var(--color-second);
-
-}

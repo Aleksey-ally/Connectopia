@@ -1,25 +1,30 @@
 
-.messageItem{
+.messageItem {
     display: flex;
     padding-top: 0.625em;
     height: 3.125em;
     align-items: center;
+
+    &:first-child {
+        padding-top: 0.063em;
+        height: 3.125em;
+    }
+
+    .circle {
+        height: 0.625em;
+        width: 0.625em;
+        border-radius: 0.313em;
+        background: red;
+    }
+
+    .currentCircle {
+        height: 0.625em;
+        width: 0.625em;
+        border-radius: 0.313em;
+        background: green;
+    }
 }
 
-.messageItem:first-child {
-    padding-top: 0.063em;
-    height: 3.125em;
-}
 
-.circle{
-    height: 0.625em;
-    width: 0.625em;
-    border-radius: 0.313em;
-    background: red;
-}
-.currentCircle{
-    height: 0.625em;
-    width: 0.625em;
-    border-radius: 0.313em;
-    background: green;
-}
+
+

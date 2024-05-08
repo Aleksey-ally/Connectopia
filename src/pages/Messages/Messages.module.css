@@ -3,9 +3,9 @@
     flex-direction: row;
     padding: 1.25em 1.25em 0.625em 1.875em;
     justify-content: space-between;
+
+    .dialogsItems {}
+
+    .messages {}
 }
 
-.dialogsItems {}
-
-.messages {
-}

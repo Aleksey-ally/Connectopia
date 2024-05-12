@@ -1,4 +1,4 @@
-import { ChangeEvent, ComponentProps, ComponentPropsWithoutRef, forwardRef, useState } from 'react'
+import {ChangeEvent, ComponentProps, ComponentPropsWithoutRef, forwardRef, useState} from 'react'
 
 import s from 'components/TextField/TextField.module.scss'
 
@@ -19,7 +19,7 @@ export type TextFieldProps = {
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     (
         {
-            className,
+            className = '',
             errorMessage,
             placeholder,
             type,
@@ -44,24 +44,34 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             setInputValue(e.target.value)
         }
 
+        const classNames = {
+            label: `${s.label} ${isDisabled ? s.disabled : ''} ${labelProps?.className || ''}`,
+
+            textFieldContainer: s.TextFieldContainer,
+
+            field: `${s.field} ${errorMessage ? s.error : ''} ${isDisabled ? s.disabled : ''} 
+                    ${isSearch ? s.searchCont : ''} ${className}`,
+
+            search: s.search,
+            showPassword: s.showPassword
+        }
+
         return (
             <>
                 {label && (
                     <Typography
                         variant="body2"
                         as="label"
-                        className={`${s.label} ${labelProps?.className || ''}`}
+                        className={classNames.label}
                         htmlFor={label}
                     >
                         {label}
                     </Typography>
                 )}
 
-                <div className={s.TextFieldContainer}>
+                <div className={classNames.textFieldContainer}>
                     <input
-                        className={`${s.field} ${errorMessage ? s.error : ''} ${className || ''} ${
-                            isDisabled ? s.disabled : ''
-                        } ${isSearch ? s.searchCont : ''}`}
+                        className={classNames.field}
                         placeholder={inputValue ? '' : placeholder}
                         ref={ref}
                         type={finalType}
@@ -69,19 +79,19 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
                         id={label}
                         {...restProps}
                     />
-                    {isSearch && <Search className={s.search} />}
+                    {isSearch && <Search className={classNames.search}/>}
                     {passwordShown && (
                         <button
-                            className={s.showPassword}
+                            className={classNames.showPassword}
                             type={'button'}
                             onClick={() => setShowPassword(prev => !prev)}
                         >
-                            {showPassword ? <Eye /> : <EyeOff />}
+                            {showPassword ? <Eye/> : <EyeOff/>}
                         </button>
                     )}
                 </div>
 
-                <Typography variant="error" className={s.error}>
+                <Typography variant="error">
                     {errorMessage}
                 </Typography>
             </>

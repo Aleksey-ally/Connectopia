@@ -1,4 +1,4 @@
-import {NavLink} from 'react-router-dom';
+import {NavLink, useNavigate} from 'react-router-dom';
 
 import s from './Header.module.css'
 import {Auth, logout} from 'redux/authReducer';
@@ -21,7 +21,10 @@ export const Header = ({auth, currentUserAvatar}: Props) => {
 
     const dispatch = useAppDispatch()
 
-    const logoutHandler = () =>{
+    const navigate = useNavigate();
+
+
+    const logoutHandler = () => {
         dispatch(logout)
     }
 
@@ -50,12 +53,12 @@ export const Header = ({auth, currentUserAvatar}: Props) => {
                                     </Typography>
                                 </div>
                             </DropdownItem>
-                            <DropdownItemWithIcon icon={<PersonOutline/>} text={'My Profile'}/>
+                            <DropdownItemWithIcon onClick={() => navigate('/profile')} icon={<PersonOutline/>}
+                                                  text={'My Profile'}/>
                             <DropdownItemWithIcon onClick={logoutHandler} icon={<Logout/>} text="Sign Out"/>
                         </Dropdown>
                     </> :
                     <NavLink className={s.login} to='/login'>Login</NavLink>
-
                 }
             </div>
         </header>

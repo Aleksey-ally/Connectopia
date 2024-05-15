@@ -83,7 +83,7 @@ export const ProfileInformation = (({
             </div>
 
             <div className={s.personalInfo}>
-ф
+
                 {!editForm &&
                     <UserInfoBody profile={profile} status={status} changeStatusHandler={changeStatusHandler}
                                   toggleEditHandler={toggleEditHandler} edit={edit}

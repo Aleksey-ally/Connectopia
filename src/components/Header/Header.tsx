@@ -41,7 +41,7 @@ export const Header = ({auth, currentUserAvatar}: Props) => {
             <div className={s.loginBlock}>
                 {auth.isAuth ?
                     <>
-                        <span>Hello <b>{auth?.login}</b></span>
+                        <span>Hello, <b>{auth?.login}</b></span>
                         <Dropdown trigger={<UserAvatar photos={currentUserAvatar} size={'small'}/>}>
                             <DropdownItem>
                                 <UserAvatar photos={currentUserAvatar} size={'small'}/>

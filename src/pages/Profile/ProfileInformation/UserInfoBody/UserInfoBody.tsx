@@ -40,23 +40,7 @@ export const UserInfoBody = memo(({
                         <Typography variant={'h3'} as={'div'} id={'fullName'}>{profile?.fullName}</Typography>
                     </div>
                 </li>
-                <li>
-                    {edit &&
-                        <div>
-                            <label>Status: </label>
-                            <TextField onBlur={toggleEditHandler} autoFocus value={status}
-                                       onChange={changeStatusHandler}/>
-                        </div>
-                    }
-                    {!edit &&
-                        <div>
-                            <label>Status: </label>
-                            <Typography variant={'subtitle2'}
-                                        as={'div'}
-                                        onDoubleClick={toggleEditHandler}>{status}</Typography>
-                        </div>
-                    }
-                </li>
+
                 <li>
                     <div>
                         <label>Looking for a job:</label> <Typography variant={'subtitle2'}

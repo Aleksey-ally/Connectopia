@@ -8,6 +8,8 @@ import {UserInfoBody} from "pages/Profile/ProfileInformation/UserInfoBody/UserIn
 import {UserInfoBodyForm} from "pages/Profile/ProfileInformation/UserInfoBodyForm/UserInfoBodyForm";
 import {ProfileUserResponseType} from "api/api.types";
 import {Edit} from "assets/icons/Edit";
+import {TextField} from "components/TextField";
+import {Typography} from "components/Typography";
 
 type Props = {
     uID?: string
@@ -77,6 +79,22 @@ export const ProfileInformation = (({
                         }
 
                     </UserAvatar>
+
+                    {edit &&
+                        <div>
+                            <label>Status: </label>
+                            <TextField onBlur={toggleEditHandler} autoFocus value={status}
+                                       onChange={changeStatusHandler}/>
+                        </div>
+                    }
+                    {!edit &&
+                        <div>
+                            <label>Status: </label>
+                            <Typography variant={'subtitle2'}
+                                        as={'div'}
+                                        onDoubleClick={toggleEditHandler}>{status}</Typography>
+                        </div>
+                    }
 
                 </div>
 

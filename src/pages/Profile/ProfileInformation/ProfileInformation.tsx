@@ -103,9 +103,7 @@ export const ProfileInformation = (({
             <div className={s.personalInfo}>
 
                 {!editForm &&
-                    <UserInfoBody profile={profile} status={status} changeStatusHandler={changeStatusHandler}
-                                  toggleEditHandler={toggleEditHandler} edit={edit}
-                                  setEditForm={setEditForm}/>}
+                    <UserInfoBody profile={profile} setEditForm={setEditForm}/>}
 
                 {editForm && <UserInfoBodyForm profile={profile} status={status} edit={edit}
                                                handleSubmitProfileForm={handleSubmitProfileForm}

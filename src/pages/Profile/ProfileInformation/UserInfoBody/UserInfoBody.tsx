@@ -1,26 +1,16 @@
 import {UtilityProfileUserType} from 'redux/profileReducer';
 import s from 'pages/Profile/ProfileInformation/ProfileInformation.module.css';
 import {Typography} from "components/Typography";
-import {TextField} from "components/TextField";
-import {ChangeEvent, memo, MutableRefObject} from "react";
+import {memo} from "react";
 import {Button} from "components/Button";
-import {Edit} from "assets/icons/Edit";
 
 type Props = {
     profile?: UtilityProfileUserType
-    status: string
-    edit: boolean
-    toggleEditHandler: () => void
-    changeStatusHandler: (value: ChangeEvent<HTMLInputElement>) => void
     setEditForm: (value: boolean) => void
 }
 
 export const UserInfoBody = memo(({
                                       profile,
-                                      status,
-                                      edit,
-                                      toggleEditHandler,
-                                      changeStatusHandler,
                                       setEditForm
                                   }: Props) => {
 

@@ -13,6 +13,9 @@ export const UserInfoBody = memo(({
                                       profile,
                                       setEditForm
                                   }: Props) => {
+    const enableEditForm = () => {
+        setEditForm(true)
+    }
 
     return (
 
@@ -20,7 +23,7 @@ export const UserInfoBody = memo(({
 
             <div className={s.title}>
                 <Typography>Personal Information</Typography>
-                <Button onClick={() => setEditForm(true)}>Change</Button>
+                <Button onClick={enableEditForm}>Change</Button>
             </div>
 
             <ul className={s.personalInfoTable}>

@@ -55,11 +55,6 @@ export const UserInfoBodyForm = memo(({
                 <TextField {...register('fullName')} defaultValue={profile?.fullName}/>
             </div>
             <div>
-                <b>Status: </b>
-                <TextField value={status}
-                           name={'status'}/>
-            </div>
-            <div>
                 <Checkbox label={<b>Looking for a job:</b>} {...register('lookingForAJob')}
                           onValueChange={field.onChange}
                           checked={field.value}/>

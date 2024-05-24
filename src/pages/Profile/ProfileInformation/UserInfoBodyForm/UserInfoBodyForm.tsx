@@ -51,8 +51,8 @@ export const UserInfoBodyForm = memo(({
             </div>
 
             <div>
-                <b>Name: </b>
-                <TextField {...register('fullName')} defaultValue={profile?.fullName}/>
+                <label htmlFor='fullName'><b>Name: </b></label>
+                <TextField id='fullName' {...register('fullName')} defaultValue={profile?.fullName}/>
             </div>
             <div>
                 <Checkbox label={<b>Looking for a job:</b>} {...register('lookingForAJob')}
@@ -60,16 +60,18 @@ export const UserInfoBodyForm = memo(({
                           checked={field.value}/>
             </div>
             <div>
-                <b>My professional skills:</b> <TextField {...register('lookingForAJobDescription')}
-                                                          defaultValue={profile?.lookingForAJobDescription}/>
+                <label htmlFor="lookingForAJobDescription"><b>My professional skills:</b></label><TextField id='lookingForAJobDescription' {...register('lookingForAJobDescription')}
+                                                         defaultValue={profile?.lookingForAJobDescription}/>
             </div>
             <div>
-                <b>About me: </b> <TextField {...register('aboutMe')} defaultValue={profile?.aboutMe}/>
+                <label htmlFor="aboutMe"><b>About me: </b></label> <TextField id='aboutMe' {...register('aboutMe')}
+                                                                              defaultValue={profile?.aboutMe}/>
             </div>
             <div>
-                <b>Contacts: </b>
+                <label htmlFor="contacts"><b>Contacts: </b></label>
                 {Object.entries(profile?.contacts || {}).map(([key, value]) => (
                     <TextField
+                        id='contacts'
                         key={key}
                         {...register(`contacts.${key}` as keyof ProfileUserResponseType)}
                         defaultValue={value || 'не указано'}

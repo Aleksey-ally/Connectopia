@@ -9,22 +9,17 @@ import {Typography} from "components/Typography";
 
 type Props = {
     profile?: UtilityProfileUserType
-    status: string
-    edit: boolean
     handleSubmitProfileForm: (userData: ProfileUserResponseType) => void
-    setEditForm: (value: boolean) => void
     errorMessage: string[]
 }
 
 
 export const UserInfoBodyForm = memo(({
                                           profile,
-                                          status,
                                           handleSubmitProfileForm,
-                                          setEditForm,
                                           errorMessage
                                       }: Props) => {
-    const {control, register, handleSubmit, formState: {errors}} = useForm<ProfileUserResponseType>();
+    const {control, register, handleSubmit} = useForm<ProfileUserResponseType>();
 
     const {field} = useController({
         name: 'lookingForAJob',

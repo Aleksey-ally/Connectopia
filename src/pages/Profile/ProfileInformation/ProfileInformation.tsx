@@ -105,9 +105,9 @@ export const ProfileInformation = (({
                 {!editForm &&
                     <UserInfoBody profile={profile} setEditForm={setEditForm}/>}
 
-                {editForm && <UserInfoBodyForm profile={profile} status={status} edit={edit}
+                {editForm && <UserInfoBodyForm profile={profile}
                                                handleSubmitProfileForm={handleSubmitProfileForm}
-                                               setEditForm={setEditForm} errorMessage={errorMessage}/>}
+                                               errorMessage={errorMessage}/>}
             </div>
 
         </div>

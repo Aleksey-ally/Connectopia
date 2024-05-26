@@ -89,8 +89,8 @@ export const ProfileInformation = (({
                     }
                     {!edit &&
                         <div>
-                            <label htmlFor={'status'} onDoubleClick={toggleEditHandler}>Status: </label>
-                            <Typography id={'status'} variant={'subtitle2'}
+                            <label className={s.statusTitle} htmlFor={'status'} onDoubleClick={toggleEditHandler}>Status: </label>
+                            <Typography id={'status'} className={s.status} variant={'subtitle2'}
                                         as={'div'}
                                         onDoubleClick={toggleEditHandler}>{status}</Typography>
                         </div>

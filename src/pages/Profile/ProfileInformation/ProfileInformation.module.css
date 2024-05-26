@@ -49,6 +49,15 @@
                     cursor: pointer;
 
                 }
+
+            }
+
+            .statusTitle{
+                cursor: pointer;
+            }
+
+            .status{
+                cursor: pointer;
             }
 
             .userInfoBody {

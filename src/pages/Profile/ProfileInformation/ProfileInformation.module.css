@@ -54,10 +54,16 @@
 
             .statusTitle{
                 cursor: pointer;
+                &:hover{
+                    opacity: 50%;
+                }
             }
 
             .status{
                 cursor: pointer;
+                &:hover{
+                    opacity: 50%;
+                }
             }
 
             .userInfoBody {

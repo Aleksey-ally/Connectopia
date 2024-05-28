@@ -1,5 +1,5 @@
 import AvatarUnknownUser from "imgs/UnknownUser.png";
-import s from './UserAvatar.module.css'
+import s from 'components/UserAvatar/UserAvatar.module.scss'
 import {ComponentPropsWithoutRef, ElementRef, forwardRef, memo} from "react";
 
 type Props = {

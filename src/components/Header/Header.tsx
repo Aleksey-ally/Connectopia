@@ -1,6 +1,6 @@
 import {NavLink, useNavigate} from 'react-router-dom';
 
-import s from './Header.module.css'
+import s from 'components/Header/Header.module.scss'
 import {Auth, logout} from 'redux/authReducer';
 import {UserAvatar} from 'components/UserAvatar';
 import {Typography} from "components/Typography";

@@ -1,6 +1,6 @@
 import React, {memo} from "react";
 import {NavLink} from 'react-router-dom'
-import s from './DialogUser.module.css'
+import s from 'pages/Messages/DialogUser/DialogUser.module.scss'
 import {UsersDataType} from "redux/messagesReducer";
 
 

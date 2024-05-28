@@ -1,5 +1,5 @@
 import {UtilityProfileUserType} from 'redux/profileReducer';
-import s from 'pages/Profile/ProfileInformation/ProfileInformation.module.css';
+import s from 'pages/Profile/ProfileInformation/ProfileInformation.module.scss';
 import {Typography} from "components/Typography";
 import {memo} from "react";
 import {Button} from "components/Button";

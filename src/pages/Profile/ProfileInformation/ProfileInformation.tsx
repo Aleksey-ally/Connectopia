@@ -1,7 +1,7 @@
 import {UserAvatar} from 'components/UserAvatar';
 import {setNewUserAvatar, UtilityProfileUserType} from 'redux/profileReducer';
 import UserCover from 'imgs/userCover_1.jpg';
-import s from './ProfileInformation.module.css';
+import s from 'pages/Profile/ProfileInformation/ProfileInformation.module.scss';
 import {ChangeEvent, useState} from "react";
 import {AppThunkDispatch} from "redux/reduxStore";
 import {UserInfoBody} from "pages/Profile/ProfileInformation/UserInfoBody/UserInfoBody";

@@ -1,5 +1,5 @@
 import React, {ChangeEvent, lazy, memo} from "react";
-import s from './Messages.module.css';
+import s from 'pages/Messages/Messages.module.scss';
 import {MessagesDataType} from "redux/messagesReducer";
 import {withSuspense} from "utils/WithSuspense";
 

@@ -1,0 +1,25 @@
+.userInfoBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.0015em;
+  flex-wrap: wrap;
+
+  .title {
+    display: flex;
+    justify-content: space-between;
+    padding: 2em 2em;
+    border-bottom: .0625em solid var(--color-dark-800);
+  }
+
+  .personalInfoTable {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+
+    & li {
+      margin-bottom: 2.5em;
+      width: 50%;
+      padding: 0 1em;
+    }
+  }
+}

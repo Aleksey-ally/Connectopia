@@ -70,21 +70,5 @@
         }
     }
 
-    .personalInfo {
-
-        .title {
-            display: flex;
-            justify-content: space-between;
-            padding: 2em 2em;
-            border-bottom: .0625em solid var(--color-dark-800);
-        }
-
-        .errorForm {
-            border: 0.063em solid red;
-        }
-
-        .errorMessage {
-            color: red;
-        }
-    }
+    .personalInfo {}
 }

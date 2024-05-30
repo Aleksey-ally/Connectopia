@@ -1,0 +1,22 @@
+.userInfoBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.0015em;
+  flex-wrap: wrap;
+
+  .title {
+    display: flex;
+    justify-content: space-between;
+    padding: 2em 2em;
+    border-bottom: .0625em solid var(--color-dark-800);
+  }
+
+  .errorMessage {
+    color: red;
+  }
+
+}
+
+.errorForm {
+  border: 0.063em solid red;
+}

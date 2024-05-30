@@ -1,5 +1,5 @@
 import {UtilityProfileUserType} from 'redux/profileReducer';
-import s from 'pages/Profile/ProfileInformation/ProfileInformation.module.scss';
+import s from './UserInfoBodyForm.module.scss';
 import {TextField} from "components/TextField";
 import {memo, useEffect} from "react";
 import {Checkbox} from "components/Checkbox";

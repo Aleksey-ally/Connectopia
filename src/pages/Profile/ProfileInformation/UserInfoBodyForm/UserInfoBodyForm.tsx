@@ -46,7 +46,7 @@ export const UserInfoBodyForm = memo(({
             </div>
 
             <div>
-                <label htmlFor='fullName'><b>Name: </b></label>
+                <label className={s.titleOption} htmlFor='fullName'><b>Name: </b></label>
                 <TextField id='fullName' {...register('fullName')} defaultValue={profile?.fullName}/>
             </div>
             <div>
@@ -55,15 +55,15 @@ export const UserInfoBodyForm = memo(({
                           checked={field.value}/>
             </div>
             <div>
-                <label htmlFor="lookingForAJobDescription"><b>My professional skills:</b></label><TextField id='lookingForAJobDescription' {...register('lookingForAJobDescription')}
+                <label className={s.titleOption} htmlFor="lookingForAJobDescription"><b>My professional skills:</b></label><TextField id='lookingForAJobDescription' {...register('lookingForAJobDescription')}
                                                          defaultValue={profile?.lookingForAJobDescription}/>
             </div>
             <div>
-                <label htmlFor="aboutMe"><b>About me: </b></label> <TextField id='aboutMe' {...register('aboutMe')}
+                <label className={s.titleOption} htmlFor="aboutMe"><b>About me: </b></label> <TextField id='aboutMe' {...register('aboutMe')}
                                                                               defaultValue={profile?.aboutMe}/>
             </div>
             <div>
-                <label htmlFor="contacts"><b>Contacts: </b></label>
+                <label className={s.titleOption} htmlFor="contacts"><b>Contacts: </b></label>
                 {Object.entries(profile?.contacts || {}).map(([key, value]) => (
                     <TextField
                         id='contacts'

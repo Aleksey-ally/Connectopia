@@ -11,6 +11,10 @@
     border-bottom: .0625em solid var(--color-dark-800);
   }
 
+  .titleOption{
+    cursor: pointer;
+  }
+
   .errorMessage {
     color: red;
   }

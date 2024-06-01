@@ -29,26 +29,26 @@ export const UserInfoBody = memo(({
             <ul className={s.personalInfoTable}>
                 <li>
                     <div>
-                        <label onDoubleClick={enableEditForm}>Name: </label>
+                        <label className={s.titleOption} onDoubleClick={enableEditForm}>Name: </label>
                         <Typography variant={'h3'} as={'div'} id={'fullName'}>{profile?.fullName}</Typography>
                     </div>
                 </li>
 
                 <li>
                     <div>
-                        <label onDoubleClick={enableEditForm}>Looking for a job:</label> <Typography variant={'subtitle2'}
+                        <label className={s.titleOption} onDoubleClick={enableEditForm}>Looking for a job:</label> <Typography variant={'subtitle2'}
                                                                       as={'div'}>{profile?.lookingForAJob}</Typography>
                     </div>
                 </li>
                 <li>
                     <div>
-                        <label onDoubleClick={enableEditForm}>My professional skills:</label> <Typography variant={'subtitle2'}
+                        <label className={s.titleOption} onDoubleClick={enableEditForm}>My professional skills:</label> <Typography variant={'subtitle2'}
                                                                            as={'div'}>{profile?.lookingForAJobDescription}</Typography>
                     </div>
                 </li>
                 <li>
                     <div>
-                        <label onDoubleClick={enableEditForm}>About me: </label> <Typography variant={'subtitle2'}
+                        <label className={s.titleOption} onDoubleClick={enableEditForm}>About me: </label> <Typography variant={'subtitle2'}
                                                               as={'div'}>{profile?.aboutMe}</Typography>
                     </div>
                 </li>

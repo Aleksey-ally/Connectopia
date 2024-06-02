@@ -23,6 +23,10 @@
 
       .titleOption{
        cursor: pointer;
+        &:hover{
+          opacity: 50%;
+        }
+
       }
     }
   }

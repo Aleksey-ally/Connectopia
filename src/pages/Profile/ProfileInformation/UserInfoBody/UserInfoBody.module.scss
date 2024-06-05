@@ -21,16 +21,21 @@
       width: 50%;
       padding: 0 1em;
 
-      .titleOption{
-       cursor: pointer;
-        &:hover{
+      .titleOption {
+        cursor: pointer;
+
+        &:hover {
           opacity: 50%;
         }
 
       }
 
-      .option:hover{
-        opacity: 50%;
+      .option {
+        cursor: pointer;
+
+        &:hover {
+          opacity: 50%;
+        }
       }
     }
   }

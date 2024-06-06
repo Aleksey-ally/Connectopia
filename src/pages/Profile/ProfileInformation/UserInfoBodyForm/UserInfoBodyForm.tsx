@@ -6,6 +6,7 @@ import {Checkbox} from "components/Checkbox";
 import {useController, useForm} from "react-hook-form";
 import {ProfileUserResponseType} from "api/api.types";
 import {Typography} from "components/Typography";
+import {Button} from "components/Button";
 
 type Props = {
     profile?: UtilityProfileUserType
@@ -42,7 +43,7 @@ export const UserInfoBodyForm = memo(({
 
             <div className={s.title}>
                 <Typography>Personal Information</Typography>
-                <button>Save</button>
+                <Button variant={'tertiary'}>Save</Button>
             </div>
 
             <div>

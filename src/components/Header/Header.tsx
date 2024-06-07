@@ -44,8 +44,9 @@ export const Header = ({auth, currentUserAvatar}: Props) => {
                         <span>Hello, <b>{auth?.login}</b></span>
                         <Dropdown trigger={<UserAvatar photos={currentUserAvatar} size={'small'}/>}>
                             <DropdownItem>
-                                <UserAvatar photos={currentUserAvatar} size={'small'}/>
-                                <div>
+                                <UserAvatar photos={currentUserAvatar} size={'small'}
+                                            onClick={() => navigate('/profile')}/>
+                                <div onClick={() => navigate('/profile')}>
                                     <Typography
                                         variant="subtitle2"> {auth?.login ? auth.login : 'User Name'}</Typography>
                                     <Typography variant="caption" style={{color: 'var(--color-dark-100)'}}>

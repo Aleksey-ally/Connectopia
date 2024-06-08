@@ -1,44 +1,50 @@
 .header {
-    position: fixed;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 
-    padding: 0 0.938em;
+  padding: 0 0.938em;
+  align-items: center;
+
+  background-color: var(--color-second);
+  border-radius: 0.25em;
+  z-index: 1;
+
+  & a {
+    text-decoration: none;
+  }
+
+  .logo {
+    display: flex;
     align-items: center;
 
-    background-color: var(--color-second);
-    border-radius: 0.25em;
-    z-index: 1;
-
-    & a {
-        text-decoration: none;
+    .title {
+      margin-left: -0.25em;
     }
 
-    .logo {
-        display: flex;
-        align-items: center;
+  }
 
-        .title {
-            margin-left: -0.25em;
-        }
+  .loginBlock {
+    display: flex;
+    gap: 0.875em;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0.625em;
+
+
+    .login {
+      color: wheat;
 
     }
 
-    .loginBlock {
-        display: flex;
-        gap: 0.875em;
-        justify-content: center;
-        align-items: center;
-        margin-right: 0.625em;
-
-        .login {
-            color: wheat;
-        }
-    }
+  }
 
 }
 
+.navigate:hover {
+  opacity: 0.7;
+}
 
 
 

@@ -44,12 +44,12 @@ export const Header = ({auth, currentUserAvatar}: Props) => {
                         <span>Hello, <b>{auth?.login}</b></span>
                         <Dropdown trigger={<UserAvatar photos={currentUserAvatar} size={'small'}/>}>
                             <DropdownItem>
-                                <UserAvatar photos={currentUserAvatar} size={'small'}
+                                <UserAvatar className={s.navigate} photos={currentUserAvatar} size={'small'}
                                             onClick={() => navigate('/profile')}/>
                                 <div onClick={() => navigate('/profile')}>
-                                    <Typography
+                                    <Typography className={s.navigate}
                                         variant="subtitle2"> {auth?.login ? auth.login : 'User Name'}</Typography>
-                                    <Typography variant="caption" style={{color: 'var(--color-dark-100)'}}>
+                                    <Typography className={s.navigate} variant="caption" style={{color: 'var(--color-dark-100)'}}>
                                         {auth?.email ? auth.email : 'User Name'}
                                     </Typography>
                                 </div>

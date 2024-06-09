@@ -27,6 +27,13 @@
     opacity: 0.3;
   }
 
+  &:hover {
+    div.itemIcon,
+    p.text {
+      opacity: 0.7;
+    }
+  }
+
   .itemIcon {
     display: flex;
     align-items: center;

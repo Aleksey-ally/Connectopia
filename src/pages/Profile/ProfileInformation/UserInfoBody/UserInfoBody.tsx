@@ -23,7 +23,7 @@ export const UserInfoBody = memo(({
 
             <div className={s.title}>
                 <Typography>Personal Information</Typography>
-                <Button onClick={enableEditForm}>Change</Button>
+                <Button variant={'secondary'} onClick={enableEditForm}>Change</Button>
             </div>
 
             <ul className={s.personalInfoTable}>

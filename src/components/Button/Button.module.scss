@@ -74,28 +74,28 @@
 
 .tertiary {
   @include button(
-                  transparent,
-                  transparent,
-                  var(--color-accent-500),
+                  var(--color-accent-700),
                   var(--color-accent-900),
-                  var(--color-dark-500),
+                  var(--color-light-100),
+                  var(--color-accent-900),
+                  var(--color-accent-900),
                   #9747ff,
                   transparent,
                   var(--color-accent-900)
   );
-
-  border: 0.063em solid var(--color-accent-500);
+  box-shadow:none;
+  border: 0.063em solid var(--color-accent-700);
 
   &:active {
-    border-color: var(--color-accent-500);
+    border-color: var(--color-accent-900);
   }
 
   &:hover {
-    border-color: var(--color-accent-500);
+    border-color: var(--color-accent-900);
   }
 
   &:focus {
-    border: 0.125em solid var(--color-info-700);
+    border: 0.063em solid var(--color-info-900);
   }
 
   &:disabled {

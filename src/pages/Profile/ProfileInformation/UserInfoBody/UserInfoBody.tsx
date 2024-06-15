@@ -28,36 +28,33 @@ export const UserInfoBody = memo(({
 
             <ul className={s.personalInfoTable}>
                 <li>
-                    <div>
-                        <label className={s.titleOption} onDoubleClick={enableEditForm}>Name: </label>
-                        <Typography className={s.option} variant={'h3'} as={'div'} id={'fullName'} onDoubleClick={enableEditForm}>{profile?.fullName}</Typography>
-                    </div>
+                    <label className={s.titleOption} onDoubleClick={enableEditForm}>Name: </label>
+                    <Typography className={s.option} variant={'h3'} as={'div'} id={'fullName'}
+                                onDoubleClick={enableEditForm}>{profile?.fullName}</Typography>
                 </li>
 
                 <li>
-                    <div>
-                        <label className={s.titleOption} onDoubleClick={enableEditForm}>Looking for a job:</label> <Typography variant={'subtitle2'}
-                                                                      as={'div'}>{profile?.lookingForAJob}</Typography>
-                    </div>
+                    <label className={s.titleOption} onDoubleClick={enableEditForm}>Looking for a job:</label>
+                    <Typography variant={'subtitle2'}
+                                as={'div'}>{profile?.lookingForAJob}</Typography>
                 </li>
                 <li>
-                    <div>
-                        <label className={s.titleOption} onDoubleClick={enableEditForm}>My professional skills:</label> <Typography className={s.option} variant={'subtitle2'}
-                                                                           as={'div'} onDoubleClick={enableEditForm}>{profile?.lookingForAJobDescription}</Typography>
-                    </div>
+                    <label className={s.titleOption} onDoubleClick={enableEditForm}>My professional skills:</label>
+                    <Typography className={s.option} variant={'subtitle2'}
+                                as={'div'}
+                                onDoubleClick={enableEditForm}>{profile?.lookingForAJobDescription}</Typography>
                 </li>
                 <li>
-                    <div>
-                        <label className={s.titleOption} onDoubleClick={enableEditForm}>About me: </label> <Typography className={s.option} variant={'subtitle2'}
-                                                              as={'div'} onDoubleClick={enableEditForm}>{profile?.aboutMe}</Typography>
-                    </div>
+                    <label className={s.titleOption} onDoubleClick={enableEditForm}>About me: </label> <Typography
+                    className={s.option} variant={'subtitle2'}
+                    as={'div'} onDoubleClick={enableEditForm}>{profile?.aboutMe}</Typography>
                 </li>
                 <li>
-                    <div>
-                        <label className={s.titleOption} onDoubleClick={enableEditForm}>Contacts: </label>{(profile?.contacts && Object.keys(profile.contacts).map(c => (
-                        <Typography className={s.option} key={c} onDoubleClick={enableEditForm}>{profile.contacts[c] || 'не указано'}</Typography>
-                    ))) || null}
-                    </div>
+                    <label className={s.titleOption}
+                           onDoubleClick={enableEditForm}>Contacts: </label>{(profile?.contacts && Object.keys(profile.contacts).map(c => (
+                    <Typography className={s.option} key={c}
+                                onDoubleClick={enableEditForm}>{profile.contacts[c] || 'не указано'}</Typography>
+                ))) || null}
                 </li>
 
             </ul>

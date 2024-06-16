@@ -16,7 +16,7 @@ export const UserInfoBody = memo(({
     const enableEditForm = () => {
         setEditForm(true)
     }
-
+    console.log(profile?.lookingForAJob)
     return (
 
         <div className={s.userInfoBody}>
@@ -36,7 +36,7 @@ export const UserInfoBody = memo(({
                 <li>
                     <label className={s.titleOption} onDoubleClick={enableEditForm}>Looking for a job:</label>
                     <Typography variant={'subtitle2'}
-                                as={'div'}>{profile?.lookingForAJob}</Typography>
+                                as={'div'}>{profile?.lookingForAJob ? 'Yes' : 'No'}</Typography>
                 </li>
                 <li>
                     <label className={s.titleOption} onDoubleClick={enableEditForm}>My professional skills:</label>

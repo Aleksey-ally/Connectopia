@@ -28,12 +28,6 @@ export const UserInfoBodyForm = memo(({
         defaultValue: profile?.lookingForAJob
     });
 
-    useEffect(() => {
-        if (profile && profile.lookingForAJob !== undefined) {
-            field.onChange(profile.lookingForAJob);
-        }
-    }, [profile, field]);
-
     const classes = {
         form: `${s.userInfoBody} ${errorMessage.length && s.errorForm}`
     }

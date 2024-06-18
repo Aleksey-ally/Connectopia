@@ -20,6 +20,12 @@
       margin-bottom: 2.5em;
       width: 50%;
       padding: 0 1em;
+
+      &.checkboxInfo{
+        display: flex;
+        align-self: center;
+        margin-top: 0.65em;
+      }
     }
     .titleOption{
       cursor: pointer;

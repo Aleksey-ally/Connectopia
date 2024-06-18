@@ -44,7 +44,7 @@ export const UserInfoBodyForm = memo(({
                     <label className={s.titleOption} htmlFor='fullName'><b>Name: </b></label>
                     <TextField id='fullName' {...register('fullName')} defaultValue={profile?.fullName}/>
                 </li>
-                <li>
+                <li className={s.checkboxInfo}>
                     <Checkbox label={<b>Looking for a job:</b>} {...register('lookingForAJob')}
                               onValueChange={field.onChange}
                               checked={field.value}/>

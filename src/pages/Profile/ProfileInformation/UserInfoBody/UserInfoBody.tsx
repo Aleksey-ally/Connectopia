@@ -16,7 +16,7 @@ export const UserInfoBody = memo(({
     const enableEditForm = () => {
         setEditForm(true)
     }
-    console.log(profile?.lookingForAJob)
+
     return (
 
         <div className={s.userInfoBody}>

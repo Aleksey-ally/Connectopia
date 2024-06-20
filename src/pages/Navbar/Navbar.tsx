@@ -9,12 +9,13 @@ import React from "react";
 
 export const Navbar = () => {
     const friendsData = useSelector<ReducersType, UsersDataType[]>(state => state.messagesData.messagesUsersData)
+    const currentUserID = useSelector<ReducersType, number | null>(state=> state.auth.id)
     return (
         <nav className={s.navbar}>
             <h3 className={s.label}>Menu</h3>
             <div className={s.navButtonsSection}>
                 <span>
-                    <NavLink to='/profile/' className={s.item}>Profile</NavLink>
+                    <NavLink to={`/profile/${currentUserID}`} className={s.item}>Profile</NavLink>
                 </span>
                 <span>
                     <NavLink to='/messages'

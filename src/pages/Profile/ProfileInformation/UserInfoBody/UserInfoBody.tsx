@@ -5,11 +5,15 @@ import {memo} from "react";
 import {Button} from "components/Button";
 
 type Props = {
+    currentUserID: number | null
+    uID?: string
     profile?: UtilityProfileUserType
     setEditForm: (value: boolean) => void
 }
 
 export const UserInfoBody = memo(({
+                                      currentUserID,
+                                      uID,
                                       profile,
                                       setEditForm
                                   }: Props) => {
@@ -17,13 +21,17 @@ export const UserInfoBody = memo(({
         setEditForm(true)
     }
 
+    console.log(uID)
+    console.log(currentUserID)
+    const isPageCurrentUser = Number(uID) === currentUserID
+
     return (
 
         <div className={s.userInfoBody}>
 
             <div className={s.title}>
                 <Typography>Personal Information</Typography>
-                <Button variant={'secondary'} onClick={enableEditForm}>Change</Button>
+                {isPageCurrentUser && <Button variant={'secondary'} onClick={enableEditForm}>Change</Button>}
             </div>
 
             <ul className={s.personalInfoTable}>

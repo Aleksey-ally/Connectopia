@@ -12,6 +12,7 @@ import {TextField} from "components/TextField";
 import {Typography} from "components/Typography";
 
 type Props = {
+    currentUserID: number | null
     uID?: string
     profile?: UtilityProfileUserType
     status: string
@@ -26,6 +27,7 @@ type Props = {
 }
 
 export const ProfileInformation = (({
+                                        currentUserID,
                                         uID,
                                         profile,
                                         status,
@@ -103,7 +105,7 @@ export const ProfileInformation = (({
             <div className={s.personalInfo}>
 
                 {!editForm &&
-                    <UserInfoBody profile={profile} setEditForm={setEditForm}/>}
+                    <UserInfoBody currentUserID={currentUserID} uID={uID} profile={profile} setEditForm={setEditForm}/>}
 
                 {editForm && <UserInfoBodyForm profile={profile}
                                                handleSubmitProfileForm={handleSubmitProfileForm}

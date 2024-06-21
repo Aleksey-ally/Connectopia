@@ -51,7 +51,8 @@ export const ProfileInformationContainer = () => {
 
     }, [userID, status])
 
-    return <ProfileInformation uID={uID} profile={profile} status={localStatus} edit={edit}
+    return <ProfileInformation currentUserID={currentUserID}
+                               uID={uID} profile={profile} status={localStatus} edit={edit}
                                toggleEditHandler={toggleEditHandler}
                                changeStatusHandler={changeStatusHandler}
                                dispatch={dispatch}

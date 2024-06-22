@@ -22,9 +22,14 @@ export const ProfileInformationContainer = () => {
         setEdit(!edit)
         status !== localStatus && dispatch(changeUserStatus(localStatus))
     }, [edit, localStatus])
+
     const changeStatusHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setLocalStatus(e.currentTarget.value)
     }, [localStatus])
+
+    const setEditFormWithCheck = (value:boolean) => {
+       if (currentUserID === Number(uID)) return setEditForm(value)
+    }
 
     const handleSubmitProfileForm = (userData: ProfileUserResponseType) => {
         dispatch(updateProfile(userData))
@@ -36,7 +41,6 @@ export const ProfileInformationContainer = () => {
                 }
             })
     }
-
 
     const {uID} = useParams()
 

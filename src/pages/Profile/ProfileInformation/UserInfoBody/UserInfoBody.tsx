@@ -61,7 +61,7 @@ export const UserInfoBody = memo(({
                     <label className={s.titleOption}
                            onDoubleClick={enableEditForm}>Contacts: </label>{(profile?.contacts && Object.keys(profile.contacts).map(c => (
                     <Typography className={s.option} key={c}
-                                onDoubleClick={enableEditForm}>{profile.contacts[c] || 'не указано'}</Typography>
+                               onDoubleClick={enableEditForm}>{profile.contacts[c] || 'не указано'}</Typography>
                 ))) || null}
                 </li>
 

@@ -61,6 +61,6 @@ export const ProfileInformationContainer = () => {
                                changeStatusHandler={changeStatusHandler}
                                dispatch={dispatch}
                                handleSubmitProfileForm={handleSubmitProfileForm}
-                               editForm={editForm} setEditForm={setEditForm}
+                               editForm={editForm} setEditForm={setEditFormWithCheck}
                                errorMessage={errorMessage}/>
 }

@@ -14,14 +14,14 @@ export const ProfileInformationContainer = () => {
     const currentUserID = useSelector<ReducersType, number | null>(state => state.auth.id)
 
     const [localStatus, setLocalStatus] = useState<string>('')
-    const [edit, setEdit] = useState<boolean>(false)
+    const [editStatus, setEditStatus] = useState<boolean>(false)
     const [editForm, setEditForm] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string[]>([])
 
     const toggleEditHandler = useCallback(() => {
-        setEdit(!edit)
+        setEditStatus(!editStatus)
         status !== localStatus && dispatch(changeUserStatus(localStatus))
-    }, [edit, localStatus])
+    }, [editStatus, localStatus])
 
     const changeStatusHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setLocalStatus(e.currentTarget.value)
@@ -56,7 +56,7 @@ export const ProfileInformationContainer = () => {
     }, [userID, status])
 
     return <ProfileInformation currentUserID={currentUserID}
-                               uID={uID} profile={profile} status={localStatus} edit={edit}
+                               uID={uID} profile={profile} status={localStatus} edit={editStatus}
                                toggleEditHandler={toggleEditHandler}
                                changeStatusHandler={changeStatusHandler}
                                dispatch={dispatch}

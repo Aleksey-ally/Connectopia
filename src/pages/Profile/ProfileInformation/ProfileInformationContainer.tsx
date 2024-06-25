@@ -19,7 +19,7 @@ export const ProfileInformationContainer = () => {
     const [errorMessage, setErrorMessage] = useState<string[]>([])
 
     const toggleEditHandler = useCallback(() => {
-        setEditStatus(!editStatus)
+        Number(uID) === currentUserID && setEditStatus(!editStatus)
         status !== localStatus && dispatch(changeUserStatus(localStatus))
     }, [editStatus, localStatus])
 

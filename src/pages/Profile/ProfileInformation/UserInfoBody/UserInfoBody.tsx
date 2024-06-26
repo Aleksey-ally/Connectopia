@@ -21,8 +21,6 @@ export const UserInfoBody = memo(({
         setEditForm(true)
     }
 
-    console.log(uID)
-    console.log(currentUserID)
     const isPageCurrentUser = Number(uID) === currentUserID
 
     return (

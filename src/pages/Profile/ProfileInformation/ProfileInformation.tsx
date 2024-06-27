@@ -73,7 +73,7 @@ export const ProfileInformation = (({
                                 size={'large'}
                                 photos={profile?.photos?.small}>
 
-                        {!uID && isEditVisible &&
+                        {Number(uID) === currentUserID && isEditVisible &&
                             <label htmlFor="avatarInput" className={s.edit} onMouseOver={handleMouseOver}
                                    onMouseOut={handleMouseOut}>
                                 <Edit/>

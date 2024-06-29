@@ -41,7 +41,7 @@ export const UserInfoBody = memo(({
 
                 <li>
                     <label className={s.titleOption} onDoubleClick={enableEditForm}>Looking for a job:</label>
-                    <Typography variant={'subtitle2'}
+                    <Typography className={s.option} variant={'subtitle2'}
                                 as={'div'} onDoubleClick={enableEditForm}>{profile?.lookingForAJob ? 'Yes' : 'No'}</Typography>
                 </li>
                 <li>

@@ -1,8 +1,6 @@
 import 'react-toastify/dist/ReactToastify.min.css'
 import s from './ToastifyOptions.module.scss'
 
-import 'animate.css/animate.min.css'
-
 export const infoOptions = {
     style: {background: 'var(--color-dark-700)'},
     progressStyle: {background: 'var(--color-info-700)'},

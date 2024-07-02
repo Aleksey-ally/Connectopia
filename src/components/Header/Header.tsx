@@ -11,6 +11,8 @@ import {PersonOutline} from "assets/icons";
 import {Logout} from "assets/icons";
 import {DropdownItem} from "components/Dropdown/DropdownItem";
 import {useAppDispatch} from "redux/reduxStore";
+import {toast} from "react-toastify";
+import {infoOptions} from "utils/ToastifyOptions/ToastifyOptions";
 
 type Props = {
     auth: Auth
@@ -26,6 +28,9 @@ export const Header = ({auth, currentUserAvatar}: Props) => {
 
     const logoutHandler = () => {
         dispatch(logout)
+            .then(() => {
+                toast.info('Goodbye', infoOptions)
+            })
     }
 
     return (
@@ -48,8 +53,9 @@ export const Header = ({auth, currentUserAvatar}: Props) => {
                                             onClick={() => navigate('/profile')}/>
                                 <div onClick={() => navigate('/profile')}>
                                     <Typography className={s.navigate}
-                                        variant="subtitle2"> {auth?.login ? auth.login : 'User Name'}</Typography>
-                                    <Typography className={s.navigate} variant="caption" style={{color: 'var(--color-dark-100)'}}>
+                                                variant="subtitle2"> {auth?.login ? auth.login : 'User Name'}</Typography>
+                                    <Typography className={s.navigate} variant="caption"
+                                                style={{color: 'var(--color-dark-100)'}}>
                                         {auth?.email ? auth.email : 'User Name'}
                                     </Typography>
                                 </div>

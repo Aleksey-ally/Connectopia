@@ -9,6 +9,8 @@ import {useAppDispatch} from "redux/reduxStore";
 import {Checkbox} from "components/Checkbox";
 import {useState} from "react";
 import {Typography} from "components/Typography";
+import {toast} from "react-toastify";
+import {infoOptions} from "utils/ToastifyOptions/ToastifyOptions";
 
 type FormValues = {
     email: string,
@@ -33,6 +35,9 @@ export const LoginForm = () => {
         dispatch(login(data)).then((message) => {
             if (message) {
                 setGeneralError(message)
+            }
+            if (!message) {
+               toast.info('You are welcome!', infoOptions)
             }
         })
     }

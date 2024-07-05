@@ -5,6 +5,7 @@ import {ReducersType, useAppDispatch} from "redux/reduxStore"
 import {followOnUser, getUsers, setItemsPerPage, setPagination, unfollowOnUser, UsersType} from "redux/usersReducer"
 import {Users} from "./Users"
 import {toast} from "react-toastify";
+import {successOptions} from "utils/ToastifyOptions/ToastifyOptions";
 
 export const UsersContainer = () => {
 
@@ -19,12 +20,15 @@ export const UsersContainer = () => {
     const follow = useCallback((userID: number) => {
         dispatch(followOnUser(userID))
             .then(()=>{
-                toast.success('You are successfully following')
+                toast.success('You are successfully following', successOptions)
             })
     },[dispatch])
 
     const unfollow = useCallback((userID: number) => {
         dispatch(unfollowOnUser(userID))
+            .then(()=>{
+                toast.success('You are successfully unfollowing', successOptions)
+            })
     },[dispatch])
 
     const setCurrentPage = useCallback((page: number) => {

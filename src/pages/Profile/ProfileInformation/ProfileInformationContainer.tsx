@@ -5,6 +5,8 @@ import {changeUserStatus, getUserProfile, getUserStatus, ProfileDataType, update
 import {ReducersType, useAppDispatch} from 'redux/reduxStore';
 import {ProfileInformation} from './ProfileInformation';
 import {ProfileUserResponseType} from "api/api.types";
+import {toast} from "react-toastify";
+import {successOptions} from "utils/ToastifyOptions/ToastifyOptions";
 
 export const ProfileInformationContainer = () => {
     const dispatch = useAppDispatch()
@@ -38,6 +40,7 @@ export const ProfileInformationContainer = () => {
                     setErrorMessage(message)
                 } else {
                     setEditForm(false)
+                    toast.success('You are successfully change data', successOptions)
                 }
             })
     }

@@ -23,6 +23,9 @@ export const ProfileInformationContainer = () => {
     const toggleEditHandler = useCallback(() => {
         Number(uID) === currentUserID && setEditStatus(!editStatus)
         status !== localStatus && dispatch(changeUserStatus(localStatus))
+            .then(()=>{
+                toast.success('You are successfully change status', successOptions)
+            })
     }, [editStatus, localStatus])
 
     const changeStatusHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {

@@ -12,6 +12,8 @@ import {
     UtilityProfileUserType
 } from "redux/profileReducer"
 import {Button} from "components/Button";
+import {toast} from "react-toastify";
+import {successOptions} from "utils/ToastifyOptions/ToastifyOptions";
 
 export const Settings: FC = () => {
     const dispatch = useAppDispatch()
@@ -36,6 +38,9 @@ export const Settings: FC = () => {
 
     const buttonStatusHandler = () => {
         dispatch(changeUserStatus(status))
+            .then(()=>{
+                toast.success('You are successfully change status', successOptions)
+            })
     }
 
     const inputNameHandler = (e: ChangeEvent<HTMLInputElement>) => {

@@ -49,6 +49,9 @@ export const Settings: FC = () => {
 
     const buttonNameHandler = () => {
         dispatch(changeUserName(user.fullName as string))
+            .then(()=>{
+                toast.success('You are successfully change user name', successOptions)
+            })
     }
 
     return (

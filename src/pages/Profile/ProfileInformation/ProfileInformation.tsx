@@ -11,7 +11,7 @@ import {Edit} from "assets/icons/Edit";
 import {TextField} from "components/TextField";
 import {Typography} from "components/Typography";
 import {toast} from "react-toastify";
-import {successOptions} from "utils/ToastifyOptions/ToastifyOptions";
+import {errorOptions, successOptions} from "utils/ToastifyOptions/ToastifyOptions";
 
 type Props = {
     currentUserID: number | null
@@ -48,7 +48,7 @@ export const ProfileInformation = (({
     const userAvatarSelected = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.currentTarget.files) {
             dispatch(setNewUserAvatar(e.currentTarget.files[0]))
-                .then((a)=>{
+                .then((message)=>{
                     toast.success('You are successfully changed avatar', successOptions)
                 })
         }

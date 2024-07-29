@@ -153,8 +153,7 @@ export const setNewUserAvatar = (photos: File) =>
     async (dispatch: AppThunkDispatch, getState: () => AppRootStateType) => {
         const res = await profileAPI.updateAvatar(photos)
         if (res.resultCode === 0) {
-            dispatch(getUserProfile(getState().auth.id as number))
-            return '1'
+          dispatch(getUserProfile(getState().auth.id as number))
         } else if (res.resultCode === 1) {
             return res.messages[0]
         }

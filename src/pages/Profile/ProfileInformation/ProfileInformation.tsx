@@ -49,7 +49,12 @@ export const ProfileInformation = (({
         if (e.currentTarget.files) {
             dispatch(setNewUserAvatar(e.currentTarget.files[0]))
                 .then((message)=>{
-                    toast.success('You are successfully changed avatar', successOptions)
+                    if (message){
+                        toast.error(message, errorOptions)
+                    } else {
+                        toast.success('You are successfully changed avatar', successOptions)
+                    }
+
                 })
         }
     }

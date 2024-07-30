@@ -1,8 +1,6 @@
 import {profileAPI} from "api/api";
 import {AppRootStateType, AppThunkDispatch} from "redux/reduxStore";
 import {ProfileUserResponseType} from "api/api.types";
-import {toast} from "react-toastify";
-import {successOptions} from "utils/ToastifyOptions/ToastifyOptions";
 
 const ADD_POST = "ADD-POST";
 const CHANGE_POST_TEXT = "CHANGE-POST-TEXT";
@@ -153,7 +151,7 @@ export const setNewUserAvatar = (photos: File) =>
     async (dispatch: AppThunkDispatch, getState: () => AppRootStateType) => {
         const res = await profileAPI.updateAvatar(photos)
         if (res.resultCode === 0) {
-          dispatch(getUserProfile(getState().auth.id as number))
+          await dispatch(getUserProfile(getState().auth.id as number))
         } else if (res.resultCode === 1) {
             return res.messages[0]
         }

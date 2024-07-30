@@ -1,7 +1,7 @@
 import {UtilityProfileUserType} from 'redux/profileReducer';
 import s from './UserInfoBodyForm.module.scss';
 import {TextField} from "components/TextField";
-import {memo, useEffect} from "react";
+import {memo} from "react";
 import {Checkbox} from "components/Checkbox";
 import {useController, useForm} from "react-hook-form";
 import {ProfileUserResponseType} from "api/api.types";

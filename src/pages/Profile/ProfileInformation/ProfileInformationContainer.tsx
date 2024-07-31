@@ -6,7 +6,7 @@ import {ReducersType, useAppDispatch} from 'redux/reduxStore';
 import {ProfileInformation} from './ProfileInformation';
 import {ProfileUserResponseType} from "api/api.types";
 import {toast} from "react-toastify";
-import {successOptions} from "utils/ToastifyOptions/ToastifyOptions";
+import {errorOptions, successOptions} from "utils/ToastifyOptions/ToastifyOptions";
 
 export const ProfileInformationContainer = () => {
     const dispatch = useAppDispatch()
@@ -23,7 +23,7 @@ export const ProfileInformationContainer = () => {
     const toggleEditHandler = useCallback(() => {
         Number(uID) === currentUserID && setEditStatus(!editStatus)
         status !== localStatus && dispatch(changeUserStatus(localStatus))
-            .then(()=>{
+            .then(() => {
                 toast.success('You are successfully change status', successOptions)
             })
     }, [editStatus, localStatus])
@@ -32,11 +32,12 @@ export const ProfileInformationContainer = () => {
         setLocalStatus(e.currentTarget.value)
     }, [localStatus])
 
-    const setEditFormWithCheck = (value:boolean) => {
-       if (currentUserID === Number(uID)) return setEditForm(value)
+    const setEditFormWithCheck = (value: boolean) => {
+        if (currentUserID === Number(uID)) return setEditForm(value)
     }
 
     const handleSubmitProfileForm = (userData: ProfileUserResponseType) => {
+
         dispatch(updateProfile(userData))
             .then(message => {
                 if (message) {
@@ -55,11 +56,17 @@ export const ProfileInformationContainer = () => {
     useEffect(() => {
         if (userID === null) return
 
-        dispatch(getUserProfile(userID))
-        dispatch(getUserStatus(userID))
-        setLocalStatus(status)
+       (async () => {
+            try {
+                await dispatch(getUserProfile(userID));
+                await dispatch(getUserStatus(userID));
+                setLocalStatus(status);
+            } catch (error) {
+                toast.success('Error when receiving user data', errorOptions)
+            }
+        })();
 
-    }, [userID, status])
+    }, [userID, status, dispatch])
 
     return <ProfileInformation currentUserID={currentUserID}
                                uID={uID} profile={profile} status={localStatus} edit={editStatus}

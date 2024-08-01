@@ -136,11 +136,12 @@ export const changeUserName = (fullName: string) =>
     }
 
 export const updateProfile = (userData: ProfileUserResponseType) =>
-    async (dispatch: AppThunkDispatch) => {
+    async (dispatch: AppThunkDispatch, getState: () => AppRootStateType) => {
         const res = await profileAPI.updateProfile(userData)
 
         if (res.resultCode === 0) {
             dispatch(setUserProfile({...userData}))
+            // await dispatch(getUserProfile(getState().auth.id as number))
         }
         if (res.resultCode === 1) {
             return res.messages
@@ -151,7 +152,7 @@ export const setNewUserAvatar = (photos: File) =>
     async (dispatch: AppThunkDispatch, getState: () => AppRootStateType) => {
         const res = await profileAPI.updateAvatar(photos)
         if (res.resultCode === 0) {
-          await dispatch(getUserProfile(getState().auth.id as number))
+            await dispatch(getUserProfile(getState().auth.id as number))
         } else if (res.resultCode === 1) {
             return res.messages[0]
         }

@@ -4,7 +4,7 @@ import {useParams} from 'react-router-dom';
 import {changeUserStatus, getUserProfile, getUserStatus, ProfileDataType, updateProfile} from 'redux/profileReducer';
 import {ReducersType, useAppDispatch} from 'redux/reduxStore';
 import {ProfileInformation} from './ProfileInformation';
-import {ProfileUserResponseType} from "api/api.types";
+import {PhotosResponse, ProfileUserResponseType} from "api/api.types";
 import {toast} from "react-toastify";
 import {errorOptions, successOptions} from "utils/ToastifyOptions/ToastifyOptions";
 
@@ -38,7 +38,7 @@ export const ProfileInformationContainer = () => {
 
     const handleSubmitProfileForm = (userData: ProfileUserResponseType) => {
 
-        dispatch(updateProfile(userData))
+        dispatch(updateProfile({...userData, photos: profile.photos as PhotosResponse}))
             .then(message => {
                 if (message) {
                     setErrorMessage(message)

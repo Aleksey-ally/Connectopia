@@ -50,7 +50,7 @@ export const Header = ({auth, currentUserAvatar}: Props) => {
                         <Dropdown trigger={<UserAvatar photos={currentUserAvatar} size={'small'}/>}>
                             <DropdownItem>
                                 <UserAvatar className={s.navigate} photos={currentUserAvatar} size={'small'}
-                                            onClick={() => navigate('/profile')}/>
+                                            onClick={() => navigate(`/profile/${auth.id}`)}/>
                                 <div onClick={() => navigate('/profile')}>
                                     <Typography className={s.navigate}
                                                 variant="subtitle2"> {auth?.login ? auth.login : 'User Name'}</Typography>

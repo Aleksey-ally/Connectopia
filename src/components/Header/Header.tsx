@@ -60,7 +60,7 @@ export const Header = ({auth, currentUserAvatar}: Props) => {
                                     </Typography>
                                 </div>
                             </DropdownItem>
-                            <DropdownItemWithIcon onClick={() => navigate('/profile')} icon={<PersonOutline/>}
+                            <DropdownItemWithIcon onClick={() => navigate(`/profile/${auth.id}`)} icon={<PersonOutline/>}
                                                   text={'My Profile'}/>
                             <DropdownItemWithIcon onClick={logoutHandler} icon={<Logout/>} text="Sign Out"/>
                         </Dropdown>

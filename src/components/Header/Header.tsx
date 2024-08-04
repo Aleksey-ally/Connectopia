@@ -51,7 +51,7 @@ export const Header = ({auth, currentUserAvatar}: Props) => {
                             <DropdownItem>
                                 <UserAvatar className={s.navigate} photos={currentUserAvatar} size={'small'}
                                             onClick={() => navigate(`/profile/${auth.id}`)}/>
-                                <div onClick={() => navigate('/profile')}>
+                                <div onClick={() => navigate(`/profile/${auth.id}`)}>
                                     <Typography className={s.navigate}
                                                 variant="subtitle2"> {auth?.login ? auth.login : 'User Name'}</Typography>
                                     <Typography className={s.navigate} variant="caption"

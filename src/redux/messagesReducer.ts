@@ -28,14 +28,12 @@ const initialState: MessagesDataType = {
     { id: 1, animalName: "Fox", photoAvatar: AvatarFox },
     { id: 2, animalName: "Bear", photoAvatar: AvatarBear },
     { id: 3, animalName: "Owl", photoAvatar: AvatarOwl },
-    { id: 4, animalName: "Wolf", photoAvatar: AvatarWolf },
   ],
 
   messagesTextData: [
     { id: 1, messageText: "Frrr fr fr" },
     { id: 2, messageText: "Raaaaa!" },
     { id: 3, messageText: "Wo! Wooo!" },
-    { id: 4, messageText: "Woyyyyy! woyyyy!" },
   ],
 
   messageText: "",

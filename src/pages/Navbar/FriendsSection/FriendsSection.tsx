@@ -15,8 +15,6 @@ export const FriendsSection = memo(({friendsData}: FriendsSectionPropsType) => {
                 <div className={s.item} key={fd.id}>
                     <UserAvatar size={'small'}/>
                     <span>{fd.animalName}</span>
-                    {/*<img className={s.avatar} src={fd.photoAvatar} alt={`${fd.animalName} avatar`}/>*/}
-                    {/*<span>{fd.animalName}</span>*/}
                 </div>
             ).slice(0, 3)}
 

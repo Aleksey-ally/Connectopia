@@ -11,7 +11,6 @@ export const DialogUser = memo(({id, animalName, photoAvatar}: UsersDataType) =>
             <NavLink to={`/messages/${id}`}
                      className={navData => navData.isActive ? s.activeDialogItem : s.dialogItem}>
                 <UserAvatar size={'small'} alt={`${photoAvatar} avatar`}/>
-                {/*<img src={photoAvatar} alt={`${photoAvatar } avatar`}/>*/}
                 <span>{animalName}</span></NavLink>
         </div>
     )

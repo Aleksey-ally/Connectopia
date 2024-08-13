@@ -20,9 +20,9 @@ export type TextDataType = {
 
 const initialState: MessagesDataType = {
     messagesUsersData: [
-        {id: 1, animalName: "Fox", photoAvatar: '#'},
-        {id: 2, animalName: "Bear", photoAvatar: '#'},
-        {id: 3, animalName: "Owl", photoAvatar: '#'},
+        {id: 1, animalName: "Fox", photoAvatar: ''},
+        {id: 2, animalName: "Bear", photoAvatar: ''},
+        {id: 3, animalName: "Owl", photoAvatar: ''},
     ],
 
     messagesTextData: [

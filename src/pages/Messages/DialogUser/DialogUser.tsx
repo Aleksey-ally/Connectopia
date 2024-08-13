@@ -10,7 +10,7 @@ export const DialogUser = memo(({id, animalName, photoAvatar}: UsersDataType) =>
         <div className={s.dialogItem}>
             <NavLink to={`/messages/${id}`}
                      className={navData => navData.isActive ? s.activeDialogItem : s.dialogItem}>
-                <UserAvatar size={'small'} alt={`${photoAvatar} avatar`}/>
+                <UserAvatar size={'small'} photos={photoAvatar}/>
                 <span>{animalName}</span></NavLink>
         </div>
     )

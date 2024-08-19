@@ -10,25 +10,25 @@
 .content {
   position: relative;
 
-  margin-top: 0.460em;
-  padding: 0.75em;
+  margin-top: 0.460rem;
+  padding: 0.75rem;
 
   background-color: var(--color-second);
-  border: 0.063em solid var(--color-dark-500);
-  border-radius: 0.25em;
+  border: 0.063rem solid var(--color-dark-500);
+  border-radius: 0.25rem;
   z-index: 2;
 
   .arrow {
     position: absolute;
-    top: -0.25em;
-    left: calc(50% - 0.25em);
+    top: -0.25rem;
+    left: calc(50% - 0.25rem);
     transform: rotate(45deg);
 
-    width: 0.625em;
-    height: 0.625em;
+    width: 0.625rem;
+    height: 0.625rem;
 
     background-color: var(--color-second);
-    border: 0.075em solid var(--color-dark-500);
+    border: 0.075rem solid var(--color-dark-500);
     border-top: none;
     border-left: none;
 

@@ -36,10 +36,10 @@ body {
   font-family: var(--font-family-primary), sans-serif;
   line-height: var(--line-height-m);
   color: var(--color-font-global);
-  font-size: 1em;
+  font-size: 1rem;
 
   background-color: var(--color-main);
-  @media (min-width: 120em){
+  @media (min-width: 120rem){
     font-size: .834vw;
   }
 }

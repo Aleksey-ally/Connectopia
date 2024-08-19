@@ -3,7 +3,7 @@
     flex-direction: row;
     color: darkblue;
     text-decoration-line: none;
-    padding-bottom: 0.313em;
+    padding-bottom: 0.313rem;
     align-items: center;
 
     .activeDialogItem {
@@ -11,18 +11,18 @@
         color: rgba(230, 42, 28, 0.616);
         text-decoration-line: none;
         align-items: center;
-        padding-bottom: 0.313em;
+        padding-bottom: 0.313rem;
     }
 
     & img {
-        width: 3.125em;
-        height: 3.125em;
-        border-radius: 1.875em;
+        width: 3.125rem;
+        height: 3.125rem;
+        border-radius: 1.875rem;
         background-color: white;
     }
 
     & span {
-        padding-left: 0.313em;
+        padding-left: 0.313rem;
     }
 }
 

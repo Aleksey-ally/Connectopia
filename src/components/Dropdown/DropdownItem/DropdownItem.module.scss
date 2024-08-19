@@ -2,7 +2,7 @@
   cursor: pointer;
 
   display: flex;
-  gap: 0.625em;
+  gap: 0.625rem;
   align-items: center;
 
   width: 100%;
@@ -14,12 +14,12 @@
   transition: opacity 0.4s ease-in-out;
 
   &:not(:last-child) {
-    padding-bottom: 0.75em;
-    border-bottom: 0.063em solid var(--color-dark-500);
+    padding-bottom: 0.75rem;
+    border-bottom: 0.063rem solid var(--color-dark-500);
   }
 
   &:not(:first-child) {
-    padding-top: 0.75em;
+    padding-top: 0.75rem;
   }
 
   &:hover,

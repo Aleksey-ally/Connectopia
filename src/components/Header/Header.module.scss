@@ -4,11 +4,11 @@
   display: flex;
   justify-content: space-between;
 
-  padding: 0 0.938em;
+  padding: 0 0.938rem;
   align-items: center;
 
   background-color: var(--color-second);
-  border-radius: 0.25em;
+  border-radius: 0.25rem;
   z-index: 1;
 
   & a {
@@ -20,17 +20,17 @@
     align-items: center;
 
     .title {
-      margin-left: -0.25em;
+      margin-left: -0.5rem;
     }
 
   }
 
   .loginBlock {
     display: flex;
-    gap: 0.875em;
+    gap: 0.875rem;
     justify-content: center;
     align-items: center;
-    margin-right: 0.625em;
+    margin-right: 0.625rem;
 
 
     .login {

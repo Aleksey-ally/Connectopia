@@ -3,16 +3,16 @@
   grid-template-areas:
   "header header"
   "navbar content";
-  grid-template-rows: 3.75em 1fr;
+  grid-template-rows: 3.75rem 1fr;
   grid-template-columns: 2fr 14fr;
-  grid-gap: 0.625em;
-  @media screen and (max-width: 89.375em) {
+  grid-gap: 0.625rem;
+  @media screen and (max-width: 89.375rem) {
     grid-template-columns: 2fr 10fr;
   }
 }
 
 .content{
-  max-width: 84.433em;
+  max-width: 84.433rem;
 
   grid-area: content;
   background-color: var(--color-second);

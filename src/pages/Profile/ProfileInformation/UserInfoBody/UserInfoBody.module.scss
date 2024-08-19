@@ -1,14 +1,14 @@
 .userInfoBody {
   display: flex;
   flex-direction: column;
-  gap: 0.0015em;
+  gap: 0.0015rem;
   flex-wrap: wrap;
 
   .title {
     display: flex;
     justify-content: space-between;
-    padding: 2em 2em;
-    border-bottom: .0625em solid var(--color-dark-800);
+    padding: 2rem 2rem;
+    border-bottom: .0625rem solid var(--color-dark-800);
   }
 
   .personalInfoTable {
@@ -17,9 +17,9 @@
     list-style: none;
 
     & li {
-      margin-bottom: 2.5em;
+      margin-bottom: 2.5rem;
       width: 50%;
-      padding: 0 1em;
+      padding: 0 1rem;
 
       .titleOption {
         cursor: pointer;

@@ -1,15 +1,15 @@
 .description {
-    padding: 0.313em;
+    padding: 0.313rem;
 
     .userCover {
-        max-height: 21.875em;
+        max-height: 21.875rem;
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
-        border-radius: 0.5em;
-        padding: 11.25em 2.188em 2.188em 3.125em;
+        border-radius: 0.5rem;
+        padding: 11.25rem 2.188rem 2.188rem 3.125rem;
         position: relative;
-        margin-bottom: 1.875em;
+        margin-bottom: 1.875rem;
         z-index: 0;
 
         &::before {
@@ -35,7 +35,7 @@
 
             .userAvatar {
                 position: relative;
-                margin-right: 1.875em;
+                margin-right: 1.875rem;
 
                 &.opacity {
                     opacity: 0.7;

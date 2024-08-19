@@ -1,11 +1,11 @@
 .settingsPage {
-  padding: 2em;
+  padding: 2rem;
   border-radius: var(--border-radius-box);
 
   .title {
-    margin-bottom: 2em;
-    padding: 0 0 1.25em;
-    border-bottom: .0625em solid var(--color-dark-800);
+    margin-bottom: 2rem;
+    padding: 0 0 1.25rem;
+    border-bottom: .0625rem solid var(--color-dark-800);
   }
 
   .item {
@@ -13,16 +13,16 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-top: 0.8em;
+    margin-top: 0.8rem;
 
 
     .input {
-      padding: 1em;
+      padding: 1rem;
       background: transparent;
-      border: 0.0625em solid var(--color-dark-800);
+      border: 0.0625rem solid var(--color-dark-800);
       border-radius: var(--border-radius);
-      height: 3.123em;
-      line-height: 3.123em;
+      height: 3.123rem;
+      line-height: 3.123rem;
       width: 100%;
     }
 
@@ -30,18 +30,18 @@
       position: absolute;
       top: 0;
       left: 0;
-      padding: 0 0.5em;
-      line-height: 1.1em;
-      letter-spacing: 0.1em;
+      padding: 0 0.5rem;
+      line-height: 1.1rem;
+      letter-spacing: 0.1rem;
       background-color: var(--color-second);
-      transform: scale(0.75) translateY(-0.7em) translateX(0.5em);
+      transform: scale(0.75) translateY(-0.7rem) translateX(0.5rem);
       font-size: var(--font-size-s);
-      border-left: 0.0625em solid var(--color-dark-800);
-      border-right: 0.0625em solid var(--color-dark-800);
+      border-left: 0.0625rem solid var(--color-dark-800);
+      border-right: 0.0625rem solid var(--color-dark-800);
     }
 
     .button {
-      margin-top: 0.8em;
+      margin-top: 0.8rem;
       text-transform: uppercase;
       line-height: var(--line-height-m);
       margin-left: auto;

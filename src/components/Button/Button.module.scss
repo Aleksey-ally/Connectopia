@@ -10,7 +10,7 @@
 ) {
   cursor: pointer;
 
-  padding: 0.3em 0.5em;
+  padding: 0.3rem 0.5rem;
 
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semi-bold);
@@ -19,9 +19,9 @@
   color: $text-color;
 
   background-color: $default-background-color;
-  border: 0.063em solid transparent;
+  border: 0.063rem solid transparent;
   border-radius: var(--border-radius);
-  box-shadow: 0 0.25em 1.125em 0 rgba($box-shadow-color, 0.35);
+  box-shadow: 0 0.25rem 1.125rem 0 rgba($box-shadow-color, 0.35);
 
   transition: all 0.45s ease;
 
@@ -84,7 +84,7 @@
                   var(--color-accent-900)
   );
   box-shadow:none;
-  border: 0.063em solid var(--color-accent-700);
+  border: 0.063rem solid var(--color-accent-700);
 
   &:active {
     border-color: var(--color-accent-900);
@@ -95,7 +95,7 @@
   }
 
   &:focus {
-    border: 0.063em solid var(--color-info-900);
+    border: 0.063rem solid var(--color-info-900);
   }
 
   &:disabled {
@@ -128,7 +128,7 @@
 
   &:focus {
     color: var(--color-accent-500);
-    border-radius: 8.125em;
+    border-radius: 8.125rem;
   }
 
   &:disabled {

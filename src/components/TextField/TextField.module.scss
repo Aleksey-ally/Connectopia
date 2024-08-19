@@ -4,11 +4,11 @@
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-m);
   color: var(--color-light-100);
-  text-indent: 0.75em;
+  text-indent: 0.75rem;
 
   background: transparent;
-  border: 0.063em solid var(--color-dark-300);
-  border-radius: 0.125em;
+  border: 0.063rem solid var(--color-dark-300);
+  border-radius: 0.125rem;
   outline: 0;
 
   &::placeholder {
@@ -17,14 +17,14 @@
 
   &:active {
     border-color: var(--color-light-100);
-    outline: 0.063em solid var(--color-light-100);
+    outline: 0.063rem solid var(--color-light-100);
     transition: 1s ease-out;
   }
 
   &:focus {
     transition: all .3s ease-in-out;
     border-color: var(--color-info-700);
-    outline: 0.063em solid var(--color-dark-700);
+    outline: 0.063rem solid var(--color-dark-700);
   }
 
   &:hover {
@@ -47,7 +47,7 @@
 }
 
 .label {
-  margin-bottom: 0.063em;
+  margin-bottom: 0.063rem;
   color: var(--color-dark-100);
 
   &.disabled {
@@ -68,9 +68,9 @@
     inset: 50% 0;
     transform: translateY(-50%);
 
-    width: 1.25em;
-    height: 1.25em;
-    margin-left: 0.75em;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-left: 0.75rem;
     padding: 0;
 
     background: transparent;
@@ -87,9 +87,9 @@
     bottom: 50%;
     transform: translateY(-50%);
 
-    width: 1.25em;
-    height: 1.25em;
-    margin-right: 0.75em;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.75rem;
     padding: 0;
 
     background: transparent;
@@ -100,7 +100,7 @@
   .searchCont {
     @extend %field-styles;
 
-    padding-left: 2.5em;
+    padding-left: 2.5rem;
   }
 }
 

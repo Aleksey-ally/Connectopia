@@ -1,26 +1,30 @@
-import {connect} from "react-redux";
+import {connect, useDispatch, useSelector} from "react-redux";
 import {ActionType, addMessage, changeMessageText, MessagesDataType} from "redux/messagesReducer";
 import {ReducersType} from "redux/reduxStore";
 import {Messages} from "./Messages";
 import {compose} from "redux";
 import {FC} from "react";
+import {UsersType} from "redux/usersReducer";
 
 
-// export const MessagesContainer = () => {
+export const MessagesContainer = () => {
 
-//     const messagesData = useSelector<ReducersType, MessagesDataType>(state => state.messagesData)
-//     const dispatch = useDispatch()
+    const messagesData = useSelector<ReducersType, MessagesDataType>(state => state.messagesData)
+    const usersData = useSelector<ReducersType, UsersType>(state => state.usersData)
 
-//     const dispatchNewTextInput = (newText: string) => {
-//         dispatch(changeMessageTextAC(newText))
-//     }
-//     const addMessage = () => {
-//         dispatch(addMessageAC())
-//     }
+    const dispatch = useDispatch()
+
+    const dispatchNewTextInput = (newText: string) => {
+        dispatch(changeMessageText(newText))
+    }
+    // const addMessage = () => {
+    //     dispatch(addMessage)
+    // }
 
 
-//     return <Messages messagesData={messagesData} dispatchNewTextInput={dispatchNewTextInput} addMessage={addMessage} />
-// }
+    return <Messages usersData={usersData} messagesData={messagesData} dispatchNewTextInput={dispatchNewTextInput}
+                     addMessage={addMessage}/>
+}
 
 type MapStateToPropsType = {
     messagesData: MessagesDataType
@@ -32,23 +36,23 @@ type MapDispatchToPropsType = {
 }
 
 
-const mapStateToProps = (state: ReducersType): MapStateToPropsType => {
-    return {
-        messagesData: state.messagesData,
-    }
-}
-
-const mapDispatchToProps = (dispatch: (action: ActionType) => void): MapDispatchToPropsType => {
-    return {
-        dispatchNewTextInput: (newText: string) => {
-            dispatch(changeMessageText(newText))
-        },
-        addMessage: () => {
-            dispatch(addMessage())
-        }
-    }
-}
-
-export const MessagesContainer = compose<FC>(
-    connect(mapStateToProps, mapDispatchToProps)
-)(Messages)
+// const mapStateToProps = (state: ReducersType): MapStateToPropsType => {
+//     return {
+//         messagesData: state.messagesData,
+//     }
+// }
+//
+// const mapDispatchToProps = (dispatch: (action: ActionType) => void): MapDispatchToPropsType => {
+//     return {
+//         dispatchNewTextInput: (newText: string) => {
+//             dispatch(changeMessageText(newText))
+//         },
+//         addMessage: () => {
+//             dispatch(addMessage())
+//         }
+//     }
+// }
+//
+// export const MessagesContainer = compose<FC>(
+//     connect(mapStateToProps, mapDispatchToProps)
+// )(Messages)

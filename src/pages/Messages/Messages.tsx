@@ -28,17 +28,43 @@ export const Messages = memo(({messagesData, dispatchNewTextInput, addMessage}: 
 
     return (
         <div className={s.dialogs}>
-            <div className={s.dialogsItems}>
-                {messagesData.messagesUsersData.map(u => <DialogUser key={u.id} id={u.id} animalName={u.animalName}
-                                                                     photoAvatar={u.photoAvatar}/>)}
+            <div className={s.sidebar}>
+                <div className={s.search}>
+                    Search
+                </div>
+
+                <div className={s.tabs}>
+                   Tabs
+                </div>
+
+                <div className={s.sidebarContent}>
+                    sidebarContent
+                </div>
+
+                <div className={s.sidebarFooter}>
+                    sidebarFooter
+                </div>
+
             </div>
-            <div className={s.messages}>
-                {messagesData.messagesTextData.map(m => <UserMessage key={m.id} id={m.id}
-                                                                     messageText={m.messageText}/>)}
-                <textarea onChange={onChangeMessageTextHandler} value={messagesData.messageText}
-                          placeholder="Enter your message"/>
-                <button onClick={addMessage}>Sent message</button>
+            <div className={s.chat}>
+                <div className={s.chatHeader}>
+                    chatHeader
+                </div>
+                <div className={s.chatContent}>
+                    chatContent
+                </div>
             </div>
+            {/*<div className={s.dialogsItems}>*/}
+            {/*    {messagesData.messagesUsersData.map(u => <DialogUser key={u.id} id={u.id} animalName={u.animalName}*/}
+            {/*                                                         photoAvatar={u.photoAvatar}/>)}*/}
+            {/*</div>*/}
+            {/*<div className={s.messages}>*/}
+            {/*    {messagesData.messagesTextData.map(m => <UserMessage key={m.id} id={m.id}*/}
+            {/*                                                         messageText={m.messageText}/>)}*/}
+            {/*    <textarea onChange={onChangeMessageTextHandler} value={messagesData.messageText}*/}
+            {/*              placeholder="Enter your message"/>*/}
+            {/*    <button onClick={addMessage}>Sent message</button>*/}
+            {/*</div>*/}
 
         </div>
     )

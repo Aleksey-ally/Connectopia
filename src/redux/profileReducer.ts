@@ -136,12 +136,11 @@ export const changeUserName = (fullName: string) =>
     }
 
 export const updateProfile = (userData: ProfileUserResponseType) =>
-    async (dispatch: AppThunkDispatch, getState: () => AppRootStateType) => {
+    async (dispatch: AppThunkDispatch) => {
         const res = await profileAPI.updateProfile(userData)
 
         if (res.resultCode === 0) {
             dispatch(setUserProfile({...userData}))
-            // await dispatch(getUserProfile(getState().auth.id as number))
         }
         if (res.resultCode === 1) {
             const searchString = "The LookingForAJobDescription field is required. (LookingForAJobDescription)";

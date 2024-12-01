@@ -94,14 +94,14 @@ export const ProfileInformation = (({
 
                     {edit &&
                         <div>
-                            <label>Status: </label>
+                            <label>Status</label>
                             <TextField onBlur={toggleEditHandler} autoFocus value={status}
                                        onChange={changeStatusHandler}/>
                         </div>
                     }
                     {!edit &&
                         <div>
-                            <label className={s.statusTitle} htmlFor={'status'} onDoubleClick={toggleEditHandler}>Status: </label>
+                            <label className={s.statusTitle} htmlFor={'status'} onDoubleClick={toggleEditHandler}>Status</label>
                             <Typography id={'status'} className={s.status} variant={'subtitle2'}
                                         as={'div'}
                                         onDoubleClick={toggleEditHandler}>{status}</Typography>

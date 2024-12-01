@@ -144,7 +144,12 @@ export const updateProfile = (userData: ProfileUserResponseType) =>
             // await dispatch(getUserProfile(getState().auth.id as number))
         }
         if (res.resultCode === 1) {
-            return res.messages
+            const searchString = "The LookingForAJobDescription field is required. (LookingForAJobDescription)";
+            const replacementString = "The My professional skills field is required. (LookingForAJobDescription)";
+
+            return res.messages.map(message =>
+                message === searchString ? replacementString : message
+            )
         }
     }
 

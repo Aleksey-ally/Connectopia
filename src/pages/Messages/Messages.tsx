@@ -1,4 +1,4 @@
-import React, {ChangeEvent, lazy, memo} from "react";
+import React, {ChangeEvent, lazy, memo, useEffect, useState} from "react";
 import s from 'pages/Messages/Messages.module.scss';
 import {MessagesDataType} from "redux/messagesReducer";
 import {withSuspense} from "utils/WithSuspense";
@@ -38,6 +38,36 @@ export const Messages = memo(({usersData, messagesData, dispatchNewTextInput, ad
         {title: 'Friends', value: 'Friends'},
         {title: 'Groups', value: 'Groups'}]
 
+    const [websocketData, setWebsocketData] = useState<any[]>([])
+
+    useEffect(() => {
+        const socket = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
+
+        socket.onopen = () => {
+            console.log('Соединение установлено');
+            // socket.send('Hello'); // Пробуем отправить тестовое сообщение
+        };
+
+        socket.onmessage = (event) => {
+            // console.log('Получено сообщение:', event.data);
+            setWebsocketData(JSON.parse(event.data))
+        };
+
+
+        socket.onerror = (error) => {
+            console.error('Ошибка сокета:', error);
+        };
+
+        socket.onclose = () => {
+            console.log('Соединение закрыто');
+        };
+
+        return () => {
+            socket.close();
+        };
+    }, [])
+
+    console.log(websocketData)
     return (
         <div className={s.dialogs}>
             <div className={s.sidebar}>
@@ -65,7 +95,7 @@ export const Messages = memo(({usersData, messagesData, dispatchNewTextInput, ad
                                                 variant={'subtitle2'}>{u.status}</Typography>
                                 </div>
                             </div>
-                    </div>
+                        </div>
                     ))}
 
                     Friend 1
@@ -86,6 +116,13 @@ export const Messages = memo(({usersData, messagesData, dispatchNewTextInput, ad
                 </div>
                 <div className={s.chatContent}>
                     chatContent
+                    <div style={{width: '96rem', height: '31.25rem', border: '15px solid black', overflowY: 'scroll'}}>
+                        {websocketData.map((d, index) => {
+                            return <div key={index} style={{display:'flex', alignItems:'center' }}>
+                               <UserAvatar  size={'small'} photos={d.photo}/> <b>{d.userName}:</b> {d.message}
+                            </div>
+                        })}
+                    </div>
                 </div>
             </div>
             {/*<div className={s.dialogsItems}>*/}

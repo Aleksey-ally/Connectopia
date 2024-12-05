@@ -1,6 +1,11 @@
 import React, {ChangeEvent, lazy, memo, useEffect, useState} from "react";
 import s from 'pages/Messages/Messages.module.scss';
-import {MessagesDataType} from "redux/messagesReducer";
+import {
+    createConnectionGroupChat,
+    destroyConnectionGroupChat,
+    GroupChatDataType,
+    MessagesDataType
+} from "redux/messagesReducer";
 import {withSuspense} from "utils/WithSuspense";
 import {TextField} from "components/TextField";
 import {TabSwitcher} from "components/TabSwitcher";
@@ -9,6 +14,9 @@ import {UserAvatar} from "components/UserAvatar";
 import {Typography} from "components/Typography";
 import {UsersType} from "redux/usersReducer";
 import {Button} from "components/Button";
+import {ReducersType, useAppDispatch} from "redux/reduxStore";
+import {useSelector} from "react-redux";
+import {chatGroupAPI} from "api/api";
 
 type MessagesPropsType = {
     usersData: UsersType
@@ -18,10 +26,46 @@ type MessagesPropsType = {
 }
 
 export const Messages = memo(({usersData, messagesData, dispatchNewTextInput, addMessage}: MessagesPropsType) => {
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(createConnectionGroupChat())
+
+
+        // socket.onopen = () => {
+        //     console.log('Соединение установлено');
+        //     // socket.send('Hello'); // Пробуем отправить тестовое сообщение
+        // };
+        //
+        // socket.onmessage = (event) => {
+        //     setWebsocketData(JSON.parse(event.data))
+        //     console.log(JSON.parse(event.data))
+        // };
+        //
+        //
+        // socket.onerror = (error) => {
+        //     console.error('Ошибка сокета:', error);
+        // };
+        //
+        // socket.onclose = () => {
+        //     console.log('Соединение закрыто');
+        // };
+
+        // return () => {
+        //     socket.close();
+        // };
+
+        return () =>{
+            dispatch(destroyConnectionGroupChat)
+        }
+    }, [dispatch])
+
+    const chatData = useSelector<ReducersType, GroupChatDataType[]>(state => state.messagesData.groupChatData)
+
     const onChangeMessageTextHandler = (e: ChangeEvent<HTMLInputElement>) => {
         dispatchNewTextInput(e.currentTarget.value)
     }
-    console.log(messagesData)
+    console.log(chatData)
     const DialogUser = withSuspense(
         lazy(() =>
             import('./DialogUser')
@@ -39,35 +83,12 @@ export const Messages = memo(({usersData, messagesData, dispatchNewTextInput, ad
         {title: 'Groups', value: 'Groups'}]
 
     const [websocketData, setWebsocketData] = useState<any[]>([])
-    const socket = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
-
-    useEffect(() => {
-
-        socket.onopen = () => {
-            console.log('Соединение установлено');
-            // socket.send('Hello'); // Пробуем отправить тестовое сообщение
-        };
-
-        socket.onmessage = (event) => {
-            setWebsocketData(JSON.parse(event.data))
-        };
+    // const socket = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
 
 
-        socket.onerror = (error) => {
-            console.error('Ошибка сокета:', error);
-        };
 
-        socket.onclose = () => {
-            console.log('Соединение закрыто');
-        };
-
-        return () => {
-            socket.close();
-        };
-    }, [])
-
-    const addMessageSocket = (message:string) =>{
-        socket.send(message)
+    const addMessageSocket = (message: string) => {
+        // socket.send(message)
     }
 
     return (
@@ -119,9 +140,9 @@ export const Messages = memo(({usersData, messagesData, dispatchNewTextInput, ad
                 <div className={s.chatContent}>
                     chatContent
                     <div style={{width: '96rem', height: '31.25rem', border: '15px solid black', overflowY: 'scroll'}}>
-                        {websocketData.map((d, index) => {
-                            return <div key={index} style={{display:'flex', alignItems:'center' }}>
-                               <UserAvatar  size={'small'} photos={d.photo}/> <b>{d.userName}:</b> {d.message}
+                        {chatData.map((d, index) => {
+                            return <div key={index} style={{display: 'flex', alignItems: 'center'}}>
+                                <UserAvatar size={'small'} photos={d.photo}/> <b>{d.userName}:</b> {d.message}
                             </div>
                         })}
 
@@ -130,7 +151,7 @@ export const Messages = memo(({usersData, messagesData, dispatchNewTextInput, ad
                                onChange={onChangeMessageTextHandler}
 
                     ></TextField>
-                    <Button onClick={()=>addMessageSocket(messagesData.messageText)}>Send</Button>
+                    <Button onClick={() => addMessageSocket(messagesData.messageText)}>Send</Button>
                 </div>
             </div>
         </div>

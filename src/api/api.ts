@@ -7,6 +7,7 @@ import {
     ResponseLogin,
     ResponseUsersType
 } from "api/api.types";
+import {GroupChatDataType} from "redux/messagesReducer";
 
 const instance = axios.create(
     {
@@ -75,7 +76,7 @@ export const profileAPI = {
         return res.data
     },
     async updateAvatar(photos: File) {
-        if (photos){
+        if (photos) {
             const formData = new FormData()
             formData.append('photos', photos)
             const res = await instance.put('profile/photo', formData)
@@ -85,4 +86,30 @@ export const profileAPI = {
     }
 }
 
+export const chatGroupAPI = {
+    socket: null as null | WebSocket,
+
+    createConnection() {
+        this.socket = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
+    },
+
+    destroyConnection() {
+        this.socket?.close()
+        console.log('socket closed')
+    },
+
+    subscribe(onMessage: (data: GroupChatDataType[]) => void) {
+        if (!this.socket) return
+
+        this.socket.onmessage = (event) => {
+            onMessage(JSON.parse(event.data));
+        };
+    },
+
+    sendMessage(message:string){
+        this.socket?.send(message)
+    }
+
+
+}
 

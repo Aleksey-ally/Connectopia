@@ -7,7 +7,6 @@ import {TabSwitcher} from "components/TabSwitcher";
 import {NavLink} from "react-router-dom";
 import {UserAvatar} from "components/UserAvatar";
 import {Typography} from "components/Typography";
-import {Button} from "components/Button";
 import {UsersType} from "redux/usersReducer";
 
 type MessagesPropsType = {
@@ -49,7 +48,6 @@ export const Messages = memo(({usersData, messagesData, dispatchNewTextInput, ad
         };
 
         socket.onmessage = (event) => {
-            // console.log('Получено сообщение:', event.data);
             setWebsocketData(JSON.parse(event.data))
         };
 
@@ -125,18 +123,6 @@ export const Messages = memo(({usersData, messagesData, dispatchNewTextInput, ad
                     </div>
                 </div>
             </div>
-            {/*<div className={s.dialogsItems}>*/}
-            {/*    {messagesData.messagesUsersData.map(u => <DialogUser key={u.id} id={u.id} animalName={u.animalName}*/}
-            {/*                                                         photoAvatar={u.photoAvatar}/>)}*/}
-            {/*</div>*/}
-            {/*<div className={s.messages}>*/}
-            {/*    {messagesData.messagesTextData.map(m => <UserMessage key={m.id} id={m.id}*/}
-            {/*                                                         messageText={m.messageText}/>)}*/}
-            {/*    <textarea onChange={onChangeMessageTextHandler} value={messagesData.messageText}*/}
-            {/*              placeholder="Enter your message"/>*/}
-            {/*    <button onClick={addMessage}>Sent message</button>*/}
-            {/*</div>*/}
-
         </div>
     )
 })

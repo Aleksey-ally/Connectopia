@@ -8,6 +8,7 @@ import {NavLink} from "react-router-dom";
 import {UserAvatar} from "components/UserAvatar";
 import {Typography} from "components/Typography";
 import {UsersType} from "redux/usersReducer";
+import {Button} from "components/Button";
 
 type MessagesPropsType = {
     usersData: UsersType
@@ -17,10 +18,10 @@ type MessagesPropsType = {
 }
 
 export const Messages = memo(({usersData, messagesData, dispatchNewTextInput, addMessage}: MessagesPropsType) => {
-    const onChangeMessageTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const onChangeMessageTextHandler = (e: ChangeEvent<HTMLInputElement>) => {
         dispatchNewTextInput(e.currentTarget.value)
     }
-
+    console.log(messagesData)
     const DialogUser = withSuspense(
         lazy(() =>
             import('./DialogUser')
@@ -38,9 +39,9 @@ export const Messages = memo(({usersData, messagesData, dispatchNewTextInput, ad
         {title: 'Groups', value: 'Groups'}]
 
     const [websocketData, setWebsocketData] = useState<any[]>([])
+    const socket = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
 
     useEffect(() => {
-        const socket = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
 
         socket.onopen = () => {
             console.log('Соединение установлено');
@@ -65,7 +66,10 @@ export const Messages = memo(({usersData, messagesData, dispatchNewTextInput, ad
         };
     }, [])
 
-    console.log(websocketData)
+    const addMessageSocket = (message:string) =>{
+        socket.send(message)
+    }
+
     return (
         <div className={s.dialogs}>
             <div className={s.sidebar}>
@@ -120,7 +124,13 @@ export const Messages = memo(({usersData, messagesData, dispatchNewTextInput, ad
                                <UserAvatar  size={'small'} photos={d.photo}/> <b>{d.userName}:</b> {d.message}
                             </div>
                         })}
+
                     </div>
+                    <TextField type="text" value={messagesData.messageText}
+                               onChange={onChangeMessageTextHandler}
+
+                    ></TextField>
+                    <Button onClick={()=>addMessageSocket(messagesData.messageText)}>Send</Button>
                 </div>
             </div>
         </div>

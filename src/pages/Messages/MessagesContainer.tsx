@@ -17,23 +17,23 @@ export const MessagesContainer = () => {
     const dispatchNewTextInput = (newText: string) => {
         dispatch(changeMessageText(newText))
     }
-    // const addMessage = () => {
-    //     dispatch(addMessage)
-    // }
+    const addMessageHandler = () => {
+        dispatch(addMessage())
+    }
 
 
     return <Messages usersData={usersData} messagesData={messagesData} dispatchNewTextInput={dispatchNewTextInput}
-                     addMessage={addMessage}/>
+                     addMessage={addMessageHandler}/>
 }
 
-type MapStateToPropsType = {
-    messagesData: MessagesDataType
-}
-
-type MapDispatchToPropsType = {
-    dispatchNewTextInput: (newText: string) => void
-    addMessage: () => void
-}
+// type MapStateToPropsType = {
+//     messagesData: MessagesDataType
+// }
+//
+// type MapDispatchToPropsType = {
+//     dispatchNewTextInput: (newText: string) => void
+//     addMessage: () => void
+// }
 
 
 // const mapStateToProps = (state: ReducersType): MapStateToPropsType => {

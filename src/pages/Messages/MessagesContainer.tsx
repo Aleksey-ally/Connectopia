@@ -1,6 +1,12 @@
 import {connect, useDispatch, useSelector} from "react-redux";
-import {ActionType, addMessage, changeMessageText, MessagesDataType} from "redux/messagesReducer";
-import {ReducersType} from "redux/reduxStore";
+import {
+    ActionType,
+    addMessage,
+    changeMessageText,
+    createConnectionGroupChat, destroyConnectionGroupChat, GroupChatDataType,
+    MessagesDataType, sendMessageChat
+} from "redux/messagesReducer";
+import {ReducersType, useAppDispatch} from "redux/reduxStore";
 import {Messages} from "./Messages";
 import {compose} from "redux";
 import {FC} from "react";
@@ -8,22 +14,31 @@ import {UsersType} from "redux/usersReducer";
 
 
 export const MessagesContainer = () => {
-
+    // const chatData = useSelector<ReducersType, GroupChatDataType[]>(state => state.messagesData.groupChatData)
     const messagesData = useSelector<ReducersType, MessagesDataType>(state => state.messagesData)
     const usersData = useSelector<ReducersType, UsersType>(state => state.usersData)
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const dispatchNewTextInput = (newText: string) => {
         dispatch(changeMessageText(newText))
     }
-    const addMessageHandler = () => {
-        dispatch(addMessage())
+    const sendMessageChatHandler = () => {
+        dispatch(sendMessageChat(messagesData.messageText))
+    }
+
+    const createConnectionGroupChatHandler = () => {
+        dispatch(createConnectionGroupChat())
+    }
+
+    const destroyConnectionGroupChatHandler = () => {
+        dispatch(destroyConnectionGroupChat)
     }
 
 
     return <Messages usersData={usersData} messagesData={messagesData} dispatchNewTextInput={dispatchNewTextInput}
-                     addMessage={addMessageHandler}/>
+                     sendMessage={sendMessageChatHandler} createConnectionGroupChat={createConnectionGroupChatHandler}
+                     destroyConnectionGroupChat={destroyConnectionGroupChatHandler}/>
 }
 
 // type MapStateToPropsType = {

@@ -22,15 +22,15 @@ type MessagesPropsType = {
     usersData: UsersType
     messagesData: MessagesDataType
     dispatchNewTextInput: (newText: string) => void
-    addMessage: () => void
+    sendMessage: () => void
+    createConnectionGroupChat:() => void
+    destroyConnectionGroupChat:() => void
 }
 
-export const Messages = memo(({usersData, messagesData, dispatchNewTextInput, addMessage}: MessagesPropsType) => {
-    const dispatch = useAppDispatch()
-    const chatData = useSelector<ReducersType, GroupChatDataType[]>(state => state.messagesData.groupChatData)
+export const Messages = memo(({usersData, messagesData, dispatchNewTextInput, sendMessage, createConnectionGroupChat, destroyConnectionGroupChat}: MessagesPropsType) => {
 
     useEffect(() => {
-        dispatch(createConnectionGroupChat())
+        createConnectionGroupChat()
 
 
         // socket.onopen = () => {
@@ -57,15 +57,15 @@ export const Messages = memo(({usersData, messagesData, dispatchNewTextInput, ad
         // };
 
         return () =>{
-            dispatch(destroyConnectionGroupChat)
+           destroyConnectionGroupChat()
         }
-    }, [dispatch])
+    }, [])
 
 
     const onChangeMessageTextHandler = (e: ChangeEvent<HTMLInputElement>) => {
         dispatchNewTextInput(e.currentTarget.value)
     }
-    console.log(chatData)
+
     const DialogUser = withSuspense(
         lazy(() =>
             import('./DialogUser')
@@ -84,8 +84,6 @@ export const Messages = memo(({usersData, messagesData, dispatchNewTextInput, ad
 
     const [websocketData, setWebsocketData] = useState<any[]>([])
     // const socket = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
-
-
 
     const addMessageSocket = (message: string) => {
         // socket.send(message)
@@ -140,7 +138,7 @@ export const Messages = memo(({usersData, messagesData, dispatchNewTextInput, ad
                 <div className={s.chatContent}>
                     chatContent
                     <div style={{width: '96rem', height: '31.25rem', border: '15px solid black', overflowY: 'scroll'}}>
-                        {chatData.map((d, index) => {
+                        {messagesData.groupChatData.map((d, index) => {
                             return <div key={index} style={{display: 'flex', alignItems: 'center'}}>
                                 <UserAvatar size={'small'} photos={d.photo}/> <b>{d.userName}:</b> {d.message}
                             </div>
@@ -150,7 +148,7 @@ export const Messages = memo(({usersData, messagesData, dispatchNewTextInput, ad
                     <TextField type="text" value={messagesData.messageText}
                                onChange={onChangeMessageTextHandler}>
                     </TextField>
-                    <Button onClick={() => dispatch(sendMessageChat(messagesData.messageText))}>Send</Button>
+                    <Button onClick={sendMessage}>Send</Button>
                 </div>
 
             </div>

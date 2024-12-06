@@ -1,11 +1,6 @@
-import React, {ChangeEvent, lazy, memo, useEffect, useState} from "react";
+import React, {ChangeEvent, lazy, memo, useEffect} from "react";
 import s from 'pages/Messages/Messages.module.scss';
-import {
-    createConnectionGroupChat,
-    destroyConnectionGroupChat,
-    GroupChatDataType,
-    MessagesDataType, sendMessageChat
-} from "redux/messagesReducer";
+import {MessagesDataType} from "redux/messagesReducer";
 import {withSuspense} from "utils/WithSuspense";
 import {TextField} from "components/TextField";
 import {TabSwitcher} from "components/TabSwitcher";
@@ -14,50 +9,30 @@ import {UserAvatar} from "components/UserAvatar";
 import {Typography} from "components/Typography";
 import {UsersType} from "redux/usersReducer";
 import {Button} from "components/Button";
-import {ReducersType, useAppDispatch} from "redux/reduxStore";
-import {useSelector} from "react-redux";
-import {chatGroupAPI} from "api/api";
 
 type MessagesPropsType = {
     usersData: UsersType
     messagesData: MessagesDataType
     dispatchNewTextInput: (newText: string) => void
     sendMessage: () => void
-    createConnectionGroupChat:() => void
-    destroyConnectionGroupChat:() => void
+    createConnectionGroupChat: () => void
+    destroyConnectionGroupChat: () => void
 }
 
-export const Messages = memo(({usersData, messagesData, dispatchNewTextInput, sendMessage, createConnectionGroupChat, destroyConnectionGroupChat}: MessagesPropsType) => {
+export const Messages = memo(({
+                                  usersData,
+                                  messagesData,
+                                  dispatchNewTextInput,
+                                  sendMessage,
+                                  createConnectionGroupChat,
+                                  destroyConnectionGroupChat
+                              }: MessagesPropsType) => {
 
     useEffect(() => {
         createConnectionGroupChat()
 
-
-        // socket.onopen = () => {
-        //     console.log('Соединение установлено');
-        //     // socket.send('Hello'); // Пробуем отправить тестовое сообщение
-        // };
-        //
-        // socket.onmessage = (event) => {
-        //     setWebsocketData(JSON.parse(event.data))
-        //     console.log(JSON.parse(event.data))
-        // };
-        //
-        //
-        // socket.onerror = (error) => {
-        //     console.error('Ошибка сокета:', error);
-        // };
-        //
-        // socket.onclose = () => {
-        //     console.log('Соединение закрыто');
-        // };
-
-        // return () => {
-        //     socket.close();
-        // };
-
-        return () =>{
-           destroyConnectionGroupChat()
+        return () => {
+            destroyConnectionGroupChat()
         }
     }, [])
 
@@ -81,13 +56,6 @@ export const Messages = memo(({usersData, messagesData, dispatchNewTextInput, se
     const tabs = [{title: 'Messages', value: 'Messages'},
         {title: 'Friends', value: 'Friends'},
         {title: 'Groups', value: 'Groups'}]
-
-    const [websocketData, setWebsocketData] = useState<any[]>([])
-    // const socket = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
-
-    const addMessageSocket = (message: string) => {
-        // socket.send(message)
-    }
 
     return (
         <div className={s.dialogs}>

@@ -95,7 +95,6 @@ export const chatGroupAPI = {
 
     destroyConnection() {
         this.socket?.close()
-        console.log('socket closed')
     },
 
     subscribe(onMessage: (data: GroupChatDataType[]) => void) {

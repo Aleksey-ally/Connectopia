@@ -4,7 +4,7 @@ import {
     createConnectionGroupChat,
     destroyConnectionGroupChat,
     GroupChatDataType,
-    MessagesDataType
+    MessagesDataType, sendMessageChat
 } from "redux/messagesReducer";
 import {withSuspense} from "utils/WithSuspense";
 import {TextField} from "components/TextField";
@@ -27,6 +27,7 @@ type MessagesPropsType = {
 
 export const Messages = memo(({usersData, messagesData, dispatchNewTextInput, addMessage}: MessagesPropsType) => {
     const dispatch = useAppDispatch()
+    const chatData = useSelector<ReducersType, GroupChatDataType[]>(state => state.messagesData.groupChatData)
 
     useEffect(() => {
         dispatch(createConnectionGroupChat())
@@ -60,7 +61,6 @@ export const Messages = memo(({usersData, messagesData, dispatchNewTextInput, ad
         }
     }, [dispatch])
 
-    const chatData = useSelector<ReducersType, GroupChatDataType[]>(state => state.messagesData.groupChatData)
 
     const onChangeMessageTextHandler = (e: ChangeEvent<HTMLInputElement>) => {
         dispatchNewTextInput(e.currentTarget.value)
@@ -148,11 +148,11 @@ export const Messages = memo(({usersData, messagesData, dispatchNewTextInput, ad
 
                     </div>
                     <TextField type="text" value={messagesData.messageText}
-                               onChange={onChangeMessageTextHandler}
-
-                    ></TextField>
-                    <Button onClick={() => addMessageSocket(messagesData.messageText)}>Send</Button>
+                               onChange={onChangeMessageTextHandler}>
+                    </TextField>
+                    <Button onClick={() => dispatch(sendMessageChat(messagesData.messageText))}>Send</Button>
                 </div>
+
             </div>
         </div>
     )

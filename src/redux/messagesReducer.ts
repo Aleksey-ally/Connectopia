@@ -3,13 +3,15 @@ import {Dispatch} from "redux";
 
 const RECEIVED_DATA_GROUP_CHAT = "RECEIVED-DATA-GROUP-CHAT";
 const ADD_MESSAGE = "ADD-MESSAGE";
+const ADD_MESSAGE_GROUP = "ADD-MESSAGE-GROUP";
 const CHANGE_MESSAGE_TEXT = "CHANGE-MESSAGE-TEXT";
 
 export type MessagesDataType = {
     messagesUsersData: UsersDataType[];
     messagesTextData: TextDataType[];
-    messageText: string;
     groupChatData: GroupChatDataType[]
+    messageText: string;
+    // messageTextGroup: string;
 };
 
 export type GroupChatDataType = {
@@ -52,7 +54,7 @@ export const messagesReducer = (state = initialState, action: ActionType): Messa
     switch (action.type) {
 
         case RECEIVED_DATA_GROUP_CHAT :
-            return {...state, groupChatData: [...action.data]};
+            return {...state, groupChatData: [...state.groupChatData, ...action.data]};
 
         case CHANGE_MESSAGE_TEXT:
             return {...state, messageText: action.payload.newText};
@@ -61,13 +63,13 @@ export const messagesReducer = (state = initialState, action: ActionType): Messa
             if (state.messageText.trim() !== "") {
                 return {
                     ...state,
-                    messagesTextData: [
-                        ...state.messagesTextData,
-                        {
-                            id: state.messagesTextData.length + 1,
-                            messageText: state.messageText,
-                        },
-                    ],
+                    // messagesTextData: [
+                    //     ...state.messagesTextData,
+                    //     {
+                    //         id: state.messagesTextData.length + 1,
+                    //         messageText: state.messageText,
+                    //     },
+                    // ],
                     messageText: "",
                 };
             }
@@ -83,8 +85,27 @@ type ReceivedGroupChatData = ReturnType<typeof receivedGroupChatData>;
 type AddMessageType = ReturnType<typeof addMessage>;
 type ChangeMessageTextType = ReturnType<typeof changeMessageText>;
 
-export const receivedGroupChatData = (data: GroupChatDataType[]) => ({type: RECEIVED_DATA_GROUP_CHAT, data} as const)
 
+//AC
+export const receivedGroupChatData = (data: GroupChatDataType[]) =>
+    ({
+        type: RECEIVED_DATA_GROUP_CHAT,
+        data
+    } as const)
+
+export const addMessage = () => ({type: ADD_MESSAGE} as const);
+// export const addMessageGroup = () => ({type: ADD_MESSAGE_GROUP} as const);
+
+export const changeMessageText = (newText: string) =>
+    ({
+        type: CHANGE_MESSAGE_TEXT,
+        payload: {
+            newText,
+        },
+    } as const);
+
+
+//Thunks
 export const createConnectionGroupChat = () => (dispatch: Dispatch) => {
     chatGroupAPI.createConnection()
 
@@ -97,12 +118,7 @@ export const destroyConnectionGroupChat = () => {
     chatGroupAPI.destroyConnection()
 }
 
-export const addMessage = () => ({type: ADD_MESSAGE} as const);
-
-export const changeMessageText = (newText: string) =>
-    ({
-        type: CHANGE_MESSAGE_TEXT,
-        payload: {
-            newText,
-        },
-    } as const);
+export const sendMessageChat = (message: string)  => (dispatch: Dispatch)=> {
+    chatGroupAPI.sendMessage(message)
+    dispatch(addMessage())
+}

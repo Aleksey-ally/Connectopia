@@ -1,12 +1,22 @@
-import {fireEvent, render, screen} from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 import {UserItem} from 'components/UserItem/UserItem';
 import {BrowserRouter} from "react-router-dom";
 
 describe('UserItem component', () => {
     let userData = {
         id: 1,
-        animalName: 'Buddy',
-        photoAvatar: 'avatar.jpg'
+        name: 'Buddy',
+        photos: {
+            small: 'avatarSmall.jpg',
+            large: 'avatarLarge.jpg'
+        },
+        status: 'Hey',
+        followed: false,
+        toggleFollowing: false,
+        follow: (id: number) => {
+        },
+        unFollow: (id: number) => {
+        }
     };
 
     test('Renders with correct data', () => {
@@ -16,24 +26,13 @@ describe('UserItem component', () => {
             </BrowserRouter>
         );
 
-        const linkElement = screen.getByRole('link', {name: /Buddy/i});
-        const imgElement = screen.getByAltText('avatar.jpg avatar');
+        const linkElement = screen.getByRole('link', {name: /Buddy/});
+        const imgElement = screen.getByAltText('User avatar');
+        const statusElement = screen.getByText(/Hey/)
 
         expect(linkElement).toBeTruthy();
         expect(imgElement).toBeTruthy();
+        expect(statusElement).toBeTruthy();
     });
 
-    test('Renders active NavLink', () => {
-        render(
-            <BrowserRouter>
-                <UserItem {...userData} />
-            </BrowserRouter>
-        );
-
-        const linkElement = screen.getByRole('link', { name: /Buddy/i });
-
-        fireEvent.click(linkElement)
-
-        expect(linkElement.className).toBe('activeDialogItem');
-    });
 })

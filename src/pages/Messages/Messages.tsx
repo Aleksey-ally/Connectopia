@@ -7,7 +7,6 @@ import {TabSwitcher, TabSwitcherContent} from "components/TabSwitcher";
 import {UserAvatar} from "components/UserAvatar";
 import {UsersType} from "redux/usersReducer";
 import {Button} from "components/Button";
-import {UserItem} from "components/UserItem";
 
 type MessagesPropsType = {
     usersData: UsersType

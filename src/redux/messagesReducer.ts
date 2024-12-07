@@ -2,6 +2,7 @@ import {chatGroupAPI} from "api/api";
 import {Dispatch} from "redux";
 
 const RECEIVED_DATA_GROUP_CHAT = "RECEIVED-DATA-GROUP-CHAT";
+const DELETED_DATA_GROUP_CHAT = "DELETED-DATA-GROUP-CHAT";
 const ADD_MESSAGE = "ADD-MESSAGE";
 const ADD_MESSAGE_GROUP = "ADD-MESSAGE-GROUP";
 const CHANGE_MESSAGE_TEXT = "CHANGE-MESSAGE-TEXT";
@@ -47,7 +48,8 @@ const initialState: MessagesDataType = {
 export type ActionType =
     | ChangeMessageTextType
     | AddMessageType
-    | ReceivedGroupChatData;
+    | ReceivedGroupChatData
+    | DeletedGroupChatData
 
 export const messagesReducer = (state = initialState, action: ActionType): MessagesDataType => {
 
@@ -55,6 +57,9 @@ export const messagesReducer = (state = initialState, action: ActionType): Messa
 
         case RECEIVED_DATA_GROUP_CHAT :
             return {...state, groupChatData: [...state.groupChatData, ...action.data]};
+
+        case DELETED_DATA_GROUP_CHAT :
+            return {...state, groupChatData: []}
 
         case CHANGE_MESSAGE_TEXT:
             return {...state, messageText: action.payload.newText};
@@ -82,6 +87,7 @@ export const messagesReducer = (state = initialState, action: ActionType): Messa
 };
 
 type ReceivedGroupChatData = ReturnType<typeof receivedGroupChatData>;
+type DeletedGroupChatData = ReturnType<typeof deletedGroupChatData>;
 type AddMessageType = ReturnType<typeof addMessage>;
 type ChangeMessageTextType = ReturnType<typeof changeMessageText>;
 
@@ -93,7 +99,13 @@ export const receivedGroupChatData = (data: GroupChatDataType[]) =>
         data
     } as const)
 
+export const deletedGroupChatData = () =>
+    ({
+        type: DELETED_DATA_GROUP_CHAT
+    } as const)
+
 export const addMessage = () => ({type: ADD_MESSAGE} as const);
+
 // export const addMessageGroup = () => ({type: ADD_MESSAGE_GROUP} as const);
 
 export const changeMessageText = (newText: string) =>
@@ -114,11 +126,13 @@ export const createConnectionGroupChat = () => (dispatch: Dispatch) => {
     })
 }
 
-export const destroyConnectionGroupChat = () => {
+export const destroyConnectionGroupChat = () => (dispatch: Dispatch) => {
     chatGroupAPI.destroyConnection()
+    dispatch(deletedGroupChatData())
+
 }
 
-export const sendMessageChat = (message: string)  => (dispatch: Dispatch)=> {
+export const sendMessageChat = (message: string) => (dispatch: Dispatch) => {
     chatGroupAPI.sendMessage(message)
     dispatch(addMessage())
 }

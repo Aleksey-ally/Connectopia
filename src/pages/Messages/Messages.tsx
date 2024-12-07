@@ -1,4 +1,4 @@
-import React, {ChangeEvent, lazy, memo, useEffect} from "react";
+import React, {ChangeEvent, lazy, memo} from "react";
 import s from 'pages/Messages/Messages.module.scss';
 import {MessagesDataType} from "redux/messagesReducer";
 import {withSuspense} from "utils/WithSuspense";
@@ -15,8 +15,6 @@ type MessagesPropsType = {
     messagesData: MessagesDataType
     dispatchNewTextInput: (newText: string) => void
     sendMessage: () => void
-    createConnectionGroupChat: () => void
-    destroyConnectionGroupChat: () => void
 }
 
 export const Messages = memo(({
@@ -24,17 +22,7 @@ export const Messages = memo(({
                                   messagesData,
                                   dispatchNewTextInput,
                                   sendMessage,
-                                  createConnectionGroupChat,
-                                  destroyConnectionGroupChat
                               }: MessagesPropsType) => {
-
-    useEffect(() => {
-        createConnectionGroupChat()
-
-        return () => {
-            destroyConnectionGroupChat()
-        }
-    }, [])
 
 
     const onChangeMessageTextHandler = (e: ChangeEvent<HTMLInputElement>) => {

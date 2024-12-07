@@ -99,6 +99,7 @@ export const chatGroupAPI = {
 
     destroyConnection() {
         this.socket?.close()
+        this.socket = null
     },
 
     subscribe(onMessage: (data: GroupChatDataType[]) => void) {

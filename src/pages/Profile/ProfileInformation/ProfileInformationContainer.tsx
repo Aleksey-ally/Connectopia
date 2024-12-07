@@ -89,8 +89,8 @@ export const ProfileInformationContainer = () => {
                 setLocalStatus(status);
                 await checkFollowed(Number(uID))
 
-            } catch (error) {
-                toast.success('Error when receiving user data', errorOptions)
+            } catch {
+                toast.error('Error when receiving user data', errorOptions)
             }
         })();
 

@@ -22,12 +22,6 @@ export type GroupChatDataType = {
     photo: string;
 }
 
-export type UsersDataType = {
-    id: number;
-    animalName: string;
-    photoAvatar: string;
-};
-
 export type TextDataType = {
     id: number;
     messageText: string;

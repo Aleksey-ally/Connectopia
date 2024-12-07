@@ -4,11 +4,10 @@ import {MessagesDataType} from "redux/messagesReducer";
 import {withSuspense} from "utils/WithSuspense";
 import {TextField} from "components/TextField";
 import {TabSwitcher, TabSwitcherContent} from "components/TabSwitcher";
-import {NavLink} from "react-router-dom";
 import {UserAvatar} from "components/UserAvatar";
-import {Typography} from "components/Typography";
 import {UsersType} from "redux/usersReducer";
 import {Button} from "components/Button";
+import {UserItem} from "components/UserItem";
 
 type MessagesPropsType = {
     usersData: UsersType
@@ -29,10 +28,10 @@ export const Messages = memo(({
         dispatchNewTextInput(e.currentTarget.value)
     }
 
-    const DialogUser = withSuspense(
+    const UserItem = withSuspense(
         lazy(() =>
-            import('./DialogUser')
-                .then(module => ({default: module.DialogUser}))
+            import('../../components/UserItem')
+                .then(module => ({default: module.UserItem}))
         ));
 
     const UserMessage = withSuspense(
@@ -72,21 +71,7 @@ export const Messages = memo(({
                         <TabSwitcherContent value={'Friends'}>
                             <div className={s.sidebarContent}>
                                 {usersData.users.map(u => (
-                                    <div className={s.user} key={u.id}>
-                                        <div className={s.userInfo}>
-                                            <NavLink className={s.linkAvatar} to={`/profile/${u.id}`}>
-                                                <UserAvatar size={'medium'} key={u.id} photos={u.photos.small}/>
-                                            </NavLink>
-                                            <div className={s.description}>
-                                                <NavLink to={`/profile/${u.id}`}>
-                                                    <Typography className={`${s.item} ${s.name}`} as={'h5'}
-                                                                variant={'h5'}>{u.name}</Typography>
-                                                </NavLink>
-                                                <Typography className={`${s.item} ${s.status}`} as={'span'}
-                                                            variant={'subtitle2'}>{u.status}</Typography>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <UserItem key={u.id} id={u.id} photos={u.photos} name={u.name} status={u.status}/>
                                 ))}
                             </div>
                         </TabSwitcherContent>
@@ -125,7 +110,7 @@ export const Messages = memo(({
                     </div>
                     <TextField type="text" value={messagesData.messageText}
                                onChange={onChangeMessageTextHandler}
-                    onKeyDown={handleKeyDown}>
+                               onKeyDown={handleKeyDown}>
                     </TextField>
                     <Button onClick={sendMessage}>Send</Button>
                 </div>

@@ -1,8 +1,8 @@
 import {fireEvent, render, screen} from '@testing-library/react';
-import {DialogUser} from './DialogUser';
+import {UserItem} from 'components/UserItem/UserItem';
 import {BrowserRouter} from "react-router-dom";
 
-describe('DialogUser component', () => {
+describe('UserItem component', () => {
     let userData = {
         id: 1,
         animalName: 'Buddy',
@@ -12,7 +12,7 @@ describe('DialogUser component', () => {
     test('Renders with correct data', () => {
         render(
             <BrowserRouter>
-                <DialogUser {...userData} />
+                <UserItem {...userData} />
             </BrowserRouter>
         );
 
@@ -26,7 +26,7 @@ describe('DialogUser component', () => {
     test('Renders active NavLink', () => {
         render(
             <BrowserRouter>
-                <DialogUser {...userData} />
+                <UserItem {...userData} />
             </BrowserRouter>
         );
 

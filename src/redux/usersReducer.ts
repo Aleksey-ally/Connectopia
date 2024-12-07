@@ -216,3 +216,8 @@ export const unfollowOnUser = (userID: number) =>
 
         dispatch(setToggleFollowing(userID, false))
     }
+
+export const checkFollowedUser = async (userID: number) =>
+      {
+        return await usersAPI.checkFollowed(userID)
+    }

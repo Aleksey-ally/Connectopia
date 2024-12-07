@@ -12,6 +12,7 @@ import {TextField} from "components/TextField";
 import {Typography} from "components/Typography";
 import {toast} from "react-toastify";
 import {errorOptions, successOptions} from "utils/ToastifyOptions/ToastifyOptions";
+import {Button} from "components/Button";
 
 type Props = {
     currentUserID: number | null
@@ -26,30 +27,26 @@ type Props = {
     editForm: boolean
     setEditForm: (value: boolean) => void
     errorMessage: string[]
+    follow: (userID: number) => void
+    unFollow: (userID: number) => void
+    isFollow: boolean
 }
 
 export const ProfileInformation = (({
-                                        currentUserID,
-                                        uID,
-                                        profile,
-                                        status,
-                                        edit,
-                                        changeStatusHandler,
-                                        toggleEditHandler,
-                                        dispatch,
-                                        handleSubmitProfileForm,
-                                        editForm,
-                                        setEditForm,
-                                        errorMessage
+                                        currentUserID, uID, profile,
+                                        status, edit, changeStatusHandler,
+                                        toggleEditHandler, dispatch,
+                                        handleSubmitProfileForm, editForm,
+                                        setEditForm, errorMessage, follow,
+                                        unFollow, isFollow
                                     }: Props) => {
 
     const [isEditVisible, setEditVisible] = useState<boolean>(false);
-
     const userAvatarSelected = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.currentTarget.files) {
             dispatch(setNewUserAvatar(e.currentTarget.files[0]))
-                .then((message)=>{
-                    if (message){
+                .then((message) => {
+                    if (message) {
                         toast.error(message, errorOptions)
                     } else {
                         toast.success('You are successfully changed avatar', successOptions)
@@ -70,46 +67,59 @@ export const ProfileInformation = (({
     const classNames = {
         userAvatar: `${s.userAvatar} ${isEditVisible ? s.opacity : ''}`
     }
-
     return (
         <div className={s.description}>
 
             <div className={s.userCover} style={{backgroundImage: `url(${UserCover})`}}>
 
-                <div className={s.userInfo}>
-                    <input id="avatarInput" className={s.fileUploader} type="file" onChange={userAvatarSelected}/>
-                    <UserAvatar className={classNames.userAvatar} onMouseOver={handleMouseOver}
-                                onMouseOut={handleMouseOut}
-                                size={'large'}
-                                photos={profile?.photos?.small}>
+                <div className={s.userWrapper}>
+                    <div className={s.userInfo}>
+                        <input id="avatarInput" className={s.fileUploader} type="file" onChange={userAvatarSelected}/>
+                        <UserAvatar className={classNames.userAvatar} onMouseOver={handleMouseOver}
+                                    onMouseOut={handleMouseOut}
+                                    size={'large'}
+                                    photos={profile?.photos?.small}>
 
-                        {Number(uID) === currentUserID && isEditVisible &&
-                            <label htmlFor="avatarInput" className={s.edit} onMouseOver={handleMouseOver}
-                                   onMouseOut={handleMouseOut}>
-                                <Edit/>
-                            </label>
+                            {Number(uID) === currentUserID && isEditVisible &&
+                                <label htmlFor="avatarInput" className={s.edit} onMouseOver={handleMouseOver}
+                                       onMouseOut={handleMouseOut}>
+                                    <Edit/>
+                                </label>
+                            }
+                        </UserAvatar>
+
+                        {edit &&
+                            <div>
+                                <label>Status</label>
+                                <TextField onBlur={toggleEditHandler} autoFocus value={status}
+                                           onChange={changeStatusHandler}/>
+                            </div>
                         }
+                        {!edit &&
+                            <div>
+                                <label className={s.statusTitle} htmlFor={'status'}
+                                       onDoubleClick={toggleEditHandler}>Status</label>
+                                <Typography id={'status'} className={s.status} variant={'subtitle2'}
+                                            as={'div'}
+                                            onDoubleClick={toggleEditHandler}>{status}</Typography>
+                            </div>
+                        }
+                    </div>
 
-                    </UserAvatar>
+                    {Number(currentUserID) !== Number(uID) && < div className={s.buttonsPanel}>
+                        {isFollow
+                            ? <Button variant={'secondary'} onClick={() => {
+                                unFollow(Number(uID))
+                            }}>Unfollow
+                            </Button>
+                            : <Button onClick={() => {
+                                follow(Number(uID))
+                            }}>Follow</Button>}
+                    </div>
+                    }
 
-                    {edit &&
-                        <div>
-                            <label>Status</label>
-                            <TextField onBlur={toggleEditHandler} autoFocus value={status}
-                                       onChange={changeStatusHandler}/>
-                        </div>
-                    }
-                    {!edit &&
-                        <div>
-                            <label className={s.statusTitle} htmlFor={'status'} onDoubleClick={toggleEditHandler}>Status</label>
-                            <Typography id={'status'} className={s.status} variant={'subtitle2'}
-                                        as={'div'}
-                                        onDoubleClick={toggleEditHandler}>{status}</Typography>
-                        </div>
-                    }
 
                 </div>
-
             </div>
 
             <div className={s.personalInfo}>

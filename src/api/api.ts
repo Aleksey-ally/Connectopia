@@ -45,6 +45,10 @@ export const usersAPI = {
     async unFollow(uID: number) {
         const res = await instance.delete<DefaultResponseType>(`follow/${uID}`)
         return res.data
+    },
+    async checkFollowed(uID: number) {
+        const res = await instance.get<boolean>(`follow/${uID}`)
+        return res.data
     }
 }
 

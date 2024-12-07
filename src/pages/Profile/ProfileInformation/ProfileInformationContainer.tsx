@@ -7,6 +7,7 @@ import {ProfileInformation} from './ProfileInformation';
 import {PhotosResponse, ProfileUserResponseType} from "api/api.types";
 import {toast} from "react-toastify";
 import {errorOptions, successOptions} from "utils/ToastifyOptions/ToastifyOptions";
+import {checkFollowedUser, followOnUser, unfollowOnUser} from "redux/usersReducer";
 
 export const ProfileInformationContainer = () => {
     const dispatch = useAppDispatch()
@@ -19,6 +20,7 @@ export const ProfileInformationContainer = () => {
     const [editStatus, setEditStatus] = useState<boolean>(false)
     const [editForm, setEditForm] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string[]>([])
+    const [isFollow, setIsFollow] = useState<boolean>(false)
 
     const toggleEditHandler = useCallback(() => {
         Number(uID) === currentUserID && setEditStatus(!editStatus)
@@ -49,18 +51,44 @@ export const ProfileInformationContainer = () => {
             })
     }
 
+    const follow = useCallback((userID: number) => {
+        dispatch(followOnUser(userID))
+            .then(() => {
+                toast.success('You are successfully following', successOptions)
+                setIsFollow(true)
+            })
+    }, [dispatch])
+
+    const unFollow = useCallback((userID: number) => {
+        dispatch(unfollowOnUser(userID))
+            .then(() => {
+                toast.success('You are successfully unfollowing', successOptions)
+                setIsFollow(false)
+
+            })
+    }, [dispatch])
+
+    const checkFollowed = useCallback(async (userID: number) => {
+
+        await checkFollowedUser(userID).then((data) => {
+            setIsFollow(data)
+        });
+
+    }, [dispatch])
+
     const {uID} = useParams()
 
     const userID = Number(uID) || currentUserID
-
     useEffect(() => {
         if (userID === null) return
 
-       (async () => {
+        (async () => {
             try {
                 await dispatch(getUserProfile(userID));
                 await dispatch(getUserStatus(userID));
                 setLocalStatus(status);
+                await checkFollowed(Number(uID))
+
             } catch (error) {
                 toast.success('Error when receiving user data', errorOptions)
             }
@@ -75,5 +103,8 @@ export const ProfileInformationContainer = () => {
                                dispatch={dispatch}
                                handleSubmitProfileForm={handleSubmitProfileForm}
                                editForm={editForm} setEditForm={setEditFormWithCheck}
-                               errorMessage={errorMessage}/>
+                               errorMessage={errorMessage}
+                               follow={follow}
+                               unFollow={unFollow}
+                               isFollow={isFollow}/>
 }

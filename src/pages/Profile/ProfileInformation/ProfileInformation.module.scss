@@ -25,49 +25,59 @@
             z-index: -1;
         }
 
-        .userInfo {
+        .userWrapper{
             display: flex;
+            justify-content: space-between;
             align-items: center;
 
-            .fileUploader {
-                display: none;
-            }
+            .userInfo {
+                display: flex;
+                align-items: center;
 
-            .userAvatar {
-                position: relative;
-                margin-right: 1.875rem;
-
-                &.opacity {
-                    opacity: 0.7;
+                .fileUploader {
+                    display: none;
                 }
 
-                .edit {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
+                .userAvatar {
+                    position: relative;
+                    margin-right: 1.875rem;
+
+                    &.opacity {
+                        opacity: 0.7;
+                    }
+
+                    .edit {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        cursor: pointer;
+
+                    }
+
+                }
+
+                .statusTitle{
                     cursor: pointer;
-
+                    &:hover{
+                        opacity: 0.7;
+                    }
                 }
+
+                .status{
+                    cursor: pointer;
+                    &:hover{
+                        opacity: 0.7;
+                    }
+                }
+
 
             }
 
-            .statusTitle{
-                cursor: pointer;
-                &:hover{
-                    opacity: 0.7;
-                }
-            }
-
-            .status{
-                cursor: pointer;
-                &:hover{
-                    opacity: 0.7;
-                }
-            }
-
-
+            .buttonsPanel{}
         }
+
+
     }
 
     .personalInfo {}

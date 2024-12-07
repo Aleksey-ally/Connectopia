@@ -18,11 +18,12 @@ type Props = {
   value?: string
   onValueChange?: (value: string) => void
   children?: ReactNode
+  className?: string
 }
 
-export const TabSwitcher = ({ tabs, defaultValue, value, onValueChange, children }: Props) => {
+export const TabSwitcher = ({ tabs, defaultValue, value, onValueChange, children, className, ...rest }: Props) => {
   return (
-    <TabsRadix.Root defaultValue={defaultValue} value={value} onValueChange={onValueChange}>
+    <TabsRadix.Root className={className} defaultValue={defaultValue} value={value} onValueChange={onValueChange} {...rest}>
       <TabsRadix.List className={s.list}>
         {tabs.map(t => {
           return (

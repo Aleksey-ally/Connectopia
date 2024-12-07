@@ -14,6 +14,7 @@ import {UsersType} from "redux/usersReducer";
 export const MessagesContainer = () => {
     const messagesData = useSelector<ReducersType, MessagesDataType>(state => state.messagesData)
     const usersData = useSelector<ReducersType, UsersType>(state => state.usersData)
+    console.log(usersData)
 
     const dispatch = useAppDispatch()
 

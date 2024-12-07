@@ -34,8 +34,8 @@ export const authAPI = {
 }
 
 export const usersAPI = {
-    async getUsers(pageSize: number, currentPage: number) {
-        const res = await instance.get<ResponseUsersType>(`users?count=${pageSize}&page=${currentPage}`)
+    async getUsers(pageSize: number, currentPage: number, friend?: boolean, term?: string) {
+        const res = await instance.get<ResponseUsersType>(`users?count=${pageSize}&page=${currentPage}&friend=${friend}`)
         return res.data
     },
     async follow(uID: number) {
@@ -109,7 +109,7 @@ export const chatGroupAPI = {
         };
     },
 
-    sendMessage(message:string){
+    sendMessage(message: string) {
         this.socket?.send(message)
     }
 

@@ -8,7 +8,8 @@ import {
 } from "redux/messagesReducer";
 import {ReducersType, useAppDispatch} from "redux/reduxStore";
 import {Messages} from "./Messages";
-import {UsersType} from "redux/usersReducer";
+import {getUsers, UsersType} from "redux/usersReducer";
+import {useEffect} from "react";
 
 
 export const MessagesContainer = () => {
@@ -32,6 +33,12 @@ export const MessagesContainer = () => {
     const destroyConnectionGroupChatHandler = () => {
         dispatch(destroyConnectionGroupChat)
     }
+
+    useEffect(() => {
+
+        dispatch(getUsers(usersData.pageSize, usersData.currentPage, true))
+
+    }, [])
 
 
     return <Messages usersData={usersData} messagesData={messagesData} dispatchNewTextInput={dispatchNewTextInput}

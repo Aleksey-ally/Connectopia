@@ -142,11 +142,11 @@ export const setPageSize = (pageSize: number) => ({
 } as const)
 
 
-export const getUsers = (pageSize: number, currentPage: number) =>
+export const getUsers = (pageSize: number, currentPage: number, friend?: boolean, term?: string) =>
     async (dispatch: AppThunkDispatch) => {
         dispatch(setFetching(true))
 
-        const res = await usersAPI.getUsers(pageSize, currentPage)
+        const res = await usersAPI.getUsers(pageSize, currentPage, friend)
 
         if (!res.error) {
             dispatch(setCurrentPage(currentPage))
@@ -217,7 +217,6 @@ export const unfollowOnUser = (userID: number) =>
         dispatch(setToggleFollowing(userID, false))
     }
 
-export const checkFollowedUser = async (userID: number) =>
-      {
-        return await usersAPI.checkFollowed(userID)
-    }
+export const checkFollowedUser = async (userID: number) => {
+    return await usersAPI.checkFollowed(userID)
+}

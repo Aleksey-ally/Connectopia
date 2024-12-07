@@ -47,6 +47,12 @@ export const Messages = memo(({
         {title: 'Groups', value: 'Groups'}
     ]
 
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === "Enter") {
+            sendMessage()
+        }
+    };
+
     return (
         <div className={s.dialogs}>
             <div className={s.sidebar}>
@@ -118,7 +124,8 @@ export const Messages = memo(({
 
                     </div>
                     <TextField type="text" value={messagesData.messageText}
-                               onChange={onChangeMessageTextHandler}>
+                               onChange={onChangeMessageTextHandler}
+                    onKeyDown={handleKeyDown}>
                     </TextField>
                     <Button onClick={sendMessage}>Send</Button>
                 </div>

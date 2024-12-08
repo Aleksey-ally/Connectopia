@@ -1,7 +1,6 @@
-import React, {ChangeEvent, lazy, memo} from "react";
+import React, {ChangeEvent, memo} from "react";
 import s from 'pages/Messages/Messages.module.scss';
 import {MessagesDataType} from "redux/messagesReducer";
-import {withSuspense} from "utils/WithSuspense";
 import {TextField} from "components/TextField";
 import {TabSwitcher, TabSwitcherContent} from "components/TabSwitcher";
 import {UserAvatar} from "components/UserAvatar";
@@ -30,12 +29,6 @@ export const Messages = memo(({
     const onChangeMessageTextHandler = (e: ChangeEvent<HTMLInputElement>) => {
         dispatchNewTextInput(e.currentTarget.value)
     }
-
-    const UserMessage = withSuspense(
-        lazy(() =>
-            import('./UserMessage')
-                .then(module => ({default: module.UserMessage}))
-        ));
 
     const tabs = [
         {title: 'Messages', value: 'Messages'},

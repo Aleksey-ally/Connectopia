@@ -17,6 +17,7 @@ import {errorOptions} from "utils/ToastifyOptions/ToastifyOptions";
 export const MessagesContainer = () => {
     const messagesData = useSelector<ReducersType, MessagesDataType>(state => state.messagesData)
     const usersData = useSelector<ReducersType, UsersType>(state => state.usersData)
+    const currentUserId = useSelector<ReducersType, number | null>(state => state.auth.id)
 
     const dispatch = useAppDispatch()
 
@@ -54,5 +55,5 @@ export const MessagesContainer = () => {
 
 
     return <Messages usersData={usersData} messagesData={messagesData} dispatchNewTextInput={dispatchNewTextInput}
-                     sendMessage={sendMessageChatHandler}/>
+                     sendMessage={sendMessageChatHandler} currentUserId={currentUserId}/>
 }

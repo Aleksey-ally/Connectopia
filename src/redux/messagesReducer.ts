@@ -22,11 +22,6 @@ export type GroupChatDataType = {
     photo: string;
 }
 
-export type TextDataType = {
-    id: number;
-    messageText: string;
-};
-
 const initialState: MessagesDataType = {
     messagesUsersData: [],
 

@@ -8,12 +8,14 @@ import {UserAvatar} from "components/UserAvatar";
 import {UsersType} from "redux/usersReducer";
 import {Button} from "components/Button";
 import {Send} from "assets/icons";
+import {UserItem} from "components/UserItem";
 
 type MessagesPropsType = {
     usersData: UsersType
     messagesData: MessagesDataType
     dispatchNewTextInput: (newText: string) => void
     sendMessage: () => void
+    currentUserId: number | null
 }
 
 export const Messages = memo(({
@@ -21,18 +23,13 @@ export const Messages = memo(({
                                   messagesData,
                                   dispatchNewTextInput,
                                   sendMessage,
+                                  currentUserId
                               }: MessagesPropsType) => {
 
 
     const onChangeMessageTextHandler = (e: ChangeEvent<HTMLInputElement>) => {
         dispatchNewTextInput(e.currentTarget.value)
     }
-
-    const UserItem = withSuspense(
-        lazy(() =>
-            import('../../components/UserItem')
-                .then(module => ({default: module.UserItem}))
-        ));
 
     const UserMessage = withSuspense(
         lazy(() =>
@@ -69,9 +66,10 @@ export const Messages = memo(({
                             Groups
                         </TabSwitcherContent>
                         <TabSwitcherContent className={s.sidebarContent} value={'Friends'}>
-                                {usersData.users.map(u => (
-                                    <UserItem className={s.userItem} key={u.id} id={u.id} photos={u.photos} name={u.name} status={u.status} userAvatar={'small'} />
-                                ))}
+                            {usersData.users.map(u => (
+                                <UserItem className={s.userItem} key={u.id} id={u.id} photos={u.photos} name={u.name}
+                                          status={u.status} userAvatar={'small'}/>
+                            ))}
                         </TabSwitcherContent>
                         <TabSwitcherContent value={'Groups'}>
                             <div className={s.groups}>
@@ -92,17 +90,24 @@ export const Messages = memo(({
                 </div>
                 <div className={s.chatContent}>
                     chatContent
-                    <div className={s.chatData} >
+                    <div className={s.chatData}>
                         {messagesData.groupChatData.map((d, index) => {
-                            return <div key={index} style={{display: 'flex', alignItems: 'center'}}>
+                            return <div
+                                className={`${s.messageItem} ${d.userId === currentUserId ? s.currentUser : ''}`}
+                                key={index}>
                                 <UserAvatar size={'small'} photos={d.photo}/>
-                                <b>{d.userName}:</b> {d.message}
+                                <div className={s.messageWrapper}>
+                                    <span className={s.userName}>{d.userName}</span>
+                                    <span className={s.text}>{d.message}</span>
+                                </div>
                             </div>
                         })}
 
                     </div>
                     <div className={s.sendMessageBar}>
-                        <TextField type="text" value={messagesData.messageText}
+                        <TextField type="text"
+                                   placeholder={'Write your message'}
+                                   value={messagesData.messageText}
                                    onChange={onChangeMessageTextHandler}
                                    onKeyDown={handleKeyDown}>
                         </TextField>

@@ -7,6 +7,7 @@ import {TabSwitcher, TabSwitcherContent} from "components/TabSwitcher";
 import {UserAvatar} from "components/UserAvatar";
 import {UsersType} from "redux/usersReducer";
 import {Button} from "components/Button";
+import {Send} from "assets/icons";
 
 type MessagesPropsType = {
     usersData: UsersType
@@ -105,7 +106,7 @@ export const Messages = memo(({
                                    onChange={onChangeMessageTextHandler}
                                    onKeyDown={handleKeyDown}>
                         </TextField>
-                        <Button className={s.button} onClick={sendMessage}>Send</Button>
+                        <Button className={s.button} onClick={sendMessage}><Send/></Button>
                     </div>
 
                 </div>

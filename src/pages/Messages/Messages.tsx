@@ -52,14 +52,14 @@ export const Messages = memo(({
     };
 
     return (
-        <div className={s.dialogs}>
+        <div className={s.messages}>
             <div className={s.sidebar}>
                 <div className={s.search}>
                     <TextField placeholder={'Search conversation '} type={'text'} isSearch/>
                 </div>
 
                 <div className={s.tabs}>
-                    <TabSwitcher className={s.tabs} tabs={tabs}>
+                    <TabSwitcher tabs={tabs}>
                         <TabSwitcherContent value={'Messages'}>
                             Friend 1
                             Friend 2
@@ -67,12 +67,10 @@ export const Messages = memo(({
                             Conversation
                             Groups
                         </TabSwitcherContent>
-                        <TabSwitcherContent value={'Friends'}>
-                            <div className={s.sidebarContent}>
+                        <TabSwitcherContent className={s.sidebarContent} value={'Friends'}>
                                 {usersData.users.map(u => (
-                                    <UserItem key={u.id} id={u.id} photos={u.photos} name={u.name} status={u.status}/>
+                                    <UserItem className={s.userItem} key={u.id} id={u.id} photos={u.photos} name={u.name} status={u.status} userAvatar={'small'} />
                                 ))}
-                            </div>
                         </TabSwitcherContent>
                         <TabSwitcherContent value={'Groups'}>
                             <div className={s.groups}>
@@ -93,12 +91,7 @@ export const Messages = memo(({
                 </div>
                 <div className={s.chatContent}>
                     chatContent
-                    <div style={{
-                        width: '96rem',
-                        height: '31.25rem',
-                        border: '15px solid black',
-                        overflowY: 'scroll'
-                    }}>
+                    <div className={s.chatData} >
                         {messagesData.groupChatData.map((d, index) => {
                             return <div key={index} style={{display: 'flex', alignItems: 'center'}}>
                                 <UserAvatar size={'small'} photos={d.photo}/>
@@ -107,11 +100,14 @@ export const Messages = memo(({
                         })}
 
                     </div>
-                    <TextField type="text" value={messagesData.messageText}
-                               onChange={onChangeMessageTextHandler}
-                               onKeyDown={handleKeyDown}>
-                    </TextField>
-                    <Button onClick={sendMessage}>Send</Button>
+                    <div className={s.sendMessageBar}>
+                        <TextField type="text" value={messagesData.messageText}
+                                   onChange={onChangeMessageTextHandler}
+                                   onKeyDown={handleKeyDown}>
+                        </TextField>
+                        <Button className={s.button} onClick={sendMessage}>Send</Button>
+                    </div>
+
                 </div>
 
             </div>

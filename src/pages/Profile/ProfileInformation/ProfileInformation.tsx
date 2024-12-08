@@ -74,7 +74,7 @@ export const ProfileInformation = (({
 
                 <div className={s.userWrapper}>
                     <div className={s.userInfo}>
-                        <input id="avatarInput" className={s.fileUploader} type="file" onChange={userAvatarSelected}/>
+                        <input id="avatarInp ut" className={s.fileUploader} type="file" onChange={userAvatarSelected}/>
                         <UserAvatar className={classNames.userAvatar} onMouseOver={handleMouseOver}
                                     onMouseOut={handleMouseOut}
                                     size={'large'}

@@ -1,21 +1,60 @@
-.dialogs {
+.messages {
 
-    display: flex;
-    flex-direction: row;
-    padding: 1.25rem 1.25rem 0.625rem 1.875rem;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  padding: 1.25rem 1.25rem 0.625rem 1.875rem;
+  justify-content: space-between;
+  background-color: var(--color-main);
 
-    .sidebar {
+  .sidebar {
 
-        .search{}
+    .search {
+    }
 
-        .tabs{}
+    .tabs {
+      .sidebarContent {
+        flex-direction: column;
 
-        .sidebarContent{}
+        .userItem {
+          background-color: var(--color-second);
 
+        }
+      }
+    }
+
+    .sidebarFooter {
 
     }
 
-    .chat {}
+  }
+
+  .chat {
+    .chatHeader {
+    }
+
+    .chatContent {
+      .chatData {
+        width: 40rem;
+        height: 31.25rem;
+        overflow-y: scroll;
+        scrollbar-width: none;
+        background-color: var(--color-second);
+        border-radius: var(--border-radius);
+
+      }
+
+      .chatData::-webkit-scrollbar {
+        display: none;
+      }
+
+      .sendMessageBar {
+        display: flex;
+
+        .button {
+          margin: auto .5rem;
+        }
+      }
+    }
+  }
 }
 

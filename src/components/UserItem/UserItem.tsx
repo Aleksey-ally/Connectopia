@@ -12,6 +12,8 @@ type UserItemType =
     & {
     follow?: (id: number) => void
     unFollow?: (id: number) => void
+    className?: string
+    userAvatar?: 'medium' | 'small' | 'large'
 }
 
 export const UserItem = memo(({
@@ -22,14 +24,16 @@ export const UserItem = memo(({
                                   followed,
                                   toggleFollowing,
                                   follow,
-                                  unFollow
+                                  unFollow,
+                                  className,
+                                  userAvatar = 'medium'
                               }: UserItemType) => {
 
     return (
-        <div className={s.user}>
+        <div className={`${s.user} ${className}`}>
             <div className={s.userInfo}>
                 <NavLink className={s.linkAvatar} to={`/profile/${id}`}>
-                    <UserAvatar size={'medium'} photos={photos.small}/>
+                    <UserAvatar size={userAvatar} photos={photos.small}/>
                 </NavLink>
                 <div className={s.description}>
                     <NavLink to={`/profile/${id}`}>

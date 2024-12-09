@@ -7,6 +7,7 @@ export type UsersType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    friends: UserType[]
 }
 
 export type UserType = {
@@ -26,6 +27,7 @@ const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT"
 const SET_FETCHING = "SET-FETCHING"
 const TOGGLE_FOLLOWING = "TOGGLE-FOLLOWING"
 const SET_PAGE_SIZE = "SET-PAGE-SIZE"
+const SET_FRIENDS = "SET-FRIENDS"
 
 const initialState: UsersType = {
     users: [],
@@ -33,6 +35,7 @@ const initialState: UsersType = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
+    friends: []
 }
 
 
@@ -45,6 +48,7 @@ type ActionType =
     | setFetching
     | SetToggleFollowing
     | SetPageSize
+    | SetFriends
 
 
 export const usersReducer = (state = initialState, action: ActionType): UsersType => {
@@ -87,6 +91,10 @@ export const usersReducer = (state = initialState, action: ActionType): UsersTyp
             return {...state, pageSize: action.pageSize}
         }
 
+        case SET_FRIENDS : {
+            return {...state, friends: action.friends}
+        }
+
         default:
             return state
     }
@@ -99,6 +107,7 @@ type setTotalUsersCount = ReturnType<typeof setTotalUsersCount>
 type setFetching = ReturnType<typeof setFetching>
 type SetToggleFollowing = ReturnType<typeof setToggleFollowing>
 type SetPageSize = ReturnType<typeof setPageSize>
+type SetFriends = ReturnType<typeof setFriends>
 
 export const follow = (userID: number) => ({
     type: FOLLOW,
@@ -141,18 +150,36 @@ export const setPageSize = (pageSize: number) => ({
     pageSize,
 } as const)
 
+export const setFriends = (friends: UserType[]) => ({
+    type: SET_FRIENDS,
+    friends
+} as const)
+
 
 export const getUsers = (pageSize: number, currentPage: number, friend?: boolean, term?: string) =>
     async (dispatch: AppThunkDispatch) => {
         dispatch(setFetching(true))
 
-        const res = await usersAPI.getUsers(pageSize, currentPage, friend)
+        let res
 
-        if (!res.error) {
-            dispatch(setCurrentPage(currentPage))
-            dispatch(setUsers(res.items))
-            dispatch(setTotalUsersCount(res.totalCount))
+        if (friend === true) {
+            res = await usersAPI.getUsers(pageSize, currentPage, friend)
+
+            if (!res.error) {
+                dispatch(setFriends(res.items))
+            }
+
+        } else {
+            res = await usersAPI.getUsers(pageSize, currentPage)
+
+            if (!res.error) {
+                dispatch(setCurrentPage(currentPage))
+                dispatch(setUsers(res.items))
+                dispatch(setTotalUsersCount(res.totalCount))
+            }
         }
+
+
         dispatch(setFetching(false))
     }
 

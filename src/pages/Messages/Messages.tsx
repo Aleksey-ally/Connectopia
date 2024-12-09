@@ -59,7 +59,7 @@ export const Messages = memo(({
                             Groups
                         </TabSwitcherContent>
                         <TabSwitcherContent className={s.sidebarContent} value={'Friends'}>
-                            {usersData.users.map(u => (
+                            {usersData.friends.map(u => (
                                 <UserItem className={s.userItem} key={u.id} id={u.id} photos={u.photos} name={u.name}
                                           status={u.status} userAvatar={'small'}/>
                             ))}

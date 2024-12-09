@@ -17,16 +17,29 @@ import {UsersContainer} from 'pages/Users';
 import {HeaderContainer} from "components/Header";
 import {MessagesContainer} from "pages/Messages";
 import {Preloader} from "components/Preloader";
+import {getUsers, UsersType} from "redux/usersReducer";
+import {toast} from "react-toastify";
+import {errorOptions} from "utils/ToastifyOptions/ToastifyOptions";
 
 const App = () => {
     const dispatch = useAppDispatch()
-
-    useEffect(() => {
-        dispatch(getAuthUserData)
-    }, [])
-
     const initializingApp = useSelector<ReducersType, boolean>(state => state.app.initializing)
     const auth = useSelector<ReducersType, Auth>(state => state.auth)
+    const usersData = useSelector<ReducersType, UsersType>(state => state.usersData)
+
+
+    useEffect(() => {
+        (async () => {
+            try {
+                await dispatch(getAuthUserData)
+                await dispatch(getUsers(usersData.pageSize, usersData.currentPage, true))
+            } catch {
+                toast.error('Error when receiving data', errorOptions)
+            }
+        })()
+
+    }, [])
+
 
     if (!initializingApp) {
         return <Preloader/>
@@ -37,7 +50,7 @@ const App = () => {
             <HeaderContainer auth={auth}/>
             {auth.isAuth ? <div className={s.appWrapper}>
 
-                    <Navbar/>
+                    <Navbar friendsData={usersData.friends} id={auth.id}/>
                     <div className={s.content}>
                         <Routes>
                             <Route path='/messages/:uID?'

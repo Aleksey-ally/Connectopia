@@ -1,6 +1,5 @@
 import React, {memo} from "react";
 import s from "pages/Navbar/FriendsSection/FriendsSection.module.scss";
-import {UsersDataType} from "redux/messagesReducer";
 import {UserAvatar} from "components/UserAvatar";
 import {UserType} from "redux/usersReducer";
 

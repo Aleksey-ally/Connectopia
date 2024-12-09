@@ -8,7 +8,6 @@ const ADD_MESSAGE_GROUP = "ADD-MESSAGE-GROUP";
 const CHANGE_MESSAGE_TEXT = "CHANGE-MESSAGE-TEXT";
 
 export type MessagesDataType = {
-    messagesUsersData: UsersDataType[];
     messagesTextData: TextDataType[];
     groupChatData: GroupChatDataType[]
     messageText: string;
@@ -28,8 +27,6 @@ export type TextDataType = {
 };
 
 const initialState: MessagesDataType = {
-    messagesUsersData: [],
-
     messagesTextData: [
         {id: 1, messageText: "Frrr fr fr"},
     ],

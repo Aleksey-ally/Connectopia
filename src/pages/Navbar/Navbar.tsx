@@ -1,27 +1,23 @@
-import {useSelector} from 'react-redux';
 import {NavLink} from 'react-router-dom';
-import {ReducersType, useAppDispatch} from 'redux/reduxStore';
 import {FriendsSection} from "./FriendsSection";
 import s from 'pages/Navbar/Navbar.module.scss';
-import React, {useEffect} from "react";
-import {getUsers, UsersType, UserType} from "redux/usersReducer";
+import React from "react";
+import {UserType} from "redux/usersReducer";
+import {Auth} from "redux/authReducer";
+
+type NavbarType = {
+    friendsData: UserType[]
+} & Pick<Auth, 'id'>
 
 
-export const Navbar = () => {
-    const dispatch = useAppDispatch()
+export const Navbar = ({friendsData, id}: NavbarType) => {
 
-    const usersData = useSelector<ReducersType, UsersType>(state => state.usersData)
-    const currentUserID = useSelector<ReducersType, number | null>(state => state.auth.id)
-
-    useEffect(() => {
-        dispatch(getUsers(usersData.pageSize, usersData.currentPage, true))
-    }, []);
     return (
         <nav className={s.navbar}>
             <h3 className={s.label}>Menu</h3>
             <div className={s.navButtonsSection}>
                 <span>
-                    <NavLink to={`/profile/${currentUserID}`} className={s.item}>Profile</NavLink>
+                    <NavLink to={`/profile/${id}`} className={s.item}>Profile</NavLink>
                 </span>
                 <span>
                     <NavLink to='/messages'
@@ -42,7 +38,7 @@ export const Navbar = () => {
                              className={s.item}>Settings</NavLink>
                 </span>
             </div>
-            <FriendsSection friendsData={usersData.friends}/>
+            <FriendsSection friendsData={friendsData}/>
         </nav>
     )
 }

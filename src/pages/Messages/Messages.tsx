@@ -1,4 +1,4 @@
-import React, {ChangeEvent, memo} from "react";
+import React, {ChangeEvent, memo, RefObject} from "react";
 import s from 'pages/Messages/Messages.module.scss';
 import {MessagesDataType} from "redux/messagesReducer";
 import {TextField} from "components/TextField";
@@ -17,6 +17,12 @@ type MessagesPropsType = {
     dispatchNewTextInput: (newText: string) => void
     sendMessage: () => void
     currentUserId: number | null
+    displayGroupChat: boolean
+    setDisplayGroupChat: (toggle: boolean) => void
+    messagesAnchorRef: RefObject<HTMLDivElement>
+    lastScrollTop: number
+    setLastScrollTop: (value: number) => void
+    setIsAutoScrollActive: (value: boolean) => void
 }
 
 export const Messages = memo(({
@@ -24,7 +30,13 @@ export const Messages = memo(({
                                   messagesData,
                                   dispatchNewTextInput,
                                   sendMessage,
-                                  currentUserId
+                                  currentUserId,
+                                  displayGroupChat,
+                                  setDisplayGroupChat,
+                                  messagesAnchorRef,
+                                  lastScrollTop,
+                                  setLastScrollTop,
+                                  setIsAutoScrollActive
                               }: MessagesPropsType) => {
 
 
@@ -43,6 +55,19 @@ export const Messages = memo(({
             sendMessage()
         }
     };
+
+    const handleOnScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
+        const element = e.currentTarget
+        const maxScrollPosition = element.scrollHeight - element.clientHeight
+
+        if (element.scrollTop > lastScrollTop && Math.abs(maxScrollPosition - element.scrollTop) < 10) {
+            setIsAutoScrollActive(true)
+        } else {
+            setIsAutoScrollActive(false)
+        }
+
+        setLastScrollTop(element.scrollTop)
+    }
 
     return (
         <div className={s.messages}>
@@ -67,7 +92,7 @@ export const Messages = memo(({
                             ))}
                         </TabSwitcherContent>
                         <TabSwitcherContent className={s.sidebarContent} value={'Groups'}>
-                            <div className={s.groupItem}>
+                            {<div className={s.groupItem} onClick={() => setDisplayGroupChat(true)}>
                                 <div className={s.groupInfo}>
                                     <Avatar className={s.groupAvatar} size={'small'} photos={IN}/>
                                     <div className={s.description}>
@@ -75,7 +100,7 @@ export const Messages = memo(({
                                                     variant={'h5'}>IT-Incubator Chat</Typography>
                                     </div>
                                 </div>
-                            </div>
+                            </div>}
                         </TabSwitcherContent>
                     </TabSwitcher>
                 </div>
@@ -84,13 +109,13 @@ export const Messages = memo(({
                     Current user avatar, settings
                 </div>
             </div>
-            <div className={s.chat}>
+            {displayGroupChat && <div className={s.chat}>
                 <div className={s.chatHeader}>
                     chatHeader
                 </div>
                 <div className={s.chatContent}>
-                    chatContent
-                    <div className={s.chatData}>
+                    <div className={s.chatData}
+                         onScroll={handleOnScroll}>
                         {messagesData.groupChatData.map((d, index) => {
                             return <div
                                 className={`${s.messageItem} ${d.userId === currentUserId ? s.currentUser : ''}`}
@@ -102,7 +127,7 @@ export const Messages = memo(({
                                 </div>
                             </div>
                         })}
-
+                        <div ref={messagesAnchorRef}></div>
                     </div>
                     <div className={s.sendMessageBar}>
                         <TextField type="text"
@@ -116,7 +141,7 @@ export const Messages = memo(({
 
                 </div>
 
-            </div>
+            </div>}
         </div>
     )
 })

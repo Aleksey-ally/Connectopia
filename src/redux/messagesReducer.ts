@@ -124,6 +124,7 @@ export const destroyConnectionGroupChat = () => (dispatch: Dispatch) => {
 }
 
 export const sendMessageChat = (message: string) => (dispatch: Dispatch) => {
+    if (message.trim().length < 1) return
     chatGroupAPI.sendMessage(message)
     dispatch(addMessage())
 }

@@ -17,7 +17,42 @@
 
         .userItem {
           background-color: var(--color-second);
+          &:hover {
+            background-color: var(--color-hover-link);
+            cursor: pointer;
+          }
+        }
 
+        .groupItem {
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+
+          border-radius: var(--border-radius-box);
+          padding: 1.5rem;
+          margin-bottom: 2rem;
+          background-color: var(--color-second);
+          transition: all 0.45s ease;
+
+          .groupInfo {
+            display: flex;
+            gap: 1rem;
+
+            .description {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+            }
+          }
+
+          &:hover {
+            background-color: var(--color-hover-link);
+            cursor: pointer;
+          }
+        }
+
+        .groupAvatar img {
+          background: var(--color-dark-900);
         }
       }
     }

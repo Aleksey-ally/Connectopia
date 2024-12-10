@@ -8,6 +8,9 @@ import {UsersType} from "redux/usersReducer";
 import {Button} from "components/Button";
 import {Send} from "assets/icons";
 import {UserItem} from "components/UserItem";
+import {NavLink} from "react-router-dom";
+import img from '../../imgs/img.png'
+import {Typography} from "components/Typography";
 
 type MessagesPropsType = {
     usersData: UsersType
@@ -64,10 +67,16 @@ export const Messages = memo(({
                                           status={u.status} userAvatar={'small'}/>
                             ))}
                         </TabSwitcherContent>
-                        <TabSwitcherContent value={'Groups'}>
-                            <div className={s.groups}>
-                                Groups
-                            </div>
+                        <TabSwitcherContent className={s.sidebarContent} value={'Groups'}>
+                                <div className={s.groupItem}>
+                                    <div className={s.groupInfo}>
+                                            <UserAvatar className={s.groupAvatar} size={'small'} photos={img}/>
+                                        <div className={s.description}>
+                                                <Typography className={`${s.item} ${s.name}`} as={'h5'}
+                                                            variant={'h5'}>IT-Incubator Chat</Typography>
+                                        </div>
+                                    </div>
+                                </div>
                         </TabSwitcherContent>
                     </TabSwitcher>
                 </div>

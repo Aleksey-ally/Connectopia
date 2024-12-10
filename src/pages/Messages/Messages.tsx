@@ -3,13 +3,12 @@ import s from 'pages/Messages/Messages.module.scss';
 import {MessagesDataType} from "redux/messagesReducer";
 import {TextField} from "components/TextField";
 import {TabSwitcher, TabSwitcherContent} from "components/TabSwitcher";
-import {UserAvatar} from "components/UserAvatar";
+import {Avatar} from "components/Avatar";
 import {UsersType} from "redux/usersReducer";
 import {Button} from "components/Button";
 import {Send} from "assets/icons";
 import {UserItem} from "components/UserItem";
-import {NavLink} from "react-router-dom";
-import img from '../../imgs/img.png'
+import IN from 'assets/imgs/IN.png'
 import {Typography} from "components/Typography";
 
 type MessagesPropsType = {
@@ -68,19 +67,18 @@ export const Messages = memo(({
                             ))}
                         </TabSwitcherContent>
                         <TabSwitcherContent className={s.sidebarContent} value={'Groups'}>
-                                <div className={s.groupItem}>
-                                    <div className={s.groupInfo}>
-                                            <UserAvatar className={s.groupAvatar} size={'small'} photos={img}/>
-                                        <div className={s.description}>
-                                                <Typography className={`${s.item} ${s.name}`} as={'h5'}
-                                                            variant={'h5'}>IT-Incubator Chat</Typography>
-                                        </div>
+                            <div className={s.groupItem}>
+                                <div className={s.groupInfo}>
+                                    <Avatar className={s.groupAvatar} size={'small'} photos={IN}/>
+                                    <div className={s.description}>
+                                        <Typography className={`${s.item} ${s.name}`} as={'h5'}
+                                                    variant={'h5'}>IT-Incubator Chat</Typography>
                                     </div>
                                 </div>
+                            </div>
                         </TabSwitcherContent>
                     </TabSwitcher>
                 </div>
-
 
                 <div className={s.sidebarFooter}>
                     Current user avatar, settings
@@ -97,7 +95,7 @@ export const Messages = memo(({
                             return <div
                                 className={`${s.messageItem} ${d.userId === currentUserId ? s.currentUser : ''}`}
                                 key={index}>
-                                <UserAvatar size={'small'} photos={d.photo}/>
+                                <Avatar size={'small'} photos={d.photo}/>
                                 <div className={s.messageWrapper}>
                                     <span className={s.userName}>{d.userName}</span>
                                     <span className={s.text}>{d.message}</span>

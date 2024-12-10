@@ -1,6 +1,6 @@
-import {UserAvatar} from 'components/UserAvatar';
+import {Avatar} from 'components/Avatar';
 import {setNewUserAvatar, UtilityProfileUserType} from 'redux/profileReducer';
-import UserCover from 'imgs/userCover_1.jpg';
+import UserCover from 'assets/imgs/userCover_1.jpg';
 import s from 'pages/Profile/ProfileInformation/ProfileInformation.module.scss';
 import {ChangeEvent, useState} from "react";
 import {AppThunkDispatch} from "redux/reduxStore";
@@ -75,7 +75,7 @@ export const ProfileInformation = (({
                 <div className={s.userWrapper}>
                     <div className={s.userInfo}>
                         <input id="avatarInp ut" className={s.fileUploader} type="file" onChange={userAvatarSelected}/>
-                        <UserAvatar className={classNames.userAvatar} onMouseOver={handleMouseOver}
+                        <Avatar className={classNames.userAvatar} onMouseOver={handleMouseOver}
                                     onMouseOut={handleMouseOut}
                                     size={'large'}
                                     photos={profile?.photos?.small}>
@@ -86,7 +86,7 @@ export const ProfileInformation = (({
                                     <Edit/>
                                 </label>
                             }
-                        </UserAvatar>
+                        </Avatar>
 
                         {edit &&
                             <div>

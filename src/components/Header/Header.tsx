@@ -2,7 +2,7 @@ import {NavLink, useNavigate} from 'react-router-dom';
 
 import s from 'components/Header/Header.module.scss'
 import {Auth, logout} from 'redux/authReducer';
-import {UserAvatar} from 'components/UserAvatar';
+import {Avatar} from 'components/Avatar';
 import {Typography} from "components/Typography";
 import {CIcon} from "assets/icons";
 import {Dropdown} from "components/Dropdown";
@@ -47,9 +47,9 @@ export const Header = ({auth, currentUserAvatar}: Props) => {
                 {auth.isAuth ?
                     <>
                         <span>Hello, <b>{auth?.login}</b></span>
-                        <Dropdown trigger={<UserAvatar photos={currentUserAvatar} size={'small'}/>}>
+                        <Dropdown trigger={<Avatar photos={currentUserAvatar} size={'small'}/>}>
                             <DropdownItem>
-                                <UserAvatar className={s.navigate} photos={currentUserAvatar} size={'small'}
+                                <Avatar className={s.navigate} photos={currentUserAvatar} size={'small'}
                                             onClick={() => navigate(`/profile/${auth.id}`)}/>
                                 <div onClick={() => navigate(`/profile/${auth.id}`)}>
                                     <Typography className={s.navigate}

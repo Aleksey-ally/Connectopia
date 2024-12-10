@@ -1,6 +1,6 @@
 import {addMessage, changeMessageText, MessagesDataType, messagesReducer} from "redux/messagesReducer";
-import AvatarFox from "imgs/Fox.png";
-import AvatarBear from "imgs/Bear.png";
+import AvatarFox from "assets/imgs/Fox.png";
+import AvatarBear from "assets/imgs/Bear.png";
 
 
 let startState: MessagesDataType

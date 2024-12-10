@@ -14,15 +14,14 @@ import {Typography} from "components/Typography";
 type MessagesPropsType = {
     usersData: UsersType
     messagesData: MessagesDataType
-    dispatchNewTextInput: (newText: string) => void
+    dispatchNewTextInput: (e: ChangeEvent<HTMLInputElement>) => void
     sendMessage: () => void
     currentUserId: number | null
     displayGroupChat: boolean
     setDisplayGroupChat: (toggle: boolean) => void
     messagesAnchorRef: RefObject<HTMLDivElement>
-    lastScrollTop: number
-    setLastScrollTop: (value: number) => void
-    setIsAutoScrollActive: (value: boolean) => void
+    handleOnScroll: (e: React.UIEvent<HTMLDivElement, UIEvent>) => void
+    handleDisplayFriends: (value: string) => void
 }
 
 export const Messages = memo(({
@@ -34,15 +33,10 @@ export const Messages = memo(({
                                   displayGroupChat,
                                   setDisplayGroupChat,
                                   messagesAnchorRef,
-                                  lastScrollTop,
-                                  setLastScrollTop,
-                                  setIsAutoScrollActive
+                                  handleOnScroll,
+                                  handleDisplayFriends
                               }: MessagesPropsType) => {
 
-
-    const onChangeMessageTextHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        dispatchNewTextInput(e.currentTarget.value)
-    }
 
     const tabs = [
         {title: 'Messages', value: 'Messages'},
@@ -56,19 +50,6 @@ export const Messages = memo(({
         }
     };
 
-    const handleOnScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
-        const element = e.currentTarget
-        const maxScrollPosition = element.scrollHeight - element.clientHeight
-
-        if (element.scrollTop > lastScrollTop && Math.abs(maxScrollPosition - element.scrollTop) < 10) {
-            setIsAutoScrollActive(true)
-        } else {
-            setIsAutoScrollActive(false)
-        }
-
-        setLastScrollTop(element.scrollTop)
-    }
-
     return (
         <div className={s.messages}>
             <div className={s.sidebar}>
@@ -77,7 +58,7 @@ export const Messages = memo(({
                 </div>
 
                 <div className={s.tabs}>
-                    <TabSwitcher tabs={tabs}>
+                    <TabSwitcher tabs={tabs} onValueChange={handleDisplayFriends}>
                         <TabSwitcherContent value={'Messages'}>
                             Friend 1
                             Friend 2
@@ -133,7 +114,7 @@ export const Messages = memo(({
                         <TextField type="text"
                                    placeholder={'Write your message'}
                                    value={messagesData.messageText}
-                                   onChange={onChangeMessageTextHandler}
+                                   onChange={dispatchNewTextInput}
                                    onKeyDown={handleKeyDown}>
                         </TextField>
                         <Button className={s.button} onClick={sendMessage}><Send/></Button>

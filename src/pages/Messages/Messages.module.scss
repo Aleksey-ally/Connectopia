@@ -17,6 +17,7 @@
 
         .userItem {
           background-color: var(--color-second);
+
           &:hover {
             background-color: var(--color-hover-link);
             cursor: pointer;
@@ -68,8 +69,9 @@
     }
 
     .chatContent {
+      width: 45rem;
+
       .chatData {
-        width: 40rem;
         height: 31.25rem;
         overflow-y: scroll;
         scrollbar-width: none;
@@ -139,7 +141,7 @@
         display: flex;
 
         .button {
-          margin: auto .5rem;
+          margin-left: .5rem;
           background-color: var(--color-accent-700);
         }
       }

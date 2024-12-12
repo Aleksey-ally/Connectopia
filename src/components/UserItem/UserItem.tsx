@@ -3,8 +3,8 @@ import {NavLink} from 'react-router-dom'
 import s from 'components/UserItem/UserItem.module.scss'
 import {Avatar} from "components/Avatar";
 import {Typography} from "components/Typography";
-import {UserType} from "redux/usersReducer";
 import {Button} from "components/Button";
+import {UserType} from "api/users/users.types";
 
 type UserItemType =
     Omit<UserType, 'followed' | 'toggleFollowing'>
@@ -33,7 +33,7 @@ export const UserItem = memo(({
         <div className={`${s.user} ${className}`}>
             <div className={s.userInfo}>
                 <NavLink className={s.linkAvatar} to={`/profile/${id}`}>
-                    <Avatar size={userAvatar} photos={photos.small}/>
+                    <Avatar size={userAvatar} photo={photos.small}/>
                 </NavLink>
                 <div className={s.description}>
                     <NavLink to={`/profile/${id}`}>

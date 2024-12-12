@@ -86,7 +86,7 @@ export const ProfileInformationContainer = () => {
             try {
                 await dispatch(getUserProfile(userID));
                 await dispatch(getUserStatus(userID));
-                setLocalStatus(status);
+                setLocalStatus(status? status: 'not specified');
                 await checkFollowed(Number(uID))
 
             } catch {

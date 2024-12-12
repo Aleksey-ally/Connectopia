@@ -5,11 +5,10 @@ import {TextField} from "components/TextField";
 import {TabSwitcher, TabSwitcherContent} from "components/TabSwitcher";
 import {Avatar} from "components/Avatar";
 import {UsersType} from "redux/usersReducer";
-import {Button} from "components/Button";
-import {Send} from "assets/icons";
 import {UserItem} from "components/UserItem";
 import IN from 'assets/imgs/IN.png'
 import {Typography} from "components/Typography";
+import {Chat} from "./Chat";
 
 type MessagesPropsType = {
     usersData: UsersType
@@ -43,12 +42,6 @@ export const Messages = memo(({
         {title: 'Friends', value: 'Friends'},
         {title: 'Groups', value: 'Groups'}
     ]
-
-    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === "Enter") {
-            sendMessage()
-        }
-    };
 
     return (
         <div className={s.messages}>
@@ -90,39 +83,10 @@ export const Messages = memo(({
                     Current user avatar, settings
                 </div>
             </div>
-            {displayGroupChat && <div className={s.chat}>
-                <div className={s.chatHeader}>
-                    chatHeader
-                </div>
-                <div className={s.chatContent}>
-                    <div className={s.chatData}
-                         onScroll={handleOnScroll}>
-                        {messagesData.groupChatData.map((d, index) => {
-                            return <div
-                                className={`${s.messageItem} ${d.userId === currentUserId ? s.currentUser : ''}`}
-                                key={index}>
-                                <Avatar size={'small'} photos={d.photo}/>
-                                <div className={s.messageWrapper}>
-                                    <span className={s.userName}>{d.userName}</span>
-                                    <span className={s.text}>{d.message}</span>
-                                </div>
-                            </div>
-                        })}
-                        <div ref={messagesAnchorRef}></div>
-                    </div>
-                    <div className={s.sendMessageBar}>
-                        <TextField type="text"
-                                   placeholder={'Write your message'}
-                                   value={messagesData.messageText}
-                                   onChange={dispatchNewTextInput}
-                                   onKeyDown={handleKeyDown}>
-                        </TextField>
-                        <Button className={s.button} onClick={sendMessage}><Send/></Button>
-                    </div>
-
-                </div>
-
-            </div>}
+            {displayGroupChat && <Chat chatData={messagesData.groupChatData} messageText={messagesData.messageText}
+                                       sendMessage={sendMessage} messagesAnchorRef={messagesAnchorRef}
+                                       dispatchNewTextInput={dispatchNewTextInput} currentUserId={currentUserId}
+                                       handleOnScroll={handleOnScroll}/>}
         </div>
     )
 })

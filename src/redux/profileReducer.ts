@@ -1,6 +1,6 @@
-import {profileAPI} from "api/api";
+import {profileAPI} from "api/profile/profile.api";
 import {AppRootStateType, AppThunkDispatch} from "redux/reduxStore";
-import {ProfileUserResponseType} from "api/api.types";
+import {ProfileUserResponseType} from "api/profile/profile.types";
 
 const ADD_POST = "ADD-POST";
 const CHANGE_POST_TEXT = "CHANGE-POST-TEXT";

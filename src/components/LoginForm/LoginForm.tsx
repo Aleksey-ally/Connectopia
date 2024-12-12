@@ -4,7 +4,7 @@ import {TextField} from "components/TextField";
 import {Button} from "components/Button";
 import {useController, useForm} from "react-hook-form";
 import {login} from "redux/authReducer";
-import {PropertiesLogin} from "api/api.types";
+import {PropertiesLogin} from "api/base-api.types";
 import {useAppDispatch} from "redux/reduxStore";
 import {Checkbox} from "components/Checkbox";
 import {useState} from "react";

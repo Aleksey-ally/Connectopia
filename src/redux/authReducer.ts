@@ -1,7 +1,7 @@
 import {AppThunkDispatch} from "redux/reduxStore";
-import {authAPI} from "api/api";
-import {PropertiesLogin} from "api/api.types";
 import {setApp} from "redux/appReducer";
+import {authApi} from "api/autn/auth.api";
+import {PropertiesLogin} from "api/autn/auth.types";
 
 export type Auth = {
     id: number | null
@@ -47,7 +47,7 @@ export const setAuthUserData = (data: Auth) => ({
 
 export const getAuthUserData = async (dispatch: AppThunkDispatch) => {
     dispatch(setApp(false))
-    const data = await authAPI.me();
+    const data = await authApi.me();
     if (data.resultCode === 0) {
         dispatch(setAuthUserData({...data.data, isAuth: true}));
     }
@@ -57,7 +57,7 @@ export const getAuthUserData = async (dispatch: AppThunkDispatch) => {
 
 export const login = (payload: PropertiesLogin) =>
     async (dispatch: AppThunkDispatch) => {
-        const res = await authAPI.login(payload)
+        const res = await authApi.login(payload)
         if (res.resultCode === 0) {
             await dispatch(getAuthUserData)
         } else {
@@ -67,7 +67,7 @@ export const login = (payload: PropertiesLogin) =>
 
 
 export const logout = async (dispatch: AppThunkDispatch) => {
-    await authAPI.logout()
+    await authApi.logout()
     dispatch(setAuthUserData({
         id: null,
         login: null,

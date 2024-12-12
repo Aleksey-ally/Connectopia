@@ -4,7 +4,7 @@ import {TextField} from "components/TextField";
 import {memo} from "react";
 import {Checkbox} from "components/Checkbox";
 import {useController, useForm} from "react-hook-form";
-import {ProfileUserResponseType} from "api/api.types";
+import {ProfileUserResponseType} from "api/base-api.types";
 import {Typography} from "components/Typography";
 import {Button} from "components/Button";
 

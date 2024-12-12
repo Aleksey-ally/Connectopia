@@ -4,7 +4,7 @@ import {useParams} from 'react-router-dom';
 import {changeUserStatus, getUserProfile, getUserStatus, ProfileDataType, updateProfile} from 'redux/profileReducer';
 import {ReducersType, useAppDispatch} from 'redux/reduxStore';
 import {ProfileInformation} from './ProfileInformation';
-import {PhotosResponse, ProfileUserResponseType} from "api/api.types";
+import {PhotosResponse, ProfileUserResponseType} from "api/base-api.types";
 import {toast} from "react-toastify";
 import {errorOptions, successOptions} from "utils/ToastifyOptions/ToastifyOptions";
 import {checkFollowedUser, followOnUser, unfollowOnUser} from "redux/usersReducer";

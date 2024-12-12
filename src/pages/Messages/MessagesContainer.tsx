@@ -12,7 +12,6 @@ import {getUsers, UsersType} from "redux/usersReducer";
 import React, {ChangeEvent, useEffect, useRef, useState} from "react";
 import {toast} from "react-toastify";
 import {errorOptions} from "utils/ToastifyOptions/ToastifyOptions";
-import {dialogsAPI} from "api/api";
 
 
 export const MessagesContainer = () => {
@@ -100,17 +99,17 @@ export const MessagesContainer = () => {
     }, [messagesData.groupChatData]);
 
     useEffect(() => {
-        // dialogsAPI.refreshDialog(2)
-        // dialogsAPI.getAllDialogs()
-        // dialogsAPI.getUserDialog(2,1, 10)
-        // dialogsAPI.sendMessage(2, 'Hello')
-        // dialogsAPI.checkIsViewedMessage('3a625288-c91c-420b-b907-f1a0f55cef40')
-        // dialogsAPI.spamMessage("3a625288-c91c-420b-b907-f1a0f55cef40")
-        // dialogsAPI.deleteMessage('4d2328cb-d28a-4b38-82ba-a6d2a211f4c4')
-        // dialogsAPI.restoreMessage('4d2328cb-d28a-4b38-82ba-a6d2a211f4c4')
+        // chatGroupApi.refreshDialog(2)
+        // chatGroupApi.getAllDialogs()
+        // chatGroupApi.getUserDialog(2,1, 10)
+        // chatGroupApi.sendMessage(2, 'Hello')
+        // chatGroupApi.checkIsViewedMessage('3a625288-c91c-420b-b907-f1a0f55cef40')
+        // chatGroupApi.spamMessage("3a625288-c91c-420b-b907-f1a0f55cef40")
+        // chatGroupApi.deleteMessage('4d2328cb-d28a-4b38-82ba-a6d2a211f4c4')
+        // chatGroupApi.restoreMessage('4d2328cb-d28a-4b38-82ba-a6d2a211f4c4')
         // const currentDate = new Date().toLocaleString('ru-Ru')
-        //  dialogsAPI.getNewestThanDateUserMessages(2, "2024-12-10T08:55:02.873")
-        //  dialogsAPI.getCountNewMessages()
+        //  chatGroupApi.getNewestThanDateUserMessages(2, "2024-12-10T08:55:02.873")
+        //  chatGroupApi.getCountNewMessages()
 
     }, []);
 

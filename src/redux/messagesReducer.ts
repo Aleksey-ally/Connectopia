@@ -1,4 +1,4 @@
-import {chatGroupAPI} from "api/api";
+import {chatGroupAPI} from "api/chat-group/chat-group.api";
 import {Dispatch} from "redux";
 
 const RECEIVED_DATA_GROUP_CHAT = "RECEIVED-DATA-GROUP-CHAT";

@@ -6,7 +6,7 @@ import {ChangeEvent, useState} from "react";
 import {AppThunkDispatch} from "redux/reduxStore";
 import {UserInfoBody} from "pages/Profile/ProfileInformation/UserInfoBody/UserInfoBody";
 import {UserInfoBodyForm} from "pages/Profile/ProfileInformation/UserInfoBodyForm/UserInfoBodyForm";
-import {ProfileUserResponseType} from "api/api.types";
+import {ProfileUserResponseType} from "api/base-api.types";
 import {Edit} from "assets/icons/Edit";
 import {TextField} from "components/TextField";
 import {Typography} from "components/Typography";

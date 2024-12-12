@@ -1,5 +1,6 @@
-import {usersAPI} from "api/api";
+import {usersAPI} from "api/users/users.api";
 import {AppThunkDispatch} from "redux/reduxStore";
+import {UserType} from "api/users/users.types";
 
 export type UsersType = {
     users: UserType[]
@@ -8,15 +9,6 @@ export type UsersType = {
     currentPage: number
     isFetching: boolean
     friends: UserType[]
-}
-
-export type UserType = {
-    id: number
-    name: string
-    photos: { small: string | null, large: string | null }
-    status?: string | undefined
-    followed: boolean
-    toggleFollowing: boolean
 }
 
 const FOLLOW = "FOLLOW"

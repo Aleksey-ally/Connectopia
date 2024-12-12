@@ -14,11 +14,13 @@ type PropsType = {
     sendMessage: () => void
     dispatchNewTextInput: (e: ChangeEvent<HTMLInputElement>) => void
     handleOnScroll: (e: React.UIEvent<HTMLDivElement, UIEvent>) => void
+    chatPhoto?: string | null
+    chatName: string
 }
 
 
 export const Chat = memo(({
-                              chatData, currentUserId, messagesAnchorRef, messageText, sendMessage, dispatchNewTextInput, handleOnScroll
+                              chatData, currentUserId, messagesAnchorRef, messageText, sendMessage, dispatchNewTextInput, handleOnScroll, chatPhoto, chatName
                           }: PropsType) => {
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -30,7 +32,9 @@ export const Chat = memo(({
     return (
         <div className={s.chat}>
             <div className={s.chatHeader}>
-                chatHeader
+                <Avatar className={s.chatAvatar} size={"small"} photo={chatPhoto}/>
+                <span className={s.chatName}>{chatName}</span>
+                <Button variant={'secondary'} className={s.close}>X</Button>
             </div>
             <div className={s.chatContent}>
                 <div className={s.chatData}
@@ -39,7 +43,7 @@ export const Chat = memo(({
                         return <div
                             className={`${s.messageItem} ${d.userId === currentUserId ? s.currentUser : ''}`}
                             key={index}>
-                            <Avatar size={'small'} photos={d.photo}/>
+                            <Avatar size={'small'} photo={d.photo}/>
                             <div className={s.messageWrapper}>
                                 <span className={s.userName}>{d.userName}</span>
                                 <span className={s.text}>{d.message}</span>

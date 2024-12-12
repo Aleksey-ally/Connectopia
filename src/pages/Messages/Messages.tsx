@@ -68,7 +68,7 @@ export const Messages = memo(({
                         <TabSwitcherContent className={s.sidebarContent} value={'Groups'}>
                             {<div className={s.groupItem} onClick={() => setDisplayGroupChat(true)}>
                                 <div className={s.groupInfo}>
-                                    <Avatar className={s.groupAvatar} size={'small'} photos={IN}/>
+                                    <Avatar className={s.groupAvatar} size={'small'} photo={IN}/>
                                     <div className={s.description}>
                                         <Typography className={`${s.item} ${s.name}`} as={'h5'}
                                                     variant={'h5'}>IT-Incubator Chat</Typography>
@@ -86,7 +86,7 @@ export const Messages = memo(({
             {displayGroupChat && <Chat chatData={messagesData.groupChatData} messageText={messagesData.messageText}
                                        sendMessage={sendMessage} messagesAnchorRef={messagesAnchorRef}
                                        dispatchNewTextInput={dispatchNewTextInput} currentUserId={currentUserId}
-                                       handleOnScroll={handleOnScroll}/>}
+                                       handleOnScroll={handleOnScroll} chatName={'IT-Incubator Chat'} chatPhoto={IN}/>}
         </div>
     )
 })

@@ -1,7 +1,7 @@
 import React, {memo} from "react";
 import s from "pages/Navbar/FriendsSection/FriendsSection.module.scss";
 import {Avatar} from "components/Avatar";
-import {UserType} from "redux/usersReducer";
+import {UserType} from "api/users/users.types";
 
 
 type FriendsSectionPropsType = {
@@ -13,7 +13,7 @@ export const FriendsSection = memo(({friendsData}: FriendsSectionPropsType) => {
             <h3 className={s.label}>Friends</h3>
             {friendsData.map(fd =>
                 <div className={s.item} key={fd.id}>
-                    <Avatar size={'small'}/>
+                    <div><Avatar size={'small'}/></div>
                     <span>{fd.name}</span>
                 </div>
             ).slice(0, 3)}

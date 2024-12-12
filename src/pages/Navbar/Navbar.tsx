@@ -2,8 +2,8 @@ import {NavLink} from 'react-router-dom';
 import {FriendsSection} from "./FriendsSection";
 import s from 'pages/Navbar/Navbar.module.scss';
 import React from "react";
-import {UserType} from "redux/usersReducer";
 import {Auth} from "redux/authReducer";
+import {UserType} from "api/users/users.types";
 
 type NavbarType = {
     friendsData: UserType[]

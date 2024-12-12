@@ -5,6 +5,7 @@ import {TextField} from "components/TextField";
 import {Button} from "components/Button";
 import {Send} from "assets/icons";
 import {GroupChatDataType} from "redux/messagesReducer";
+import {Close} from "assets/icons/Close";
 
 type PropsType = {
     chatData: GroupChatDataType[]
@@ -16,11 +17,12 @@ type PropsType = {
     handleOnScroll: (e: React.UIEvent<HTMLDivElement, UIEvent>) => void
     chatPhoto?: string | null
     chatName: string
+    setDisplayGroupChat: (toggle: boolean) => void
 }
 
 
 export const Chat = memo(({
-                              chatData, currentUserId, messagesAnchorRef, messageText, sendMessage, dispatchNewTextInput, handleOnScroll, chatPhoto, chatName
+                              chatData, currentUserId, messagesAnchorRef, messageText, sendMessage, dispatchNewTextInput, handleOnScroll, chatPhoto, chatName, setDisplayGroupChat
                           }: PropsType) => {
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -34,7 +36,9 @@ export const Chat = memo(({
             <div className={s.chatHeader}>
                 <Avatar className={s.chatAvatar} size={"small"} photo={chatPhoto}/>
                 <span className={s.chatName}>{chatName}</span>
-                <Button variant={'secondary'} className={s.close}>X</Button>
+                <Button variant={'secondary'} className={s.close} onClick={() => setDisplayGroupChat(false)}>
+                    <Close/>
+                </Button>
             </div>
             <div className={s.chatContent}>
                 <div className={s.chatData}

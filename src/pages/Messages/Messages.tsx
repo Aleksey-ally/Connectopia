@@ -86,7 +86,7 @@ export const Messages = memo(({
             {displayGroupChat && <Chat chatData={messagesData.groupChatData} messageText={messagesData.messageText}
                                        sendMessage={sendMessage} messagesAnchorRef={messagesAnchorRef}
                                        dispatchNewTextInput={dispatchNewTextInput} currentUserId={currentUserId}
-                                       handleOnScroll={handleOnScroll} chatName={'IT-Incubator Chat'} chatPhoto={IN}/>}
+                                       handleOnScroll={handleOnScroll} chatName={'IT-Incubator Chat'} chatPhoto={IN} setDisplayGroupChat={setDisplayGroupChat}/>}
         </div>
     )
 })

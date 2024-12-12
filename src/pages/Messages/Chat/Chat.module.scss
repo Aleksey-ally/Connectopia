@@ -93,6 +93,7 @@
 
     .sendMessageBar {
       display: flex;
+      border-top: 10px var(--color-main) solid;
 
       .button {
         margin-left: .5rem;

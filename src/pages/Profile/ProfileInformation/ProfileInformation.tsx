@@ -6,13 +6,13 @@ import {ChangeEvent, useState} from "react";
 import {AppThunkDispatch} from "redux/reduxStore";
 import {UserInfoBody} from "pages/Profile/ProfileInformation/UserInfoBody/UserInfoBody";
 import {UserInfoBodyForm} from "pages/Profile/ProfileInformation/UserInfoBodyForm/UserInfoBodyForm";
-import {ProfileUserResponseType} from "api/base-api.types";
 import {Edit} from "assets/icons/Edit";
 import {TextField} from "components/TextField";
 import {Typography} from "components/Typography";
 import {toast} from "react-toastify";
 import {errorOptions, successOptions} from "utils/ToastifyOptions/ToastifyOptions";
 import {Button} from "components/Button";
+import {ProfileUserResponseType} from "api/profile/profile.types";
 
 type Props = {
     currentUserID: number | null
@@ -74,19 +74,21 @@ export const ProfileInformation = (({
 
                 <div className={s.userWrapper}>
                     <div className={s.userInfo}>
-                        <input id="avatarInp ut" className={s.fileUploader} type="file" onChange={userAvatarSelected}/>
-                        <Avatar className={classNames.userAvatar} onMouseOver={handleMouseOver}
+                        <input id="avatarInput" className={s.fileUploader} type="file" onChange={userAvatarSelected}/>
+                        <div className={classNames.userAvatar}>
+                            <Avatar onMouseOver={handleMouseOver}
                                     onMouseOut={handleMouseOut}
                                     size={'large'}
-                                    photos={profile?.photos?.small}>
+                                    photo={profile?.photos?.small}>
 
-                            {Number(uID) === currentUserID && isEditVisible &&
-                                <label htmlFor="avatarInput" className={s.edit} onMouseOver={handleMouseOver}
-                                       onMouseOut={handleMouseOut}>
-                                    <Edit/>
-                                </label>
-                            }
-                        </Avatar>
+                                {Number(uID) === currentUserID && isEditVisible &&
+                                    <label htmlFor="avatarInput" className={s.edit} onMouseOver={handleMouseOver}
+                                           onMouseOut={handleMouseOut}>
+                                        <Edit/>
+                                    </label>
+                                }
+                            </Avatar>
+                        </div>
 
                         {edit &&
                             <div>

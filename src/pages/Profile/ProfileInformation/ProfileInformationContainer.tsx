@@ -4,10 +4,10 @@ import {useParams} from 'react-router-dom';
 import {changeUserStatus, getUserProfile, getUserStatus, ProfileDataType, updateProfile} from 'redux/profileReducer';
 import {ReducersType, useAppDispatch} from 'redux/reduxStore';
 import {ProfileInformation} from './ProfileInformation';
-import {PhotosResponse, ProfileUserResponseType} from "api/base-api.types";
 import {toast} from "react-toastify";
 import {errorOptions, successOptions} from "utils/ToastifyOptions/ToastifyOptions";
 import {checkFollowedUser, followOnUser, unfollowOnUser} from "redux/usersReducer";
+import {Photos, ProfileUserResponseType} from "api/profile/profile.types";
 
 export const ProfileInformationContainer = () => {
     const dispatch = useAppDispatch()
@@ -40,7 +40,7 @@ export const ProfileInformationContainer = () => {
 
     const handleSubmitProfileForm = (userData: ProfileUserResponseType) => {
 
-        dispatch(updateProfile({...userData, photos: profile.photos as PhotosResponse}))
+        dispatch(updateProfile({...userData, photos: profile.photos as Photos}))
             .then(message => {
                 if (message) {
                     setErrorMessage(message)

@@ -22,8 +22,7 @@ export const dialogsAPI = {
 
     async getUserDialog(uID: number, page: number, count: number) {
         const res = await instance.get<Omit<DefaultResponseType, 'data'> & UserDialogResponseType>(`dialogs/${uID}/messages?page=${page}&count=${count}`);
-        console.log(res.data.items)
-        // return res
+        return res.data.items
     },
 
     async sendMessage(uID: number, message: string) {

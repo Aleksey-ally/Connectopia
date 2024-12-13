@@ -1,14 +1,16 @@
 import {chatGroupAPI} from "api/chat-group/chat-group.api";
 import {Dispatch} from "redux";
+import {dialogsAPI} from "api/dialogs/dialogs.api";
 
 const RECEIVED_DATA_GROUP_CHAT = "RECEIVED-DATA-GROUP-CHAT";
 const DELETED_DATA_GROUP_CHAT = "DELETED-DATA-GROUP-CHAT";
 const ADD_MESSAGE = "ADD-MESSAGE";
 const ADD_MESSAGE_GROUP = "ADD-MESSAGE-GROUP";
 const CHANGE_MESSAGE_TEXT = "CHANGE-MESSAGE-TEXT";
+const RECEIVED_DIALOGS_DATA = "RECEIVED-DIALOGS-DATA";
 
 export type MessagesDataType = {
-    messagesTextData: TextDataType[];
+    dialogsData: DialogDataType[];
     groupChatData: GroupChatDataType[]
     messageText: string;
     // messageTextGroup: string;
@@ -21,18 +23,19 @@ export type GroupChatDataType = {
     photo: string;
 }
 
-export type TextDataType = {
-    id: number;
-    messageText: string;
+export type DialogDataType = {
+    id: string;
+    body: string;
+    addedAt: string;
+    senderId: number;
+    senderName: string;
+    recipientId: number;
+    viewed: boolean;
 };
 
 const initialState: MessagesDataType = {
-    messagesTextData: [
-        {id: 1, messageText: "Frrr fr fr"},
-    ],
-
+    dialogsData: [],
     groupChatData: [],
-
     messageText: "",
 };
 
@@ -41,10 +44,14 @@ export type ActionType =
     | AddMessageType
     | ReceivedGroupChatData
     | DeletedGroupChatData
+    | ReceivedDialogsData
 
 export const messagesReducer = (state = initialState, action: ActionType): MessagesDataType => {
 
     switch (action.type) {
+
+        case RECEIVED_DIALOGS_DATA:
+            return {...state, dialogsData: action.data}
 
         case RECEIVED_DATA_GROUP_CHAT :
             return {...state, groupChatData: [...state.groupChatData, ...action.data]};
@@ -81,6 +88,7 @@ type ReceivedGroupChatData = ReturnType<typeof receivedGroupChatData>;
 type DeletedGroupChatData = ReturnType<typeof deletedGroupChatData>;
 type AddMessageType = ReturnType<typeof addMessage>;
 type ChangeMessageTextType = ReturnType<typeof changeMessageText>;
+type ReceivedDialogsData = ReturnType<typeof receivedDialogsData>;
 
 
 //AC
@@ -93,6 +101,12 @@ export const receivedGroupChatData = (data: GroupChatDataType[]) =>
 export const deletedGroupChatData = () =>
     ({
         type: DELETED_DATA_GROUP_CHAT
+    } as const)
+
+export const receivedDialogsData = (data: DialogDataType[]) =>
+    ({
+        type: RECEIVED_DIALOGS_DATA,
+        data
     } as const)
 
 export const addMessage = () => ({type: ADD_MESSAGE} as const);
@@ -109,6 +123,11 @@ export const changeMessageText = (newText: string) =>
 
 
 //Thunks
+export const getDialogData = (uID: number, page: number, count: number) => async (dispatch: Dispatch) => {
+   const res = await dialogsAPI.getUserDialog(uID, page, count)
+    dispatch(receivedDialogsData(res))
+}
+
 export const createConnectionGroupChat = () => (dispatch: Dispatch) => {
     chatGroupAPI.createConnection()
 

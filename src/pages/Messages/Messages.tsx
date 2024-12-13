@@ -9,6 +9,7 @@ import {UserItem} from "components/UserItem";
 import IN from 'assets/imgs/IN.png'
 import {Typography} from "components/Typography";
 import {Chat} from "./Chat";
+import {DataActiveUserDialogType} from "pages/Messages/MessagesContainer";
 
 type MessagesPropsType = {
     usersData: UsersType
@@ -20,7 +21,9 @@ type MessagesPropsType = {
     setDisplayGroupChat: (toggle: boolean) => void
     messagesAnchorRef: RefObject<HTMLDivElement>
     handleOnScroll: (e: React.UIEvent<HTMLDivElement, UIEvent>) => void
-    handleDisplayFriends: (value: string) => void
+    handleDisplayFriends: (value: string) => void,
+    handleGetDialogData: (uID: number, page: number, count: number, name: string, photo: string | null) => void
+    dataActiveUserDialog?: DataActiveUserDialogType
 }
 
 export const Messages = memo(({
@@ -33,7 +36,9 @@ export const Messages = memo(({
                                   setDisplayGroupChat,
                                   messagesAnchorRef,
                                   handleOnScroll,
-                                  handleDisplayFriends
+                                  handleDisplayFriends,
+                                  handleGetDialogData,
+                                  dataActiveUserDialog
                               }: MessagesPropsType) => {
 
 
@@ -61,8 +66,10 @@ export const Messages = memo(({
                         </TabSwitcherContent>
                         <TabSwitcherContent className={s.sidebarContent} value={'Friends'}>
                             {usersData.friends.map(u => (
-                                <UserItem className={s.userItem} key={u.id} id={u.id} photos={u.photos} name={u.name}
-                                          status={u.status} userAvatar={'small'}/>
+                                <UserItem className={s.userItem} key={u.id} id={u.id}
+                                          photos={u.photos} name={u.name}
+                                          status={u.status} userAvatar={'small'}
+                                          handleGetDialogData={handleGetDialogData}/>
                             ))}
                         </TabSwitcherContent>
                         <TabSwitcherContent className={s.sidebarContent} value={'Groups'}>
@@ -86,7 +93,15 @@ export const Messages = memo(({
             {displayGroupChat && <Chat chatData={messagesData.groupChatData} messageText={messagesData.messageText}
                                        sendMessage={sendMessage} messagesAnchorRef={messagesAnchorRef}
                                        dispatchNewTextInput={dispatchNewTextInput} currentUserId={currentUserId}
-                                       handleOnScroll={handleOnScroll} chatName={'IT-Incubator Chat'} chatPhoto={IN} setDisplayGroupChat={setDisplayGroupChat}/>}
+                                       handleOnScroll={handleOnScroll} chatName={'IT-Incubator Chat'} chatPhoto={IN}
+                                       setDisplayGroupChat={setDisplayGroupChat}/>}
+
+            <Chat dialogData={messagesData.dialogsData} currentUserId={currentUserId}
+                  messagesAnchorRef={messagesAnchorRef} messageText={messagesData.messageText} sendMessage={sendMessage}
+                  dispatchNewTextInput={dispatchNewTextInput} handleOnScroll={handleOnScroll}
+                  chatName={dataActiveUserDialog?.name}
+                  setDisplayGroupChat={setDisplayGroupChat}
+                  chatPhoto={dataActiveUserDialog?.photo}/>
         </div>
     )
 })

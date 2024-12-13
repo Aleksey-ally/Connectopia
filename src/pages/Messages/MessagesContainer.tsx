@@ -2,7 +2,7 @@ import {useSelector} from "react-redux";
 import {
     changeMessageText,
     createConnectionGroupChat,
-    destroyConnectionGroupChat,
+    destroyConnectionGroupChat, getDialogData,
     MessagesDataType,
     sendMessageChat
 } from "redux/messagesReducer";
@@ -12,7 +12,11 @@ import {getUsers, UsersType} from "redux/usersReducer";
 import React, {ChangeEvent, useEffect, useRef, useState} from "react";
 import {toast} from "react-toastify";
 import {errorOptions} from "utils/ToastifyOptions/ToastifyOptions";
+import {dialogsAPI} from "api/dialogs/dialogs.api";
 
+export type DataActiveUserDialogType = {
+    name: string, photo?: string | null
+}
 
 export const MessagesContainer = () => {
     const dispatch = useAppDispatch()
@@ -24,8 +28,10 @@ export const MessagesContainer = () => {
 
     const [displayFriends, setDisplayFriends] = useState<boolean>(false)
     const [displayGroupChat, setDisplayGroupChat] = useState<boolean>(false)
+    const [displayUserChat, setDisplayUserChat] = useState<boolean>(false)
     const [isAutoScrollActive, setIsAutoScrollActive] = useState<boolean>(true)
     const [lastScrollTop, setLastScrollTop] = useState<number>(0)
+    const [dataActiveUserDialog, setDataActiveUserDialog] = useState<DataActiveUserDialogType>()
 
     const messagesAnchorRef = useRef<HTMLDivElement>(null)
 
@@ -64,6 +70,15 @@ export const MessagesContainer = () => {
         return
     }
 
+    const handleGetDialogData = (uID: number, page: number, count: number, name: string, photo: string | null) => {
+        dispatch(getDialogData(uID, page, count))
+        setDataActiveUserDialog({name, photo})
+    }
+
+    // useEffect(() => {
+    //     dispatch(getDialogData(2, 1, 10))
+    // }, []);
+
     useEffect(() => {
         if (!displayFriends) return
         (async () => {
@@ -99,17 +114,17 @@ export const MessagesContainer = () => {
     }, [messagesData.groupChatData]);
 
     useEffect(() => {
-        // chatGroupApi.refreshDialog(2)
-        // chatGroupApi.getAllDialogs()
-        // chatGroupApi.getUserDialog(2,1, 10)
-        // chatGroupApi.sendMessage(2, 'Hello')
-        // chatGroupApi.checkIsViewedMessage('3a625288-c91c-420b-b907-f1a0f55cef40')
-        // chatGroupApi.spamMessage("3a625288-c91c-420b-b907-f1a0f55cef40")
-        // chatGroupApi.deleteMessage('4d2328cb-d28a-4b38-82ba-a6d2a211f4c4')
-        // chatGroupApi.restoreMessage('4d2328cb-d28a-4b38-82ba-a6d2a211f4c4')
-        // const currentDate = new Date().toLocaleString('ru-Ru')
-        //  chatGroupApi.getNewestThanDateUserMessages(2, "2024-12-10T08:55:02.873")
-        //  chatGroupApi.getCountNewMessages()
+        // dialogsAPI.refreshDialog(2)
+        // dialogsAPI.getAllDialogs()
+        // dialogsAPI.getUserDialog(2,1, 10)
+        // dialogsAPI.sendMessage(2, 'Hello')
+        // dialogsAPI.checkIsViewedMessage('3a625288-c91c-420b-b907-f1a0f55cef40')
+        // dialogsAPI.spamMessage("3a625288-c91c-420b-b907-f1a0f55cef40")
+        // dialogsAPI.deleteMessage('4d2328cb-d28a-4b38-82ba-a6d2a211f4c4')
+        // dialogsAPI.restoreMessage('4d2328cb-d28a-4b38-82ba-a6d2a211f4c4')
+        // const dialogsAPI = new Date().toLocaleString('ru-Ru')
+        //  dialogsAPI.getNewestThanDateUserMessages(2, "2024-12-10T08:55:02.873")
+        //  dialogsAPI.getCountNewMessages()
 
     }, []);
 
@@ -117,5 +132,7 @@ export const MessagesContainer = () => {
                      sendMessage={sendMessageChatHandler} currentUserId={currentUserId}
                      displayGroupChat={displayGroupChat} setDisplayGroupChat={setDisplayGroupChat}
                      messagesAnchorRef={messagesAnchorRef} handleOnScroll={handleOnScroll}
-                     handleDisplayFriends={handleDisplayFriends}/>
+                     handleDisplayFriends={handleDisplayFriends} handleGetDialogData={handleGetDialogData}
+                     dataActiveUserDialog={dataActiveUserDialog}
+    />
 }

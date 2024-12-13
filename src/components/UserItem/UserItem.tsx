@@ -14,6 +14,7 @@ type UserItemType =
     unFollow?: (id: number) => void
     className?: string
     userAvatar?: 'medium' | 'small' | 'large'
+    handleGetDialogData?: (uID: number, page: number, count: number, name:string, photo:string | null) => void
 }
 
 export const UserItem = memo(({
@@ -26,11 +27,12 @@ export const UserItem = memo(({
                                   follow,
                                   unFollow,
                                   className,
-                                  userAvatar = 'medium'
+                                  userAvatar = 'medium',
+                                  handleGetDialogData
                               }: UserItemType) => {
 
     return (
-        <div className={`${s.user} ${className}`}>
+        <div className={`${s.user} ${className}`} onClick={() => handleGetDialogData?.(id, 1, 20, name, photos?.small)}>
             <div className={s.userInfo}>
                 <NavLink className={s.linkAvatar} to={`/profile/${id}`}>
                     <Avatar size={userAvatar} photo={photos.small}/>

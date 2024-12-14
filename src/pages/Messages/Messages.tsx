@@ -18,7 +18,9 @@ type MessagesPropsType = {
     sendMessage: () => void
     currentUserId: number | null
     displayGroupChat: boolean
+    displayUserChat: boolean
     setDisplayGroupChat: (toggle: boolean) => void
+    setDisplayUserChat: (toggle: boolean) => void
     messagesAnchorRef: RefObject<HTMLDivElement>
     handleOnScroll: (e: React.UIEvent<HTMLDivElement, UIEvent>) => void
     handleDisplayFriends: (value: string) => void,
@@ -38,7 +40,9 @@ export const Messages = memo(({
                                   handleOnScroll,
                                   handleDisplayFriends,
                                   handleGetDialogData,
-                                  dataActiveUserDialog
+                                  dataActiveUserDialog,
+                                  displayUserChat,
+                                  setDisplayUserChat
                               }: MessagesPropsType) => {
 
 
@@ -94,14 +98,15 @@ export const Messages = memo(({
                                        sendMessage={sendMessage} messagesAnchorRef={messagesAnchorRef}
                                        dispatchNewTextInput={dispatchNewTextInput} currentUserId={currentUserId}
                                        handleOnScroll={handleOnScroll} chatName={'IT-Incubator Chat'} chatPhoto={IN}
-                                       setDisplayGroupChat={setDisplayGroupChat}/>}
+                                       setDisplayChat={setDisplayGroupChat}/>}
 
-            <Chat dialogData={messagesData.dialogsData} currentUserId={currentUserId}
-                  messagesAnchorRef={messagesAnchorRef} messageText={messagesData.messageText} sendMessage={sendMessage}
-                  dispatchNewTextInput={dispatchNewTextInput} handleOnScroll={handleOnScroll}
-                  chatName={dataActiveUserDialog?.name}
-                  setDisplayGroupChat={setDisplayGroupChat}
-                  chatPhoto={dataActiveUserDialog?.photo}/>
+            {displayUserChat && <Chat dialogData={messagesData.dialogsData} currentUserId={currentUserId}
+                                      messagesAnchorRef={messagesAnchorRef} messageText={messagesData.messageText}
+                                      sendMessage={sendMessage}
+                                      dispatchNewTextInput={dispatchNewTextInput} handleOnScroll={handleOnScroll}
+                                      chatName={dataActiveUserDialog?.name}
+                                      setDisplayChat={setDisplayUserChat}
+                                      chatPhoto={dataActiveUserDialog?.photo}/>}
         </div>
     )
 })

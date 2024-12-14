@@ -25,7 +25,6 @@ export const MessagesContainer = () => {
     const usersData = useSelector<ReducersType, UsersType>(state => state.usersData)
     const currentUserId = useSelector<ReducersType, number | null>(state => state.auth.id)
 
-
     const [displayFriends, setDisplayFriends] = useState<boolean>(false)
     const [displayGroupChat, setDisplayGroupChat] = useState<boolean>(false)
     const [displayUserChat, setDisplayUserChat] = useState<boolean>(false)
@@ -72,12 +71,13 @@ export const MessagesContainer = () => {
 
     const handleGetDialogData = (uID: number, page: number, count: number, name: string, photo: string | null) => {
         dispatch(getDialogData(uID, page, count))
-        setDataActiveUserDialog({name, photo})
-    }
+            .then(()=>{
+                setDisplayGroupChat(false)
+                setDataActiveUserDialog({name, photo})
+                setDisplayUserChat(true)
+        })
 
-    // useEffect(() => {
-    //     dispatch(getDialogData(2, 1, 10))
-    // }, []);
+    }
 
     useEffect(() => {
         if (!displayFriends) return
@@ -101,6 +101,7 @@ export const MessagesContainer = () => {
                 toast.error('Error when receiving messages data', errorOptions)
             }
         })()
+        setDisplayUserChat(false)
 
         return () => {
             destroyConnectionGroupChatHandler()
@@ -133,6 +134,7 @@ export const MessagesContainer = () => {
                      displayGroupChat={displayGroupChat} setDisplayGroupChat={setDisplayGroupChat}
                      messagesAnchorRef={messagesAnchorRef} handleOnScroll={handleOnScroll}
                      handleDisplayFriends={handleDisplayFriends} handleGetDialogData={handleGetDialogData}
-                     dataActiveUserDialog={dataActiveUserDialog}
+                     dataActiveUserDialog={dataActiveUserDialog} displayUserChat={displayUserChat}
+                     setDisplayUserChat={setDisplayUserChat}
     />
 }

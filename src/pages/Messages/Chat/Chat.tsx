@@ -6,7 +6,6 @@ import {Button} from "components/Button";
 import {Send} from "assets/icons";
 import {DialogDataType, GroupChatDataType} from "redux/messagesReducer";
 import {Close} from "assets/icons/Close";
-import {DataActiveUserDialogType} from "pages/Messages/MessagesContainer";
 
 type PropsType = {
     dialogData?: DialogDataType[]
@@ -19,7 +18,7 @@ type PropsType = {
     handleOnScroll: (e: React.UIEvent<HTMLDivElement, UIEvent>) => void
     chatPhoto?: string | null
     chatName?: string
-    setDisplayGroupChat: (toggle: boolean) => void
+    setDisplayChat: (toggle: boolean) => void
 }
 
 
@@ -34,7 +33,7 @@ export const Chat = memo(({
                               handleOnScroll,
                               chatPhoto,
                               chatName,
-                              setDisplayGroupChat,
+                              setDisplayChat,
                           }: PropsType) => {
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -46,9 +45,10 @@ export const Chat = memo(({
     return (
         <div className={s.chat}>
             <div className={s.chatHeader}>
-                <Avatar className={`${s.chatAvatar} ${chatData && s.chatGroupAvatar}` } size={"small"} photo={chatPhoto}/>
+                <Avatar className={`${s.chatAvatar} ${chatData && s.chatGroupAvatar}`} size={"small"}
+                        photo={chatPhoto}/>
                 <span className={s.chatName}>{chatName}</span>
-                <Button variant={'secondary'} className={s.close} onClick={() => setDisplayGroupChat(false)}>
+                <Button variant={'secondary'} className={s.close} onClick={() => setDisplayChat(false)}>
                     <Close/>
                 </Button>
             </div>

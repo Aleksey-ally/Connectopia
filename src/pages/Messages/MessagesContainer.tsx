@@ -3,7 +3,8 @@ import {
     changeMessageTextDialog,
     changeMessageTextGroup,
     createConnectionGroupChat,
-    destroyConnectionGroupChat, getDialogData,
+    destroyConnectionGroupChat,
+    getDialogData,
     MessagesDataType,
     sendMessageGroupChat
 } from "redux/messagesReducer";
@@ -13,7 +14,6 @@ import {getUsers, UsersType} from "redux/usersReducer";
 import React, {ChangeEvent, useEffect, useRef, useState} from "react";
 import {toast} from "react-toastify";
 import {errorOptions} from "utils/ToastifyOptions/ToastifyOptions";
-import {dialogsAPI} from "api/dialogs/dialogs.api";
 
 export type DataActiveUserDialogType = {
     name: string, photo?: string | null
@@ -30,7 +30,6 @@ export const MessagesContainer = () => {
     const [displayGroupChat, setDisplayGroupChat] = useState<boolean>(false)
     const [displayUserChat, setDisplayUserChat] = useState<boolean>(false)
     const [isAutoScrollActive, setIsAutoScrollActive] = useState<boolean>(true)
-    const [lastScrollTop, setLastScrollTop] = useState<number>(0)
     const [dataActiveUserDialog, setDataActiveUserDialog] = useState<DataActiveUserDialogType>()
 
     const messagesAnchorRef = useRef<HTMLDivElement>(null)
@@ -50,21 +49,18 @@ export const MessagesContainer = () => {
         dispatch(createConnectionGroupChat())
     }
 
-    const destroyConnectionGroupChatHandler = () => {
-        dispatch(destroyConnectionGroupChat())
-    }
-
     const handleOnScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
-        const element = e.currentTarget
-        const maxScrollPosition = element.scrollHeight - element.clientHeight
+        const element = e.currentTarget;
+        const maxScrollPosition = element.scrollHeight - element.clientHeight;
 
-        if (element.scrollTop > lastScrollTop && Math.abs(maxScrollPosition - element.scrollTop) < 10) {
-            setIsAutoScrollActive(true)
+        // Проверяем, находится ли пользователь у нижней границы скролла
+        const isNearBottom = Math.abs(maxScrollPosition - element.scrollTop) < 10;
+
+        if (isNearBottom) {
+            setIsAutoScrollActive(true); // Включаем автоскролл, если пользователь у конца
         } else {
-            setIsAutoScrollActive(false)
+            setIsAutoScrollActive(false); // Отключаем, если пользователь прокручивает вверх
         }
-
-        setLastScrollTop(element.scrollTop)
     }
 
     const handleDisplayFriends = (value: string) => {
@@ -75,12 +71,15 @@ export const MessagesContainer = () => {
     }
 
     const handleGetDialogData = (uID: number, page: number, count: number, name: string, photo: string | null) => {
+        setIsAutoScrollActive(false)
+        setDisplayGroupChat(false)
+
         dispatch(getDialogData(uID, page, count))
-            .then(()=>{
-                setDisplayGroupChat(false)
+            .then(() => {
                 setDataActiveUserDialog({name, photo})
                 setDisplayUserChat(true)
-        })
+                setIsAutoScrollActive(true)
+            })
 
     }
 
@@ -109,15 +108,15 @@ export const MessagesContainer = () => {
         setDisplayUserChat(false)
 
         return () => {
-            destroyConnectionGroupChatHandler()
+            dispatch(destroyConnectionGroupChat())
         }
     }, [displayGroupChat])
 
     useEffect(() => {
         if (isAutoScrollActive) {
-            messagesAnchorRef.current?.scrollIntoView({behavior: "smooth"})
+            messagesAnchorRef.current?.scrollIntoView()
         }
-    }, [messagesData.groupChatData]);
+    }, [isAutoScrollActive, messagesData.groupChatData, messagesData.dialogsData]);
 
     useEffect(() => {
         // dialogsAPI.refreshDialog(2)
@@ -134,10 +133,10 @@ export const MessagesContainer = () => {
 
     }, []);
 
-    return <Messages usersData={usersData} messagesData={messagesData} dispatchNewTextGroup={dispatchNewTextGroup}
+    return <Messages ref={messagesAnchorRef} usersData={usersData} messagesData={messagesData} dispatchNewTextGroup={dispatchNewTextGroup}
                      sendMessage={sendMessageGroupChatHandler} currentUserId={currentUserId}
                      displayGroupChat={displayGroupChat} setDisplayGroupChat={setDisplayGroupChat}
-                     messagesAnchorRef={messagesAnchorRef} handleOnScroll={handleOnScroll}
+                     handleOnScroll={handleOnScroll}
                      handleDisplayFriends={handleDisplayFriends} handleGetDialogData={handleGetDialogData}
                      dataActiveUserDialog={dataActiveUserDialog} displayUserChat={displayUserChat}
                      setDisplayUserChat={setDisplayUserChat} dispatchNewTextDialog={dispatchNewTextDialog}

@@ -1,4 +1,4 @@
-import React, {ChangeEvent, memo} from "react";
+import React, {ChangeEvent, forwardRef, memo, useImperativeHandle, useRef} from "react";
 import s from "./Chat.module.scss";
 import {Avatar} from "components/Avatar";
 import {TextField} from "components/TextField";
@@ -11,7 +11,6 @@ type PropsType = {
     dialogData?: DialogDataType[]
     chatData?: GroupChatDataType[]
     currentUserId: number | null
-    messagesAnchorRef: React.RefObject<HTMLDivElement>
     messageText: string
     sendMessage: () => void
     dispatchNewTextInput?: (e: ChangeEvent<HTMLInputElement>) => void
@@ -22,11 +21,10 @@ type PropsType = {
 }
 
 
-export const Chat = memo(({
+export const Chat = memo(forwardRef(({
                               dialogData,
                               chatData,
                               currentUserId,
-                              messagesAnchorRef,
                               messageText,
                               sendMessage,
                               dispatchNewTextInput,
@@ -34,7 +32,17 @@ export const Chat = memo(({
                               chatPhoto,
                               chatName,
                               setDisplayChat,
-                          }: PropsType) => {
+                          }: PropsType, ref) => {
+
+    const scrollableRef  = useRef<HTMLDivElement>(null)
+
+    useImperativeHandle(ref, () => ({
+        scrollIntoView: () => {
+            if (scrollableRef .current) {
+                scrollableRef .current.scrollIntoView({ behavior: 'smooth'});
+            }
+        }
+    }));
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === "Enter") {
@@ -55,6 +63,7 @@ export const Chat = memo(({
             <div className={s.chatContent}>
                 <div className={s.chatData}
                      onScroll={handleOnScroll}>
+
                     {chatData && chatData?.map((d, index) => {
                         return <div
                             className={`${s.messageItem} ${d.userId === currentUserId ? s.currentUser : ''}`}
@@ -78,7 +87,7 @@ export const Chat = memo(({
                         </div>
                     })}
 
-                    <div ref={messagesAnchorRef}></div>
+                    <div ref={scrollableRef}></div>
                 </div>
                 <div className={s.sendMessageBar}>
                     <TextField type="text"
@@ -94,4 +103,4 @@ export const Chat = memo(({
 
         </div>
     )
-})
+}))

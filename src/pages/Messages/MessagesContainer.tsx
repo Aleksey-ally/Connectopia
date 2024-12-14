@@ -1,10 +1,11 @@
 import {useSelector} from "react-redux";
 import {
-    changeMessageText,
+    changeMessageTextDialog,
+    changeMessageTextGroup,
     createConnectionGroupChat,
     destroyConnectionGroupChat, getDialogData,
     MessagesDataType,
-    sendMessageChat
+    sendMessageGroupChat
 } from "redux/messagesReducer";
 import {ReducersType, useAppDispatch} from "redux/reduxStore";
 import {Messages} from "./Messages";
@@ -34,11 +35,15 @@ export const MessagesContainer = () => {
 
     const messagesAnchorRef = useRef<HTMLDivElement>(null)
 
-    const dispatchNewTextInput = (e: ChangeEvent<HTMLInputElement>) => {
-        dispatch(changeMessageText(e.currentTarget.value))
+    const dispatchNewTextDialog = (e: ChangeEvent<HTMLInputElement>) => {
+        dispatch(changeMessageTextDialog(e.currentTarget.value))
     }
-    const sendMessageChatHandler = () => {
-        dispatch(sendMessageChat(messagesData.messageText))
+
+    const dispatchNewTextGroup = (e: ChangeEvent<HTMLInputElement>) => {
+        dispatch(changeMessageTextGroup(e.currentTarget.value))
+    }
+    const sendMessageGroupChatHandler = () => {
+        dispatch(sendMessageGroupChat(messagesData.messageTextGroup))
     }
 
     const createConnectionGroupChatHandler = () => {
@@ -129,12 +134,12 @@ export const MessagesContainer = () => {
 
     }, []);
 
-    return <Messages usersData={usersData} messagesData={messagesData} dispatchNewTextInput={dispatchNewTextInput}
-                     sendMessage={sendMessageChatHandler} currentUserId={currentUserId}
+    return <Messages usersData={usersData} messagesData={messagesData} dispatchNewTextGroup={dispatchNewTextGroup}
+                     sendMessage={sendMessageGroupChatHandler} currentUserId={currentUserId}
                      displayGroupChat={displayGroupChat} setDisplayGroupChat={setDisplayGroupChat}
                      messagesAnchorRef={messagesAnchorRef} handleOnScroll={handleOnScroll}
                      handleDisplayFriends={handleDisplayFriends} handleGetDialogData={handleGetDialogData}
                      dataActiveUserDialog={dataActiveUserDialog} displayUserChat={displayUserChat}
-                     setDisplayUserChat={setDisplayUserChat}
+                     setDisplayUserChat={setDisplayUserChat} dispatchNewTextDialog={dispatchNewTextDialog}
     />
 }

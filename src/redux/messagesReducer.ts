@@ -4,16 +4,17 @@ import {dialogsAPI} from "api/dialogs/dialogs.api";
 
 const RECEIVED_DATA_GROUP_CHAT = "RECEIVED-DATA-GROUP-CHAT";
 const DELETED_DATA_GROUP_CHAT = "DELETED-DATA-GROUP-CHAT";
-const ADD_MESSAGE = "ADD-MESSAGE";
+const ADD_MESSAGE_DIALOG = "ADD-MESSAGE-DIALOG";
 const ADD_MESSAGE_GROUP = "ADD-MESSAGE-GROUP";
-const CHANGE_MESSAGE_TEXT = "CHANGE-MESSAGE-TEXT";
+const CHANGE_MESSAGE_TEXT_DIALOG = "CHANGE-MESSAGE-TEXT-DIALOG";
+const CHANGE_MESSAGE_TEXT_GROUP = "CHANGE-MESSAGE-TEXT-GROUP";
 const RECEIVED_DIALOGS_DATA = "RECEIVED-DIALOGS-DATA";
 
 export type MessagesDataType = {
     dialogsData: DialogDataType[];
     groupChatData: GroupChatDataType[]
-    messageText: string;
-    // messageTextGroup: string;
+    messageTextDialog: string;
+    messageTextGroup: string;
 };
 
 export type GroupChatDataType = {
@@ -36,15 +37,18 @@ export type DialogDataType = {
 const initialState: MessagesDataType = {
     dialogsData: [],
     groupChatData: [],
-    messageText: "",
+    messageTextDialog: "",
+    messageTextGroup: ""
 };
 
 export type ActionType =
-    | ChangeMessageTextType
-    | AddMessageType
+    | ChangeMessageTextDialogType
+    | AddMessageDialogType
     | ReceivedGroupChatData
     | DeletedGroupChatData
     | ReceivedDialogsData
+    | ChangeMessageTextGroupType
+    | AddMessageGroupType
 
 export const messagesReducer = (state = initialState, action: ActionType): MessagesDataType => {
 
@@ -59,26 +63,27 @@ export const messagesReducer = (state = initialState, action: ActionType): Messa
         case DELETED_DATA_GROUP_CHAT :
             return {...state, groupChatData: []}
 
-        case CHANGE_MESSAGE_TEXT:
-            return {...state, messageText: action.payload.newText};
+        case CHANGE_MESSAGE_TEXT_DIALOG:
+            return {...state, messageTextDialog: action.newText}
 
-        case ADD_MESSAGE:
-            if (state.messageText.trim() !== "") {
+        case CHANGE_MESSAGE_TEXT_GROUP:
+            return {...state, messageTextGroup: action.newText}
+
+        case ADD_MESSAGE_DIALOG:
+            if (state.messageTextDialog.trim() !== "") {
                 return {
-                    ...state,
-                    // messagesTextData: [
-                    //     ...state.messagesTextData,
-                    //     {
-                    //         id: state.messagesTextData.length + 1,
-                    //         messageText: state.messageText,
-                    //     },
-                    // ],
-                    messageText: "",
-                };
+                    ...state, messageTextDialog: "",
+                }
             }
+            return state
 
-            return state;
-
+        case ADD_MESSAGE_GROUP:
+            if (state.messageTextGroup.trim() !== "") {
+                return {
+                    ...state, messageTextGroup: "",
+                }
+            }
+            return state
         default:
             return state;
     }
@@ -86,8 +91,10 @@ export const messagesReducer = (state = initialState, action: ActionType): Messa
 
 type ReceivedGroupChatData = ReturnType<typeof receivedGroupChatData>;
 type DeletedGroupChatData = ReturnType<typeof deletedGroupChatData>;
-type AddMessageType = ReturnType<typeof addMessage>;
-type ChangeMessageTextType = ReturnType<typeof changeMessageText>;
+type AddMessageDialogType = ReturnType<typeof addMessageDialog>;
+type AddMessageGroupType = ReturnType<typeof addMessageGroup>;
+type ChangeMessageTextDialogType = ReturnType<typeof changeMessageTextDialog>;
+type ChangeMessageTextGroupType = ReturnType<typeof changeMessageTextGroup>;
 type ReceivedDialogsData = ReturnType<typeof receivedDialogsData>;
 
 
@@ -109,22 +116,25 @@ export const receivedDialogsData = (data: DialogDataType[]) =>
         data
     } as const)
 
-export const addMessage = () => ({type: ADD_MESSAGE} as const);
+export const addMessageDialog = () => ({type: ADD_MESSAGE_DIALOG} as const);
+export const addMessageGroup = () => ({type: ADD_MESSAGE_GROUP} as const);
 
-// export const addMessageGroup = () => ({type: ADD_MESSAGE_GROUP} as const);
-
-export const changeMessageText = (newText: string) =>
+export const changeMessageTextDialog = (newText: string) =>
     ({
-        type: CHANGE_MESSAGE_TEXT,
-        payload: {
-            newText,
-        },
+        type: CHANGE_MESSAGE_TEXT_DIALOG,
+        newText,
+    } as const);
+
+export const changeMessageTextGroup = (newText: string) =>
+    ({
+        type: CHANGE_MESSAGE_TEXT_GROUP,
+        newText,
     } as const);
 
 
 //Thunks
 export const getDialogData = (uID: number, page: number, count: number) => async (dispatch: Dispatch) => {
-   const res = await dialogsAPI.getUserDialog(uID, page, count)
+    const res = await dialogsAPI.getUserDialog(uID, page, count)
     dispatch(receivedDialogsData(res))
 }
 
@@ -142,8 +152,8 @@ export const destroyConnectionGroupChat = () => (dispatch: Dispatch) => {
 
 }
 
-export const sendMessageChat = (message: string) => (dispatch: Dispatch) => {
+export const sendMessageGroupChat = (message: string) => (dispatch: Dispatch) => {
     if (message.trim().length < 1) return
     chatGroupAPI.sendMessage(message)
-    dispatch(addMessage())
+    dispatch(addMessageGroup())
 }

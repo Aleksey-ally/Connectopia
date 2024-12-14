@@ -14,7 +14,8 @@ import {DataActiveUserDialogType} from "pages/Messages/MessagesContainer";
 type MessagesPropsType = {
     usersData: UsersType
     messagesData: MessagesDataType
-    dispatchNewTextInput: (e: ChangeEvent<HTMLInputElement>) => void
+    dispatchNewTextGroup?: (e: ChangeEvent<HTMLInputElement>) => void
+    dispatchNewTextDialog?: (e: ChangeEvent<HTMLInputElement>) => void
     sendMessage: () => void
     currentUserId: number | null
     displayGroupChat: boolean
@@ -31,7 +32,7 @@ type MessagesPropsType = {
 export const Messages = memo(({
                                   usersData,
                                   messagesData,
-                                  dispatchNewTextInput,
+                                  dispatchNewTextGroup,
                                   sendMessage,
                                   currentUserId,
                                   displayGroupChat,
@@ -42,7 +43,8 @@ export const Messages = memo(({
                                   handleGetDialogData,
                                   dataActiveUserDialog,
                                   displayUserChat,
-                                  setDisplayUserChat
+                                  setDisplayUserChat,
+                                  dispatchNewTextDialog
                               }: MessagesPropsType) => {
 
 
@@ -94,16 +96,16 @@ export const Messages = memo(({
                     Current user avatar, settings
                 </div>
             </div>
-            {displayGroupChat && <Chat chatData={messagesData.groupChatData} messageText={messagesData.messageText}
+            {displayGroupChat && <Chat chatData={messagesData.groupChatData} messageText={messagesData.messageTextGroup}
                                        sendMessage={sendMessage} messagesAnchorRef={messagesAnchorRef}
-                                       dispatchNewTextInput={dispatchNewTextInput} currentUserId={currentUserId}
+                                       dispatchNewTextInput={dispatchNewTextGroup} currentUserId={currentUserId}
                                        handleOnScroll={handleOnScroll} chatName={'IT-Incubator Chat'} chatPhoto={IN}
                                        setDisplayChat={setDisplayGroupChat}/>}
 
             {displayUserChat && <Chat dialogData={messagesData.dialogsData} currentUserId={currentUserId}
-                                      messagesAnchorRef={messagesAnchorRef} messageText={messagesData.messageText}
+                                      messagesAnchorRef={messagesAnchorRef} messageText={messagesData.messageTextDialog}
                                       sendMessage={sendMessage}
-                                      dispatchNewTextInput={dispatchNewTextInput} handleOnScroll={handleOnScroll}
+                                      dispatchNewTextInput={dispatchNewTextDialog} handleOnScroll={handleOnScroll}
                                       chatName={dataActiveUserDialog?.name}
                                       setDisplayChat={setDisplayUserChat}
                                       chatPhoto={dataActiveUserDialog?.photo}/>}

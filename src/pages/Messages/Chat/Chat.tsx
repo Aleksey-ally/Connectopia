@@ -14,7 +14,7 @@ type PropsType = {
     messagesAnchorRef: React.RefObject<HTMLDivElement>
     messageText: string
     sendMessage: () => void
-    dispatchNewTextInput: (e: ChangeEvent<HTMLInputElement>) => void
+    dispatchNewTextInput?: (e: ChangeEvent<HTMLInputElement>) => void
     handleOnScroll: (e: React.UIEvent<HTMLDivElement, UIEvent>) => void
     chatPhoto?: string | null
     chatName?: string

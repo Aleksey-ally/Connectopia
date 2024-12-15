@@ -62,12 +62,13 @@ export const Messages = memo(forwardRef(({
                 </div>
 
                 <div className={s.tabs}>
-                    <TabSwitcher tabs={tabs} onValueChange={handleDisplayFriends}>
-                        <TabSwitcherContent value={'Messages'}>
-                            Friend 1
-                            Friend 2
-                            Friend 3
-                            Conversation
+                    <TabSwitcher tabs={tabs} defaultValue={'Messages'} onValueChange={handleDisplayFriends}>
+                        <TabSwitcherContent className={s.sidebarContent} value={'Messages'}>
+                            {messagesData.allDialogs.map(d=>(
+                              <>  <UserItem key={d.id} className={s.userItem} id={d.id} name={d.userName} photos={d.photos} userAvatar={'small'} handleGetDialogData={handleGetDialogData}/>
+                                  {!d.hasNewMessages && '*'}
+                              </>
+                            ))}
                             Groups
                         </TabSwitcherContent>
                         <TabSwitcherContent className={s.sidebarContent} value={'Friends'}>

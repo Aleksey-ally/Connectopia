@@ -2,7 +2,9 @@ import {chatGroupAPI} from "api/chat-group/chat-group.api";
 import {Dispatch} from "redux";
 import {dialogsAPI} from "api/dialogs/dialogs.api";
 import {AppThunkDispatch} from "redux/reduxStore";
+import {AllDialogsResponseType} from "api/dialogs/dialogs.types";
 
+const RECEIVED_ALL_DIALOGS = "RECEIVED-ALL-DIALOGS"
 const RECEIVED_DATA_GROUP_CHAT = "RECEIVED-DATA-GROUP-CHAT";
 const DELETED_DATA_GROUP_CHAT = "DELETED-DATA-GROUP-CHAT";
 const ADD_MESSAGE_DIALOG = "ADD-MESSAGE-DIALOG";
@@ -12,6 +14,7 @@ const CHANGE_MESSAGE_TEXT_GROUP = "CHANGE-MESSAGE-TEXT-GROUP";
 const RECEIVED_DIALOGS_DATA = "RECEIVED-DIALOGS-DATA";
 
 export type MessagesDataType = {
+    allDialogs: AllDialogsResponseType
     dialogsData: DialogDataType[];
     groupChatData: GroupChatDataType[]
     messageTextDialog: string;
@@ -36,6 +39,7 @@ export type DialogDataType = {
 };
 
 const initialState: MessagesDataType = {
+    allDialogs: [],
     dialogsData: [],
     groupChatData: [],
     messageTextDialog: "",
@@ -50,10 +54,13 @@ export type ActionType =
     | ReceivedDialogsData
     | ChangeMessageTextGroupType
     | AddMessageGroupType
+    | ReceivedAllDialogs
 
 export const messagesReducer = (state = initialState, action: ActionType): MessagesDataType => {
 
     switch (action.type) {
+        case RECEIVED_ALL_DIALOGS:
+            return {...state, allDialogs: action.data};
 
         case RECEIVED_DIALOGS_DATA:
             return {...state, dialogsData: action.data}
@@ -90,6 +97,7 @@ export const messagesReducer = (state = initialState, action: ActionType): Messa
     }
 };
 
+type ReceivedAllDialogs = ReturnType<typeof receivedAllDialogs>;
 type ReceivedGroupChatData = ReturnType<typeof receivedGroupChatData>;
 type DeletedGroupChatData = ReturnType<typeof deletedGroupChatData>;
 type AddMessageDialogType = ReturnType<typeof addMessageDialog>;
@@ -100,6 +108,12 @@ type ReceivedDialogsData = ReturnType<typeof receivedDialogsData>;
 
 
 //AC
+export const receivedAllDialogs = (data: AllDialogsResponseType) =>
+    ({
+        type: RECEIVED_ALL_DIALOGS,
+        data
+    } as const)
+
 export const receivedGroupChatData = (data: GroupChatDataType[]) =>
     ({
         type: RECEIVED_DATA_GROUP_CHAT,
@@ -163,4 +177,9 @@ export const sendMessageGroupChat = (message: string) => (dispatch: Dispatch) =>
     if (message.trim().length < 1) return
     chatGroupAPI.sendMessage(message)
     dispatch(addMessageGroup())
+}
+
+export const getAllDialogs = () => async (dispatch: AppThunkDispatch) => {
+    const res = await dispatch(dialogsAPI.getAllDialogs)
+    dispatch(receivedAllDialogs(res))
 }

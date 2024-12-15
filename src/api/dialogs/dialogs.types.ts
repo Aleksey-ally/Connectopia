@@ -1,4 +1,4 @@
-export type AllDialogsResponseType = [{
+export type AllDialogsResponseType = {
     id: number;
     userName: string;
     hasNewMessages: boolean;
@@ -6,11 +6,11 @@ export type AllDialogsResponseType = [{
     lastUserActivityDate: string;
     newMessagesCount: number;
     photos: AllDialogsResponsePhotosType;
-}]
+}[]
 
 export type AllDialogsResponsePhotosType = {
-    small: string;
-    large: string;
+    small: string | null;
+    large: string | null;
 }
 
 export type SendMessageResponseType = {

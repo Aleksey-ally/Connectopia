@@ -4,8 +4,10 @@ import {
     changeMessageTextGroup,
     createConnectionGroupChat,
     destroyConnectionGroupChat,
+    getAllDialogs,
     getDialogData,
-    MessagesDataType, sendMessageDialog,
+    MessagesDataType,
+    sendMessageDialog,
     sendMessageGroupChat
 } from "redux/messagesReducer";
 import {ReducersType, useAppDispatch} from "redux/reduxStore";
@@ -118,6 +120,16 @@ export const MessagesContainer = () => {
             dispatch(destroyConnectionGroupChat())
         }
     }, [displayGroupChat])
+
+    useEffect(() => {
+        (async ()=>{
+            try{
+                await dispatch(getAllDialogs())
+            } catch {
+                toast.error('Error when receiving all dialogs data', errorOptions)
+            }
+        })()
+    }, []);
 
     useEffect(() => {
         if (isAutoScrollActive) {

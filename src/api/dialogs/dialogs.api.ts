@@ -16,8 +16,7 @@ export const dialogsAPI = {
 
     async getAllDialogs() {
         const res = await instance.get<AllDialogsResponseType>('dialogs');
-        console.log(res.data[0].id)
-        // return res
+        return res.data
     },
 
     async getUserDialog(uID: number, page: number, count: number) {
@@ -27,7 +26,6 @@ export const dialogsAPI = {
 
     async sendMessage(uID: number, message: string) {
         const res = await instance.post<DefaultResponseType<SendMessageResponseType>>(`dialogs/${uID}/messages`, {body: message})
-        console.log(res.data.data.message)
     },
 
     async checkIsViewedMessage(messageID: string) {

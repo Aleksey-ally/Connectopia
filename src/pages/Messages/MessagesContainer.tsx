@@ -13,7 +13,7 @@ import {
 import {ReducersType, useAppDispatch} from "redux/reduxStore";
 import {Messages} from "./Messages";
 import {getUsers, UsersType} from "redux/usersReducer";
-import React, {ChangeEvent, useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {toast} from "react-toastify";
 import {errorOptions} from "utils/ToastifyOptions/ToastifyOptions";
 
@@ -36,8 +36,8 @@ export const MessagesContainer = () => {
 
     const messagesAnchorRef = useRef<HTMLDivElement>(null)
 
-    const dispatchNewTextDialog = (e: ChangeEvent<HTMLInputElement>) => {
-        dispatch(changeMessageTextDialog(e.currentTarget.value))
+    const dispatchNewTextDialog = (e: string) => {
+        dispatch(changeMessageTextDialog(e))
     }
 
     const sendMessageDialogHandler = (uID: number, message: string) => {
@@ -47,8 +47,8 @@ export const MessagesContainer = () => {
             })
     }
 
-    const dispatchNewTextGroup = (e: ChangeEvent<HTMLInputElement>) => {
-        dispatch(changeMessageTextGroup(e.currentTarget.value))
+    const dispatchNewTextGroup = (e: string) => {
+        dispatch(changeMessageTextGroup(e))
     }
     const sendMessageGroupChatHandler = () => {
         dispatch(sendMessageGroupChat(messagesData.messageTextGroup))
@@ -115,8 +115,8 @@ export const MessagesContainer = () => {
     }, [displayGroupChat])
 
     useEffect(() => {
-        (async ()=>{
-            try{
+        (async () => {
+            try {
                 await dispatch(getAllDialogs())
             } catch {
                 toast.error('Error when receiving all dialogs data', errorOptions)

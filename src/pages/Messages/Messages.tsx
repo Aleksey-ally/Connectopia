@@ -1,4 +1,4 @@
-import React, {ChangeEvent, forwardRef, memo, useState} from "react";
+import React, {forwardRef, memo, useState} from "react";
 import s from 'pages/Messages/Messages.module.scss';
 import {MessagesDataType} from "redux/messagesReducer";
 import {TextField} from "components/TextField";
@@ -14,8 +14,8 @@ import {DataActiveUserDialogType} from "pages/Messages/MessagesContainer";
 type MessagesPropsType = {
     usersData: UsersType
     messagesData: MessagesDataType
-    dispatchNewTextGroup?: (e: ChangeEvent<HTMLInputElement>) => void
-    dispatchNewTextDialog?: (e: ChangeEvent<HTMLInputElement>) => void
+    dispatchNewTextGroup?: (e: string) => void
+    dispatchNewTextDialog?: (e: string) => void
     sendMessageGroupChat: () => void
     sendMessageDialog: (uID: number, message: string) => void
     currentUserId: number | null
@@ -55,7 +55,7 @@ export const Messages = memo(forwardRef(({
 
         if (value === 'Friends') {
             setDisplayFriends(true)
-        } else  {
+        } else {
             setDisplayFriends(false)
         }
         return
@@ -70,24 +70,26 @@ export const Messages = memo(forwardRef(({
     return (
         <div className={s.messages}>
             <div className={s.sidebar}>
-                <div className={s.search}>
-                    <TextField placeholder={'Search conversation '} type={'text'} isSearch/>
-                </div>
+
 
                 <div className={s.tabs}>
                     <TabSwitcher tabs={tabs} value={tabsValue} defaultValue={'Messages'}
                                  onValueChange={handleDisplayFriends}>
                         <TabSwitcherContent className={s.sidebarContent} value={'Messages'}>
                             {messagesData.allDialogs.map(d => (
-                                <div key={d.id}>  <UserItem key={d.id} className={s.userItem} id={d.id} name={d.userName}
-                                              photos={d.photos} userAvatar={'small'}
-                                              handleGetDialogData={handleGetDialogData}/>
+                                <div key={d.id}><UserItem key={d.id} className={s.userItem} id={d.id} name={d.userName}
+                                                          photos={d.photos} userAvatar={'small'}
+                                                          handleGetDialogData={handleGetDialogData}/>
                                     {!d.hasNewMessages && '*'}
                                 </div>
                             ))}
                             Groups
                         </TabSwitcherContent>
                         <TabSwitcherContent className={s.sidebarContent} value={'Friends'}>
+                            <div className={s.search}>
+                                <TextField placeholder={'Search friend'} type={'text'} isSearch onChange={() => {
+                                }}/>
+                            </div>
                             {usersData.friends.map(u => (
                                 <UserItem className={s.userItem} key={u.id} id={u.id}
                                           photos={u.photos} name={u.name}

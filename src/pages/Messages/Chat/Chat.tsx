@@ -1,4 +1,4 @@
-import React, {ChangeEvent, forwardRef, memo, useImperativeHandle, useRef} from "react";
+import React, {forwardRef, memo, useImperativeHandle, useRef} from "react";
 import s from "./Chat.module.scss";
 import {Avatar} from "components/Avatar";
 import {TextField} from "components/TextField";
@@ -13,7 +13,7 @@ type PropsType = {
     currentUserId: number | null
     messageText: string
     sendMessage: SendMessageType
-    dispatchNewTextInput?: (e: ChangeEvent<HTMLInputElement>) => void
+    dispatchNewTextInput?: (e: string) => void
     handleOnScroll: (e: React.UIEvent<HTMLDivElement, UIEvent>) => void
     chatPhoto?: string | null
     chatName?: string
@@ -100,7 +100,7 @@ export const Chat = memo(forwardRef(({
                     <TextField type="text"
                                placeholder={'Write your message'}
                                value={messageText}
-                               onChange={dispatchNewTextInput}
+                               onValueChange={dispatchNewTextInput}
                                onKeyDown={handleKeyDown}>
                     </TextField>
                     <Button className={s.button} onClick={() => sendMessage(chatUserId as number, messageText)}><Send/></Button>

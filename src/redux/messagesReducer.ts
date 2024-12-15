@@ -1,6 +1,7 @@
 import {chatGroupAPI} from "api/chat-group/chat-group.api";
 import {Dispatch} from "redux";
 import {dialogsAPI} from "api/dialogs/dialogs.api";
+import {AppThunkDispatch} from "redux/reduxStore";
 
 const RECEIVED_DATA_GROUP_CHAT = "RECEIVED-DATA-GROUP-CHAT";
 const DELETED_DATA_GROUP_CHAT = "DELETED-DATA-GROUP-CHAT";
@@ -72,7 +73,7 @@ export const messagesReducer = (state = initialState, action: ActionType): Messa
         case ADD_MESSAGE_DIALOG:
             if (state.messageTextDialog.trim() !== "") {
                 return {
-                    ...state, messageTextDialog: "",
+                    ...state, messageTextDialog: ""
                 }
             }
             return state
@@ -136,6 +137,12 @@ export const changeMessageTextGroup = (newText: string) =>
 export const getDialogData = (uID: number, page: number, count: number) => async (dispatch: Dispatch) => {
     const res = await dialogsAPI.getUserDialog(uID, page, count)
     dispatch(receivedDialogsData(res))
+}
+
+export const sendMessageDialog = (uID: number, message: string) => async (dispatch: AppThunkDispatch) => {
+    await dialogsAPI.sendMessage(uID, message)
+    dispatch(addMessageDialog())
+    await dispatch(getDialogData(uID, 1, 20))
 }
 
 export const createConnectionGroupChat = () => (dispatch: Dispatch) => {

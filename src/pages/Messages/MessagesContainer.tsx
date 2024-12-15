@@ -5,7 +5,7 @@ import {
     createConnectionGroupChat,
     destroyConnectionGroupChat,
     getDialogData,
-    MessagesDataType,
+    MessagesDataType, sendMessageDialog,
     sendMessageGroupChat
 } from "redux/messagesReducer";
 import {ReducersType, useAppDispatch} from "redux/reduxStore";
@@ -16,7 +16,7 @@ import {toast} from "react-toastify";
 import {errorOptions} from "utils/ToastifyOptions/ToastifyOptions";
 
 export type DataActiveUserDialogType = {
-    name: string, photo?: string | null
+    uID: number, name: string, photo?: string | null
 }
 
 export const MessagesContainer = () => {
@@ -36,6 +36,13 @@ export const MessagesContainer = () => {
 
     const dispatchNewTextDialog = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(changeMessageTextDialog(e.currentTarget.value))
+    }
+
+    const sendMessageDialogHandler = (uID: number, message: string) => {
+        dispatch(sendMessageDialog(uID, message))
+            .catch(() => {
+                toast.error('Error when sending message', errorOptions)
+            })
     }
 
     const dispatchNewTextGroup = (e: ChangeEvent<HTMLInputElement>) => {
@@ -76,7 +83,7 @@ export const MessagesContainer = () => {
 
         dispatch(getDialogData(uID, page, count))
             .then(() => {
-                setDataActiveUserDialog({name, photo})
+                setDataActiveUserDialog({uID, name, photo})
                 setDisplayUserChat(true)
                 setIsAutoScrollActive(true)
             })
@@ -133,12 +140,14 @@ export const MessagesContainer = () => {
 
     }, []);
 
-    return <Messages ref={messagesAnchorRef} usersData={usersData} messagesData={messagesData} dispatchNewTextGroup={dispatchNewTextGroup}
-                     sendMessage={sendMessageGroupChatHandler} currentUserId={currentUserId}
+    return <Messages ref={messagesAnchorRef} usersData={usersData} messagesData={messagesData}
+                     dispatchNewTextGroup={dispatchNewTextGroup}
+                     sendMessageGroupChat={sendMessageGroupChatHandler} currentUserId={currentUserId}
                      displayGroupChat={displayGroupChat} setDisplayGroupChat={setDisplayGroupChat}
                      handleOnScroll={handleOnScroll}
                      handleDisplayFriends={handleDisplayFriends} handleGetDialogData={handleGetDialogData}
                      dataActiveUserDialog={dataActiveUserDialog} displayUserChat={displayUserChat}
                      setDisplayUserChat={setDisplayUserChat} dispatchNewTextDialog={dispatchNewTextDialog}
+                     sendMessageDialog={sendMessageDialogHandler}
     />
 }

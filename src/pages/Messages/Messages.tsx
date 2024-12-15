@@ -8,7 +8,7 @@ import {UsersType} from "redux/usersReducer";
 import {UserItem} from "components/UserItem";
 import IN from 'assets/imgs/IN.png'
 import {Typography} from "components/Typography";
-import {Chat} from "./Chat";
+import {Chat, SendMessageType} from "./Chat";
 import {DataActiveUserDialogType} from "pages/Messages/MessagesContainer";
 
 type MessagesPropsType = {
@@ -16,7 +16,8 @@ type MessagesPropsType = {
     messagesData: MessagesDataType
     dispatchNewTextGroup?: (e: ChangeEvent<HTMLInputElement>) => void
     dispatchNewTextDialog?: (e: ChangeEvent<HTMLInputElement>) => void
-    sendMessage: () => void
+    sendMessageGroupChat: () => void
+    sendMessageDialog: (uID: number, message: string) => void
     currentUserId: number | null
     displayGroupChat: boolean
     displayUserChat: boolean
@@ -32,7 +33,8 @@ export const Messages = memo(forwardRef(({
                                              usersData,
                                              messagesData,
                                              dispatchNewTextGroup,
-                                             sendMessage,
+                                             sendMessageGroupChat,
+                                             sendMessageDialog,
                                              currentUserId,
                                              displayGroupChat,
                                              setDisplayGroupChat,
@@ -96,15 +98,15 @@ export const Messages = memo(forwardRef(({
             </div>
             {displayGroupChat &&
                 <Chat ref={ref} chatData={messagesData.groupChatData} messageText={messagesData.messageTextGroup}
-                      sendMessage={sendMessage} dispatchNewTextInput={dispatchNewTextGroup}
+                      sendMessage={sendMessageGroupChat} dispatchNewTextInput={dispatchNewTextGroup}
                       currentUserId={currentUserId} handleOnScroll={handleOnScroll} chatName={'IT-Incubator Chat'}
                       chatPhoto={IN} setDisplayChat={setDisplayGroupChat}/>}
 
             {displayUserChat && <Chat ref={ref} dialogData={messagesData.dialogsData} currentUserId={currentUserId}
-                                      messageText={messagesData.messageTextDialog} sendMessage={sendMessage}
+                                      messageText={messagesData.messageTextDialog} sendMessage={sendMessageDialog as SendMessageType}
                                       dispatchNewTextInput={dispatchNewTextDialog} handleOnScroll={handleOnScroll}
                                       chatName={dataActiveUserDialog?.name} setDisplayChat={setDisplayUserChat}
-                                      chatPhoto={dataActiveUserDialog?.photo}/>}
+                                      chatPhoto={dataActiveUserDialog?.photo} chatUserId={dataActiveUserDialog?.uID}/>}
         </div>
     )
 }))

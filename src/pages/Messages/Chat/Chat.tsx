@@ -12,34 +12,41 @@ type PropsType = {
     chatData?: GroupChatDataType[]
     currentUserId: number | null
     messageText: string
-    sendMessage: () => void
+    sendMessage: SendMessageType
     dispatchNewTextInput?: (e: ChangeEvent<HTMLInputElement>) => void
     handleOnScroll: (e: React.UIEvent<HTMLDivElement, UIEvent>) => void
     chatPhoto?: string | null
     chatName?: string
     setDisplayChat: (toggle: boolean) => void
+    chatUserId?: number
+}
+
+export type SendMessageType = {
+    (): void;
+    (uID: number, message: string): void;
 }
 
 
 export const Chat = memo(forwardRef(({
-                              dialogData,
-                              chatData,
-                              currentUserId,
-                              messageText,
-                              sendMessage,
-                              dispatchNewTextInput,
-                              handleOnScroll,
-                              chatPhoto,
-                              chatName,
-                              setDisplayChat,
-                          }: PropsType, ref) => {
+                                         dialogData,
+                                         chatData,
+                                         currentUserId,
+                                         messageText,
+                                         sendMessage,
+                                         dispatchNewTextInput,
+                                         handleOnScroll,
+                                         chatPhoto,
+                                         chatName,
+                                         setDisplayChat,
+                                         chatUserId
+                                     }: PropsType, ref) => {
 
-    const scrollableRef  = useRef<HTMLDivElement>(null)
+    const scrollableRef = useRef<HTMLDivElement>(null)
 
     useImperativeHandle(ref, () => ({
         scrollIntoView: () => {
-            if (scrollableRef .current) {
-                scrollableRef .current.scrollIntoView({ behavior: 'smooth'});
+            if (scrollableRef.current) {
+                scrollableRef.current.scrollIntoView({behavior: 'smooth'});
             }
         }
     }));
@@ -96,7 +103,7 @@ export const Chat = memo(forwardRef(({
                                onChange={dispatchNewTextInput}
                                onKeyDown={handleKeyDown}>
                     </TextField>
-                    <Button className={s.button} onClick={sendMessage}><Send/></Button>
+                    <Button className={s.button} onClick={() => sendMessage(chatUserId as number, messageText)}><Send/></Button>
                 </div>
 
             </div>

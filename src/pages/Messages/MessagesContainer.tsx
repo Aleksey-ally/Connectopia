@@ -72,13 +72,6 @@ export const MessagesContainer = () => {
         }
     }
 
-    const handleDisplayFriends = (value: string) => {
-        if (value === 'Friends') {
-            setDisplayFriends(true)
-        }
-        return
-    }
-
     const handleGetDialogData = (uID: number, page: number, count: number, name: string, photo: string | null) => {
         setIsAutoScrollActive(false)
         setDisplayGroupChat(false)
@@ -157,7 +150,7 @@ export const MessagesContainer = () => {
                      sendMessageGroupChat={sendMessageGroupChatHandler} currentUserId={currentUserId}
                      displayGroupChat={displayGroupChat} setDisplayGroupChat={setDisplayGroupChat}
                      handleOnScroll={handleOnScroll}
-                     handleDisplayFriends={handleDisplayFriends} handleGetDialogData={handleGetDialogData}
+                     setDisplayFriends={setDisplayFriends} handleGetDialogData={handleGetDialogData}
                      dataActiveUserDialog={dataActiveUserDialog} displayUserChat={displayUserChat}
                      setDisplayUserChat={setDisplayUserChat} dispatchNewTextDialog={dispatchNewTextDialog}
                      sendMessageDialog={sendMessageDialogHandler}

@@ -1,4 +1,4 @@
-import React, {ChangeEvent, forwardRef, memo} from "react";
+import React, {ChangeEvent, forwardRef, memo, useState} from "react";
 import s from 'pages/Messages/Messages.module.scss';
 import {MessagesDataType} from "redux/messagesReducer";
 import {TextField} from "components/TextField";
@@ -21,10 +21,10 @@ type MessagesPropsType = {
     currentUserId: number | null
     displayGroupChat: boolean
     displayUserChat: boolean
+    setDisplayFriends: (toggle: boolean) => void
     setDisplayGroupChat: (toggle: boolean) => void
     setDisplayUserChat: (toggle: boolean) => void
     handleOnScroll: (e: React.UIEvent<HTMLDivElement, UIEvent>) => void
-    handleDisplayFriends: (value: string) => void,
     handleGetDialogData: (uID: number, page: number, count: number, name: string, photo: string | null) => void
     dataActiveUserDialog?: DataActiveUserDialogType
 }
@@ -39,14 +39,27 @@ export const Messages = memo(forwardRef(({
                                              displayGroupChat,
                                              setDisplayGroupChat,
                                              handleOnScroll,
-                                             handleDisplayFriends,
                                              handleGetDialogData,
                                              dataActiveUserDialog,
                                              displayUserChat,
                                              setDisplayUserChat,
-                                             dispatchNewTextDialog
+                                             dispatchNewTextDialog,
+                                             setDisplayFriends
                                          }: MessagesPropsType, ref: React.ForwardedRef<HTMLDivElement>) => {
 
+
+    const [tabsValue, setTabsValue] = useState<string>()
+
+    const handleDisplayFriends = (value: string) => {
+        setTabsValue(value)
+
+        if (value === 'Friends') {
+            setDisplayFriends(true)
+        } else  {
+            setDisplayFriends(false)
+        }
+        return
+    }
 
     const tabs = [
         {title: 'Messages', value: 'Messages'},
@@ -62,12 +75,15 @@ export const Messages = memo(forwardRef(({
                 </div>
 
                 <div className={s.tabs}>
-                    <TabSwitcher tabs={tabs} defaultValue={'Messages'} onValueChange={handleDisplayFriends}>
+                    <TabSwitcher tabs={tabs} value={tabsValue} defaultValue={'Messages'}
+                                 onValueChange={handleDisplayFriends}>
                         <TabSwitcherContent className={s.sidebarContent} value={'Messages'}>
-                            {messagesData.allDialogs.map(d=>(
-                              <>  <UserItem key={d.id} className={s.userItem} id={d.id} name={d.userName} photos={d.photos} userAvatar={'small'} handleGetDialogData={handleGetDialogData}/>
-                                  {!d.hasNewMessages && '*'}
-                              </>
+                            {messagesData.allDialogs.map(d => (
+                                <div key={d.id}>  <UserItem key={d.id} className={s.userItem} id={d.id} name={d.userName}
+                                              photos={d.photos} userAvatar={'small'}
+                                              handleGetDialogData={handleGetDialogData}/>
+                                    {!d.hasNewMessages && '*'}
+                                </div>
                             ))}
                             Groups
                         </TabSwitcherContent>
@@ -104,7 +120,8 @@ export const Messages = memo(forwardRef(({
                       chatPhoto={IN} setDisplayChat={setDisplayGroupChat}/>}
 
             {displayUserChat && <Chat ref={ref} dialogData={messagesData.dialogsData} currentUserId={currentUserId}
-                                      messageText={messagesData.messageTextDialog} sendMessage={sendMessageDialog as SendMessageType}
+                                      messageText={messagesData.messageTextDialog}
+                                      sendMessage={sendMessageDialog as SendMessageType}
                                       dispatchNewTextInput={dispatchNewTextDialog} handleOnScroll={handleOnScroll}
                                       chatName={dataActiveUserDialog?.name} setDisplayChat={setDisplayUserChat}
                                       chatPhoto={dataActiveUserDialog?.photo} chatUserId={dataActiveUserDialog?.uID}/>}

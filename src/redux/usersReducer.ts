@@ -152,27 +152,43 @@ export const getUsers = (pageSize: number, currentPage: number, friend?: boolean
     async (dispatch: AppThunkDispatch) => {
         dispatch(setFetching(true))
 
-        let res
+        try {
 
-        if (friend === true) {
-            res = await usersAPI.getUsers(pageSize, currentPage, friend)
+            const res = await usersAPI.getUsers(pageSize, currentPage, friend, term);
 
-            if (!res.error) {
+            if (friend) {
                 dispatch(setFriends(res.items))
-            }
-
-        } else {
-            res = await usersAPI.getUsers(pageSize, currentPage)
-
-            if (!res.error) {
+            } else {
                 dispatch(setCurrentPage(currentPage))
                 dispatch(setUsers(res.items))
                 dispatch(setTotalUsersCount(res.totalCount))
             }
+
+        } finally {
+            dispatch(setFetching(false))
         }
 
-
-        dispatch(setFetching(false))
+        // let res
+        //
+        // if (friend === true) {
+        //     res = await usersAPI.getUsers(pageSize, currentPage, friend)
+        //
+        //     if (!res.error) {
+        //         dispatch(setFriends(res.items))
+        //     }
+        //
+        // } else {
+        //     res = await usersAPI.getUsers(pageSize, currentPage)
+        //
+        //     if (!res.error) {
+        //         dispatch(setCurrentPage(currentPage))
+        //         dispatch(setUsers(res.items))
+        //         dispatch(setTotalUsersCount(res.totalCount))
+        //     }
+        // }
+        //
+        //
+        // dispatch(setFetching(false))
     }
 
 

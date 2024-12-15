@@ -27,6 +27,7 @@ type MessagesPropsType = {
     handleOnScroll: (e: React.UIEvent<HTMLDivElement, UIEvent>) => void
     handleGetDialogData: (uID: number, page: number, count: number, name: string, photo: string | null) => void
     dataActiveUserDialog?: DataActiveUserDialogType
+    searchFriendByName:(text:string)=>void
 }
 
 export const Messages = memo(forwardRef(({
@@ -44,7 +45,8 @@ export const Messages = memo(forwardRef(({
                                              displayUserChat,
                                              setDisplayUserChat,
                                              dispatchNewTextDialog,
-                                             setDisplayFriends
+                                             setDisplayFriends,
+                                             searchFriendByName
                                          }: MessagesPropsType, ref: React.ForwardedRef<HTMLDivElement>) => {
 
 
@@ -70,8 +72,6 @@ export const Messages = memo(forwardRef(({
     return (
         <div className={s.messages}>
             <div className={s.sidebar}>
-
-
                 <div className={s.tabs}>
                     <TabSwitcher tabs={tabs} value={tabsValue} defaultValue={'Messages'}
                                  onValueChange={handleDisplayFriends}>
@@ -87,8 +87,7 @@ export const Messages = memo(forwardRef(({
                         </TabSwitcherContent>
                         <TabSwitcherContent className={s.sidebarContent} value={'Friends'}>
                             <div className={s.search}>
-                                <TextField placeholder={'Search friend'} type={'text'} isSearch onChange={() => {
-                                }}/>
+                                <TextField placeholder={'Search friend'} type={'text'} isSearch onValueChange={searchFriendByName}/>
                             </div>
                             {usersData.friends.map(u => (
                                 <UserItem className={s.userItem} key={u.id} id={u.id}
@@ -126,7 +125,9 @@ export const Messages = memo(forwardRef(({
                                       sendMessage={sendMessageDialog as SendMessageType}
                                       dispatchNewTextInput={dispatchNewTextDialog} handleOnScroll={handleOnScroll}
                                       chatName={dataActiveUserDialog?.name} setDisplayChat={setDisplayUserChat}
-                                      chatPhoto={dataActiveUserDialog?.photo} chatUserId={dataActiveUserDialog?.uID}/>}
+                                      chatPhoto={dataActiveUserDialog?.photo} chatUserId={dataActiveUserDialog?.uID}
+
+            />}
         </div>
     )
 }))

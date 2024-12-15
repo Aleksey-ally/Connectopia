@@ -8,12 +8,12 @@
 
   .sidebar {
 
-    .search {
-    }
-
     .tabs {
       .sidebarContent {
         flex-direction: column;
+
+        .search {
+        }
 
         .userItem {
           background-color: var(--color-second);

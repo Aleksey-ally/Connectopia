@@ -47,6 +47,13 @@ export const MessagesContainer = () => {
             })
     }
 
+    const searchFriendByName = (text:string)=>{
+        dispatch(getUsers(usersData.pageSize, usersData.currentPage, true, text))
+            .catch(() => {
+                toast.error('Error when searching friends', errorOptions)
+            })
+    }
+
     const dispatchNewTextGroup = (e: string) => {
         dispatch(changeMessageTextGroup(e))
     }
@@ -153,6 +160,6 @@ export const MessagesContainer = () => {
                      setDisplayFriends={setDisplayFriends} handleGetDialogData={handleGetDialogData}
                      dataActiveUserDialog={dataActiveUserDialog} displayUserChat={displayUserChat}
                      setDisplayUserChat={setDisplayUserChat} dispatchNewTextDialog={dispatchNewTextDialog}
-                     sendMessageDialog={sendMessageDialogHandler}
+                     sendMessageDialog={sendMessageDialogHandler} searchFriendByName={searchFriendByName}
     />
 }

@@ -4,7 +4,20 @@ import {ResponseUsersType} from "./users.types";
 
 export const usersAPI = {
     async getUsers(pageSize: number, currentPage: number, friend?: boolean, term?: string) {
-        const res = await instance.get<ResponseUsersType>(`users?count=${pageSize}&page=${currentPage}&friend=${friend}`)
+        const params = new URLSearchParams()
+
+        params.append('count', String(pageSize))
+        params.append('page', String(currentPage))
+
+        if (friend){
+            params.append('friend', String(friend))
+        }
+
+        if (term) {
+            params.append('term', term); // Добавляем только если есть значение
+        }
+
+        const res = await instance.get<ResponseUsersType>(`users?${params.toString()}`)
         return res.data
     },
     async follow(uID: number) {

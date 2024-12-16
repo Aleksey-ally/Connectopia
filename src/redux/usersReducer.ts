@@ -9,6 +9,7 @@ export type UsersType = {
     currentPage: number
     isFetching: boolean
     friends: UserType[]
+    navbarFriends: UserType[]
 }
 
 const FOLLOW = "FOLLOW"
@@ -20,6 +21,7 @@ const SET_FETCHING = "SET-FETCHING"
 const TOGGLE_FOLLOWING = "TOGGLE-FOLLOWING"
 const SET_PAGE_SIZE = "SET-PAGE-SIZE"
 const SET_FRIENDS = "SET-FRIENDS"
+const SET_NAVBAR_FRIENDS = "SET-NAVBAR-FRIENDS"
 
 const initialState: UsersType = {
     users: [],
@@ -27,7 +29,8 @@ const initialState: UsersType = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
-    friends: []
+    friends: [],
+    navbarFriends: []
 }
 
 
@@ -41,6 +44,7 @@ type ActionType =
     | SetToggleFollowing
     | SetPageSize
     | SetFriends
+    | SetNavbarFriends
 
 
 export const usersReducer = (state = initialState, action: ActionType): UsersType => {
@@ -87,6 +91,10 @@ export const usersReducer = (state = initialState, action: ActionType): UsersTyp
             return {...state, friends: action.friends}
         }
 
+        case SET_NAVBAR_FRIENDS : {
+            return {...state, navbarFriends: action.friends}
+        }
+
         default:
             return state
     }
@@ -100,6 +108,7 @@ type setFetching = ReturnType<typeof setFetching>
 type SetToggleFollowing = ReturnType<typeof setToggleFollowing>
 type SetPageSize = ReturnType<typeof setPageSize>
 type SetFriends = ReturnType<typeof setFriends>
+type SetNavbarFriends = ReturnType<typeof setNavbarFriends>
 
 export const follow = (userID: number) => ({
     type: FOLLOW,
@@ -147,6 +156,11 @@ export const setFriends = (friends: UserType[]) => ({
     friends
 } as const)
 
+export const setNavbarFriends = (friends: UserType[]) => ({
+    type: SET_NAVBAR_FRIENDS,
+    friends
+} as const)
+
 
 export const getUsers = (pageSize: number, currentPage: number, friend?: boolean, term?: string) =>
     async (dispatch: AppThunkDispatch) => {
@@ -168,28 +182,17 @@ export const getUsers = (pageSize: number, currentPage: number, friend?: boolean
             dispatch(setFetching(false))
         }
 
-        // let res
-        //
-        // if (friend === true) {
-        //     res = await usersAPI.getUsers(pageSize, currentPage, friend)
-        //
-        //     if (!res.error) {
-        //         dispatch(setFriends(res.items))
-        //     }
-        //
-        // } else {
-        //     res = await usersAPI.getUsers(pageSize, currentPage)
-        //
-        //     if (!res.error) {
-        //         dispatch(setCurrentPage(currentPage))
-        //         dispatch(setUsers(res.items))
-        //         dispatch(setTotalUsersCount(res.totalCount))
-        //     }
-        // }
-        //
-        //
-        // dispatch(setFetching(false))
     }
+
+export const getNavbarFriends = (pageSize: number, currentPage: number, friend: boolean) => async (dispatch: AppThunkDispatch) => {
+    dispatch(setFetching(true))
+    try {
+        const res = await usersAPI.getUsers(pageSize, currentPage, friend);
+        dispatch(setNavbarFriends(res.items))
+    } finally {
+        dispatch(setFetching(false))
+    }
+}
 
 
 export const setPagination = (pageSize: number, page: number) =>

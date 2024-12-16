@@ -6,7 +6,7 @@ import {
     destroyConnectionGroupChat,
     getAllDialogs,
     getDialogData,
-    MessagesDataType,
+    MessagesDataType, searchFriendByName,
     sendMessageDialog,
     sendMessageGroupChat
 } from "redux/messagesReducer";
@@ -39,7 +39,7 @@ export const MessagesContainer = () => {
     const dispatchNewTextDialog = (e: string) => {
         dispatch(changeMessageTextDialog(e))
     }
-
+    console.log(messagesData.searchText)
     const sendMessageDialogHandler = (uID: number, message: string) => {
         dispatch(sendMessageDialog(uID, message))
             .catch(() => {
@@ -47,8 +47,8 @@ export const MessagesContainer = () => {
             })
     }
 
-    const searchFriendByName = (text:string)=>{
-        dispatch(getUsers(usersData.pageSize, usersData.currentPage, true, text))
+    const handleSearchFriendByName = (text:string)=>{
+        dispatch(searchFriendByName(usersData.pageSize, usersData.currentPage, text))
             .catch(() => {
                 toast.error('Error when searching friends', errorOptions)
             })
@@ -160,6 +160,6 @@ export const MessagesContainer = () => {
                      setDisplayFriends={setDisplayFriends} handleGetDialogData={handleGetDialogData}
                      dataActiveUserDialog={dataActiveUserDialog} displayUserChat={displayUserChat}
                      setDisplayUserChat={setDisplayUserChat} dispatchNewTextDialog={dispatchNewTextDialog}
-                     sendMessageDialog={sendMessageDialogHandler} searchFriendByName={searchFriendByName}
+                     sendMessageDialog={sendMessageDialogHandler} searchFriendByName={handleSearchFriendByName}
     />
 }

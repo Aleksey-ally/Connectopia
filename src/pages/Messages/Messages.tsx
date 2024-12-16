@@ -87,7 +87,7 @@ export const Messages = memo(forwardRef(({
                         </TabSwitcherContent>
                         <TabSwitcherContent className={s.sidebarContent} value={'Friends'}>
                             <div className={s.search}>
-                                <TextField placeholder={'Search friend'} type={'text'} isSearch onValueChange={searchFriendByName}/>
+                                <TextField placeholder={'Search friend'} type={'text'} isSearch value={messagesData.searchText} onValueChange={searchFriendByName}/>
                             </div>
                             {usersData.friends.map(u => (
                                 <UserItem className={s.userItem} key={u.id} id={u.id}

@@ -3,6 +3,7 @@ import {Dispatch} from "redux";
 import {dialogsAPI} from "api/dialogs/dialogs.api";
 import {AppThunkDispatch} from "redux/reduxStore";
 import {AllDialogsResponseType} from "api/dialogs/dialogs.types";
+import {getUsers} from "redux/usersReducer";
 
 const RECEIVED_ALL_DIALOGS = "RECEIVED-ALL-DIALOGS"
 const RECEIVED_DATA_GROUP_CHAT = "RECEIVED-DATA-GROUP-CHAT";
@@ -12,6 +13,7 @@ const ADD_MESSAGE_GROUP = "ADD-MESSAGE-GROUP";
 const CHANGE_MESSAGE_TEXT_DIALOG = "CHANGE-MESSAGE-TEXT-DIALOG";
 const CHANGE_MESSAGE_TEXT_GROUP = "CHANGE-MESSAGE-TEXT-GROUP";
 const RECEIVED_DIALOGS_DATA = "RECEIVED-DIALOGS-DATA";
+const CHANGE_SEARCH_TEXT = "CHANGE-SEARCH-TEXT";
 
 export type MessagesDataType = {
     allDialogs: AllDialogsResponseType
@@ -19,6 +21,7 @@ export type MessagesDataType = {
     groupChatData: GroupChatDataType[]
     messageTextDialog: string;
     messageTextGroup: string;
+    searchText: string
 };
 
 export type GroupChatDataType = {
@@ -43,7 +46,8 @@ const initialState: MessagesDataType = {
     dialogsData: [],
     groupChatData: [],
     messageTextDialog: "",
-    messageTextGroup: ""
+    messageTextGroup: "",
+    searchText: ""
 };
 
 export type ActionType =
@@ -55,6 +59,7 @@ export type ActionType =
     | ChangeMessageTextGroupType
     | AddMessageGroupType
     | ReceivedAllDialogs
+    | ChangeSearchText
 
 export const messagesReducer = (state = initialState, action: ActionType): MessagesDataType => {
 
@@ -92,6 +97,9 @@ export const messagesReducer = (state = initialState, action: ActionType): Messa
                 }
             }
             return state
+
+        case CHANGE_SEARCH_TEXT:
+            return {...state, searchText: action.newText}
         default:
             return state;
     }
@@ -105,6 +113,7 @@ type AddMessageGroupType = ReturnType<typeof addMessageGroup>;
 type ChangeMessageTextDialogType = ReturnType<typeof changeMessageTextDialog>;
 type ChangeMessageTextGroupType = ReturnType<typeof changeMessageTextGroup>;
 type ReceivedDialogsData = ReturnType<typeof receivedDialogsData>;
+type ChangeSearchText = ReturnType<typeof changeSearchText>;
 
 
 //AC
@@ -146,6 +155,12 @@ export const changeMessageTextGroup = (newText: string) =>
         newText,
     } as const);
 
+export const changeSearchText = (newText: string) =>
+    ({
+        type: CHANGE_SEARCH_TEXT,
+        newText
+    } as const)
+
 
 //Thunks
 export const getDialogData = (uID: number, page: number, count: number) => async (dispatch: Dispatch) => {
@@ -182,4 +197,10 @@ export const sendMessageGroupChat = (message: string) => (dispatch: Dispatch) =>
 export const getAllDialogs = () => async (dispatch: AppThunkDispatch) => {
     const res = await dispatch(dialogsAPI.getAllDialogs)
     dispatch(receivedAllDialogs(res))
+}
+
+export const searchFriendByName = (pageSize: number, currentPage: number, text: string) => async (dispatch: AppThunkDispatch) => {
+    dispatch(changeSearchText(text))
+    await dispatch(getUsers(pageSize, currentPage, true, text))
+
 }

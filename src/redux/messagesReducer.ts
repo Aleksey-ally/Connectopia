@@ -4,6 +4,7 @@ import {dialogsAPI} from "api/dialogs/dialogs.api";
 import {AppThunkDispatch} from "redux/reduxStore";
 import {AllDialogsResponseType} from "api/dialogs/dialogs.types";
 import {getUsers} from "redux/usersReducer";
+import {useDebounce} from "utils/useDebounce";
 
 const RECEIVED_ALL_DIALOGS = "RECEIVED-ALL-DIALOGS"
 const RECEIVED_DATA_GROUP_CHAT = "RECEIVED-DATA-GROUP-CHAT";
@@ -200,7 +201,5 @@ export const getAllDialogs = () => async (dispatch: AppThunkDispatch) => {
 }
 
 export const searchFriendByName = (pageSize: number, currentPage: number, text: string) => async (dispatch: AppThunkDispatch) => {
-    dispatch(changeSearchText(text))
     await dispatch(getUsers(pageSize, currentPage, true, text))
-
 }

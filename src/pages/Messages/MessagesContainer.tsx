@@ -1,7 +1,7 @@
 import {useSelector} from "react-redux";
 import {
     changeMessageTextDialog,
-    changeMessageTextGroup,
+    changeMessageTextGroup, changeSearchText,
     createConnectionGroupChat,
     destroyConnectionGroupChat,
     getAllDialogs,
@@ -16,6 +16,7 @@ import {getUsers, UsersType} from "redux/usersReducer";
 import React, {useEffect, useRef, useState} from "react";
 import {toast} from "react-toastify";
 import {errorOptions} from "utils/ToastifyOptions/ToastifyOptions";
+import {useDebounce} from "utils/useDebounce";
 
 export type DataActiveUserDialogType = {
     uID: number, name: string, photo?: string | null
@@ -28,6 +29,8 @@ export const MessagesContainer = () => {
     const usersData = useSelector<ReducersType, UsersType>(state => state.usersData)
     const currentUserId = useSelector<ReducersType, number | null>(state => state.auth.id)
 
+    const debounceSearchText = useDebounce(messagesData.searchText)
+
     const [displayFriends, setDisplayFriends] = useState<boolean>(false)
     const [displayGroupChat, setDisplayGroupChat] = useState<boolean>(false)
     const [displayUserChat, setDisplayUserChat] = useState<boolean>(false)
@@ -39,7 +42,7 @@ export const MessagesContainer = () => {
     const dispatchNewTextDialog = (e: string) => {
         dispatch(changeMessageTextDialog(e))
     }
-    console.log(messagesData.searchText)
+
     const sendMessageDialogHandler = (uID: number, message: string) => {
         dispatch(sendMessageDialog(uID, message))
             .catch(() => {
@@ -47,11 +50,8 @@ export const MessagesContainer = () => {
             })
     }
 
-    const handleSearchFriendByName = (text:string)=>{
-        dispatch(searchFriendByName(usersData.pageSize, usersData.currentPage, text))
-            .catch(() => {
-                toast.error('Error when searching friends', errorOptions)
-            })
+    const handleSearchFriendByName = (text: string) => {
+        dispatch(changeSearchText(text))
     }
 
     const dispatchNewTextGroup = (e: string) => {
@@ -136,6 +136,17 @@ export const MessagesContainer = () => {
             messagesAnchorRef.current?.scrollIntoView()
         }
     }, [isAutoScrollActive, messagesData.groupChatData, messagesData.dialogsData]);
+
+    useEffect(() => {
+        if (debounceSearchText.trim() !== "") {
+            dispatch(searchFriendByName(usersData.pageSize, usersData.currentPage, debounceSearchText.trim()))
+                .catch(() => {
+                    toast.error('Error when searching friends', errorOptions)
+                })
+        }
+
+    }, [debounceSearchText, dispatch]);
+
 
     useEffect(() => {
         // dialogsAPI.refreshDialog(2)

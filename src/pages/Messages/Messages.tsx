@@ -77,37 +77,46 @@ export const Messages = memo(forwardRef(({
                     <TabSwitcher tabs={tabs} value={tabsValue} defaultValue={'Messages'}
                                  onValueChange={handleDisplayFriends}>
                         <TabSwitcherContent className={s.sidebarContent} value={'Messages'}>
-                            {messagesData.allDialogs.map(d => (
-                                <div key={d.id}><UserItem key={d.id} className={s.userItem} id={d.id} name={d.userName}
-                                                          photos={d.photos} userAvatar={'small'}
-                                                          handleGetDialogData={handleGetDialogData}/>
-                                    {!d.hasNewMessages && '*'}
-                                </div>
-                            ))}
-                            Groups
+                            <div className={s.sidebarContentItem}>
+                                {messagesData.allDialogs.map(d => (
+                                    <div key={d.id}><UserItem key={d.id} className={s.userItem} id={d.id}
+                                                              name={d.userName}
+                                                              photos={d.photos} userAvatar={'small'}
+                                                              handleGetDialogData={handleGetDialogData}/>
+                                        {!d.hasNewMessages && '*'}
+                                    </div>
+                                ))}
+                                Groups
+                            </div>
+
                         </TabSwitcherContent>
                         <TabSwitcherContent className={s.sidebarContent} value={'Friends'}>
-                            <div className={s.search}>
-                                <TextField placeholder={'Search friend'} type={'text'} isSearch
-                                           value={messagesData.searchText} onValueChange={searchFriendByName}/>
+                            <div className={s.sidebarContentItem}>
+                                <div className={s.search}>
+                                    <TextField placeholder={'Search friend'} type={'text'} isSearch
+                                               value={messagesData.searchText} onValueChange={searchFriendByName}/>
+                                </div>
+                                {usersData.friends.map(u => (
+                                    <UserItem className={s.userItem} key={u.id} id={u.id}
+                                              photos={u.photos} name={u.name}
+                                              status={u.status} userAvatar={'small'}
+                                              handleGetDialogData={handleGetDialogData}/>
+                                ))}
                             </div>
-                            {usersData.friends.map(u => (
-                                <UserItem className={s.userItem} key={u.id} id={u.id}
-                                          photos={u.photos} name={u.name}
-                                          status={u.status} userAvatar={'small'}
-                                          handleGetDialogData={handleGetDialogData}/>
-                            ))}
                         </TabSwitcherContent>
                         <TabSwitcherContent className={s.sidebarContent} value={'Groups'}>
-                            {<div className={s.groupItem} onClick={() => setDisplayGroupChat(true)}>
-                                <div className={s.groupInfo}>
-                                    <Avatar className={s.groupAvatar} size={'small'} photo={IN}/>
-                                    <div className={s.description}>
-                                        <Typography className={`${s.item} ${s.name}`} as={'h5'}
-                                                    variant={'h5'}>IT-Incubator Chat</Typography>
+                            <div className={s.sidebarContentItem}>
+                                {<div className={s.groupItem} onClick={() => setDisplayGroupChat(true)}>
+                                    <div className={s.groupInfo}>
+                                        <Avatar className={s.groupAvatar} size={'small'} photo={IN}/>
+                                        <div className={s.description}>
+                                            <Typography className={`${s.item} ${s.name}`} as={'h5'}
+                                                        variant={'h5'}>IT-Incubator Chat</Typography>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>}
+                                }
+                            </div>
                         </TabSwitcherContent>
                     </TabSwitcher>
                 </div>

@@ -17,9 +17,10 @@ import {infoOptions} from "utils/ToastifyOptions/ToastifyOptions";
 type Props = {
     auth: Auth
     currentUserAvatar: string | undefined
+    userName?:string
 }
 
-export const Header = ({auth, currentUserAvatar}: Props) => {
+export const Header = ({auth, currentUserAvatar, userName}: Props) => {
 
     const dispatch = useAppDispatch()
 
@@ -46,14 +47,14 @@ export const Header = ({auth, currentUserAvatar}: Props) => {
             <div className={s.loginBlock}>
                 {auth.isAuth ?
                     <>
-                        <span>Hello, <b>{auth?.login}</b></span>
-                        <Dropdown trigger={<Avatar photos={currentUserAvatar} size={'small'}/>}>
+                        <span>Hello, <b>{userName}</b></span>
+                        <Dropdown trigger={<Avatar photo={currentUserAvatar} size={'small'}/>}>
                             <DropdownItem>
-                                <Avatar className={s.navigate} photos={currentUserAvatar} size={'small'}
+                                <Avatar className={s.navigate} photo={currentUserAvatar} size={'small'}
                                             onClick={() => navigate(`/profile/${auth.id}`)}/>
                                 <div onClick={() => navigate(`/profile/${auth.id}`)}>
                                     <Typography className={s.navigate}
-                                                variant="subtitle2"> {auth?.login ? auth.login : 'User Name'}</Typography>
+                                                variant="subtitle2"> {userName ? userName : 'User Name'}</Typography>
                                     <Typography className={s.navigate} variant="caption"
                                                 style={{color: 'var(--color-dark-100)'}}>
                                         {auth?.email ? auth.email : 'User Name'}

@@ -14,8 +14,9 @@ export const HeaderContainer = ({auth}: Props) => {
     }, [auth]);
 
     const currentUserAvatar = useSelector<ReducersType, string | undefined>(state => state.profileData.profile.photos?.large)
+    const userName = useSelector<ReducersType, string | undefined>(state => state.profileData.profile.fullName)
 
     return (
-        <Header auth={auth} currentUserAvatar={currentUserAvatar}/>
+        <Header auth={auth} userName={userName} currentUserAvatar={currentUserAvatar}/>
     )
 }

@@ -3,7 +3,7 @@ import s from './App.module.css';
 import {useEffect} from "react";
 import {useSelector} from "react-redux";
 import {ReducersType, useAppDispatch} from "redux/reduxStore";
-import {Route, Routes} from 'react-router-dom';
+import {Navigate, Route, Routes} from 'react-router-dom';
 
 import {Auth, getAuthUserData} from "redux/authReducer";
 
@@ -52,9 +52,10 @@ const App = () => {
                     <Navbar friendsData={usersData.navbarFriends} id={auth.id}/>
                     <div className={s.content}>
                         <Routes>
-                            <Route path='/messages/:uID?'
-                                   element={<MessagesContainer/>}/>
+                            <Route path="/" element={<Navigate to={`/profile/${auth.id}`}/>}/>
                             <Route path={'/profile/:uID?'} element={<Profile/>}/>
+                            <Route path='/messages'
+                                   element={<MessagesContainer/>}/>
                             <Route path='/users' element={<UsersContainer/>}/>
                             <Route path='/news' element={(<News/>)}/>
                             <Route path='/music' element={<Music/>}/>

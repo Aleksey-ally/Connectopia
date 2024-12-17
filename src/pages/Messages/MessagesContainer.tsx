@@ -96,7 +96,7 @@ export const MessagesContainer = () => {
         if (!displayFriends) return
         (async () => {
             try {
-                await dispatch(getUsers(usersData.pageSize, usersData.currentPage, true))
+                await dispatch(getUsers(messagesData.pageSize, messagesData.currentPage, true))
             } catch {
                 toast.error('Error when receiving messages data', errorOptions)
             }
@@ -138,12 +138,10 @@ export const MessagesContainer = () => {
     }, [isAutoScrollActive, messagesData.groupChatData, messagesData.dialogsData]);
 
     useEffect(() => {
-        if (debounceSearchText.trim() !== "") {
-            dispatch(searchFriendByName(usersData.pageSize, usersData.currentPage, debounceSearchText.trim()))
-                .catch(() => {
-                    toast.error('Error when searching friends', errorOptions)
-                })
-        }
+        dispatch(searchFriendByName(messagesData.pageSize, messagesData.currentPage, debounceSearchText.trim()))
+            .catch(() => {
+                toast.error('Error when searching friends', errorOptions)
+            })
 
     }, [debounceSearchText, dispatch]);
 

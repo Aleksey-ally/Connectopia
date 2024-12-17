@@ -14,14 +14,18 @@ const CHANGE_MESSAGE_TEXT_DIALOG = "CHANGE-MESSAGE-TEXT-DIALOG";
 const CHANGE_MESSAGE_TEXT_GROUP = "CHANGE-MESSAGE-TEXT-GROUP";
 const RECEIVED_DIALOGS_DATA = "RECEIVED-DIALOGS-DATA";
 const CHANGE_SEARCH_TEXT = "CHANGE-SEARCH-TEXT";
+const SET_CURRENT_PAGE_MESSAGES_FRIENDS = "SET-CURRENT-PAGE-MESSAGES-FRIENDS"
+const SET_PAGE_SIZE_MESSAGES_FRIENDS = "SET-PAGE-SIZE-MESSAGES-FRIENDS"
 
 export type MessagesDataType = {
-    allDialogs: AllDialogsResponseType
+    allDialogs: AllDialogsResponseType;
     dialogsData: DialogDataType[];
-    groupChatData: GroupChatDataType[]
+    groupChatData: GroupChatDataType[];
     messageTextDialog: string;
     messageTextGroup: string;
-    searchText: string
+    searchText: string;
+    pageSize: number;
+    currentPage: number;
 };
 
 export type GroupChatDataType = {
@@ -47,7 +51,9 @@ const initialState: MessagesDataType = {
     groupChatData: [],
     messageTextDialog: "",
     messageTextGroup: "",
-    searchText: ""
+    searchText: "",
+    pageSize: 5,
+    currentPage: 1,
 };
 
 export type ActionType =
@@ -60,6 +66,8 @@ export type ActionType =
     | AddMessageGroupType
     | ReceivedAllDialogs
     | ChangeSearchText
+    | SetPageSizeMessagesFriends
+    | SetCurrentPageMessagesFriends
 
 export const messagesReducer = (state = initialState, action: ActionType): MessagesDataType => {
 
@@ -100,6 +108,13 @@ export const messagesReducer = (state = initialState, action: ActionType): Messa
 
         case CHANGE_SEARCH_TEXT:
             return {...state, searchText: action.newText}
+
+        case SET_PAGE_SIZE_MESSAGES_FRIENDS:
+            return {...state, pageSize: action.pageSize}
+
+        case SET_CURRENT_PAGE_MESSAGES_FRIENDS:
+            return {...state, pageSize: action.currentPage}
+
         default:
             return state;
     }
@@ -114,6 +129,8 @@ type ChangeMessageTextDialogType = ReturnType<typeof changeMessageTextDialog>;
 type ChangeMessageTextGroupType = ReturnType<typeof changeMessageTextGroup>;
 type ReceivedDialogsData = ReturnType<typeof receivedDialogsData>;
 type ChangeSearchText = ReturnType<typeof changeSearchText>;
+type SetPageSizeMessagesFriends = ReturnType<typeof setPageSizeMessagesFriends>;
+type SetCurrentPageMessagesFriends = ReturnType<typeof setCurrentPageMessagesFriends>;
 
 
 //AC
@@ -161,6 +178,17 @@ export const changeSearchText = (newText: string) =>
         newText
     } as const)
 
+export const setPageSizeMessagesFriends = (pageSize: number) =>
+    ({
+        type: SET_PAGE_SIZE_MESSAGES_FRIENDS,
+        pageSize
+    } as const)
+
+export const setCurrentPageMessagesFriends = (currentPage: number) =>
+    ({
+        type: SET_CURRENT_PAGE_MESSAGES_FRIENDS,
+        currentPage
+    } as const)
 
 //Thunks
 export const getDialogData = (uID: number, page: number, count: number) => async (dispatch: Dispatch) => {

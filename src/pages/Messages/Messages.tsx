@@ -51,7 +51,6 @@ export const Messages = memo(forwardRef(({
 
 
     const [tabsValue, setTabsValue] = useState<string>()
-    console.log(messagesData.searchText)
 
     const handleDisplayFriends = (value: string) => {
         setTabsValue(value)

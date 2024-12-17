@@ -5,8 +5,8 @@
   top: 4.375rem;
   background-color: var(--color-second);
   padding: 0.938rem 0.625rem;
-  border-radius: 0.25rem;
-  height: calc(100% - 4.375rem);
+  border-radius: var(--border-radius);
+  max-height: calc(100% - 4.375rem);
   overflow-y: auto;
   scrollbar-width: none;
   z-index: 1000;

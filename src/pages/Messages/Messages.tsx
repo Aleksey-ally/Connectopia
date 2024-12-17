@@ -79,12 +79,11 @@ export const Messages = memo(forwardRef(({
                         <TabSwitcherContent className={s.sidebarContent} value={'Messages'}>
                             <div className={s.sidebarContentItem}>
                                 {messagesData.allDialogs.map(d => (
-                                    <div key={d.id}><UserItem key={d.id} className={s.userItem} id={d.id}
+                                    <UserItem key={d.id} className={`${s.userItem} ${d.hasNewMessages && s.unread}`} id={d.id}
                                                               name={d.userName}
                                                               photos={d.photos} userAvatar={'small'}
                                                               handleGetDialogData={handleGetDialogData}/>
-                                        {!d.hasNewMessages && '*'}
-                                    </div>
+
                                 ))}
                                 Groups
                             </div>

@@ -14,9 +14,9 @@ export const FriendsSection = memo(({friendsData}: FriendsSectionPropsType) => {
             {friendsData.map(fd =>
                 <div className={s.item} key={fd.id}>
                     <div><Avatar size={'small'} photo={fd.photos.small}/></div>
-                    <span>{fd.name}</span>
+                    <span className={s.name}>{fd.name}</span>
                 </div>
-            ).slice(0, 3)}
+            )}
 
         </div>
     )

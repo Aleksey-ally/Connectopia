@@ -1,11 +1,20 @@
 .navbar {
   position: fixed;
-  min-width: 12.5rem;
+  width: 12.5rem;
   grid-area: navbar;
-  margin-top: 4.375rem;
+  top: 4.375rem;
   background-color: var(--color-second);
   padding: 0.938rem 0.625rem;
   border-radius: 0.25rem;
+  height: calc(100% - 4.375rem);
+  overflow-y: auto;
+  scrollbar-width: none;
+  z-index: 1000;
+
+  .navbar::-webkit-scrollbar {
+    display: none;
+  }
+
 
   .label {
     font-size: 0.75rem;

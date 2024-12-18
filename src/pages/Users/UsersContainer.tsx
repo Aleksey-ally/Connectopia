@@ -6,17 +6,23 @@ import {followOnUser, getUsers, setItemsPerPage, setPagination, unfollowOnUser, 
 import {Users} from "./Users"
 import {toast} from "react-toastify";
 import {errorOptions, successOptions} from "utils/ToastifyOptions/ToastifyOptions";
+import {setFetching} from "redux/appReducer";
 
 export const UsersContainer = () => {
-
-    const usersData = useSelector<ReducersType, UsersType>(state => state.usersData)
-
     const dispatch = useAppDispatch()
 
+    const isFetching = useSelector<ReducersType, boolean>(state => state.app.isFetching)
+    const usersData = useSelector<ReducersType, UsersType>(state => state.usersData)
+
+
     useEffect(() => {
+        dispatch(setFetching(true))
         dispatch(getUsers(usersData.pageSize, usersData.currentPage))
-            .catch(()=>{
+            .catch(() => {
                 toast.error('Error when getting users', errorOptions)
+            })
+            .finally(() => {
+                dispatch(setFetching(false))
             })
     }, [dispatch]);
 
@@ -36,20 +42,20 @@ export const UsersContainer = () => {
 
     const setCurrentPage = useCallback((page: number) => {
         dispatch(setPagination(usersData.pageSize, page))
-            .catch(()=>{
+            .catch(() => {
                 toast.error('Error when changing page', errorOptions)
             })
     }, [dispatch, usersData.pageSize])
 
     const setPageSize = useCallback((pageSize: number) => {
         dispatch(setItemsPerPage(pageSize, usersData.currentPage))
-            .catch(()=>{
+            .catch(() => {
                 toast.error('Error when changing page size', errorOptions)
             })
     }, [dispatch, usersData.currentPage])
 
     return <>
-        {usersData.isFetching ? <Preloader/> :
+        {isFetching ? <Preloader/> :
             <Users usersData={usersData} follow={follow} unFollow={unfollow}
                    setCurrentPage={setCurrentPage} setPageSize={setPageSize}/>}
     </>

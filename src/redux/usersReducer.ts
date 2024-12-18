@@ -1,13 +1,13 @@
 import {usersAPI} from "api/users/users.api";
 import {AppThunkDispatch} from "redux/reduxStore";
 import {UserType} from "api/users/users.types";
+import {setFetching} from "redux/appReducer";
 
 export type UsersType = {
     users: UserType[]
     pageSize: number
     totalUsersCount: number
     currentPage: number
-    isFetching: boolean
     friends: UserType[]
     navbarFriends: UserType[]
 }
@@ -17,7 +17,6 @@ const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET-USERS"
 const SET_CURRENT_PAGE = "SET-CURRENT-PAGE"
 const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT"
-const SET_FETCHING = "SET-FETCHING"
 const TOGGLE_FOLLOWING = "TOGGLE-FOLLOWING"
 const SET_PAGE_SIZE = "SET-PAGE-SIZE"
 const SET_FRIENDS = "SET-FRIENDS"
@@ -28,7 +27,6 @@ const initialState: UsersType = {
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: false,
     friends: [],
     navbarFriends: []
 }
@@ -39,8 +37,7 @@ type ActionType =
     | UnFollow
     | SetUsers
     | SetCurrentPage
-    | setTotalUsersCount
-    | setFetching
+    | SetTotalUsersCount
     | SetToggleFollowing
     | SetPageSize
     | SetFriends
@@ -70,8 +67,7 @@ export const usersReducer = (state = initialState, action: ActionType): UsersTyp
         case SET_TOTAL_USERS_COUNT:
             return {...state, totalUsersCount: action.totalUsersCount}
 
-        case SET_FETCHING:
-            return {...state, isFetching: action.isFetching}
+
 
         case TOGGLE_FOLLOWING: {
             return {
@@ -103,8 +99,7 @@ type Follow = ReturnType<typeof follow>
 type UnFollow = ReturnType<typeof unFollow>
 type SetUsers = ReturnType<typeof setUsers>
 type SetCurrentPage = ReturnType<typeof setCurrentPage>
-type setTotalUsersCount = ReturnType<typeof setTotalUsersCount>
-type setFetching = ReturnType<typeof setFetching>
+type SetTotalUsersCount = ReturnType<typeof setTotalUsersCount>
 type SetToggleFollowing = ReturnType<typeof setToggleFollowing>
 type SetPageSize = ReturnType<typeof setPageSize>
 type SetFriends = ReturnType<typeof setFriends>
@@ -135,11 +130,6 @@ export const setTotalUsersCount = (totalUsersCount: number) => ({
     totalUsersCount
 } as const)
 
-export const setFetching = (isFetching: boolean) => ({
-    type: SET_FETCHING,
-    isFetching
-} as const)
-
 export const setToggleFollowing = (userID: number, toggleFollowing: boolean) => ({
     type: TOGGLE_FOLLOWING,
     userID,
@@ -164,8 +154,7 @@ export const setNavbarFriends = (friends: UserType[]) => ({
 
 export const getUsers = (pageSize: number, currentPage: number, friend?: boolean, term?: string) =>
     async (dispatch: AppThunkDispatch) => {
-        dispatch(setFetching(true))
-
+        // dispatch(setFetching(true))
         try {
 
             const res = await usersAPI.getUsers(pageSize, currentPage, friend, term);
@@ -179,7 +168,7 @@ export const getUsers = (pageSize: number, currentPage: number, friend?: boolean
             }
 
         } finally {
-            dispatch(setFetching(false))
+            // dispatch(setFetching(false))
         }
 
     }

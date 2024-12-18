@@ -1,4 +1,4 @@
-import {ChangeEvent, useCallback, useEffect, useState} from 'react';
+import React, {ChangeEvent, useCallback, useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {useParams} from 'react-router-dom';
 import {changeUserStatus, getUserProfile, getUserStatus, ProfileDataType, updateProfile} from 'redux/profileReducer';
@@ -8,10 +8,13 @@ import {toast} from "react-toastify";
 import {errorOptions, successOptions} from "utils/ToastifyOptions/ToastifyOptions";
 import {checkFollowedUser, followOnUser, unfollowOnUser} from "redux/usersReducer";
 import {Photos, ProfileUserResponseType} from "api/profile/profile.types";
+import {Preloader} from "components/Preloader";
+import {setFetching} from "redux/appReducer";
 
 export const ProfileInformationContainer = () => {
     const dispatch = useAppDispatch()
 
+    const isFetching = useSelector<ReducersType, boolean>(state => state.app.isFetching)
 
     const {profile, status} = useSelector<ReducersType, ProfileDataType>(state => state.profileData)
     const currentUserID = useSelector<ReducersType, number | null>(state => state.auth.id)
@@ -83,11 +86,13 @@ export const ProfileInformationContainer = () => {
         if (userID === null) return
 
         (async () => {
+            dispatch(setFetching(true))
             try {
-                await dispatch(getUserProfile(userID));
-                await dispatch(getUserStatus(userID));
+                await dispatch(getUserProfile(userID))
+                await dispatch(getUserStatus(userID))
                 setLocalStatus(status? status: 'not specified');
                 await checkFollowed(Number(uID))
+                dispatch(setFetching(false))
 
             } catch {
                 toast.error('Error when receiving user data', errorOptions)
@@ -96,15 +101,19 @@ export const ProfileInformationContainer = () => {
 
     }, [userID, status, dispatch])
 
-    return <ProfileInformation currentUserID={currentUserID}
-                               uID={uID} profile={profile} status={localStatus} edit={editStatus}
-                               toggleEditHandler={toggleEditHandler}
-                               changeStatusHandler={changeStatusHandler}
-                               dispatch={dispatch}
-                               handleSubmitProfileForm={handleSubmitProfileForm}
-                               editForm={editForm} setEditForm={setEditFormWithCheck}
-                               errorMessage={errorMessage}
-                               follow={follow}
-                               unFollow={unFollow}
-                               isFollow={isFollow}/>
+    return<>
+        {isFetching ? <Preloader/> :
+        <ProfileInformation currentUserID={currentUserID}
+                            uID={uID} profile={profile} status={localStatus} edit={editStatus}
+                            toggleEditHandler={toggleEditHandler}
+                            changeStatusHandler={changeStatusHandler}
+                            dispatch={dispatch}
+                            handleSubmitProfileForm={handleSubmitProfileForm}
+                            editForm={editForm} setEditForm={setEditFormWithCheck}
+                            errorMessage={errorMessage}
+                            follow={follow}
+                            unFollow={unFollow}
+                            isFollow={isFollow}/>
+        }
+    </>
 }

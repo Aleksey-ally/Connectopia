@@ -10,6 +10,7 @@ import IN from 'assets/imgs/IN.png'
 import {Typography} from "components/Typography";
 import {Chat, SendMessageType} from "./Chat";
 import {DataActiveUserDialogType} from "pages/Messages/MessagesContainer";
+import {Conversation} from "assets/icons";
 
 type MessagesPropsType = {
     usersData: UsersType
@@ -78,13 +79,13 @@ export const Messages = memo(forwardRef(({
                         <TabSwitcherContent className={s.sidebarContent} value={'Messages'}>
                             <div className={s.sidebarContentItem}>
                                 {messagesData.allDialogs.map(d => (
-                                    <UserItem key={d.id} className={`${s.userItem} ${d.hasNewMessages && s.unread}`} id={d.id}
-                                                              name={d.userName}
-                                                              photos={d.photos} userAvatar={'small'}
-                                                              handleGetDialogData={handleGetDialogData}/>
+                                    <UserItem key={d.id} className={`${s.userItem} ${d.hasNewMessages && s.unread}`}
+                                              id={d.id}
+                                              name={d.userName}
+                                              photos={d.photos} userAvatar={'small'}
+                                              handleGetDialogData={handleGetDialogData}/>
 
                                 ))}
-                                Groups
                             </div>
 
                         </TabSwitcherContent>
@@ -118,11 +119,9 @@ export const Messages = memo(forwardRef(({
                         </TabSwitcherContent>
                     </TabSwitcher>
                 </div>
-
-                <div className={s.sidebarFooter}>
-                    Current user avatar, settings
-                </div>
             </div>
+
+
             {displayGroupChat &&
                 <Chat ref={ref} chatData={messagesData.groupChatData} messageText={messagesData.messageTextGroup}
                       sendMessage={sendMessageGroupChat} dispatchNewTextInput={dispatchNewTextGroup}

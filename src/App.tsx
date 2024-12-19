@@ -20,6 +20,7 @@ import {Preloader} from "components/Preloader";
 import {getNavbarFriends, UsersType} from "redux/usersReducer";
 import {toast} from "react-toastify";
 import {errorOptions} from "utils/ToastifyOptions/ToastifyOptions";
+import {getUserProfile} from "redux/profileReducer";
 
 const App = () => {
     const dispatch = useAppDispatch()
@@ -38,6 +39,18 @@ const App = () => {
         })()
 
     }, [dispatch])
+
+    useEffect(() => {
+        (async () => {
+            try {
+                if (auth.id) {
+                    await dispatch(getUserProfile(auth.id))
+                }
+            } catch {
+                toast.error('Error when receiving data', errorOptions)
+            }
+        })()
+    }, [auth.id]);
 
 
     if (!initializingApp) {

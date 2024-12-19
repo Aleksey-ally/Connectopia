@@ -2,8 +2,8 @@ import {SVGProps, Ref, forwardRef, memo} from 'react'
 
 export const Conversation = memo(forwardRef((props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
     <svg
-        width="150"
-        height="150"
+        width="120"
+        height="120"
         viewBox="0 0 24 24"
         fill='none'
         xmlns="http://www.w3.org/2000/svg"

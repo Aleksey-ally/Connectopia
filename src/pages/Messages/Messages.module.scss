@@ -8,6 +8,7 @@
 
   .sidebar {
     .tabs {
+      height: 26.875rem;
       .sidebarContent {
         flex-direction: column;
 
@@ -90,7 +91,12 @@
   }
   .empty{
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    &.noDisplay{
+      display: none;
+    }
   }
 
 }

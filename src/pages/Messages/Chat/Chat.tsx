@@ -17,7 +17,7 @@ type PropsType = {
     handleOnScroll: (e: React.UIEvent<HTMLDivElement, UIEvent>) => void
     chatPhoto?: string | null
     chatName?: string
-    setDisplayChat: (toggle: boolean) => void
+    setDisplayChat: () => void
     chatUserId?: number
 }
 
@@ -63,7 +63,7 @@ export const Chat = memo(forwardRef(({
                 <Avatar className={`${s.chatAvatar} ${chatData && s.chatGroupAvatar}`} size={"small"}
                         photo={chatPhoto}/>
                 <span className={s.chatName}>{chatName}</span>
-                <Button variant={'secondary'} className={s.close} onClick={() => setDisplayChat(false)}>
+                <Button variant={'secondary'} className={s.close} onClick={setDisplayChat}>
                     <Close/>
                 </Button>
             </div>

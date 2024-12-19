@@ -24,6 +24,11 @@ export type DataActiveUserDialogType = {
     uID: number, name: string, photo?: string | null
 }
 
+export type DisplayChat =  {
+    displayGroupChat: boolean
+    displayUserChat: boolean
+}
+
 export const MessagesContainer = () => {
     const dispatch = useAppDispatch()
     const isFetching = useSelector<ReducersType, boolean>(state => state.app.isFetching)
@@ -34,13 +39,27 @@ export const MessagesContainer = () => {
 
     const debounceSearchText = useDebounce(messagesData.searchText)
 
+    // const [displayEmpty, setDisplayEmpty] = useState<boolean>(false)
+    const [displayChat, setDisplayChat] = useState<DisplayChat>({
+        displayGroupChat: false,
+        displayUserChat: false,
+    })
     const [displayFriends, setDisplayFriends] = useState<boolean>(false)
-    const [displayGroupChat, setDisplayGroupChat] = useState<boolean>(false)
-    const [displayUserChat, setDisplayUserChat] = useState<boolean>(false)
     const [isAutoScrollActive, setIsAutoScrollActive] = useState<boolean>(true)
     const [dataActiveUserDialog, setDataActiveUserDialog] = useState<DataActiveUserDialogType>()
 
     const messagesAnchorRef = useRef<HTMLDivElement>(null)
+
+    const toggleDisplayChat = (key: keyof typeof displayChat, toggle:boolean) => {
+        setDisplayChat((prev) => {
+            const updatedState = Object.keys(prev).reduce((acc, k) => {
+                acc[k as keyof typeof displayChat] = k === key ? toggle : false;
+                return acc;
+            }, {} as typeof displayChat);
+
+            return updatedState;
+        })
+    };
 
     const dispatchNewTextDialog = (e: string) => {
         dispatch(changeMessageTextDialog(e))
@@ -84,12 +103,11 @@ export const MessagesContainer = () => {
 
     const handleGetDialogData = (uID: number, page: number, count: number, name: string, photo: string | null) => {
         setIsAutoScrollActive(false)
-        setDisplayGroupChat(false)
 
         dispatch(getDialogData(uID, page, count))
             .then(() => {
                 setDataActiveUserDialog({uID, name, photo})
-                setDisplayUserChat(true)
+              toggleDisplayChat('displayUserChat', true)
                 setIsAutoScrollActive(true)
             })
 
@@ -107,7 +125,7 @@ export const MessagesContainer = () => {
     }, [displayFriends]);
 
     useEffect(() => {
-        if (!displayGroupChat) return
+        if (!displayChat.displayGroupChat) return
 
         (async () => {
             try {
@@ -117,12 +135,11 @@ export const MessagesContainer = () => {
                 toast.error('Error when receiving messages data', errorOptions)
             }
         })()
-        setDisplayUserChat(false)
 
         return () => {
             dispatch(destroyConnectionGroupChat())
         }
-    }, [displayGroupChat])
+    }, [displayChat.displayGroupChat])
 
     useEffect(() => {
         (async () => {
@@ -172,14 +189,12 @@ export const MessagesContainer = () => {
                                                dispatchNewTextGroup={dispatchNewTextGroup}
                                                sendMessageGroupChat={sendMessageGroupChatHandler}
                                                currentUserId={currentUserId}
-                                               displayGroupChat={displayGroupChat}
-                                               setDisplayGroupChat={setDisplayGroupChat}
+                                               displayChat={displayChat}
+                                               toggleDisplayChat={toggleDisplayChat}
                                                handleOnScroll={handleOnScroll}
                                                setDisplayFriends={setDisplayFriends}
                                                handleGetDialogData={handleGetDialogData}
                                                dataActiveUserDialog={dataActiveUserDialog}
-                                               displayUserChat={displayUserChat}
-                                               setDisplayUserChat={setDisplayUserChat}
                                                dispatchNewTextDialog={dispatchNewTextDialog}
                                                sendMessageDialog={sendMessageDialogHandler}
                                                searchFriendByName={handleSearchFriendByName}

@@ -9,7 +9,7 @@ import {UserItem} from "components/UserItem";
 import IN from 'assets/imgs/IN.png'
 import {Typography} from "components/Typography";
 import {Chat, SendMessageType} from "./Chat";
-import {DataActiveUserDialogType} from "pages/Messages/MessagesContainer";
+import {DataActiveUserDialogType, DisplayChat} from "pages/Messages/MessagesContainer";
 import {Conversation} from "assets/icons";
 
 type MessagesPropsType = {
@@ -20,11 +20,9 @@ type MessagesPropsType = {
     sendMessageGroupChat: () => void
     sendMessageDialog: (uID: number, message: string) => void
     currentUserId: number | null
-    displayGroupChat: boolean
-    displayUserChat: boolean
+    displayChat:DisplayChat
+    toggleDisplayChat: (key: keyof DisplayChat, toggle:boolean) => void
     setDisplayFriends: (toggle: boolean) => void
-    setDisplayGroupChat: (toggle: boolean) => void
-    setDisplayUserChat: (toggle: boolean) => void
     handleOnScroll: (e: React.UIEvent<HTMLDivElement, UIEvent>) => void
     handleGetDialogData: (uID: number, page: number, count: number, name: string, photo: string | null) => void
     dataActiveUserDialog?: DataActiveUserDialogType
@@ -38,13 +36,11 @@ export const Messages = memo(forwardRef(({
                                              sendMessageGroupChat,
                                              sendMessageDialog,
                                              currentUserId,
-                                             displayGroupChat,
-                                             setDisplayGroupChat,
+                                             displayChat,
+                                             toggleDisplayChat,
                                              handleOnScroll,
                                              handleGetDialogData,
                                              dataActiveUserDialog,
-                                             displayUserChat,
-                                             setDisplayUserChat,
                                              dispatchNewTextDialog,
                                              setDisplayFriends,
                                              searchFriendByName
@@ -69,7 +65,6 @@ export const Messages = memo(forwardRef(({
         {title: 'Friends', value: 'Friends'},
         {title: 'Groups', value: 'Groups'}
     ]
-
     return (
         <div className={s.messages}>
             <div className={s.sidebar}>
@@ -105,7 +100,7 @@ export const Messages = memo(forwardRef(({
                         </TabSwitcherContent>
                         <TabSwitcherContent className={s.sidebarContent} value={'Groups'}>
                             <div className={s.sidebarContentItem}>
-                                {<div className={s.groupItem} onClick={() => setDisplayGroupChat(true)}>
+                                {<div className={s.groupItem} onClick={() => {toggleDisplayChat("displayGroupChat", true)}}>
                                     <div className={s.groupInfo}>
                                         <Avatar className={s.groupAvatar} size={'small'} photo={IN}/>
                                         <div className={s.description}>
@@ -122,17 +117,17 @@ export const Messages = memo(forwardRef(({
             </div>
 
 
-            {displayGroupChat &&
+            {displayChat.displayGroupChat &&
                 <Chat ref={ref} chatData={messagesData.groupChatData} messageText={messagesData.messageTextGroup}
                       sendMessage={sendMessageGroupChat} dispatchNewTextInput={dispatchNewTextGroup}
                       currentUserId={currentUserId} handleOnScroll={handleOnScroll} chatName={'IT-Incubator Chat'}
-                      chatPhoto={IN} setDisplayChat={setDisplayGroupChat}/>}
+                      chatPhoto={IN} setDisplayChat={()=>toggleDisplayChat("displayGroupChat", false)}/>}
 
-            {displayUserChat && <Chat ref={ref} dialogData={messagesData.dialogsData} currentUserId={currentUserId}
+            {displayChat.displayUserChat && <Chat ref={ref} dialogData={messagesData.dialogsData} currentUserId={currentUserId}
                                       messageText={messagesData.messageTextDialog}
                                       sendMessage={sendMessageDialog as SendMessageType}
                                       dispatchNewTextInput={dispatchNewTextDialog} handleOnScroll={handleOnScroll}
-                                      chatName={dataActiveUserDialog?.name} setDisplayChat={setDisplayUserChat}
+                                      chatName={dataActiveUserDialog?.name} setDisplayChat={()=>toggleDisplayChat("displayUserChat", false)}
                                       chatPhoto={dataActiveUserDialog?.photo} chatUserId={dataActiveUserDialog?.uID}
 
             />}

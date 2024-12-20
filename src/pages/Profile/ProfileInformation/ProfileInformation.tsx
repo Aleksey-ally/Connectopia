@@ -13,7 +13,7 @@ import {toast} from "react-toastify";
 import {errorOptions, successOptions} from "utils/ToastifyOptions/ToastifyOptions";
 import {Button} from "components/Button";
 import {ProfileUserResponseType} from "api/profile/profile.types";
-import {Send} from "assets/icons";
+import {Like, Send} from "assets/icons";
 
 type Props = {
     currentUserID: number | null
@@ -141,7 +141,10 @@ export const ProfileInformation = (({
                            onValueChange={changePostText}></TextField>
                 <Button variant={'tertiary'} onClick={addPost}><Send/></Button>
                 {profileData?.postData.map(p => {
-                    return <div key={p.id} className={s.post}>{p.message}</div>
+                    return <div key={p.id} className={s.post}>
+                        <div>{p.message}</div>
+                        <div><Like/>{p.likeCounter}</div>
+                    </div>
                 })}
             </div>}
 

@@ -112,7 +112,7 @@ export const ProfileInformation = (({
                         }
                     </div>
 
-                    {currentUserID !== uID && <div className={s.buttonsPanel}>
+                    {currentUserID !== uID && <div>
                         {isFollow
                             ? <Button variant={'secondary'} onClick={() => {
                                 unFollow(uID!)
@@ -137,17 +137,22 @@ export const ProfileInformation = (({
             </div>
 
             {currentUserID === uID && <div className={s.posts}>
-                <TextField placeholder={'Write something...'} value={profileData?.textPost}
-                           onValueChange={changePostText}></TextField>
-                <Button variant={'tertiary'} onClick={addPost}><Send/></Button>
+                <div className={s.inputWrapper}>
+                    <TextField type={'text'} placeholder={'Write something...'} value={profileData?.textPost}
+                               onValueChange={changePostText}></TextField>
+                    <Button variant={'tertiary'} onClick={addPost}><Send/></Button>
+                </div>
+
                 {profileData?.postData.map(p => {
                     return <div key={p.id} className={s.post}>
-                        <div>{p.message}</div>
-                        <div><Like/>{p.likeCounter}</div>
+                        <div className={s.messagePostWrapper}>
+                            <p className={s.messagePost}>{p.message}</p>
+                        </div>
+
+                        <div className={s.likeCounter}><Like/><span>{p.likeCounter}</span></div>
                     </div>
                 })}
             </div>}
-
         </div>
     )
 })

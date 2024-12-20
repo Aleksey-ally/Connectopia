@@ -27,6 +27,7 @@ export type DataActiveUserDialogType = {
 export type DisplayChat =  {
     displayGroupChat: boolean
     displayUserChat: boolean
+    displayEmpty: boolean
 }
 
 export const MessagesContainer = () => {
@@ -39,10 +40,10 @@ export const MessagesContainer = () => {
 
     const debounceSearchText = useDebounce(messagesData.searchText)
 
-    // const [displayEmpty, setDisplayEmpty] = useState<boolean>(false)
     const [displayChat, setDisplayChat] = useState<DisplayChat>({
         displayGroupChat: false,
         displayUserChat: false,
+        displayEmpty: true,
     })
     const [displayFriends, setDisplayFriends] = useState<boolean>(false)
     const [isAutoScrollActive, setIsAutoScrollActive] = useState<boolean>(true)
@@ -56,6 +57,15 @@ export const MessagesContainer = () => {
                 acc[k as keyof typeof displayChat] = k === key ? toggle : false;
                 return acc;
             }, {} as typeof displayChat);
+
+
+            const otherKeysFalse =
+                !updatedState.displayGroupChat &&
+                !updatedState.displayUserChat;
+
+            if (otherKeysFalse) {
+                updatedState.displayEmpty = true;
+            }
 
             return updatedState;
         })

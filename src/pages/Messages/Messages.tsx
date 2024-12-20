@@ -116,7 +116,10 @@ export const Messages = memo(forwardRef(({
                 </div>
             </div>
 
-
+            <div className={`${s.empty} ${!displayChat.displayEmpty && s.noDisplay}`}>
+                <Conversation/>
+                <span>Select a chat to display messages</span>
+            </div>
             {displayChat.displayGroupChat &&
                 <Chat ref={ref} chatData={messagesData.groupChatData} messageText={messagesData.messageTextGroup}
                       sendMessage={sendMessageGroupChat} dispatchNewTextInput={dispatchNewTextGroup}

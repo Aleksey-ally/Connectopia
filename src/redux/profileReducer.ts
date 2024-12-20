@@ -90,7 +90,7 @@ export const changePostText = (newText: string) => ({
     },
 } as const);
 
-export const setUserProfile = (profile: Partial<ProfileUserResponseType>) => ({
+export const  setUserProfile = (profile: Partial<ProfileUserResponseType>) => ({
     type: SET_USER_PROFILE,
     payload: {
         profile,

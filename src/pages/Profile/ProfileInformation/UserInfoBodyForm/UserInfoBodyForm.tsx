@@ -4,9 +4,9 @@ import {TextField} from "components/TextField";
 import {memo} from "react";
 import {Checkbox} from "components/Checkbox";
 import {useController, useForm} from "react-hook-form";
-import {ProfileUserResponseType} from "api/base-api.types";
 import {Typography} from "components/Typography";
 import {Button} from "components/Button";
+import {ProfileUserResponseType} from "api/profile/profile.types";
 
 type Props = {
     profile?: UtilityProfileUserType
@@ -66,7 +66,7 @@ export const UserInfoBodyForm = memo(({
                             id='contacts'
                             key={key}
                             {...register(`contacts.${key}` as keyof ProfileUserResponseType)}
-                            defaultValue={value || 'не указано'}
+                            defaultValue={value}
                         />
                     ))}
                 </li>

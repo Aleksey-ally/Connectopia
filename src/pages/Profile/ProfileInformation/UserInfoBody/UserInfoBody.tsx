@@ -3,6 +3,7 @@ import s from './UserInfoBody.module.scss';
 import {Typography} from "components/Typography";
 import {memo} from "react";
 import {Button} from "components/Button";
+import {Contacts} from "api/profile/profile.types";
 
 type Props = {
     currentUserID: number | null
@@ -48,19 +49,19 @@ export const UserInfoBody = memo(({
                     <label className={s.titleOption} onDoubleClick={enableEditForm}>My professional skills:</label>
                     <Typography className={s.option} variant={'subtitle2'}
                                 as={'div'}
-                                onDoubleClick={enableEditForm}>{profile?.lookingForAJobDescription}</Typography>
+                                onDoubleClick={enableEditForm}>{profile?.lookingForAJobDescription || 'not specified'}</Typography>
                 </li>
                 <li>
                     <label className={s.titleOption} onDoubleClick={enableEditForm}>About me: </label> <Typography
                     className={s.option} variant={'subtitle2'}
-                    as={'div'} onDoubleClick={enableEditForm}>{profile?.aboutMe}</Typography>
+                    as={'div'} onDoubleClick={enableEditForm}>{profile?.aboutMe || 'not specified'}</Typography>
                 </li>
                 <li>
                     <label className={s.titleOption}
-                           onDoubleClick={enableEditForm}>Contacts: </label>{(profile?.contacts && Object.keys(profile.contacts).map(c => (
+                           onDoubleClick={enableEditForm}>Contacts: </label>{profile?.contacts && (Object.keys(profile.contacts) as Array<keyof Contacts>).map(c  => (
                     <Typography className={s.option} key={c}
-                               onDoubleClick={enableEditForm}>{profile.contacts[c] || 'не указано'}</Typography>
-                ))) || null}
+                               onDoubleClick={enableEditForm}>{profile.contacts![c] || 'not specified'}</Typography>
+                )) || null}
                 </li>
 
             </ul>

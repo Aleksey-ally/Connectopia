@@ -7,7 +7,7 @@ import {Contacts} from "api/profile/profile.types";
 
 type Props = {
     currentUserID: number | null
-    uID?: string
+    uID?: number
     profile?: UtilityProfileUserType
     setEditForm: (value: boolean) => void
 }
@@ -22,7 +22,7 @@ export const UserInfoBody = memo(({
         setEditForm(true)
     }
 
-    const isPageCurrentUser = Number(uID) === currentUserID
+    const isPageCurrentUser = uID === currentUserID
 
     return (
 

@@ -17,7 +17,7 @@ import {Send} from "assets/icons";
 
 type Props = {
     currentUserID: number | null
-    uID?: string
+    uID?: number
     profileData?: ProfileDataType
     status: string
     edit: boolean
@@ -85,7 +85,7 @@ export const ProfileInformation = (({
                                     size={'large'}
                                     photo={profileData?.profile?.photos?.small}>
 
-                                {Number(uID) === currentUserID && isEditVisible &&
+                                {uID === currentUserID && isEditVisible &&
                                     <label htmlFor="avatarInput" className={s.edit} onMouseOver={handleMouseOver}
                                            onMouseOut={handleMouseOut}>
                                         <Edit/>
@@ -112,19 +112,16 @@ export const ProfileInformation = (({
                         }
                     </div>
 
-                    {Number(currentUserID) !== Number(uID) && < div className={s.buttonsPanel}>
+                    {currentUserID !== uID && <div className={s.buttonsPanel}>
                         {isFollow
                             ? <Button variant={'secondary'} onClick={() => {
-                                unFollow(Number(uID))
+                                unFollow(uID!)
                             }}>Unfollow
                             </Button>
                             : <Button onClick={() => {
-                                follow(Number(uID))
+                                follow(uID!)
                             }}>Follow</Button>}
-                    </div>
-                    }
-
-
+                    </div>}
                 </div>
             </div>
 
@@ -139,14 +136,14 @@ export const ProfileInformation = (({
                                                errorMessage={errorMessage}/>}
             </div>
 
-            <div className={s.posts}>
+            {currentUserID === uID && <div className={s.posts}>
                 <TextField placeholder={'Write something...'} value={profileData?.textPost}
                            onValueChange={changePostText}></TextField>
                 <Button variant={'tertiary'} onClick={addPost}><Send/></Button>
                 {profileData?.postData.map(p => {
                     return <div key={p.id} className={s.post}>{p.message}</div>
                 })}
-            </div>
+            </div>}
 
         </div>
     )

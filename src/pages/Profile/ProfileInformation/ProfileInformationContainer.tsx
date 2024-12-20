@@ -120,7 +120,7 @@ export const ProfileInformationContainer = () => {
     return<>
         {isFetching ? <Preloader/> :
         <ProfileInformation currentUserID={currentUserID}
-                            uID={uID} profileData={profileData} status={localStatus} edit={editStatus}
+                            uID={Number(uID)} profileData={profileData} status={localStatus} edit={editStatus}
                             toggleEditHandler={toggleEditHandler}
                             changeStatusHandler={changeStatusHandler}
                             dispatch={dispatch}

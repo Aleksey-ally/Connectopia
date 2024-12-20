@@ -1,7 +1,15 @@
 import React, {ChangeEvent, useCallback, useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {useParams} from 'react-router-dom';
-import {changeUserStatus, getUserProfile, getUserStatus, ProfileDataType, updateProfile} from 'redux/profileReducer';
+import {
+    addPost,
+    changePostText,
+    changeUserStatus,
+    getUserProfile,
+    getUserStatus,
+    ProfileDataType,
+    updateProfile
+} from 'redux/profileReducer';
 import {ReducersType, useAppDispatch} from 'redux/reduxStore';
 import {ProfileInformation} from './ProfileInformation';
 import {toast} from "react-toastify";
@@ -16,7 +24,7 @@ export const ProfileInformationContainer = () => {
 
     const isFetching = useSelector<ReducersType, boolean>(state => state.app.isFetching)
 
-    const {profile, status} = useSelector<ReducersType, ProfileDataType>(state => state.profileData)
+    const profileData = useSelector<ReducersType, ProfileDataType>(state => state.profileData)
     const currentUserID = useSelector<ReducersType, number | null>(state => state.auth.id)
 
     const [localStatus, setLocalStatus] = useState<string>('')
@@ -27,7 +35,7 @@ export const ProfileInformationContainer = () => {
 
     const toggleEditHandler = useCallback(() => {
         Number(uID) === currentUserID && setEditStatus(!editStatus)
-        status !== localStatus && dispatch(changeUserStatus(localStatus))
+        profileData.status !== localStatus && dispatch(changeUserStatus(localStatus))
             .then(() => {
                 toast.success('You are successfully change status', successOptions)
             })
@@ -43,7 +51,7 @@ export const ProfileInformationContainer = () => {
 
     const handleSubmitProfileForm = (userData: ProfileUserResponseType) => {
 
-        dispatch(updateProfile({...userData, photos: profile.photos as Photos}))
+        dispatch(updateProfile({...userData, photos: profileData.profile.photos as Photos}))
             .then(message => {
                 if (message) {
                     setErrorMessage(message)
@@ -79,6 +87,14 @@ export const ProfileInformationContainer = () => {
 
     }, [dispatch])
 
+    const handleChangePostText = (newText: string)=>{
+        dispatch(changePostText(newText))
+    }
+
+    const handleAddPost = ()=>{
+        dispatch(addPost())
+    }
+
     const {uID} = useParams()
 
     const userID = Number(uID) || currentUserID
@@ -90,7 +106,7 @@ export const ProfileInformationContainer = () => {
             try {
                 await dispatch(getUserProfile(userID))
                 await dispatch(getUserStatus(userID))
-                setLocalStatus(status? status: 'not specified');
+                setLocalStatus(profileData.status? profileData.status: 'not specified');
                 await checkFollowed(Number(uID))
                 dispatch(setFetching(false))
 
@@ -99,12 +115,12 @@ export const ProfileInformationContainer = () => {
             }
         })();
 
-    }, [userID, status, dispatch])
+    }, [userID, profileData.status, dispatch])
 
     return<>
         {isFetching ? <Preloader/> :
         <ProfileInformation currentUserID={currentUserID}
-                            uID={uID} profile={profile} status={localStatus} edit={editStatus}
+                            uID={uID} profileData={profileData} status={localStatus} edit={editStatus}
                             toggleEditHandler={toggleEditHandler}
                             changeStatusHandler={changeStatusHandler}
                             dispatch={dispatch}
@@ -113,7 +129,9 @@ export const ProfileInformationContainer = () => {
                             errorMessage={errorMessage}
                             follow={follow}
                             unFollow={unFollow}
-                            isFollow={isFollow}/>
+                            isFollow={isFollow}
+                            changePostText={handleChangePostText}
+                            addPost={handleAddPost}/>
         }
     </>
 }

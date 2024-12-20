@@ -1,5 +1,5 @@
 import {Avatar} from 'components/Avatar';
-import {setNewUserAvatar, UtilityProfileUserType} from 'redux/profileReducer';
+import {ProfileDataType, setNewUserAvatar} from 'redux/profileReducer';
 import UserCover from 'assets/imgs/userCover_1.jpg';
 import s from 'pages/Profile/ProfileInformation/ProfileInformation.module.scss';
 import {ChangeEvent, useState} from "react";
@@ -13,11 +13,12 @@ import {toast} from "react-toastify";
 import {errorOptions, successOptions} from "utils/ToastifyOptions/ToastifyOptions";
 import {Button} from "components/Button";
 import {ProfileUserResponseType} from "api/profile/profile.types";
+import {Send} from "assets/icons";
 
 type Props = {
     currentUserID: number | null
     uID?: string
-    profile?: UtilityProfileUserType
+    profileData?: ProfileDataType
     status: string
     edit: boolean
     toggleEditHandler: () => void
@@ -30,15 +31,18 @@ type Props = {
     follow: (userID: number) => void
     unFollow: (userID: number) => void
     isFollow: boolean
+    changePostText: (newText: string) => void
+    addPost: () => void
 }
 
 export const ProfileInformation = (({
-                                        currentUserID, uID, profile,
+                                        currentUserID, uID, profileData,
                                         status, edit, changeStatusHandler,
                                         toggleEditHandler, dispatch,
                                         handleSubmitProfileForm, editForm,
                                         setEditForm, errorMessage, follow,
-                                        unFollow, isFollow
+                                        unFollow, isFollow, changePostText,
+                                        addPost
                                     }: Props) => {
 
     const [isEditVisible, setEditVisible] = useState<boolean>(false);
@@ -79,7 +83,7 @@ export const ProfileInformation = (({
                             <Avatar onMouseOver={handleMouseOver}
                                     onMouseOut={handleMouseOut}
                                     size={'large'}
-                                    photo={profile?.photos?.small}>
+                                    photo={profileData?.profile?.photos?.small}>
 
                                 {Number(uID) === currentUserID && isEditVisible &&
                                     <label htmlFor="avatarInput" className={s.edit} onMouseOver={handleMouseOver}
@@ -127,11 +131,21 @@ export const ProfileInformation = (({
             <div className={s.personalInfo}>
 
                 {!editForm &&
-                    <UserInfoBody currentUserID={currentUserID} uID={uID} profile={profile} setEditForm={setEditForm}/>}
+                    <UserInfoBody currentUserID={currentUserID} uID={uID} profile={profileData?.profile}
+                                  setEditForm={setEditForm}/>}
 
-                {editForm && <UserInfoBodyForm profile={profile}
+                {editForm && <UserInfoBodyForm profile={profileData?.profile}
                                                handleSubmitProfileForm={handleSubmitProfileForm}
                                                errorMessage={errorMessage}/>}
+            </div>
+
+            <div className={s.posts}>
+                <TextField placeholder={'Write something...'} value={profileData?.textPost}
+                           onValueChange={changePostText}></TextField>
+                <Button variant={'tertiary'} onClick={addPost}><Send/></Button>
+                {profileData?.postData.map(p => {
+                    return <div key={p.id} className={s.post}>{p.message}</div>
+                })}
             </div>
 
         </div>

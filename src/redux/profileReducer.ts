@@ -23,10 +23,7 @@ export type PostDataType = {
 export type UtilityProfileUserType = Partial<ProfileUserResponseType>
 
 const initialState: ProfileDataType = {
-    postData: [
-        {id: 1, message: "Beautiful!", likeCounter: 9},
-        {id: 2, message: "Have a nice day!", likeCounter: 5},
-    ],
+    postData: [],
     textPost: "",
     profile: {},
     status: ""

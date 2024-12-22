@@ -20,22 +20,25 @@
       margin-bottom: 2.5rem;
       width: 50%;
       padding: 0 1rem;
+      .titleOption {
+        cursor: pointer;
 
-      &.checkboxInfo{
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+      &.checkboxInfo {
         display: flex;
         align-self: center;
         margin-top: 0.65rem;
       }
     }
-    .titleOption{
-      cursor: pointer;
-      &:hover{
-        opacity: 0.7;
-      }
+
+    .titleContact{
+      color: var(--color-accent-700);
     }
+
   }
-
-
 
   .errorMessage {
     color: red;

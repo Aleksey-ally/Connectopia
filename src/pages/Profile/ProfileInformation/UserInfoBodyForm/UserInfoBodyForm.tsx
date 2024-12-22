@@ -62,12 +62,15 @@ export const UserInfoBodyForm = memo(({
                 <li>
                     <label className={s.titleOption} htmlFor="contacts"><b>Contacts: </b></label>
                     {Object.entries(profile?.contacts || {}).map(([key, value]) => (
-                        <TextField
-                            id='contacts'
-                            key={key}
-                            {...register(`contacts.${key}` as keyof ProfileUserResponseType)}
-                            defaultValue={value}
-                        />
+                        <>
+                            <Typography key={key} as={'h5'} className={s.titleContact}>{key}:</Typography>
+                            <TextField
+                                id='contacts'
+                                key={key}
+                                {...register(`contacts.${key}` as keyof ProfileUserResponseType)}
+                                defaultValue={value}
+                            />
+                        </>
                     ))}
                 </li>
             </ul>

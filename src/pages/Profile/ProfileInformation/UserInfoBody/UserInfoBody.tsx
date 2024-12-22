@@ -43,7 +43,8 @@ export const UserInfoBody = memo(({
                 <li>
                     <label className={s.titleOption} onDoubleClick={enableEditForm}>Looking for a job:</label>
                     <Typography className={s.option} variant={'subtitle2'}
-                                as={'div'} onDoubleClick={enableEditForm}>{profile?.lookingForAJob ? 'Yes' : 'No'}</Typography>
+                                as={'div'}
+                                onDoubleClick={enableEditForm}>{profile?.lookingForAJob ? 'Yes' : 'No'}</Typography>
                 </li>
                 <li>
                     <label className={s.titleOption} onDoubleClick={enableEditForm}>My professional skills:</label>
@@ -58,9 +59,12 @@ export const UserInfoBody = memo(({
                 </li>
                 <li>
                     <label className={s.titleOption}
-                           onDoubleClick={enableEditForm}>Contacts: </label>{profile?.contacts && (Object.keys(profile.contacts) as Array<keyof Contacts>).map(c  => (
-                    <Typography className={s.option} key={c}
-                               onDoubleClick={enableEditForm}>{profile.contacts![c] || 'not specified'}</Typography>
+                           onDoubleClick={enableEditForm}>Contacts: </label>{profile?.contacts && (Object.keys(profile.contacts) as Array<keyof Contacts>).map(c => (
+                    <div className={s.optionWrapper}>
+                        <Typography key={c} as={'h5'} className={s.titleContact}>{c}:</Typography>
+                        <Typography className={s.option} key={c}
+                                    onDoubleClick={enableEditForm}>{profile.contacts![c] || 'not specified'}</Typography>
+                    </div>
                 )) || null}
                 </li>
 

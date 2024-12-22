@@ -20,9 +20,9 @@
       margin-bottom: 2.5rem;
       width: 50%;
       padding: 0 1rem;
-
       .titleOption {
         cursor: pointer;
+        display: flex;
 
         &:hover {
           opacity: 0.7;
@@ -30,13 +30,23 @@
 
       }
 
-      .option {
-        cursor: pointer;
 
-        &:hover {
-          opacity: 0.7;
+      .optionWrapper{
+        display: flex;
+        justify-content: start;
+        gap: .5rem;
+        .titleContact{
+          color: var(--color-accent-700);
+        }
+        .option {
+          cursor: pointer;
+
+          &:hover {
+            opacity: 0.7;
+          }
         }
       }
+
     }
   }
 }

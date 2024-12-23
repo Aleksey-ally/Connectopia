@@ -2,6 +2,7 @@ export type PropertiesLogin = {
     email: string
     password: number
     rememberMe: boolean
+    captcha?:string
 }
 
 export type ResponseLogin = {

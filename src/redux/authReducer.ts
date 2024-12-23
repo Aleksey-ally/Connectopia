@@ -2,6 +2,7 @@ import {AppThunkDispatch} from "redux/reduxStore";
 import {setApp} from "redux/appReducer";
 import {authApi} from "api/autn/auth.api";
 import {PropertiesLogin} from "api/autn/auth.types";
+import {securityApi} from "api/security/security.api";
 
 export type Auth = {
     id: number | null
@@ -60,6 +61,12 @@ export const login = (payload: PropertiesLogin) =>
         const res = await authApi.login(payload)
         if (res.resultCode === 0) {
             await dispatch(getAuthUserData)
+        } else if (res.resultCode === 10) {
+            const resCaptcha = await dispatch(securityApi.getCaptchaUrl)
+            return {
+                message: res.messages[0],
+                captchaUrl: resCaptcha.url
+            }
         } else {
             return res.messages[0]
         }

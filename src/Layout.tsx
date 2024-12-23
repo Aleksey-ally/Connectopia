@@ -15,7 +15,7 @@ import {getUserProfile} from "redux/profileReducer";
 
 const Layout = () => {
     const dispatch = useAppDispatch()
-    // const initializingApp = useSelector<ReducersType, boolean>(state => state.app.initializing)
+    const initializingApp = useSelector<ReducersType, boolean>(state => state.app.initializing)
     const auth = useSelector<ReducersType, Auth>(state => state.auth)
     const usersData = useSelector<ReducersType, UsersType>(state => state.usersData)
 
@@ -51,9 +51,9 @@ const Layout = () => {
         <>
             <HeaderContainer auth={auth}/>
             <main className={s.appWrapper}>
-                <Navbar friendsData={usersData.navbarFriends} id={auth.id}/>
+                {auth.isAuth && <Navbar friendsData={usersData.navbarFriends} id={auth.id}/>}
                 <div className={s.content}>
-                    <Outlet/>
+                    <Outlet />
                 </div>
             </main>
         </>

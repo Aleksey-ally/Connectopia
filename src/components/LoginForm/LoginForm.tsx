@@ -71,7 +71,9 @@ export const LoginForm = () => {
             {generalError && <Typography variant='error'>{generalError}</Typography>}
             {captchaUrl && <TextField type={'text'} {...register('captcha', {required: 'Captcha is required'})}
                                       errorMessage={errors.captcha?.message}/>}
-            <Button className={s.button} type='submit' fullWidth>Submit</Button>
+            <Button type="submit" fullWidth className={s.button}>
+                Sign In
+            </Button>
         </form>
     )
 }

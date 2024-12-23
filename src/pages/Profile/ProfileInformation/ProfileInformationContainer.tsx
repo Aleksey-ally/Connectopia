@@ -34,7 +34,7 @@ export const ProfileInformationContainer = () => {
     const [isFollow, setIsFollow] = useState<boolean>(false)
 
     const toggleEditHandler = useCallback(() => {
-        Number(uID) === currentUserID && setEditStatus(!editStatus)
+        paramsUID === currentUserID && setEditStatus(!editStatus)
         profileData.status !== localStatus && dispatch(changeUserStatus(localStatus))
             .then(() => {
                 toast.success('You are successfully change status', successOptions)
@@ -46,7 +46,7 @@ export const ProfileInformationContainer = () => {
     }, [localStatus])
 
     const setEditFormWithCheck = (value: boolean) => {
-        if (currentUserID === Number(uID)) return setEditForm(value)
+        if (currentUserID === paramsUID) return setEditForm(value)
     }
 
     const handleSubmitProfileForm = (userData: ProfileUserResponseType) => {
@@ -79,13 +79,13 @@ export const ProfileInformationContainer = () => {
             })
     }, [dispatch])
 
-    const checkFollowed = useCallback(async (userID: number) => {
+    const checkFollowed = async (userID: number) => {
 
         await checkFollowedUser(userID).then((data) => {
             setIsFollow(data)
         });
 
-    }, [dispatch])
+    }
 
     const handleChangePostText = (newText: string)=>{
         dispatch(changePostText(newText))
@@ -96,8 +96,10 @@ export const ProfileInformationContainer = () => {
     }
 
     const {uID} = useParams()
+    
+    const paramsUID = Number(uID)
 
-    const userID = Number(uID) || currentUserID
+    const userID = paramsUID || currentUserID
     useEffect(() => {
         if (userID === null) return
 
@@ -107,7 +109,9 @@ export const ProfileInformationContainer = () => {
                 await dispatch(getUserProfile(userID))
                 await dispatch(getUserStatus(userID))
                 setLocalStatus(profileData.status? profileData.status: 'not specified');
-                await checkFollowed(Number(uID))
+               if (paramsUID && currentUserID !== paramsUID ) {
+                   await checkFollowed(paramsUID)
+               }
                 dispatch(setFetching(false))
 
             } catch {
@@ -120,7 +124,7 @@ export const ProfileInformationContainer = () => {
     return<>
         {isFetching ? <Preloader/> :
         <ProfileInformation currentUserID={currentUserID}
-                            uID={Number(uID)} profileData={profileData} status={localStatus} edit={editStatus}
+                            uID={paramsUID} profileData={profileData} status={localStatus} edit={editStatus}
                             toggleEditHandler={toggleEditHandler}
                             changeStatusHandler={changeStatusHandler}
                             dispatch={dispatch}

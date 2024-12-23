@@ -29,6 +29,7 @@ export const usersAPI = {
         return res.data
     },
     async checkFollowed(uID: number) {
+        // debugger
         const res = await instance.get<boolean>(`follow/${uID}`)
         return res.data
     }

@@ -9,7 +9,7 @@ export const Login = () => {
 
     const isAuth = useSelector<ReducersType, boolean>(state => state.auth.isAuth)
 
-    if (isAuth) return <Navigate to={'/profile'}/>
+    if (isAuth) return <Navigate to={'/'}/>
 
     return (
         <div className={s.login}>

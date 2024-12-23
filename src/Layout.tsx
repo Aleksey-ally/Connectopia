@@ -11,41 +11,23 @@ import {HeaderContainer} from "components/Header";
 import {getNavbarFriends, UsersType} from "redux/usersReducer";
 import {toast} from "react-toastify";
 import {errorOptions} from "utils/ToastifyOptions/ToastifyOptions";
-import {getUserProfile} from "redux/profileReducer";
 
 const Layout = () => {
     const dispatch = useAppDispatch()
-    const initializingApp = useSelector<ReducersType, boolean>(state => state.app.initializing)
     const auth = useSelector<ReducersType, Auth>(state => state.auth)
     const usersData = useSelector<ReducersType, UsersType>(state => state.usersData)
 
     useEffect(() => {
         (async () => {
             try {
+                if (auth.isAuth)
                 await dispatch(getNavbarFriends(9, 1, true))
             } catch {
                 toast.error('Error when receiving data', errorOptions)
             }
         })()
 
-    }, [dispatch])
-
-    useEffect(() => {
-        (async () => {
-            try {
-                if (auth.id) {
-                    await dispatch(getUserProfile(auth.id))
-                }
-            } catch {
-                toast.error('Error when receiving data', errorOptions)
-            }
-        })()
-    }, [auth.id]);
-
-
-    // if (!initializingApp) {
-    //     return <Preloader/>
-    // }
+    }, [auth.isAuth, dispatch])
 
     return (
         <>
@@ -53,7 +35,7 @@ const Layout = () => {
             <main className={s.appWrapper}>
                 {auth.isAuth && <Navbar friendsData={usersData.navbarFriends} id={auth.id}/>}
                 <div className={s.content}>
-                    <Outlet />
+                    <Outlet/>
                 </div>
             </main>
         </>

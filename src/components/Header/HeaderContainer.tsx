@@ -1,17 +1,30 @@
 import {Auth} from 'redux/authReducer';
 import {Header} from "components/Header/Header";
-import {useSelector} from "react-redux";
-import {ReducersType} from "redux/reduxStore";
+import {useEffect, useState} from "react";
+import {profileAPI} from "api/profile/profile.api";
+import {ProfileUserResponseType} from "api/profile/profile.types";
 
 type Props = {
     auth: Auth
 }
 
 export const HeaderContainer = ({auth}: Props) => {
-    const currentUserAvatar = useSelector<ReducersType, string | undefined>(state => state.profileData.profile.photos?.large)
-    const userName = useSelector<ReducersType, string | undefined>(state => state.profileData.profile.fullName)
+    const [currentUserData, setCurrentUserData] = useState<ProfileUserResponseType>()
+
+    useEffect(() => {
+        if (!auth.isAuth) return
+        (async () => {
+            const res = await profileAPI.getProfile(auth.id!)
+            setCurrentUserData(res)
+        })()
+
+        return ()=>{
+            setCurrentUserData(undefined)
+        }
+
+    }, [auth.isAuth]);
 
     return (
-        <Header auth={auth} userName={userName} currentUserAvatar={currentUserAvatar}/>
+        <Header auth={auth} userName={currentUserData?.fullName} currentUserAvatar={currentUserData?.photos.large}/>
     )
 }

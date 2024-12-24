@@ -60,9 +60,9 @@ export const UserInfoBody = memo(({
                 <li>
                     <label className={s.titleOption}
                            onDoubleClick={enableEditForm}>Contacts: </label>{profile?.contacts && (Object.keys(profile.contacts) as Array<keyof Contacts>).map(c => (
-                    <div className={s.optionWrapper}>
-                        <Typography key={c} as={'h5'} className={s.titleContact}>{c}:</Typography>
-                        <Typography className={s.option} key={c}
+                    <div key={c} className={s.optionWrapper}>
+                        <Typography as={'h5'} className={s.titleContact}>{c}:</Typography>
+                        <Typography className={s.option}
                                     onDoubleClick={enableEditForm}>{profile.contacts![c] || 'not specified'}</Typography>
                     </div>
                 )) || null}

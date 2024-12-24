@@ -66,7 +66,7 @@ export const UserInfoBodyForm = memo(({
                             <Typography key={key} as={'h5'} className={s.titleContact}>{key}:</Typography>
                             <TextField
                                 id='contacts'
-                                key={key}
+                                key={value}
                                 {...register(`contacts.${key}` as keyof ProfileUserResponseType)}
                                 defaultValue={value}
                             />

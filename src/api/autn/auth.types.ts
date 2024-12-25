@@ -7,6 +7,7 @@ export type PropertiesLogin = {
 
 export type ResponseLogin = {
     userId: number
+    token:string
 }
 
 export type ResponseAuth = {

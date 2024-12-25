@@ -58,8 +58,9 @@ export const getAuthUserData = async (dispatch: AppThunkDispatch) => {
 
 export const login = (payload: PropertiesLogin) =>
     async (dispatch: AppThunkDispatch) => {
-        const res = await authApi.login(payload)
+        const res  = await authApi.login(payload)
         if (res.resultCode === 0) {
+            localStorage.setItem("sn-token",  res.data.token)
             await dispatch(getAuthUserData)
         } else if (res.resultCode === 10) {
             const resCaptcha = await dispatch(securityApi.getCaptchaUrl)
@@ -75,6 +76,7 @@ export const login = (payload: PropertiesLogin) =>
 
 export const logout = async (dispatch: AppThunkDispatch) => {
     await authApi.logout()
+    localStorage.clear()
     dispatch(setAuthUserData({
         id: null,
         login: null,

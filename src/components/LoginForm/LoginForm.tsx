@@ -54,26 +54,31 @@ export const LoginForm = () => {
     })
 
     return (
-        <form className={s.loginForm} onSubmit={handleSubmit(onSubmit)}>
-            <TextField label={'Email'}
-                       {...register('email', {required: 'Email is required'})}
-                       errorMessage={errors.email?.message}/>
-
-            <TextField type={"password"} label={'Password'}
-                       {...register('password', {
-                           required: 'Password is required',
-                           minLength: {value: 3, message: 'Min length 3'}
-                       })}
-                       errorMessage={errors.password?.message}/>
-
-            <Checkbox label={'Remember me'} {...register('rememberMe')} onValueChange={onChange} checked={value}/>
-            <img src={captchaUrl} alt=""/>
-            {generalError && <Typography variant='error'>{generalError}</Typography>}
-            {captchaUrl && <TextField type={'text'} {...register('captcha', {required: 'Captcha is required'})}
-                                      errorMessage={errors.captcha?.message}/>}
-            <Button type="submit" fullWidth className={s.button}>
+        <div className={s.login}>
+            <Typography variant="large" className={s.title}>
                 Sign In
-            </Button>
-        </form>
+            </Typography>
+            <form className={s.loginForm} onSubmit={handleSubmit(onSubmit)}>
+                <TextField type={'email'} label={'Email'}
+                           {...register('email', {required: 'Email is required'})}
+                           errorMessage={errors.email?.message}/>
+
+                <TextField type={"password"} label={'Password'}
+                           {...register('password', {
+                               required: 'Password is required',
+                               minLength: {value: 3, message: 'Min length 3'}
+                           })}
+                           errorMessage={errors.password?.message}/>
+
+                <Checkbox label={'Remember me'} {...register('rememberMe')} onValueChange={onChange} checked={value}/>
+                <img src={captchaUrl} alt=""/>
+                {generalError && <Typography variant='error'>{generalError}</Typography>}
+                {captchaUrl && <TextField type={'text'} {...register('captcha', {required: 'Captcha is required'})}
+                                          errorMessage={errors.captcha?.message}/>}
+                <Button type="submit" fullWidth variant={'tertiary'} className={s.button}>
+                    Sign In
+                </Button>
+            </form>
+        </div>
     )
 }

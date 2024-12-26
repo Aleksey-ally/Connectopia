@@ -1,5 +1,3 @@
-import s from './Login.module.scss'
-
 import {LoginForm} from "components/LoginForm";
 import {useSelector} from "react-redux";
 import {ReducersType} from "redux/reduxStore";
@@ -11,9 +9,5 @@ export const Login = () => {
 
     if (isAuth) return <Navigate to={'/'}/>
 
-    return (
-        <div className={s.login}>
-            <LoginForm/>
-        </div>
-    )
+    return <LoginForm/>
 }

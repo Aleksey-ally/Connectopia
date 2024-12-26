@@ -1,8 +1,22 @@
-.loginForm {
-  display: flex;
-  flex-direction: column;
+.login {
+  padding: 33px 36px 29px;
+  background-color: var(--color-second);
+  border: 1px solid #313131;
+  box-shadow: -1px -1px 2px 0 rgb(0 0 0 / 10%),
+  1px 1px 2px 0 rgb(0 0 0 / 10%);
 
-  .button {
-    margin-top: 0.525rem;
+  .title {
+    text-align: center;
+  }
+
+  .loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 0.563rem;
+    width: 100%;
+
+    .button {
+      margin-top: 0.525rem;
+    }
   }
 }

@@ -32,9 +32,9 @@ const Layout = () => {
     return (
         <>
             <HeaderContainer auth={auth}/>
-            <main className={s.appWrapper}>
+            <main className={auth.isAuth ? s.appWrapper : s.appWrapperLoginLayout}>
                 {auth.isAuth && <Navbar friendsData={usersData.navbarFriends} id={auth.id}/>}
-                <div className={s.content}>
+                <div className={auth.isAuth ? s.content : s.contentLoginLayout}>
                     <Outlet/>
                 </div>
             </main>

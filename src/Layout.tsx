@@ -11,6 +11,8 @@ import {HeaderContainer} from "components/Header";
 import {getNavbarFriends, UsersType} from "redux/usersReducer";
 import {toast} from "react-toastify";
 import {errorOptions} from "utils/ToastifyOptions/ToastifyOptions";
+import {AnimatedBackground} from "assets/animations";
+
 
 const Layout = () => {
     const dispatch = useAppDispatch()
@@ -33,6 +35,7 @@ const Layout = () => {
         <>
             <HeaderContainer auth={auth}/>
             <main className={auth.isAuth ? s.appWrapper : s.appWrapperLoginLayout}>
+                {!auth.isAuth && <AnimatedBackground className={s.bg}/>}
                 {auth.isAuth && <Navbar friendsData={usersData.navbarFriends} id={auth.id}/>}
                 <div className={auth.isAuth ? s.content : s.contentLoginLayout}>
                     <Outlet/>

@@ -11,6 +11,7 @@ import {Typography} from "components/Typography";
 import {toast} from "react-toastify";
 import {infoOptions} from "utils/ToastifyOptions/ToastifyOptions";
 import {PropertiesLogin} from "api/autn/auth.types";
+import {AnimatedBackground} from "assets/animations/AnimatedBackground";
 
 type FormValues = {
     email: string,
@@ -54,11 +55,14 @@ export const LoginForm = () => {
     })
 
     return (
+
+
         <div className={s.login}>
             <Typography variant="large" className={s.title}>
                 Sign In
             </Typography>
             <form className={s.loginForm} onSubmit={handleSubmit(onSubmit)}>
+
                 <TextField type={'email'} label={'Email'}
                            {...register('email', {required: 'Email is required'})}
                            errorMessage={errors.email?.message}/>
@@ -80,5 +84,6 @@ export const LoginForm = () => {
                 </Button>
             </form>
         </div>
+
     )
 }

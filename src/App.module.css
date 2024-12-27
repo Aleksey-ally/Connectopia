@@ -1,50 +1,48 @@
 .appWrapper {
-  display: grid;
-  grid-template-areas:
+    display: grid;
+    grid-template-areas:
   "header header"
   "navbar content";
-  grid-template-rows: 3.75rem 1fr;
-  grid-template-columns: 2fr 14fr;
-  grid-gap: 0.625rem;
+    grid-template-rows: 3.75rem 1fr;
+    grid-template-columns: 2fr 14fr;
+    grid-gap: 0.625rem;
 
 
-  @media screen and (max-width: 89.375rem) {
-    grid-template-columns: 2fr 10fr;
-  }
+    @media screen and (max-width: 89.375rem) {
+        grid-template-columns: 2fr 10fr;
+    }
 
-  .content{
-    max-width: 84.433rem;
-
-    grid-area: content;
-    background-color: var(--color-second);
-  }
+    .content {
+        max-width: 84.433rem;
+        grid-area: content;
+        background-color: var(--color-second);
+    }
 }
 
-.appWrapperLoginLayout{
-  display: grid;
-  grid-template-areas:
+.appWrapperLoginLayout {
+    display: grid;
+    grid-template-areas:
     "header"
     "login";
-  grid-template-rows: 90%;
-  grid-template-columns: minmax(300px, 400px);
-  justify-content: center;
+    grid-template-rows: 90%;
+    grid-template-columns: minmax(300px, 400px);
+    justify-content: center;
 
 
- @media (min-width: 1280px) and (max-width: 1440px)  {
-   grid-template-rows: 50%;
- }
+    @media (min-width: 1280px) and (max-width: 1440px) {
+        grid-template-rows: 50%;
+    }
 
 
-  @media (min-width: 1024px) and (max-width: 1280px)  {
-    grid-template-rows: 40%;
-  }
+    @media (min-width: 1024px) and (max-width: 1280px) {
+        grid-template-rows: 40%;
+    }
 
-  .contentLoginLayout{
-    max-width: 84.433rem;
-
-    grid-area: login;
-    background-color: var(--color-second);
-  }
+    .contentLoginLayout {
+        max-width: 84.433rem;
+        grid-area: login;
+        background-color: var(--color-second);
+    }
 
 }
 

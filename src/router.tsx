@@ -3,7 +3,7 @@ import {Login} from "pages/Login";
 import {Profile} from "pages/Profile";
 import {MessagesContainer} from "pages/Messages";
 import {UsersContainer} from "pages/Users";
-import {News} from "pages/News";
+import {Weather} from "pages/Weather";
 import {Music} from "pages/Music";
 import {Settings} from "pages/Settings";
 import Layout from "Layout";
@@ -39,8 +39,8 @@ const privateRoutes: RouteObject[] = [
         element: <UsersContainer/>,
     },
     {
-        path: '/news',
-        element: <News/>,
+        path: '/weather',
+        element: <Weather/>,
     },
     {
         path: '/music',

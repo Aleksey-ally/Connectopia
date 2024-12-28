@@ -28,7 +28,7 @@ export const Navbar = ({friendsData, id}: NavbarType) => {
                              className={s.item}>Users</NavLink>
                 </span>
                 <span>
-                    <NavLink to='/news' className={s.item}>News</NavLink>
+                    <NavLink to='/weather' className={s.item}>Weather</NavLink>
                 </span>
                 <span>
                     <NavLink to='/music' className={s.item}>Music</NavLink>

@@ -11,7 +11,6 @@ import {Typography} from "components/Typography";
 import {toast} from "react-toastify";
 import {infoOptions} from "utils/ToastifyOptions/ToastifyOptions";
 import {PropertiesLogin} from "api/autn/auth.types";
-import {AnimatedBackground} from "assets/animations/AnimatedBackground";
 
 type FormValues = {
     email: string,
@@ -55,8 +54,6 @@ export const LoginForm = () => {
     })
 
     return (
-
-
         <div className={s.login}>
             <Typography variant="large" className={s.title}>
                 Sign In
@@ -87,3 +84,4 @@ export const LoginForm = () => {
 
     )
 }
+

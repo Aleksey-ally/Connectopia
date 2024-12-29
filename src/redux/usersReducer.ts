@@ -68,7 +68,6 @@ export const usersReducer = (state = initialState, action: ActionType): UsersTyp
             return {...state, totalUsersCount: action.totalUsersCount}
 
 
-
         case TOGGLE_FOLLOWING: {
             return {
                 ...state,
@@ -154,7 +153,6 @@ export const setNavbarFriends = (friends: UserType[]) => ({
 
 export const getUsers = (pageSize: number, currentPage: number, friend?: boolean, term?: string) =>
     async (dispatch: AppThunkDispatch) => {
-        // dispatch(setFetching(true))
         try {
 
             const res = await usersAPI.getUsers(pageSize, currentPage, friend, term);
@@ -167,8 +165,8 @@ export const getUsers = (pageSize: number, currentPage: number, friend?: boolean
                 dispatch(setTotalUsersCount(res.totalCount))
             }
 
-        } finally {
-            // dispatch(setFetching(false))
+        } catch {
+            return
         }
 
     }
@@ -184,12 +182,12 @@ export const getNavbarFriends = (pageSize: number, currentPage: number, friend: 
 }
 
 
-export const setPagination = (pageSize: number, page: number) =>
+export const setPagination = (pageSize: number, page: number, toggleSearchFriend: boolean) =>
     async (dispatch: AppThunkDispatch) => {
         dispatch(setFetching(true))
         dispatch(setCurrentPage(page))
 
-        const res = await usersAPI.getUsers(pageSize, page)
+        const res = await usersAPI.getUsers(pageSize, page, toggleSearchFriend)
 
         if (!res.error) {
             dispatch(setUsers(res.items))
@@ -200,12 +198,12 @@ export const setPagination = (pageSize: number, page: number) =>
     }
 
 
-export const setItemsPerPage = (pageSize: number, currentPage: number) =>
+export const setItemsPerPage = (pageSize: number, currentPage: number, toggleSearchFriend: boolean) =>
     async (dispatch: AppThunkDispatch) => {
         dispatch(setFetching(true))
         dispatch(setPageSize(pageSize))
 
-        const res = await usersAPI.getUsers(pageSize, currentPage)
+        const res = await usersAPI.getUsers(pageSize, currentPage, toggleSearchFriend)
 
         if (!res.error) {
             dispatch(setUsers(res.items))

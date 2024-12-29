@@ -6,8 +6,8 @@
 
   display: flex;
 
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 36px;
+  height: 36px;
 
   background-color: $backgroundColor;
   border-radius: 50%;
@@ -23,10 +23,12 @@
   align-items: center;
   justify-content: center;
 
-  width: 1.125rem;
-  height: 1.125rem;
+  width: 20px;
+  max-width: 18px;
 
-  border: 0.125rem solid var(--color-light-100);
+  height: 18px;
+
+  border: 2px solid var(--color-light-100);
   border-radius: 0.125rem;
 
   &:hover::before {

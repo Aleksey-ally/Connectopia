@@ -2,5 +2,9 @@
     display: flex;
     flex-direction: column;
     padding: 2rem;
-
+    .settingsBlock{
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+    }
 }

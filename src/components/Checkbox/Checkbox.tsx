@@ -39,7 +39,7 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxRadix.Root>, Checkb
                 disabled={disabled}
                 required={required}
             >
-                <CheckboxRadix.Indicator>
+                <CheckboxRadix.Indicator style={{display:"flex"}}>
                     {checked && <CheckMark disabled={disabled}/>}
                 </CheckboxRadix.Indicator>
             </CheckboxRadix.Root>

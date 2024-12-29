@@ -1,30 +1,33 @@
 import {useSelector} from "react-redux";
 import {
     changeMessageTextDialog,
-    changeMessageTextGroup, changeSearchText,
+    changeMessageTextGroup,
+    changeSearchText,
     createConnectionGroupChat,
     destroyConnectionGroupChat,
     getAllDialogs,
     getDialogData,
-    MessagesDataType, searchFriendByName,
+    getFriendsDialogs,
+    MessagesDataType,
+    searchFriendByName,
     sendMessageDialog,
     sendMessageGroupChat
 } from "redux/messagesReducer";
 import {ReducersType, useAppDispatch} from "redux/reduxStore";
 import {Messages} from "./Messages";
-import {getUsers, UsersType} from "redux/usersReducer";
 import React, {useEffect, useRef, useState} from "react";
 import {toast} from "react-toastify";
 import {errorOptions} from "utils/ToastifyOptions/ToastifyOptions";
 import {useDebounce} from "utils/useDebounce";
 import {Preloader} from "components/Preloader";
 import {setFetching} from "redux/appReducer";
+import {UserType} from "api/users/users.types";
 
 export type DataActiveUserDialogType = {
     uID: number, name: string, photo?: string | null
 }
 
-export type DisplayChat =  {
+export type DisplayChat = {
     displayGroupChat: boolean
     displayUserChat: boolean
     displayEmpty: boolean
@@ -35,7 +38,7 @@ export const MessagesContainer = () => {
     const isFetching = useSelector<ReducersType, boolean>(state => state.app.isFetching)
 
     const messagesData = useSelector<ReducersType, MessagesDataType>(state => state.messagesData)
-    const usersData = useSelector<ReducersType, UsersType>(state => state.usersData)
+    const friendsDialogs = useSelector<ReducersType, UserType[]>(state => state.messagesData.friendsDialogs)
     const currentUserId = useSelector<ReducersType, number | null>(state => state.auth.id)
 
     const debounceSearchText = useDebounce(messagesData.searchText)
@@ -51,7 +54,7 @@ export const MessagesContainer = () => {
 
     const messagesAnchorRef = useRef<HTMLDivElement>(null)
 
-    const toggleDisplayChat = (key: keyof typeof displayChat, toggle:boolean) => {
+    const toggleDisplayChat = (key: keyof typeof displayChat, toggle: boolean) => {
         setDisplayChat((prev) => {
             const updatedState = Object.keys(prev).reduce((acc, k) => {
                 acc[k as keyof typeof displayChat] = k === key ? toggle : false;
@@ -117,7 +120,7 @@ export const MessagesContainer = () => {
         dispatch(getDialogData(uID, page, count))
             .then(() => {
                 setDataActiveUserDialog({uID, name, photo})
-              toggleDisplayChat('displayUserChat', true)
+                toggleDisplayChat('displayUserChat', true)
                 setIsAutoScrollActive(true)
             })
 
@@ -127,7 +130,7 @@ export const MessagesContainer = () => {
         if (!displayFriends) return
         (async () => {
             try {
-                await dispatch(getUsers(messagesData.pageSize, messagesData.currentPage, true))
+                await dispatch(getFriendsDialogs(messagesData.pageSize, messagesData.currentPage, true))
             } catch {
                 toast.error('Error when receiving messages data', errorOptions)
             }
@@ -195,19 +198,20 @@ export const MessagesContainer = () => {
     }, []);
 
     return <>
-        {isFetching ? <Preloader/> : <Messages ref={messagesAnchorRef} usersData={usersData} messagesData={messagesData}
-                                               dispatchNewTextGroup={dispatchNewTextGroup}
-                                               sendMessageGroupChat={sendMessageGroupChatHandler}
-                                               currentUserId={currentUserId}
-                                               displayChat={displayChat}
-                                               toggleDisplayChat={toggleDisplayChat}
-                                               handleOnScroll={handleOnScroll}
-                                               setDisplayFriends={setDisplayFriends}
-                                               handleGetDialogData={handleGetDialogData}
-                                               dataActiveUserDialog={dataActiveUserDialog}
-                                               dispatchNewTextDialog={dispatchNewTextDialog}
-                                               sendMessageDialog={sendMessageDialogHandler}
-                                               searchFriendByName={handleSearchFriendByName}
-        />}
+        {isFetching ? <Preloader/> :
+            <Messages ref={messagesAnchorRef} friendsDialogs={friendsDialogs} messagesData={messagesData}
+                      dispatchNewTextGroup={dispatchNewTextGroup}
+                      sendMessageGroupChat={sendMessageGroupChatHandler}
+                      currentUserId={currentUserId}
+                      displayChat={displayChat}
+                      toggleDisplayChat={toggleDisplayChat}
+                      handleOnScroll={handleOnScroll}
+                      setDisplayFriends={setDisplayFriends}
+                      handleGetDialogData={handleGetDialogData}
+                      dataActiveUserDialog={dataActiveUserDialog}
+                      dispatchNewTextDialog={dispatchNewTextDialog}
+                      sendMessageDialog={sendMessageDialogHandler}
+                      searchFriendByName={handleSearchFriendByName}
+            />}
     </>
 }

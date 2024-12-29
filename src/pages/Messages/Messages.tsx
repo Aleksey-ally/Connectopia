@@ -4,24 +4,24 @@ import {MessagesDataType} from "redux/messagesReducer";
 import {TextField} from "components/TextField";
 import {TabSwitcher, TabSwitcherContent} from "components/TabSwitcher";
 import {Avatar} from "components/Avatar";
-import {UsersType} from "redux/usersReducer";
 import {UserItem} from "components/UserItem";
 import IN from 'assets/imgs/IN.png'
 import {Typography} from "components/Typography";
 import {Chat, SendMessageType} from "./Chat";
 import {DataActiveUserDialogType, DisplayChat} from "pages/Messages/MessagesContainer";
 import {Conversation} from "assets/icons";
+import {UserType} from "api/users/users.types";
 
 type MessagesPropsType = {
-    usersData: UsersType
+    friendsDialogs: UserType[]
     messagesData: MessagesDataType
     dispatchNewTextGroup?: (e: string) => void
     dispatchNewTextDialog?: (e: string) => void
     sendMessageGroupChat: () => void
     sendMessageDialog: (uID: number, message: string) => void
     currentUserId: number | null
-    displayChat:DisplayChat
-    toggleDisplayChat: (key: keyof DisplayChat, toggle:boolean) => void
+    displayChat: DisplayChat
+    toggleDisplayChat: (key: keyof DisplayChat, toggle: boolean) => void
     setDisplayFriends: (toggle: boolean) => void
     handleOnScroll: (e: React.UIEvent<HTMLDivElement, UIEvent>) => void
     handleGetDialogData: (uID: number, page: number, count: number, name: string, photo: string | null) => void
@@ -30,7 +30,7 @@ type MessagesPropsType = {
 }
 
 export const Messages = memo(forwardRef(({
-                                             usersData,
+                                             friendsDialogs,
                                              messagesData,
                                              dispatchNewTextGroup,
                                              sendMessageGroupChat,
@@ -90,7 +90,7 @@ export const Messages = memo(forwardRef(({
                                     <TextField placeholder={'Search friend'} type={'text'} isSearch
                                                value={messagesData.searchText} onValueChange={searchFriendByName}/>
                                 </div>
-                                {usersData.friends.map(u => (
+                                {friendsDialogs.map(u => (
                                     <UserItem className={s.userItem} key={u.id} id={u.id}
                                               photos={u.photos} name={u.name}
                                               status={u.status} userAvatar={'small'}
@@ -100,7 +100,9 @@ export const Messages = memo(forwardRef(({
                         </TabSwitcherContent>
                         <TabSwitcherContent className={s.sidebarContent} value={'Groups'}>
                             <div className={s.sidebarContentItem}>
-                                {<div className={s.groupItem} onClick={() => {toggleDisplayChat("displayGroupChat", true)}}>
+                                {<div className={s.groupItem} onClick={() => {
+                                    toggleDisplayChat("displayGroupChat", true)
+                                }}>
                                     <div className={s.groupInfo}>
                                         <Avatar className={s.groupAvatar} size={'small'} photo={IN}/>
                                         <div className={s.description}>
@@ -124,16 +126,18 @@ export const Messages = memo(forwardRef(({
                 <Chat ref={ref} chatData={messagesData.groupChatData} messageText={messagesData.messageTextGroup}
                       sendMessage={sendMessageGroupChat} dispatchNewTextInput={dispatchNewTextGroup}
                       currentUserId={currentUserId} handleOnScroll={handleOnScroll} chatName={'IT-Incubator Chat'}
-                      chatPhoto={IN} setDisplayChat={()=>toggleDisplayChat("displayGroupChat", false)}/>}
+                      chatPhoto={IN} setDisplayChat={() => toggleDisplayChat("displayGroupChat", false)}/>}
 
-            {displayChat.displayUserChat && <Chat ref={ref} dialogData={messagesData.dialogsData} currentUserId={currentUserId}
-                                      messageText={messagesData.messageTextDialog}
-                                      sendMessage={sendMessageDialog as SendMessageType}
-                                      dispatchNewTextInput={dispatchNewTextDialog} handleOnScroll={handleOnScroll}
-                                      chatName={dataActiveUserDialog?.name} setDisplayChat={()=>toggleDisplayChat("displayUserChat", false)}
-                                      chatPhoto={dataActiveUserDialog?.photo} chatUserId={dataActiveUserDialog?.uID}
+            {displayChat.displayUserChat &&
+                <Chat ref={ref} dialogData={messagesData.dialogsData} currentUserId={currentUserId}
+                      messageText={messagesData.messageTextDialog}
+                      sendMessage={sendMessageDialog as SendMessageType}
+                      dispatchNewTextInput={dispatchNewTextDialog} handleOnScroll={handleOnScroll}
+                      chatName={dataActiveUserDialog?.name}
+                      setDisplayChat={() => toggleDisplayChat("displayUserChat", false)}
+                      chatPhoto={dataActiveUserDialog?.photo} chatUserId={dataActiveUserDialog?.uID}
 
-            />}
+                />}
         </div>
     )
 }))

@@ -153,23 +153,12 @@ export const setNavbarFriends = (friends: UserType[]) => ({
 
 export const getUsers = (pageSize: number, currentPage: number, friend?: boolean, term?: string) =>
     async (dispatch: AppThunkDispatch) => {
-        try {
-
-            const res = await usersAPI.getUsers(pageSize, currentPage, friend, term);
-
-            if (friend) {
-                dispatch(setFriends(res.items))
-            } else {
-                dispatch(setCurrentPage(currentPage))
-                dispatch(setUsers(res.items))
-                dispatch(setTotalUsersCount(res.totalCount))
-            }
-
-        } catch {
-            return
-        }
-
+        const res = await usersAPI.getUsers(pageSize, currentPage, friend, term);
+        dispatch(setCurrentPage(currentPage))
+        dispatch(setUsers(res.items))
+        dispatch(setTotalUsersCount(res.totalCount))
     }
+
 
 export const getNavbarFriends = (pageSize: number, currentPage: number, friend: boolean) => async (dispatch: AppThunkDispatch) => {
     dispatch(setFetching(true))

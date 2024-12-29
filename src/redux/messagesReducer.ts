@@ -4,6 +4,8 @@ import {dialogsAPI} from "api/dialogs/dialogs.api";
 import {AppThunkDispatch} from "redux/reduxStore";
 import {AllDialogsResponseType} from "api/dialogs/dialogs.types";
 import {getUsers} from "redux/usersReducer";
+import {UserType} from "api/users/users.types";
+import {usersAPI} from "api/users/users.api";
 
 const RECEIVED_ALL_DIALOGS = "RECEIVED-ALL-DIALOGS"
 const RECEIVED_DATA_GROUP_CHAT = "RECEIVED-DATA-GROUP-CHAT";
@@ -16,6 +18,8 @@ const RECEIVED_DIALOGS_DATA = "RECEIVED-DIALOGS-DATA";
 const CHANGE_SEARCH_TEXT = "CHANGE-SEARCH-TEXT";
 const SET_CURRENT_PAGE_MESSAGES_FRIENDS = "SET-CURRENT-PAGE-MESSAGES-FRIENDS"
 const SET_PAGE_SIZE_MESSAGES_FRIENDS = "SET-PAGE-SIZE-MESSAGES-FRIENDS"
+const SET_FRIENDS_DIALOGS = "SET-FRIENDS-DIALOGS"
+
 
 export type MessagesDataType = {
     allDialogs: AllDialogsResponseType;
@@ -26,6 +30,7 @@ export type MessagesDataType = {
     searchText: string;
     pageSize: number;
     currentPage: number;
+    friendsDialogs: UserType[],
 };
 
 export type GroupChatDataType = {
@@ -54,6 +59,7 @@ const initialState: MessagesDataType = {
     searchText: "",
     pageSize: 5,
     currentPage: 1,
+    friendsDialogs: []
 };
 
 export type ActionType =
@@ -68,6 +74,8 @@ export type ActionType =
     | ChangeSearchText
     | SetPageSizeMessagesFriends
     | SetCurrentPageMessagesFriends
+    | SetFriendsDialogs
+
 
 export const messagesReducer = (state = initialState, action: ActionType): MessagesDataType => {
 
@@ -115,6 +123,10 @@ export const messagesReducer = (state = initialState, action: ActionType): Messa
         case SET_CURRENT_PAGE_MESSAGES_FRIENDS:
             return {...state, pageSize: action.currentPage}
 
+        case SET_FRIENDS_DIALOGS : {
+            return {...state, friendsDialogs: action.friends}
+        }
+
         default:
             return state;
     }
@@ -131,6 +143,7 @@ type ReceivedDialogsData = ReturnType<typeof receivedDialogsData>;
 type ChangeSearchText = ReturnType<typeof changeSearchText>;
 type SetPageSizeMessagesFriends = ReturnType<typeof setPageSizeMessagesFriends>;
 type SetCurrentPageMessagesFriends = ReturnType<typeof setCurrentPageMessagesFriends>;
+type SetFriendsDialogs = ReturnType<typeof setFriendsDialogs>
 
 
 //AC
@@ -190,6 +203,11 @@ export const setCurrentPageMessagesFriends = (currentPage: number) =>
         currentPage
     } as const)
 
+export const setFriendsDialogs = (friends: UserType[]) => ({
+    type: SET_FRIENDS_DIALOGS,
+    friends
+} as const)
+
 //Thunks
 export const getDialogData = (uID: number, page: number, count: number) => async (dispatch: Dispatch) => {
     const res = await dialogsAPI.getUserDialog(uID, page, count)
@@ -229,4 +247,9 @@ export const getAllDialogs = () => async (dispatch: AppThunkDispatch) => {
 
 export const searchFriendByName = (pageSize: number, currentPage: number, text: string) => async (dispatch: AppThunkDispatch) => {
     await dispatch(getUsers(pageSize, currentPage, true, text))
+}
+
+export const getFriendsDialogs = (pageSize: number, currentPage: number, friend: boolean) => async (dispatch: AppThunkDispatch) => {
+    const res = await usersAPI.getUsers(pageSize, currentPage, friend);
+    dispatch(setFriendsDialogs(res.items))
 }

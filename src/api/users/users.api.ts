@@ -14,7 +14,7 @@ export const usersAPI = {
         }
 
         if (term) {
-            params.append('term', term); // Добавляем только если есть значение
+            params.append('term', term);
         }
 
         const res = await instance.get<ResponseUsersType>(`users?${params.toString()}`)
@@ -29,7 +29,6 @@ export const usersAPI = {
         return res.data
     },
     async checkFollowed(uID: number) {
-        // debugger
         const res = await instance.get<boolean>(`follow/${uID}`)
         return res.data
     }

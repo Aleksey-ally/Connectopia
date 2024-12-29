@@ -14,7 +14,7 @@ export const UsersContainer = () => {
     const isFetching = useSelector<ReducersType, boolean>(state => state.app.isFetching)
     const usersData = useSelector<ReducersType, UsersType>(state => state.usersData)
 
-    const [toggleSearchFriend, setToggleSearchFriend] = useState<boolean>(true )
+    const [toggleSearchFriend, setToggleSearchFriend] = useState<boolean>(false )
 
     useEffect(() => {
         dispatch(setFetching(true))

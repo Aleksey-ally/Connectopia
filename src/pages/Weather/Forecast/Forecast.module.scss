@@ -1,0 +1,70 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(115deg, #0f172a, #1e3a8a);
+  position: relative;
+  background-size: 200% 200%;
+  animation: gradientAnimation 5s ease infinite;
+  @keyframes gradientAnimation {
+    0% {
+      background-position: 0 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0 50%;
+    }
+  }
+  border-radius: 15px;
+  padding: 20px;
+  height: 21.25rem;
+  color: var(--color-light-100);
+  text-align: center;
+
+  .dayTemperatureWrapper {
+    .day {
+      font-size: 18px;
+      font-weight: var(--font-weight-bold);
+    }
+
+    .temperature {
+      font-size: 64px;
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    .weatherIcon {
+      width: 80px;
+      height: 80px;
+    }
+
+    .condition {
+      font-size: 18px;
+    }
+  }
+
+  .detailsWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .details {
+      display: flex;
+      justify-content: center;
+      font-size: 14px;
+      gap: .5em;
+
+      .detailsItem {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .2em;
+      }
+    }
+  }
+}
+
+
+

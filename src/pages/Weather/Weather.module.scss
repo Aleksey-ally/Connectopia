@@ -57,21 +57,21 @@
       outline: none;
       color: var(--color-main);
       font-weight: var(--font-weight-semi-bold);
-
     }
 
     .cardWeather {
       display: flex;
       justify-content: center;
-      gap: 4rem;
+      gap: 3.5rem;
 
       .cardTemperatureWrapper {
+        margin-right: -1.5em;
         .cardTemperature {
           font-size: 8em;
           font-weight: var(--font-weight-bold);
 
           .celsius {
-            margin-left: -.15em;
+            margin-left: -.05em;
           }
         }
       }
@@ -79,7 +79,6 @@
       .cityDateWrapper {
         display: flex;
         align-items: center;
-
         .cityDate {
           display: flex;
           flex-direction: column;
@@ -87,14 +86,19 @@
           margin-right: 1rem;
 
           .city {
-            font-size: 2.6em;
+            font-size:3.25em;
           }
         }
 
         .iconDescription {
           display: flex;
           flex-direction: column;
-          margin-bottom: 1.3em;
+          text-align: center;
+          align-items: center;
+          img{
+            width: 4em;
+            height: 4em;
+          }
         }
       }
     }
@@ -125,10 +129,25 @@
           }
         }
 
-
       }
     }
 
   }
 
+}
+
+
+.forecastWrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-main);
+  .forecastHeader{
+    color:var(--color-light-100);
+  }
+  .forecast{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+  }
 }

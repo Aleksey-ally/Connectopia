@@ -3,7 +3,7 @@ import s from './App.module.css';
 import {useEffect} from "react";
 import {useSelector} from "react-redux";
 import {ReducersType, useAppDispatch} from "redux/reduxStore";
-import {Outlet} from 'react-router-dom';
+import {Outlet, useLocation} from 'react-router-dom';
 
 import {Auth} from "redux/authReducer";
 import {Navbar} from "pages/Navbar";
@@ -18,12 +18,13 @@ const Layout = () => {
     const dispatch = useAppDispatch()
     const auth = useSelector<ReducersType, Auth>(state => state.auth)
     const usersData = useSelector<ReducersType, UsersType>(state => state.usersData)
+    const {pathname} = useLocation()
 
     useEffect(() => {
         (async () => {
             try {
                 if (auth.isAuth)
-                await dispatch(getNavbarFriends(9, 1, true))
+                    await dispatch(getNavbarFriends(9, 1, true))
             } catch {
                 toast.error('Error when receiving data', errorOptions)
             }
@@ -35,7 +36,7 @@ const Layout = () => {
         <>
             <HeaderContainer auth={auth}/>
             <main className={auth.isAuth ? s.appWrapper : s.appWrapperLoginLayout}>
-                {!auth.isAuth && <AnimatedBackground className={s.bg}/>}
+                {!auth.isAuth && pathname === '/login' && <AnimatedBackground className={s.bg}/>}
                 {auth.isAuth && <Navbar friendsData={usersData.navbarFriends} id={auth.id}/>}
                 <div className={auth.isAuth ? s.content : s.contentLoginLayout}>
                     <Outlet/>

@@ -12,6 +12,7 @@ import {getAuthUserData} from "redux/authReducer";
 import {ReducersType, useAppDispatch} from "redux/reduxStore";
 import {useSelector} from "react-redux";
 import {Preloader} from "components/Preloader";
+import NotFound from "components/NotFound/NotFound";
 
 const publicRoutes: RouteObject[] = [
     {
@@ -64,11 +65,11 @@ export const Router = () => {
                     children: privateRoutes,
                 },
                 ...publicRoutes,
-                {
-                    path: '*',
-                    element: <h1>Not Found</h1>,
-                },
             ],
+        },
+        {
+            path: '*',
+            element: <NotFound/>,
         },
     ])
 

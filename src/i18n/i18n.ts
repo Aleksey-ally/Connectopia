@@ -22,8 +22,8 @@ i18n
             escapeValue: false
         },
         detection:{
-            order: ['localStorage'],  // Порядок поиска языка
-            caches: ['localStorage'],  // Сохранение в localStorage
+            order: ['localStorage'],
+            caches: ['localStorage'],
         },
         fallbackLng:'ru'
     });

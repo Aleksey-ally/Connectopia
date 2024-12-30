@@ -14,6 +14,7 @@ import {errorOptions, successOptions} from "utils/ToastifyOptions/ToastifyOption
 import {Button} from "components/Button";
 import {ProfileUserResponseType} from "api/profile/profile.types";
 import {Like, Send} from "assets/icons";
+import {useTranslation} from "react-i18next";
 
 type Props = {
     currentUserID: number | null
@@ -71,6 +72,9 @@ export const ProfileInformation = (({
     const classNames = {
         userAvatar: `${s.userAvatar} ${isEditVisible ? s.opacity : ''}`
     }
+
+    const { t } = useTranslation();
+
     return (
         <div className={s.description}>
 
@@ -96,7 +100,7 @@ export const ProfileInformation = (({
 
                         {edit &&
                             <div>
-                                <label>Status</label>
+                                <label>{t('profilePage.status')}</label>
                                 <TextField onBlur={toggleEditHandler} autoFocus value={status}
                                            onChange={changeStatusHandler}/>
                             </div>
@@ -104,7 +108,7 @@ export const ProfileInformation = (({
                         {!edit &&
                             <div>
                                 <label className={s.statusTitle} htmlFor={'status'}
-                                       onDoubleClick={toggleEditHandler}>Status</label>
+                                       onDoubleClick={toggleEditHandler}>{t('profilePage.status')}</label>
                                 <Typography id={'status'} className={s.status} variant={'subtitle2'}
                                             as={'div'}
                                             onDoubleClick={toggleEditHandler}>{status}</Typography>
@@ -138,7 +142,7 @@ export const ProfileInformation = (({
 
             {currentUserID === uID && <div className={s.posts}>
                 <div className={s.inputWrapper}>
-                    <TextField type={'text'} placeholder={'Write something...'} value={profileData?.textPost}
+                    <TextField type={'text'} placeholder={t('profilePage.labelPost')} value={profileData?.textPost}
                                onValueChange={changePostText}></TextField>
                     <Button variant={'tertiary'} onClick={addPost}><Send/></Button>
                 </div>

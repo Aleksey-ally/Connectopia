@@ -76,7 +76,7 @@ export const login = (payload: PropertiesLogin) =>
 
 export const logout = async (dispatch: AppThunkDispatch) => {
     await authApi.logout()
-    localStorage.clear()
+    localStorage.removeItem("sn-token")
     dispatch(setAuthUserData({
         id: null,
         login: null,

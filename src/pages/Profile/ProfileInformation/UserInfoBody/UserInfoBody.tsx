@@ -4,6 +4,7 @@ import {Typography} from "components/Typography";
 import {memo} from "react";
 import {Button} from "components/Button";
 import {Contacts} from "api/profile/profile.types";
+import {useTranslation} from "react-i18next";
 
 type Props = {
     currentUserID: number | null
@@ -24,42 +25,45 @@ export const UserInfoBody = memo(({
 
     const isPageCurrentUser = uID === currentUserID
 
+    const { t } = useTranslation();
+
+
     return (
 
         <div className={s.userInfoBody}>
 
             <div className={s.title}>
-                <Typography>Personal Information</Typography>
-                {isPageCurrentUser && <Button variant={'secondary'} onClick={enableEditForm}>Change</Button>}
+                <Typography>{t('profilePage.personInfo')}</Typography>
+                {isPageCurrentUser && <Button variant={'secondary'} onClick={enableEditForm}>{t('profilePage.changeBtn')}</Button>}
             </div>
 
             <ul className={s.personalInfoTable}>
                 <li>
-                    <label className={s.titleOption} onDoubleClick={enableEditForm}>Name: </label>
+                    <label className={s.titleOption} onDoubleClick={enableEditForm}>{t('profilePage.name')}</label>
                     <Typography className={s.option} variant={'h3'} as={'div'} id={'fullName'}
                                 onDoubleClick={enableEditForm}>{profile?.fullName}</Typography>
                 </li>
 
                 <li>
-                    <label className={s.titleOption} onDoubleClick={enableEditForm}>Looking for a job:</label>
+                    <label className={s.titleOption} onDoubleClick={enableEditForm}>{t('profilePage.lookingJob')}</label>
                     <Typography className={s.option} variant={'subtitle2'}
                                 as={'div'}
-                                onDoubleClick={enableEditForm}>{profile?.lookingForAJob ? 'Yes' : 'No'}</Typography>
+                                onDoubleClick={enableEditForm}>{profile?.lookingForAJob ? t('profilePage.lookingJobYes') : t('profilePage.lookingJobNo')}</Typography>
                 </li>
                 <li>
-                    <label className={s.titleOption} onDoubleClick={enableEditForm}>My professional skills:</label>
+                    <label className={s.titleOption} onDoubleClick={enableEditForm}>{t('profilePage.mySkills')}</label>
                     <Typography className={s.option} variant={'subtitle2'}
                                 as={'div'}
                                 onDoubleClick={enableEditForm}>{profile?.lookingForAJobDescription || 'not specified'}</Typography>
                 </li>
                 <li>
-                    <label className={s.titleOption} onDoubleClick={enableEditForm}>About me: </label> <Typography
+                    <label className={s.titleOption} onDoubleClick={enableEditForm}>{t('profilePage.aboutMe')}</label> <Typography
                     className={s.option} variant={'subtitle2'}
                     as={'div'} onDoubleClick={enableEditForm}>{profile?.aboutMe || 'not specified'}</Typography>
                 </li>
                 <li>
                     <label className={s.titleOption}
-                           onDoubleClick={enableEditForm}>Contacts: </label>{profile?.contacts && (Object.keys(profile.contacts) as Array<keyof Contacts>).map(c => (
+                           onDoubleClick={enableEditForm}>{t('profilePage.contacts')}</label>{profile?.contacts && (Object.keys(profile.contacts) as Array<keyof Contacts>).map(c => (
                     <div key={c} className={s.optionWrapper}>
                         <Typography as={'h5'} className={s.titleContact}>{c}:</Typography>
                         <Typography className={s.option}

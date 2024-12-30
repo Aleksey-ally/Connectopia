@@ -12,10 +12,10 @@ const NotFound = () => {
             <div className={s.centerContent}>
                 <h1 className={s.errorCode}>404</h1>
                 <p className={s.errorMessage}>
-                    {t("notFound")}
+                    {t("notFoundPage.notFound")}
                 </p>
                 <a href="/" className={s.homeLink}>
-                    {t("back")}
+                    {t("notFoundPage.back")}
                 </a>
             </div>
         </div>

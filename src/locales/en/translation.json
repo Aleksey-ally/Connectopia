@@ -1,7 +1,31 @@
 {
-  "changeLanguage": "Change Language",
-  "notFound": "Oops... page not found.",
-  "back": "Go Back to Home",
-  "language": "Language"
-
+  "settingsPage": {
+    "changeLanguage": "Change language",
+    "language": "Language",
+    "personalInformation": "Personal information"
+  },
+  "notFoundPage": {
+    "notFound": "Oops... page not found.",
+    "back": "Go back to home"
+  },
+  "login": {
+    "signIn": "Sign In",
+    "password": "Password",
+    "rememberMe": "Remember me",
+    "signInBtn": "Sign In"
+  },
+  "profilePage": {
+    "status": "Status",
+    "personInfo": "Personal Information",
+    "name": "Name:",
+    "lookingJob": "Looking for a job:",
+    "lookingJobYes": "Yes",
+    "lookingJobNo": "No",
+    "mySkills": "My professional skills:",
+    "aboutMe": "About me:",
+    "contacts": "Contacts:",
+    "labelPost": "Write something...",
+    "changeBtn": "Change",
+    "saveBtn": "Save"
+  }
 }

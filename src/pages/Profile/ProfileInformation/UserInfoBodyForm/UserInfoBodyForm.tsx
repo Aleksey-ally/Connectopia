@@ -7,6 +7,7 @@ import {useController, useForm} from "react-hook-form";
 import {Typography} from "components/Typography";
 import {Button} from "components/Button";
 import {ProfileUserResponseType} from "api/profile/profile.types";
+import {useTranslation} from "react-i18next";
 
 type Props = {
     profile?: UtilityProfileUserType
@@ -32,35 +33,37 @@ export const UserInfoBodyForm = memo(({
         form: `${s.userInfoBody} ${errorMessage.length && s.errorForm}`
     }
 
+    const { t } = useTranslation();
+
     return (
         <form className={classes.form} onSubmit={handleSubmit(handleSubmitProfileForm)}>
             <div className={s.title}>
-                <Typography>Personal Information</Typography>
-                <Button variant={'tertiary'}>Save</Button>
+                <Typography>{t('profilePage.personInfo')}</Typography>
+                <Button variant={'tertiary'}>{t('profilePage.saveBtn')}</Button>
             </div>
 
             <ul className={s.personalInfoTable}>
                 <li>
-                    <label className={s.titleOption} htmlFor='fullName'><b>Name: </b></label>
+                    <label className={s.titleOption} htmlFor='fullName'><b>{t('profilePage.name')}</b></label>
                     <TextField id='fullName' {...register('fullName')} defaultValue={profile?.fullName}/>
                 </li>
                 <li className={s.checkboxInfo}>
-                    <Checkbox label={<b>Looking for a job:</b>} {...register('lookingForAJob')}
+                    <Checkbox label={<b>{t('profilePage.lookingJob')}</b>} {...register('lookingForAJob')}
                               onValueChange={field.onChange}
                               checked={field.value}/>
                 </li>
                 <li>
-                    <label className={s.titleOption} htmlFor="lookingForAJobDescription"><b>My professional skills:</b></label><TextField
+                    <label className={s.titleOption} htmlFor="lookingForAJobDescription"><b>{t('profilePage.mySkills')}</b></label><TextField
                     id='lookingForAJobDescription' {...register('lookingForAJobDescription')}
                     defaultValue={profile?.lookingForAJobDescription}/>
                 </li>
                 <li>
-                    <label className={s.titleOption} htmlFor="aboutMe"><b>About me: </b></label> <TextField
+                    <label className={s.titleOption} htmlFor="aboutMe"><b>{t('profilePage.aboutMe')}</b></label> <TextField
                     id='aboutMe' {...register('aboutMe')}
                     defaultValue={profile?.aboutMe}/>
                 </li>
                 <li>
-                    <label className={s.titleOption} htmlFor="contacts"><b>Contacts: </b></label>
+                    <label className={s.titleOption} htmlFor="contacts"><b>{t('profilePage.contacts')}</b></label>
                     {Object.entries(profile?.contacts || {}).map(([key, value]) => (
                         <>
                             <Typography key={key} as={'h5'} className={s.titleContact}>{key}:</Typography>

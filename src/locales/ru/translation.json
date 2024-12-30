@@ -1,6 +1,31 @@
 {
-  "changeLanguage": "Change Language",
-  "notFound": "Такой страницы не существует.",
-  "back": "Вернутсья на главную",
-  "language": "Язык"
+  "settingsPage": {
+    "changeLanguage": "Изменить язык",
+    "language": "Язык",
+    "personalInformation": "Личная информация"
+  },
+  "notFoundPage": {
+    "notFound": "Такой страницы не существует.",
+    "back": "Вернутсья на главную"
+  },
+  "login": {
+    "signIn": "Вход",
+    "password": "Пароль",
+    "rememberMe": "Запомнить меня",
+    "signInBtn": "Войти"
+  },
+  "profilePage": {
+    "status": "Статус",
+    "personInfo": "Личная информация",
+    "name": "Имя:",
+    "lookingJob": "В поиске работы:",
+    "lookingJobYes": "Да",
+    "lookingJobNo": "Нет",
+    "mySkills": "Мои профессиональные навыки:",
+    "aboutMe": "Обо мне:",
+    "contacts": "Контакты:",
+    "labelPost": "Напишите что-нибудь...",
+    "changeBtn": "Изменить",
+    "saveBtn": "Сохранить"
+  }
 }

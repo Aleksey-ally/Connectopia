@@ -11,6 +11,8 @@ import {Typography} from "components/Typography";
 import {toast} from "react-toastify";
 import {infoOptions} from "utils/ToastifyOptions/ToastifyOptions";
 import {PropertiesLogin} from "api/autn/auth.types";
+import {useTranslation} from "react-i18next";
+
 
 type FormValues = {
     email: string,
@@ -53,10 +55,13 @@ export const LoginForm = () => {
         defaultValue: false,
     })
 
+    const { t } = useTranslation();
+
+
     return (
         <div className={s.login}>
             <Typography variant="large" className={s.title}>
-                Sign In
+                {t("login.signIn")}
             </Typography>
             <form className={s.loginForm} onSubmit={handleSubmit(onSubmit)}>
 
@@ -64,20 +69,20 @@ export const LoginForm = () => {
                            {...register('email', {required: 'Email is required'})}
                            errorMessage={errors.email?.message}/>
 
-                <TextField type={"password"} label={'Password'}
+                <TextField type={"password"} label= {t("login.password")}
                            {...register('password', {
                                required: 'Password is required',
                                minLength: {value: 3, message: 'Min length 3'}
                            })}
                            errorMessage={errors.password?.message}/>
 
-                <Checkbox label={'Remember me'} {...register('rememberMe')} onValueChange={onChange} checked={value}/>
+                <Checkbox label= {t("login.rememberMe")} {...register('rememberMe')} onValueChange={onChange} checked={value}/>
                 <img src={captchaUrl} alt=""/>
                 {generalError && <Typography variant='error'>{generalError}</Typography>}
                 {captchaUrl && <TextField type={'text'} {...register('captcha', {required: 'Captcha is required'})}
                                           errorMessage={errors.captcha?.message}/>}
                 <Button type="submit" fullWidth variant={'tertiary'} className={s.button}>
-                    Sign In
+                    {t("login.signInBtn")}
                 </Button>
             </form>
         </div>

@@ -14,6 +14,7 @@ import {
 import {Button} from "components/Button";
 import {toast} from "react-toastify";
 import {successOptions} from "utils/ToastifyOptions/ToastifyOptions";
+import {useTranslation} from "react-i18next";
 
 export const Settings: FC = () => {
     const dispatch = useAppDispatch()
@@ -54,8 +55,18 @@ export const Settings: FC = () => {
             })
     }
 
+    const { t, i18n } = useTranslation();
+
+
     return (
         <div className={s.settingsPage}>
+            <Typography className={s.title} as={'h4'} variant={'h4'}>{t('language')}:</Typography>
+            <div className={s.item}>
+                    <Button className={s.button} variant={'secondary'} onClick={() => i18n.changeLanguage("en")}>English</Button>
+                    <Button className={s.button} variant={'secondary'} onClick={() => i18n.changeLanguage("ru")}>Русский</Button>
+            </div>
+
+
             <Typography className={s.title} as={'h4'} variant={'h4'}>Personal Information:</Typography>
 
             <div className={s.item}>

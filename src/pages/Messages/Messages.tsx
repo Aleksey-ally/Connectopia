@@ -122,22 +122,25 @@ export const Messages = memo(forwardRef(({
                 <Conversation/>
                 <span>Select a chat to display messages</span>
             </div>
-            {displayChat.displayGroupChat &&
-                <Chat ref={ref} chatData={messagesData.groupChatData} messageText={messagesData.messageTextGroup}
-                      sendMessage={sendMessageGroupChat} dispatchNewTextInput={dispatchNewTextGroup}
-                      currentUserId={currentUserId} handleOnScroll={handleOnScroll} chatName={'IT-Incubator Chat'}
-                      chatPhoto={IN} setDisplayChat={() => toggleDisplayChat("displayGroupChat", false)}/>}
+            <div className={s.chatWrapper}>
+                {displayChat.displayGroupChat &&
+                    <Chat ref={ref} chatData={messagesData.groupChatData} messageText={messagesData.messageTextGroup}
+                          sendMessage={sendMessageGroupChat} dispatchNewTextInput={dispatchNewTextGroup}
+                          currentUserId={currentUserId} handleOnScroll={handleOnScroll} chatName={'IT-Incubator Chat'}
+                          chatPhoto={IN} setDisplayChat={() => toggleDisplayChat("displayGroupChat", false)}/>}
 
-            {displayChat.displayUserChat &&
-                <Chat ref={ref} dialogData={messagesData.dialogsData} currentUserId={currentUserId}
-                      messageText={messagesData.messageTextDialog}
-                      sendMessage={sendMessageDialog as SendMessageType}
-                      dispatchNewTextInput={dispatchNewTextDialog} handleOnScroll={handleOnScroll}
-                      chatName={dataActiveUserDialog?.name}
-                      setDisplayChat={() => toggleDisplayChat("displayUserChat", false)}
-                      chatPhoto={dataActiveUserDialog?.photo} chatUserId={dataActiveUserDialog?.uID}
+                {displayChat.displayUserChat &&
+                    <Chat ref={ref} dialogData={messagesData.dialogsData} currentUserId={currentUserId}
+                          messageText={messagesData.messageTextDialog}
+                          sendMessage={sendMessageDialog as SendMessageType}
+                          dispatchNewTextInput={dispatchNewTextDialog} handleOnScroll={handleOnScroll}
+                          chatName={dataActiveUserDialog?.name}
+                          setDisplayChat={() => toggleDisplayChat("displayUserChat", false)}
+                          chatPhoto={dataActiveUserDialog?.photo} chatUserId={dataActiveUserDialog?.uID}
 
-                />}
+                    />}
+            </div>
+
         </div>
     )
 }))

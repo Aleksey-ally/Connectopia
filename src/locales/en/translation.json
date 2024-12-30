@@ -1,8 +1,8 @@
 {
   "settingsPage": {
     "changeLanguage": "Change language",
-    "language": "Language",
-    "personalInformation": "Personal information"
+    "language": "Language:",
+    "personalInformation": "Personal information:"
   },
   "notFoundPage": {
     "notFound": "Oops... page not found.",
@@ -27,5 +27,28 @@
     "labelPost": "Write something...",
     "changeBtn": "Change",
     "saveBtn": "Save"
+  },
+  "navbar": {
+    "menu": "Menu",
+    "profile": "Profile",
+    "messages": "Messages",
+    "users": "Users",
+    "weather": "Weather",
+    "settings": "Settings",
+    "friends": "Friends"
+  },
+  "messagesPage": {
+    "messages": "Messages",
+    "friends": "Friends",
+    "groups": "Groups",
+    "selectChat": "Select a chat to display messages",
+    "labelSearch": "Search friend",
+    "labelTyping": "Write your message"
+  },
+  "header": {
+    "greetings": "Hello",
+    "myProfile": "My Profile",
+    "signOut": "Sign Out",
+    "login": "Login"
   }
 }

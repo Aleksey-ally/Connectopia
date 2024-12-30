@@ -60,7 +60,7 @@ export const Settings: FC = () => {
 
     return (
         <div className={s.settingsPage}>
-            <Typography className={s.title} as={'h4'} variant={'h4'}>{t('settingsPage.language')}:</Typography>
+            <Typography className={s.title} as={'h4'} variant={'h4'}>{t('settingsPage.language')}</Typography>
             <div className={s.item}>
                     <Button className={s.button} variant={'secondary'} onClick={() => i18n.changeLanguage("en")}>English</Button>
                     <Button className={s.button} variant={'secondary'} onClick={() => i18n.changeLanguage("ru")}>Русский</Button>

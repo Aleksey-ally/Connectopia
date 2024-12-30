@@ -1,8 +1,7 @@
 {
   "settingsPage": {
-    "changeLanguage": "Изменить язык",
-    "language": "Язык",
-    "personalInformation": "Личная информация"
+    "language": "Язык:",
+    "personalInformation": "Личная информация:"
   },
   "notFoundPage": {
     "notFound": "Такой страницы не существует.",
@@ -27,5 +26,28 @@
     "labelPost": "Напишите что-нибудь...",
     "changeBtn": "Изменить",
     "saveBtn": "Сохранить"
+  },
+  "navbar": {
+    "menu": "Меню",
+    "profile": "Профиль",
+    "messages": "Сообщения",
+    "users": "Пользователи",
+    "weather": "Погода",
+    "settings": "Настройки",
+    "friends": "Друзья"
+  },
+  "messagesPage": {
+    "messages": "Сообщения",
+    "friends": "Друзья",
+    "groups": "Группы",
+    "selectChat": "Выберите чат для отображения сообщений",
+    "labelSearch": "Искать друга",
+    "labelTyping": "Напиши ваше сообщение"
+  },
+  "header": {
+    "greetings": "Привет",
+    "myProfile": "Мой Профиль",
+    "signOut": "Выйти",
+    "login": "Вход"
   }
 }

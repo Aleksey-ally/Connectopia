@@ -11,6 +11,7 @@ import {Chat, SendMessageType} from "./Chat";
 import {DataActiveUserDialogType, DisplayChat} from "pages/Messages/MessagesContainer";
 import {Conversation} from "assets/icons";
 import {UserType} from "api/users/users.types";
+import {useTranslation} from "react-i18next";
 
 type MessagesPropsType = {
     friendsDialogs: UserType[]
@@ -60,11 +61,14 @@ export const Messages = memo(forwardRef(({
         return
     }
 
+    const {t} = useTranslation();
+
     const tabs = [
-        {title: 'Messages', value: 'Messages'},
-        {title: 'Friends', value: 'Friends'},
-        {title: 'Groups', value: 'Groups'}
+        {title: t('messagesPage.messages'), value: 'Messages'},
+        {title: t('messagesPage.friends'), value: 'Friends'},
+        {title: t('messagesPage.groups'), value: 'Groups'}
     ]
+
     return (
         <div className={s.messages}>
             <div className={s.sidebar}>
@@ -87,7 +91,7 @@ export const Messages = memo(forwardRef(({
                         <TabSwitcherContent className={s.sidebarContent} value={'Friends'}>
                             <div className={s.sidebarContentItem}>
                                 <div className={s.search}>
-                                    <TextField placeholder={'Search friend'} type={'text'} isSearch
+                                    <TextField placeholder={t('messagesPage.labelSearch')} type={'text'} isSearch
                                                value={messagesData.searchText} onValueChange={searchFriendByName}/>
                                 </div>
                                 {friendsDialogs.map(u => (
@@ -120,7 +124,7 @@ export const Messages = memo(forwardRef(({
 
             <div className={`${s.empty} ${!displayChat.displayEmpty && s.noDisplay}`}>
                 <Conversation/>
-                <span>Select a chat to display messages</span>
+                <span>{t('messagesPage.selectChat')}</span>
             </div>
             <div className={s.chatWrapper}>
                 {displayChat.displayGroupChat &&

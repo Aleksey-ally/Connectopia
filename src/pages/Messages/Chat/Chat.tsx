@@ -6,6 +6,7 @@ import {Button} from "components/Button";
 import {Send} from "assets/icons";
 import {DialogDataType, GroupChatDataType} from "redux/messagesReducer";
 import {Close} from "assets/icons/Close";
+import {useTranslation} from "react-i18next";
 
 type PropsType = {
     dialogData?: DialogDataType[]
@@ -57,6 +58,8 @@ export const Chat = memo(forwardRef(({
         }
     };
 
+    const {t} = useTranslation();
+
     return (
         <div className={s.chat}>
             <div className={s.chatHeader}>
@@ -98,7 +101,7 @@ export const Chat = memo(forwardRef(({
                 </div>
                 <div className={s.sendMessageBar}>
                     <TextField type="text"
-                               placeholder={'Write your message'}
+                               placeholder={t('messagesPage.labelTyping')}
                                value={messageText}
                                onValueChange={dispatchNewTextInput}
                                onKeyDown={handleKeyDown}>

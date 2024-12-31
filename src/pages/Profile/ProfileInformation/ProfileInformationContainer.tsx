@@ -35,11 +35,16 @@ export const ProfileInformationContainer = () => {
     const [isFollow, setIsFollow] = useState<boolean>(false)
 
     const toggleEditHandler = useCallback(() => {
-        paramsUID === currentUserID && setEditStatus(!editStatus)
-        profileData.status !== localStatus && dispatch(changeUserStatus(localStatus))
-            .then(() => {
-                toast.success(t("notifications.status"), successOptions)
-            })
+        if (paramsUID === currentUserID) {
+            setEditStatus(!editStatus)
+
+            profileData.status !== localStatus && dispatch(changeUserStatus(localStatus))
+                .then(() => {
+                    toast.success(t("notifications.status"), successOptions)
+                })
+        }
+
+
     }, [editStatus, localStatus])
 
     const changeStatusHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {

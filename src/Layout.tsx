@@ -12,6 +12,7 @@ import {getNavbarFriends, UsersType} from "redux/usersReducer";
 import {toast} from "react-toastify";
 import {errorOptions} from "utils/ToastifyOptions/ToastifyOptions";
 import {AnimatedBackground} from "assets/animations";
+import {useTranslation} from "react-i18next";
 
 
 const Layout = () => {
@@ -20,13 +21,16 @@ const Layout = () => {
     const usersData = useSelector<ReducersType, UsersType>(state => state.usersData)
     const {pathname} = useLocation()
 
+    const {t} = useTranslation();
+
+
     useEffect(() => {
         (async () => {
             try {
                 if (auth.isAuth)
                     await dispatch(getNavbarFriends(9, 1, true))
             } catch {
-                toast.error('Error when receiving data', errorOptions)
+                toast.error(t("notifications.errorData"), errorOptions)
             }
         })()
 

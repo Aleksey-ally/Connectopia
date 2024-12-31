@@ -40,7 +40,7 @@ export const Settings: FC = () => {
     const buttonStatusHandler = () => {
         dispatch(changeUserStatus(status))
             .then(()=>{
-                toast.success('You are successfully change status', successOptions)
+                toast.success(t("notifications.status"), successOptions)
             })
     }
 
@@ -51,7 +51,7 @@ export const Settings: FC = () => {
     const buttonNameHandler = () => {
         dispatch(changeUserName(user.fullName as string))
             .then(()=>{
-                toast.success('You are successfully change user name', successOptions)
+                toast.success(t("notifications.userName"), successOptions)
             })
     }
 

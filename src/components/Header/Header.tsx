@@ -25,14 +25,15 @@ export const Header = ({auth, currentUserAvatar, userName}: Props) => {
 
     const navigate = useNavigate();
 
+    const {t} = useTranslation();
+
     const logoutHandler = () => {
         dispatch(logout)
             .then(() => {
-                toast.info('Goodbye', infoOptions)
+                toast.info(t("notifications.goodbye"), infoOptions)
             })
     }
 
-    const {t} = useTranslation();
 
     return (
         <header className={s.header}>

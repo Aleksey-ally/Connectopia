@@ -54,7 +54,7 @@ export const ProfileInformation = (({
                     if (message) {
                         toast.error(message, errorOptions)
                     } else {
-                        toast.success('You are successfully changed avatar', successOptions)
+                        toast.success(t("notifications.avatar"), successOptions)
                     }
 
                 })

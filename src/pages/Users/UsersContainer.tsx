@@ -7,6 +7,7 @@ import {Users} from "./Users"
 import {toast} from "react-toastify";
 import {errorOptions, successOptions} from "utils/ToastifyOptions/ToastifyOptions";
 import {setFetching} from "redux/appReducer";
+import {useTranslation} from "react-i18next";
 
 export const UsersContainer = () => {
     const dispatch = useAppDispatch()
@@ -16,11 +17,13 @@ export const UsersContainer = () => {
 
     const [toggleSearchFriend, setToggleSearchFriend] = useState<boolean>(false )
 
+    const {t} = useTranslation();
+
     useEffect(() => {
         dispatch(setFetching(true))
         dispatch(getUsers(usersData.pageSize, usersData.currentPage, toggleSearchFriend))
             .catch(() => {
-                toast.error('Error when getting users', errorOptions)
+                toast.error(t("notifications.errorReceivingUsers"), errorOptions)
             })
             .finally(() => {
                 dispatch(setFetching(false))
@@ -30,28 +33,28 @@ export const UsersContainer = () => {
     const follow = useCallback((userID: number) => {
         dispatch(followOnUser(userID))
             .then(() => {
-                toast.success('You are successfully following', successOptions)
+                toast.success(t("notifications.follow"), successOptions)
             })
     }, [dispatch]);
 
     const unfollow = useCallback((userID: number) => {
         dispatch(unfollowOnUser(userID))
             .then(() => {
-                toast.success('You are successfully unfollowing', successOptions)
+                toast.success(t("notifications.unfollow"), successOptions)
             })
     }, [dispatch]);
 
     const setCurrentPage = useCallback((page: number) => {
         dispatch(setPagination(usersData.pageSize, page, toggleSearchFriend))
             .catch(() => {
-                toast.error('Error when changing page', errorOptions)
+                toast.error(t("notifications.errorChangingPage"), errorOptions)
             })
     }, [dispatch, usersData.pageSize, toggleSearchFriend]);
 
     const setPageSize = useCallback((pageSize: number) => {
         dispatch(setItemsPerPage(pageSize, usersData.currentPage, toggleSearchFriend))
             .catch(() => {
-                toast.error('Error when changing page size', errorOptions)
+                toast.error(t("notifications.errorChangingPageSize"), errorOptions)
             })
     }, [dispatch, usersData.currentPage, toggleSearchFriend]);
 

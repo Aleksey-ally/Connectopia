@@ -38,7 +38,7 @@ export const ProfileInformationContainer = () => {
         paramsUID === currentUserID && setEditStatus(!editStatus)
         profileData.status !== localStatus && dispatch(changeUserStatus(localStatus))
             .then(() => {
-                toast.success('You are successfully change status', successOptions)
+                toast.success(t("notifications.status"), successOptions)
             })
     }, [editStatus, localStatus])
 
@@ -58,7 +58,7 @@ export const ProfileInformationContainer = () => {
                     setErrorMessage(message)
                 } else {
                     setEditForm(false)
-                    toast.success('You are successfully change data', successOptions)
+                    toast.success(t("notifications.changeData"), successOptions)
                 }
             })
     }
@@ -66,7 +66,7 @@ export const ProfileInformationContainer = () => {
     const follow = useCallback((userID: number) => {
         dispatch(followOnUser(userID))
             .then(() => {
-                toast.success('You are successfully following', successOptions)
+                toast.success(t("notifications.follow"), successOptions)
                 setIsFollow(true)
             })
     }, [dispatch])
@@ -74,7 +74,7 @@ export const ProfileInformationContainer = () => {
     const unFollow = useCallback((userID: number) => {
         dispatch(unfollowOnUser(userID))
             .then(() => {
-                toast.success('You are successfully unfollowing', successOptions)
+                toast.success(t("notifications.unfollow"), successOptions)
                 setIsFollow(false)
 
             })
@@ -119,7 +119,7 @@ export const ProfileInformationContainer = () => {
                 dispatch(setFetching(false))
 
             } catch {
-                toast.error('Error when receiving user data', errorOptions)
+                toast.error(t("notifications.errorReceivingUser"), errorOptions)
             }
         })();
 

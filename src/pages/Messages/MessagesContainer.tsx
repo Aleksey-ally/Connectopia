@@ -22,6 +22,7 @@ import {useDebounce} from "utils/useDebounce";
 import {Preloader} from "components/Preloader";
 import {setFetching} from "redux/appReducer";
 import {UserType} from "api/users/users.types";
+import {useTranslation} from "react-i18next";
 
 export type DataActiveUserDialogType = {
     uID: number, name: string, photo?: string | null
@@ -78,10 +79,12 @@ export const MessagesContainer = () => {
         dispatch(changeMessageTextDialog(e))
     }
 
+    const {t} = useTranslation();
+
     const sendMessageDialogHandler = (uID: number, message: string) => {
         dispatch(sendMessageDialog(uID, message))
             .catch(() => {
-                toast.error('Error when sending message', errorOptions)
+                toast.error(t("notifications.errorSendMessage"), errorOptions)
             })
     }
 
@@ -132,7 +135,7 @@ export const MessagesContainer = () => {
             try {
                 await dispatch(getFriendsDialogs(messagesData.pageSize, messagesData.currentPage, true))
             } catch {
-                toast.error('Error when receiving messages data', errorOptions)
+                toast.error(t("notifications.errorReceivingMessage"), errorOptions)
             }
         })()
     }, [displayFriends]);
@@ -145,7 +148,7 @@ export const MessagesContainer = () => {
                 createConnectionGroupChatHandler()
 
             } catch {
-                toast.error('Error when receiving messages data', errorOptions)
+                toast.error(t("notifications.errorReceivingMessage"), errorOptions)
             }
         })()
 
@@ -160,7 +163,7 @@ export const MessagesContainer = () => {
                 dispatch(setFetching(true))
                 await dispatch(getAllDialogs())
             } catch {
-                toast.error('Error when receiving all dialogs data', errorOptions)
+                toast.error(t("notifications.errorReceivingAll"), errorOptions)
             } finally {
                 dispatch(setFetching(false))
             }
@@ -176,7 +179,7 @@ export const MessagesContainer = () => {
     useEffect(() => {
         dispatch(searchFriendByName(messagesData.pageSize, messagesData.currentPage, debounceSearchText.trim()))
             .catch(() => {
-                toast.error('Error when searching friends', errorOptions)
+                toast.error(t("notifications.errorSearch"), errorOptions)
             })
 
     }, [debounceSearchText, dispatch]);

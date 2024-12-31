@@ -34,15 +34,17 @@ export const LoginForm = () => {
     const [generalError, setGeneralError] = useState<string>('')
     const [captchaUrl, setCaptchaUrl] = useState<string>('')
 
+    const { t } = useTranslation();
+
     const onSubmit = (data: PropertiesLogin) => {
         dispatch(login(data)).then((message) => {
             if (typeof message === "string") {
-                setGeneralError(message); // Устанавливаем сообщение об ошибке
+                setGeneralError(message);
             } else if (typeof message === 'object') {
                 setGeneralError(message.message)
                 setCaptchaUrl(message.captchaUrl)
             } else {
-                toast.info('You are welcome!', infoOptions); // Сообщение о капче или другом случае
+                toast.info(t("notifications.welcome"), infoOptions);
             }
         })
     }
@@ -54,8 +56,6 @@ export const LoginForm = () => {
         control,
         defaultValue: false,
     })
-
-    const { t } = useTranslation();
 
 
     return (

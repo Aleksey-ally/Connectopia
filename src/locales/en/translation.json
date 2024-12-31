@@ -1,6 +1,5 @@
 {
   "settingsPage": {
-    "changeLanguage": "Change language",
     "language": "Language:",
     "personalInformation": "Personal information:"
   },
@@ -67,5 +66,24 @@
     "max": "Max",
     "min": "Min",
     "header": "5 day forecast"
+  },
+  "notifications": {
+    "welcome": "You are welcome!",
+    "goodbye": "Goodbye!",
+    "status": "Your status has been successfully changed",
+    "avatar": "You have successfully changed your avatar",
+    "userName": "You have successfully changed your username",
+    "changeData": "You have successfully changed data",
+    "follow": "You are successfully following",
+    "unfollow": "You are successfully unfollowing",
+    "errorData": "Error when receiving data",
+    "errorSendMessage": "Error when sending message",
+    "errorReceivingMessage": "Error when receiving data messages",
+    "errorReceivingAll": "Error when receiving all dialog data",
+    "errorSearch": "Error when searching friends",
+    "errorReceivingUsers": "Error when receiving users data",
+    "errorReceivingUser": "Error when receiving user data",
+    "errorChangingPage": "Error when changing page",
+    "errorChangingPageSize": "Error when changing page size"
   }
 }

@@ -24,7 +24,3 @@ export type AppRootStateType = ReturnType<typeof reducers>
 
 export type AppThunkDispatch = ThunkDispatch<AppRootStateType, any, AnyAction>
 export const useAppDispatch = () => useDispatch<AppThunkDispatch>();
-
-
-// @ts-expect-error:old
-window.reduxStore = reduxStore;

@@ -184,22 +184,6 @@ export const MessagesContainer = () => {
 
     }, [debounceSearchText, dispatch]);
 
-
-    useEffect(() => {
-        // dialogsAPI.refreshDialog(2)
-        // dialogsAPI.getAllDialogs()
-        // dialogsAPI.getUserDialog(2,1, 10)
-        // dialogsAPI.sendMessage(2, 'Hello')
-        // dialogsAPI.checkIsViewedMessage('3a625288-c91c-420b-b907-f1a0f55cef40')
-        // dialogsAPI.spamMessage("3a625288-c91c-420b-b907-f1a0f55cef40")
-        // dialogsAPI.deleteMessage('4d2328cb-d28a-4b38-82ba-a6d2a211f4c4')
-        // dialogsAPI.restoreMessage('4d2328cb-d28a-4b38-82ba-a6d2a211f4c4')
-        // const dialogsAPI = new Date().toLocaleString('ru-Ru')
-        //  dialogsAPI.getNewestThanDateUserMessages(2, "2024-12-10T08:55:02.873")
-        //  dialogsAPI.getCountNewMessages()
-
-    }, []);
-
     return <>
         {isFetching ? <Preloader/> :
             <Messages ref={messagesAnchorRef} friendsDialogs={friendsDialogs} messagesData={messagesData}

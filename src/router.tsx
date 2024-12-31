@@ -4,7 +4,6 @@ import {Profile} from "pages/Profile";
 import {MessagesContainer} from "pages/Messages";
 import {UsersContainer} from "pages/Users";
 import {Weather} from "pages/Weather";
-import {Music} from "pages/Music";
 import {Settings} from "pages/Settings";
 import Layout from "Layout";
 import {useEffect} from "react";
@@ -42,10 +41,6 @@ const privateRoutes: RouteObject[] = [
     {
         path: '/weather',
         element: <Weather/>,
-    },
-    {
-        path: '/music',
-        element: <Music/>,
     },
     {
         path: '/settings',

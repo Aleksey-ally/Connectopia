@@ -34,9 +34,6 @@ export const Navbar = ({friendsData, id}: NavbarType) => {
                     <NavLink to='/weather' className={s.item}>{t('navbar.weather')}</NavLink>
                 </span>
                 <span>
-                    <NavLink to='/music' className={s.item}>Music</NavLink>
-                </span>
-                <span>
                     <NavLink to='/settings'
                              className={s.item}>{t('navbar.settings')}</NavLink>
                 </span>

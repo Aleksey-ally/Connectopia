@@ -1,36 +1,39 @@
-import {addMessage, changeMessageText, MessagesDataType, messagesReducer} from "redux/messagesReducer";
-import AvatarFox from "assets/imgs/Fox.png";
-import AvatarBear from "assets/imgs/Bear.png";
-
+import {addMessageDialog, changeMessageTextDialog, MessagesDataType, messagesReducer} from "redux/messagesReducer";
 
 let startState: MessagesDataType
 
+export const mockMessagesData: MessagesDataType = {
+    allDialogs: [
+        {id: 1, userName: "User 1", photos: {large: "avatar1.jpg", small: "avatar2.jpg"}, newMessagesCount: 0, hasNewMessages: false, lastUserActivityDate: '11.02.2024', lastDialogActivityDate: "11.02.2024"},
+        {id: 2, userName: "User 2", photos: {large: "avatar3.jpg", small: "avatar4.jpg"}, newMessagesCount: 0, hasNewMessages: false, lastUserActivityDate: '11.02.2024', lastDialogActivityDate: "11.02.2024"}
+    ],
+    messageTextDialog: "Hi, everyone!",
+    dialogsData: [{id: "id1", body: "Message 1", senderName: "Aleksey", senderId: 123, addedAt: "24.12.2024", recipientId: 123, viewed: false}, {id: "id2", body: "Message 2", senderName: "Aleksey", senderId: 123, addedAt: "24.12.2024", recipientId: 123, viewed: false}],
+    friendsDialogs: [{id: 1, toggleFollowing: true, followed: true, name: "Andrew", photos: {large: "avatar1.jpg", small: "avatar2.jpg"}}],
+    pageSize: 5,
+    searchText: '',
+    groupChatData: [{userId: 123, userName: "Aleksey", message: "", photo: ''}],
+    messageTextGroup: '',
+    currentPage: 1
+}
+
 beforeEach(() => {
-    startState = {
-        messagesUsersData: [
-            {id: 1, animalName: "Fox", photoAvatar: AvatarFox},
-            {id: 2, animalName: "Bear", photoAvatar: AvatarBear},
-        ],
-
-        messagesTextData: [
-            {id: 1, messageText: "Frrr fr fr"},
-            {id: 2, messageText: "Raaaaa!"},
-        ],
-
-        messageText: "Hi, everyone!",
-    }
+    startState = mockMessagesData
 })
 
 test('Messages should be to added', () => {
-    const endState = messagesReducer(startState, addMessage())
 
-    expect(endState.messagesTextData[2].messageText).toBe('Hi, everyone!')
-    expect(endState.messagesTextData[2].id).toBe(3)
-    expect(endState.messageText).toBe('')
+    expect(startState.messageTextDialog).toBe("Hi, everyone!")
+
+    const endState = messagesReducer(startState, addMessageDialog())
+
+    expect(endState.messageTextDialog).toBe("")
+    expect(endState.dialogsData[1].id).toBe('id2')
+
 })
 
 test('Message should be to changed', () => {
-    const endState = messagesReducer(startState, changeMessageText('Bye, everyone!'))
+    const endState = messagesReducer(startState, changeMessageTextDialog('Bye, everyone!'))
 
-    expect(endState.messageText).toBe('Bye, everyone!')
+    expect(endState.messageTextDialog).toBe('Bye, everyone!')
 })

@@ -6,7 +6,7 @@ import {
     setStatus,
     setUserProfile
 } from "redux/profileReducer";
-import {ProfileUserResponseType} from "api/base-api.types";
+import {ProfileUserResponseType} from "api/profile/profile.types";
 
 let startState: ProfileDataType
 

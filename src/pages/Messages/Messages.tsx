@@ -13,7 +13,7 @@ import {Conversation} from "assets/icons";
 import {UserType} from "api/users/users.types";
 import {useTranslation} from "react-i18next";
 
-type MessagesPropsType = {
+export type MessagesPropsType = {
     friendsDialogs: UserType[]
     messagesData: MessagesDataType
     dispatchNewTextGroup?: (e: string) => void
@@ -106,7 +106,7 @@ export const Messages = memo(forwardRef(({
                             <div className={s.sidebarContentItem}>
                                 {<div className={s.groupItem} onClick={() => {
                                     toggleDisplayChat("displayGroupChat", true)
-                                }}>
+                                }}>;
                                     <div className={s.groupInfo}>
                                         <Avatar className={s.groupAvatar} size={'small'} photo={IN}/>
                                         <div className={s.description}>

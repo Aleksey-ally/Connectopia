@@ -1,28 +1,32 @@
 import {render} from '@testing-library/react';
 import {FriendsSection} from './FriendsSection';
+import {UserType} from "api/users/users.types";
 
 
-const mockFriendsData = [
-    {id: 1, photoAvatar: 'avatar1.jpg', animalName: 'Friend 1'},
-    {id: 2, photoAvatar: 'avatar2.jpg', animalName: 'Friend 2'},
-    {id: 3, photoAvatar: 'avatar3.jpg', animalName: 'Friend 3'}
+const mockFriendsData: UserType[] = [
+    {id: 1, photos: {small: 'avatar1.jpg', large: 'avatar2.jpg'}, name: 'Andrew', followed: true, toggleFollowing: true},
+    {id: 2, photos: {small: 'avatar3.jpg', large: 'avatar4.jpg'}, name: 'Nadya', followed: true, toggleFollowing: true},
+    {id: 3, photos: {small: 'avatar5.jpg', large: 'avatar6.jpg'}, name: 'Egor', followed: false, toggleFollowing: false},
 ];
 
 describe('FriendsSection', () => {
     test('Renders with correct data', () => {
-        const {getByText, getByAltText} = render(<FriendsSection friendsData={mockFriendsData}/>);
+        const {getByText, getAllByRole} = render(<FriendsSection friendsData={mockFriendsData}/>);
 
 
-        const labelElement = getByText('Friends');
+        const labelElement = getByText('Nadya');
         expect(labelElement).toBeTruthy();
 
 
         mockFriendsData.slice(0, 3).forEach(friend => {
-            const nameElement = getByText(friend.animalName);
+            const nameElement = getByText(friend.name);
             expect(nameElement).toBeTruthy();
 
-            const avatarElement = getByAltText(`${friend.animalName} avatar`);
-            expect(avatarElement.getAttribute('src')).toBe(friend.photoAvatar)
+            const avatarElements = getAllByRole('img')
+            const avatarElement = avatarElements.find((img) =>
+                img.getAttribute('src') === friend.photos.small);
+
+            expect(avatarElement).toBeTruthy();
         });
     });
 

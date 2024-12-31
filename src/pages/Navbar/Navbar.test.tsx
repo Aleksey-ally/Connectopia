@@ -1,8 +1,9 @@
 import {render, screen} from "@testing-library/react";
 import {Navbar} from "pages/Navbar/Navbar";
 import {reduxStore} from "redux/reduxStore";
-import {Provider, useSelector} from "react-redux";
+import {Provider} from "react-redux";
 import {BrowserRouter} from "react-router-dom";
+import {UserType} from "api/users/users.types";
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -17,35 +18,35 @@ describe('Navbar component', () => {
 
 
         // Создание тестовых данных для друзей
-        const friendsData = [
-            {id: 1, animalName: 'Friend 1', photoAvatar: 'avatar1.jpg'},
-            {id: 2, animalName: 'Friend 2', photoAvatar: 'avatar2.jpg'},
-            {id: 3, animalName: 'Friend 3', photoAvatar: 'avatar3.jpg'}
+        const friendsData: UserType[] = [
+            {id: 1, name: 'Friend 1', photos: {large: "avatar1.jpg", small: "'avatar2.jpg'"}, followed: true, toggleFollowing: true},
+            {id: 2, name: 'Friend 2', photos: {large: "avatar3.jpg", small: "'avatar4.jpg'"}, followed: true, toggleFollowing: true},
+            {id: 3, name: 'Friend 3', photos: {large: "avatar5.jpg", small: "'avatar6.jpg'"}, followed: false, toggleFollowing: false},
         ];
 
         // Устанавливаем возвращаемое значение для useSelector
         useSelectorMock.mockReturnValueOnce(friendsData);
 
-        render(
+        const {getAllByRole} = render(
             <BrowserRouter>
                 <Provider store={reduxStore}>
-                    <Navbar/>
+                    <Navbar friendsData={friendsData} id={123}/>
                 </Provider>
             </BrowserRouter>
         );
 
         // Проверка отображения секции с друзьями
-        const friendsSection = await screen.findByText('Friends');
-        expect(friendsSection).toBeTruthy();
+        const friendsSection = getAllByRole('heading', {level: 3});
+        expect(friendsSection[0]).toBeTruthy();
 
         // Проверка отображения каждого друга
-        for (const friend of friendsData) {
-            const friendNameElement = await screen.findByText(friend.animalName);
+        friendsData.forEach((friend, index)=>{
+            const friendNameElement = screen.findByText(friend.name);
             expect(friendNameElement).toBeTruthy();
 
-            const friendAvatarElement = screen.getByAltText(`${friend.animalName} avatar`) as HTMLImageElement;
+            const friendAvatarElement = getAllByRole('img');
             expect(friendAvatarElement).toBeTruthy();
-            expect(friendAvatarElement.getAttribute('src')).toBe(friend.photoAvatar);
-        }
+            expect(friendAvatarElement[index].getAttribute('src')).toBe(friend.photos.small);
+        })
     });
 })

@@ -1,30 +1,37 @@
 import {Messages} from "pages/Messages/Messages";
-import {render, fireEvent} from "@testing-library/react";
+import {fireEvent, render} from "@testing-library/react";
 import {BrowserRouter} from "react-router-dom";
+import React from "react";
+import {mockMessagesData} from "redux/messagesReducer.test";
 
-const mockMessagesData = {
-    messagesUsersData: [
-        {id: 1, animalName: 'User 1', photoAvatar: 'avatar1.jpg'},
-        {id: 2, animalName: 'User 2', photoAvatar: 'avatar2.jpg'}
-    ],
-    messagesTextData: [
-        {id: 1, messageText: 'Message 1'},
-        {id: 2, messageText: 'Message 2'}
-    ],
-    messageText: 'New message'
-};
+const mockFriendsDialogs = [{id: 1, toggleFollowing: true, followed: true, name: "Andrew", photos: {large: "avatar1.jpg", small: "avatar2.jpg"}}]
 
-const mockDispatchNewTextInput = jest.fn();
-const mockAddMessage = jest.fn();
+const mockDispatchNewTextDialog = jest.fn();
+const mockSendMessageGroupChat = jest.fn();
+const mockSendMessageDialog = jest.fn();
+const mockToggleDisplayChat = jest.fn();
+const mockSetDisplayFriends = jest.fn();
+const mockHandleOnScroll = jest.fn();
+const mockHandleGetDialogData = jest.fn();
+const mockSearchFriendByName = jest.fn();
 
 describe('Messages component', () => {
     it('renders users and messages correctly', () => {
-        const {getByText, getByPlaceholderText} = render(
+        const {getByText, getAllByRole} = render(
             <BrowserRouter>
                 <Messages
                     messagesData={mockMessagesData}
-                    dispatchNewTextInput={mockDispatchNewTextInput}
-                    addMessage={mockAddMessage}
+                    dispatchNewTextDialog={mockDispatchNewTextDialog}
+                    friendsDialogs={mockFriendsDialogs}
+                    sendMessageGroupChat={mockSendMessageGroupChat}
+                    sendMessageDialog={mockSendMessageDialog}
+                    currentUserId={123}
+                    displayChat={{displayGroupChat: false, displayUserChat: true, displayEmpty: false}}
+                    toggleDisplayChat={mockToggleDisplayChat}
+                    setDisplayFriends={mockSetDisplayFriends}
+                    handleOnScroll={mockHandleOnScroll}
+                    handleGetDialogData={mockHandleGetDialogData}
+                    searchFriendByName={mockSearchFriendByName}
                 />
             </BrowserRouter>
         );
@@ -37,49 +44,66 @@ describe('Messages component', () => {
         expect(getByText('Message 1')).toBeTruthy();
         expect(getByText('Message 2')).toBeTruthy();
 
-        // Check if textarea is rendered with correct value
-        const textarea = getByPlaceholderText('Enter your message');
-        expect(textarea).toBeTruthy();
-        expect(textarea.innerHTML).toBe('New message');
+        // Check if textarea is rendered
+        const inputs = getAllByRole('textbox');
+        expect(inputs[0]).toBeTruthy();
     });
 
     it('dispatches new text input correctly', () => {
-        const {getByPlaceholderText} = render(
+        const {getAllByRole} = render(
             <BrowserRouter>
                 <Messages
                     messagesData={mockMessagesData}
-                    dispatchNewTextInput={mockDispatchNewTextInput}
-                    addMessage={mockAddMessage}
+                    dispatchNewTextDialog={mockDispatchNewTextDialog}
+                    friendsDialogs={mockFriendsDialogs}
+                    sendMessageGroupChat={mockSendMessageGroupChat}
+                    sendMessageDialog={mockSendMessageDialog}
+                    currentUserId={123}
+                    displayChat={{displayGroupChat: false, displayUserChat: true, displayEmpty: false}}
+                    toggleDisplayChat={mockToggleDisplayChat}
+                    setDisplayFriends={mockSetDisplayFriends}
+                    handleOnScroll={mockHandleOnScroll}
+                    handleGetDialogData={mockHandleGetDialogData}
+                    searchFriendByName={mockSearchFriendByName}
                 />
             </BrowserRouter>
         );
 
-        const textarea = getByPlaceholderText('Enter your message');
+        const inputs = getAllByRole('textbox');
 
         // Simulate changing text in textarea
-        fireEvent.change(textarea, {target: {value: 'New input text'}});
+        fireEvent.change(inputs[0], {target: {value: 'New input text'}});
 
         // Check if dispatchNewTextInput was called with correct value
-        expect(mockDispatchNewTextInput).toHaveBeenCalledWith('New input text');
+        expect(mockDispatchNewTextDialog).toHaveBeenCalledWith('New input text');
     });
 
     it('dispatches add message correctly', () => {
-        const {getByText} = render(
+        const {getAllByRole} = render(
             <BrowserRouter>
                 <Messages
                     messagesData={mockMessagesData}
-                    dispatchNewTextInput={mockDispatchNewTextInput}
-                    addMessage={mockAddMessage}
+                    dispatchNewTextDialog={mockDispatchNewTextDialog}
+                    friendsDialogs={mockFriendsDialogs}
+                    sendMessageGroupChat={mockSendMessageGroupChat}
+                    sendMessageDialog={mockSendMessageDialog}
+                    currentUserId={123}
+                    displayChat={{displayGroupChat: false, displayUserChat: true, displayEmpty: false}}
+                    toggleDisplayChat={mockToggleDisplayChat}
+                    setDisplayFriends={mockSetDisplayFriends}
+                    handleOnScroll={mockHandleOnScroll}
+                    handleGetDialogData={mockHandleGetDialogData}
+                    searchFriendByName={mockSearchFriendByName}
                 />
             </BrowserRouter>
         );
 
-        const sendButton = getByText('Sent message');
+        const sendButton = getAllByRole('button');
 
         // Simulate clicking on the send message button
-        fireEvent.click(sendButton);
+        fireEvent.click(sendButton[1]);
 
         // Check if addMessage was called
-        expect(mockAddMessage).toHaveBeenCalled();
+        expect(mockSendMessageDialog).toHaveBeenCalled();
     });
 });

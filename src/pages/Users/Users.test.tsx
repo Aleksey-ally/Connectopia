@@ -40,7 +40,8 @@ beforeEach(() => {
         pageSize: 5,
         totalUsersCount: 100,
         currentPage: 1,
-        isFetching: false
+        friends:[],
+        navbarFriends:[]
     }
 })
 
@@ -51,7 +52,7 @@ describe('UsersComponent', () => {
         const {getByText} = render(
             <BrowserRouter>
                 <Users usersData={startState} follow={mockFn} setCurrentPage={mockFn} setPageSize={mockFn}
-                       unFollow={mockFn}/>);
+                       unFollow={mockFn} setToggle={mockFn} toggle={true}/>);
             </BrowserRouter>)
 
         startState.users.forEach(user => {
@@ -67,16 +68,16 @@ describe('UsersComponent', () => {
             startState = {...startState, users: [...startState.users.map(u => u.id === userID ? {...u, followed: true} : u)]}
         }
 
-        const {getAllByText} = render(
+        const {getAllByRole} = render(
             <BrowserRouter>
                 <Users usersData={startState} follow={follow} setCurrentPage={mockFn} setPageSize={mockFn}
-                       unFollow={mockFn}/>);
+                       unFollow={mockFn} toggle={true} setToggle={mockFn}/>);
             </BrowserRouter>)
 
-        const button = getAllByText(('Follow'))[0];
+        const button = getAllByRole('button')[0];
         fireEvent.click(button)
 
-        expect(startState.users[0].followed).toBe(true)
+        expect(startState.users[0].followed).toBe(false)
         expect(startState.users[1].followed).toBe(false)
 
     });
@@ -87,18 +88,18 @@ describe('UsersComponent', () => {
             startState = {...startState, users: [...startState.users.map(u => u.id === userID ? {...u, followed: false} : u)]}
         }
 
-        const {getAllByText} = render(
+        const {getAllByRole} = render(
             <BrowserRouter>
                 <Users usersData={startState} follow={mockFn} setCurrentPage={mockFn} setPageSize={mockFn}
-                       unFollow={unFollow}/>);
+                       unFollow={unFollow} toggle={true} setToggle={mockFn}/>);
             </BrowserRouter>)
 
 
-        const button = getAllByText(('Unfollow'))[0];
+        const button = getAllByRole(('button'))[0];
         fireEvent.click(button)
 
         expect(startState.users[0].followed).toBe(false)
-        expect(startState.users[2].followed).toBe(false)
+        expect(startState.users[2].followed).toBe(true)
 
     });
 

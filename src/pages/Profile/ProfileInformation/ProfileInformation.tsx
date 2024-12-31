@@ -16,7 +16,7 @@ import {ProfileUserResponseType} from "api/profile/profile.types";
 import {Like, Send} from "assets/icons";
 import {useTranslation} from "react-i18next";
 
-type Props = {
+export type PropsProfileInformation = {
     currentUserID: number | null
     uID?: number
     profileData?: ProfileDataType
@@ -44,7 +44,7 @@ export const ProfileInformation = (({
                                         setEditForm, errorMessage, follow,
                                         unFollow, isFollow, changePostText,
                                         addPost
-                                    }: Props) => {
+                                    }: PropsProfileInformation) => {
 
     const [isEditVisible, setEditVisible] = useState<boolean>(false);
     const userAvatarSelected = (e: ChangeEvent<HTMLInputElement>) => {

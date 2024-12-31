@@ -15,6 +15,7 @@ import {Button} from "components/Button";
 import {toast} from "react-toastify";
 import {successOptions} from "utils/ToastifyOptions/ToastifyOptions";
 import {useTranslation} from "react-i18next";
+import {LanguageSwitcher} from "components/LanguageSwitcher/LanguageSwitcher";
 
 export const Settings: FC = () => {
     const dispatch = useAppDispatch()
@@ -39,7 +40,7 @@ export const Settings: FC = () => {
 
     const buttonStatusHandler = () => {
         dispatch(changeUserStatus(status))
-            .then(()=>{
+            .then(() => {
                 toast.success(t("notifications.status"), successOptions)
             })
     }
@@ -50,24 +51,22 @@ export const Settings: FC = () => {
 
     const buttonNameHandler = () => {
         dispatch(changeUserName(user.fullName as string))
-            .then(()=>{
+            .then(() => {
                 toast.success(t("notifications.userName"), successOptions)
             })
     }
 
-    const { t, i18n } = useTranslation();
+    const {t} = useTranslation();
 
 
     return (
         <div className={s.settingsPage}>
             <Typography className={s.title} as={'h4'} variant={'h4'}>{t('settingsPage.language')}</Typography>
-            <div className={s.item}>
-                    <Button className={s.button} variant={'secondary'} onClick={() => i18n.changeLanguage("en")}>English</Button>
-                    <Button className={s.button} variant={'secondary'} onClick={() => i18n.changeLanguage("ru")}>Русский</Button>
-            </div>
 
+            <LanguageSwitcher/>
 
-            <Typography className={s.title} as={'h4'} variant={'h4'}>{t('settingsPage.personalInformation')}</Typography>
+            <Typography className={s.title} as={'h4'}
+                        variant={'h4'}>{t('settingsPage.personalInformation')}</Typography>
 
             <div className={s.item}>
                 <input className={s.input} id='status' type='text' value={status}

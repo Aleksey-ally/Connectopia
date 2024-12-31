@@ -1,0 +1,26 @@
+.languageSwitcher {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+
+  .button {
+
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: #00f2fe;
+    }
+
+    &.active {
+      background: var(--color-success-100);
+      border-color: #00f2fe;
+    }
+  }
+}
+
+

@@ -120,11 +120,11 @@ export const ProfileInformation = (({
                         {isFollow
                             ? <Button variant={'secondary'} onClick={() => {
                                 unFollow(uID!)
-                            }}>Unfollow
+                            }}>{t("users.unfollow")}
                             </Button>
                             : <Button onClick={() => {
                                 follow(uID!)
-                            }}>Follow</Button>}
+                            }}>{t("users.follow")}</Button>}
                     </div>}
                 </div>
             </div>

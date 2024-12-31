@@ -18,6 +18,7 @@ import {checkFollowedUser, followOnUser, unfollowOnUser} from "redux/usersReduce
 import {Photos, ProfileUserResponseType} from "api/profile/profile.types";
 import {Preloader} from "components/Preloader";
 import {setFetching} from "redux/appReducer";
+import {useTranslation} from "react-i18next";
 
 export const ProfileInformationContainer = () => {
     const dispatch = useAppDispatch()
@@ -87,19 +88,22 @@ export const ProfileInformationContainer = () => {
 
     }
 
-    const handleChangePostText = (newText: string)=>{
+    const handleChangePostText = (newText: string) => {
         dispatch(changePostText(newText))
     }
 
-    const handleAddPost = ()=>{
+    const handleAddPost = () => {
         dispatch(addPost())
     }
 
     const {uID} = useParams()
-    
+
     const paramsUID = Number(uID)
 
     const userID = paramsUID || currentUserID
+
+    const {t} = useTranslation();
+
     useEffect(() => {
         if (userID === null) return
 
@@ -108,10 +112,10 @@ export const ProfileInformationContainer = () => {
             try {
                 await dispatch(getUserProfile(userID))
                 await dispatch(getUserStatus(userID))
-                setLocalStatus(profileData.status? profileData.status: 'not specified');
-               if (paramsUID && currentUserID !== paramsUID ) {
-                   await checkFollowed(paramsUID)
-               }
+                setLocalStatus(profileData.status ? profileData.status : t("profilePage.noValue"));
+                if (paramsUID && currentUserID !== paramsUID) {
+                    await checkFollowed(paramsUID)
+                }
                 dispatch(setFetching(false))
 
             } catch {
@@ -121,21 +125,21 @@ export const ProfileInformationContainer = () => {
 
     }, [userID, profileData.status, dispatch])
 
-    return<>
+    return <>
         {isFetching ? <Preloader/> :
-        <ProfileInformation currentUserID={currentUserID}
-                            uID={paramsUID} profileData={profileData} status={localStatus} edit={editStatus}
-                            toggleEditHandler={toggleEditHandler}
-                            changeStatusHandler={changeStatusHandler}
-                            dispatch={dispatch}
-                            handleSubmitProfileForm={handleSubmitProfileForm}
-                            editForm={editForm} setEditForm={setEditFormWithCheck}
-                            errorMessage={errorMessage}
-                            follow={follow}
-                            unFollow={unFollow}
-                            isFollow={isFollow}
-                            changePostText={handleChangePostText}
-                            addPost={handleAddPost}/>
+            <ProfileInformation currentUserID={currentUserID}
+                                uID={paramsUID} profileData={profileData} status={localStatus} edit={editStatus}
+                                toggleEditHandler={toggleEditHandler}
+                                changeStatusHandler={changeStatusHandler}
+                                dispatch={dispatch}
+                                handleSubmitProfileForm={handleSubmitProfileForm}
+                                editForm={editForm} setEditForm={setEditFormWithCheck}
+                                errorMessage={errorMessage}
+                                follow={follow}
+                                unFollow={unFollow}
+                                isFollow={isFollow}
+                                changePostText={handleChangePostText}
+                                addPost={handleAddPost}/>
         }
     </>
 }

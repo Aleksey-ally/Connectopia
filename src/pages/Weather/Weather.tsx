@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {ReducersType} from "redux/reduxStore";
 import {setFetching} from "redux/appReducer";
 import {Preloader} from "components/Preloader";
+import {useTranslation} from "react-i18next";
 
 export const Weather = () => {
     const dispatch = useDispatch()
@@ -20,15 +21,17 @@ export const Weather = () => {
     const [forecast, setForecast] = useState<ForecastDataList[]>([]);
     const [error, setError] = useState<string | null>(null);
 
+    const {t, i18n} = useTranslation();
+
     const fetchWeatherData = async (cityName: string) => {
         try {
             dispatch(setFetching(true))
             setError(null);
 
-            const weatherData = await weatherAPI.getWeatherData(cityName)
+            const weatherData = await weatherAPI.getWeatherData(cityName, i18n.language)
             setWeatherData(weatherData);
 
-            const forecastData = await weatherAPI.getForecastData(cityName)
+            const forecastData = await weatherAPI.getForecastData(cityName, i18n.language)
 
             const dailyForecast = forecastData.list.filter(
                 (_, index: number) => index % 8 === 0
@@ -79,7 +82,7 @@ export const Weather = () => {
                         <input
                             type="text"
                             className={s.cardSearchBar}
-                            placeholder="Введите название города"
+                            placeholder={t("weatherPage.placeholder")}
                             value={searchInput}
                             onChange={(e) => setSearchInput(e.target.value)}
                         />
@@ -99,7 +102,7 @@ export const Weather = () => {
                             <div className={s.cityDateWrapper}>
                                 <div className={s.cityDate}>
                                     <p className={s.city}>{weatherData.name}</p>
-                                    <p>{new Date(weatherData.dt * 1000).toLocaleDateString('ru-RU', dayOptions)}</p>
+                                    <p>{new Date(weatherData.dt * 1000).toLocaleDateString(`${i18n.language}-${i18n.language.toUpperCase()}`, dayOptions)}</p>
                                 </div>
                                 <div className={s.iconDescription}>
                                     <img
@@ -123,7 +126,7 @@ export const Weather = () => {
 
                                         <div className={s.detailItem}>
                                             <SpeedWind/>
-                                            <p>{Math.round(weatherData.wind.speed)} м/с</p>
+                                            <p>{Math.round(weatherData.wind.speed)} {t("weatherPage.m/s")}</p>
                                         </div>
 
                                     </div>
@@ -131,12 +134,12 @@ export const Weather = () => {
 
                                         <div className={s.detailItem}>
                                             <Sunrise/>
-                                            <p>{new Date(weatherData?.sys.sunrise * 1000).toLocaleTimeString('ru-RU', sunOptions)}</p>
+                                            <p>{new Date(weatherData?.sys.sunrise * 1000).toLocaleTimeString(`${i18n.language}-${i18n.language.toUpperCase()}`, sunOptions)}</p>
                                         </div>
 
                                         <div className={s.detailItem}>
                                             <Sunset/>
-                                            <p>{new Date(weatherData?.sys.sunset * 1000).toLocaleTimeString('ru-RU', sunOptions)}</p>
+                                            <p>{new Date(weatherData?.sys.sunset * 1000).toLocaleTimeString(`${i18n.language}-${i18n.language.toUpperCase()}`, sunOptions)}</p>
                                         </div>
 
                                     </div>
@@ -151,11 +154,11 @@ export const Weather = () => {
             {forecast.length > 0 && city && forecast && (
 
                 <div className={s.forecastWrapper}>
-                    <h2 className={s.forecastHeader}>Прогноз на 5 дней</h2>
+                    <h2 className={s.forecastHeader}>{t("weatherPage.header")}</h2>
                     <div className={s.forecast}>
                         {forecast.map((day, index) => (
 
-                            <Forecast key={index} day={new Date(day.dt * 1000).toLocaleDateString("ru-RU", {
+                            <Forecast key={index} day={new Date(day.dt * 1000).toLocaleDateString(`${i18n.language}-${i18n.language.toUpperCase()}`, {
                                 weekday: "short",
                             })}
                                       temperature={Math.round(day.main.temp)}

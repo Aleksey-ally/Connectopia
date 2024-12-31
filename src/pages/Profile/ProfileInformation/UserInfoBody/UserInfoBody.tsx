@@ -54,12 +54,12 @@ export const UserInfoBody = memo(({
                     <label className={s.titleOption} onDoubleClick={enableEditForm}>{t('profilePage.mySkills')}</label>
                     <Typography className={s.option} variant={'subtitle2'}
                                 as={'div'}
-                                onDoubleClick={enableEditForm}>{profile?.lookingForAJobDescription || 'not specified'}</Typography>
+                                onDoubleClick={enableEditForm}>{profile?.lookingForAJobDescription || t("profilePage.noValue")}</Typography>
                 </li>
                 <li>
                     <label className={s.titleOption} onDoubleClick={enableEditForm}>{t('profilePage.aboutMe')}</label> <Typography
                     className={s.option} variant={'subtitle2'}
-                    as={'div'} onDoubleClick={enableEditForm}>{profile?.aboutMe || 'not specified'}</Typography>
+                    as={'div'} onDoubleClick={enableEditForm}>{profile?.aboutMe || t("profilePage.noValue")}</Typography>
                 </li>
                 <li>
                     <label className={s.titleOption}
@@ -67,7 +67,7 @@ export const UserInfoBody = memo(({
                     <div key={c} className={s.optionWrapper}>
                         <Typography as={'h5'} className={s.titleContact}>{c}:</Typography>
                         <Typography className={s.option}
-                                    onDoubleClick={enableEditForm}>{profile.contacts![c] || 'not specified'}</Typography>
+                                    onDoubleClick={enableEditForm}>{profile.contacts![c] || t("profilePage.noValue")}</Typography>
                     </div>
                 )) || null}
                 </li>

@@ -26,7 +26,8 @@
     "contacts": "Contacts:",
     "labelPost": "Write something...",
     "changeBtn": "Change",
-    "saveBtn": "Save"
+    "saveBtn": "Save",
+    "noValue": "not specified"
   },
   "navbar": {
     "menu": "Menu",
@@ -50,5 +51,21 @@
     "myProfile": "My Profile",
     "signOut": "Sign Out",
     "login": "Login"
+  },
+  "users": {
+    "onlyFriends": "Only friends",
+    "follow": "Follow",
+    "unfollow": "Unfollow"
+  },
+  "pagination": {
+    "show": "Show",
+    "onPage": "on page"
+  },
+  "weatherPage": {
+    "placeholder": "Enter city name",
+    "m/s": "m/s",
+    "max": "Max",
+    "min": "Min",
+    "header": "5 day forecast"
   }
 }

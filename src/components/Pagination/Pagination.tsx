@@ -1,88 +1,91 @@
-import { FC } from 'react'
+import {FC} from 'react'
 
 import s from 'components/Pagination/Pagination.module.scss'
 
 import {ArrowLeft, ArrowRight} from "assets/icons";
 import {usePagination} from "components/Pagination/usePagination";
 import {Select} from "components/Select";
+import {useTranslation} from "react-i18next";
 
 export type PaginationProps = {
-  count: number
-  siblings?: number
-  page: number
-  onChange: (pageNumber: number) => void
-  perPage?: number
-  perPageOptions?: number[]
-  onPerPageChange?: (itemPerPage: string) => void
+    count: number
+    siblings?: number
+    page: number
+    onChange: (pageNumber: number) => void
+    perPage?: number
+    perPageOptions?: number[]
+    onPerPageChange?: (itemPerPage: string) => void
 }
 export const Pagination: FC<PaginationProps> = ({
-  page,
-  count,
-  siblings,
-  onChange,
-  perPage,
-  perPageOptions,
-  onPerPageChange,
-}) => {
-  const {
-    paginationRange,
-    isFirstPage,
-    isLastPage,
-    handlePageClicked,
-    handleNextClicked,
-    handlePreviousClicked,
-  } = usePagination({ page, count, siblings: siblings, onChange })
+                                                    page,
+                                                    count,
+                                                    siblings,
+                                                    onChange,
+                                                    perPage,
+                                                    perPageOptions,
+                                                    onPerPageChange,
+                                                }) => {
+    const {
+        paginationRange,
+        isFirstPage,
+        isLastPage,
+        handlePageClicked,
+        handleNextClicked,
+        handlePreviousClicked,
+    } = usePagination({page, count, siblings: siblings, onChange})
 
-  const showPerPageSelect = !!perPage && !!perPageOptions && !!onPerPageChange
+    const showPerPageSelect = !!perPage && !!perPageOptions && !!onPerPageChange
 
-  return (
-    <div className={s.container}>
-      <div className={s.paginationRange}>
-        <button className={s.item} disabled={isFirstPage} onClick={handlePreviousClicked}>
+    const {t} = useTranslation();
+
+    return (
+        <div className={s.container}>
+            <div className={s.paginationRange}>
+                <button className={s.item} disabled={isFirstPage} onClick={handlePreviousClicked}>
           <span className={s.icon}>
-            <ArrowLeft />
+            <ArrowLeft/>
           </span>
-        </button>
+                </button>
 
-        {paginationRange.map((el: number | string, index) => {
-          if (typeof el !== 'number') {
-            return (
-              <span className={s.dots} key={index}>
+                {paginationRange.map((el: number | string, index) => {
+                    if (typeof el !== 'number') {
+                        return (
+                            <span className={s.dots} key={index}>
                 . . .
               </span>
-            )
-          }
+                        )
+                    }
 
-          return (
-            <button
-              key={index}
-              onClick={handlePageClicked(el)}
-              className={`${s.item} ${el === page && s.selected}`}
-              disabled={el === page}
-            >
-              {el}
-            </button>
-          )
-        })}
+                    return (
+                        <button
+                            key={index}
+                            onClick={handlePageClicked(el)}
+                            className={`${s.item} ${el === page && s.selected}`}
+                            disabled={el === page}
+                        >
+                            {el}
+                        </button>
+                    )
+                })}
 
-        <button className={s.item} disabled={isLastPage} onClick={handleNextClicked}>
+                <button className={s.item} disabled={isLastPage} onClick={handleNextClicked}>
           <span className={s.icon}>
-            <ArrowRight />
+            <ArrowRight/>
           </span>
-        </button>
-      </div>
-      {showPerPageSelect && (
-        <div className={s.selectBox}>
-          Show
-          <Select
-            variant="pagination"
-            value={perPage}
-            onValueChange={onPerPageChange}
-            items={perPageOptions?.map(el => ({ label: `${el}`, value: `${el}` }))}
-          />
-          on page
+                </button>
+            </div>
+            {showPerPageSelect && (
+                <div className={s.selectBox}>
+                    {t("pagination.show")}
+                    <Select
+                        variant="pagination"
+                        value={perPage}
+                        onValueChange={onPerPageChange}
+                        items={perPageOptions?.map(el => ({label: `${el}`, value: `${el}`}))}
+                    />
+                    {t("pagination.onPage")}
+                </div>
+            )}
         </div>
-      )}
-    </div>
-  )
+    )
 }

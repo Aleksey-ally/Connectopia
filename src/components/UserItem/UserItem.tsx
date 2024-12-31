@@ -5,6 +5,7 @@ import {Avatar} from "components/Avatar";
 import {Typography} from "components/Typography";
 import {Button} from "components/Button";
 import {UserType} from "api/users/users.types";
+import {useTranslation} from "react-i18next";
 
 type UserItemType =
     Omit<UserType, 'followed' | 'toggleFollowing'>
@@ -31,6 +32,8 @@ export const UserItem = memo(({
                                   handleGetDialogData
                               }: UserItemType) => {
 
+    const {t} = useTranslation();
+
     return (
         <div className={`${s.user} ${className}`} onClick={() => handleGetDialogData?.(id, 1, 20, name, photos?.small)}>
             <div className={s.userInfo}>
@@ -50,9 +53,9 @@ export const UserItem = memo(({
             {follow && unFollow &&
                 (followed
                     ? <Button variant={'secondary'} onClick={() => unFollow(id)}
-                              disabled={toggleFollowing}>Unfollow</Button>
+                              disabled={toggleFollowing}>{t("users.unfollow")}</Button>
                     : <Button onClick={() => follow(id)}
-                              disabled={toggleFollowing}>Follow</Button>)}
+                              disabled={toggleFollowing}>{t("users.follow")}</Button>)}
         </div>
     )
 })

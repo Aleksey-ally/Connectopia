@@ -4,6 +4,7 @@ import {Pagination} from "components/Pagination";
 import React, {memo} from "react";
 import {UserItem} from "components/UserItem";
 import {Checkbox} from "components/Checkbox";
+import {useTranslation} from "react-i18next";
 
 export type UsersPropsType = {
     usersData: UsersType
@@ -15,9 +16,19 @@ export type UsersPropsType = {
     setToggle: (toggle: boolean) => void
 }
 
-export const Users = memo(({usersData, follow, unFollow, setCurrentPage, setPageSize, toggle, setToggle}: UsersPropsType) => {
+export const Users = memo(({
+                               usersData,
+                               follow,
+                               unFollow,
+                               setCurrentPage,
+                               setPageSize,
+                               toggle,
+                               setToggle
+                           }: UsersPropsType) => {
 
     const pagesCount = Math.ceil(usersData.totalUsersCount / usersData.pageSize)
+
+    const {t} = useTranslation();
 
     return (
         <div className={s.users}>
@@ -25,7 +36,7 @@ export const Users = memo(({usersData, follow, unFollow, setCurrentPage, setPage
                 <Pagination count={pagesCount} page={usersData.currentPage} onChange={setCurrentPage}
                             perPage={usersData.pageSize} onPerPageChange={(pageSize) => setPageSize(Number(pageSize))}
                             perPageOptions={[5, 10, 20, 30, 40, 50]}/>
-                <Checkbox checked={toggle} onValueChange={setToggle} label={"Only friends"}/>
+                <Checkbox checked={toggle} onValueChange={setToggle} label={t("users.onlyFriends")}/>
             </div>
             {usersData.users.map(u => (
                 <UserItem key={u.id} id={u.id} photos={u.photos} name={u.name} status={u.status}

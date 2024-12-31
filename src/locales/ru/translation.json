@@ -25,7 +25,8 @@
     "contacts": "Контакты:",
     "labelPost": "Напишите что-нибудь...",
     "changeBtn": "Изменить",
-    "saveBtn": "Сохранить"
+    "saveBtn": "Сохранить",
+    "noValue": "не указано"
   },
   "navbar": {
     "menu": "Меню",
@@ -49,5 +50,21 @@
     "myProfile": "Мой Профиль",
     "signOut": "Выйти",
     "login": "Вход"
+  },
+  "users": {
+    "onlyFriends": "Только друзья",
+    "follow": "Подписаться",
+    "unfollow": "Отписаться"
+  },
+  "pagination": {
+    "show": "Показать",
+    "onPage": "на странице"
+  },
+  "weatherPage": {
+    "placeholder": "Введите название города",
+    "m/s": "м/с",
+    "max": "Макс",
+    "min": "Мин",
+    "header": "Прогноз на 5 дней"
   }
 }

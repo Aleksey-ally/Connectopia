@@ -34,7 +34,7 @@ export const LoginForm = () => {
     const [generalError, setGeneralError] = useState<string>('')
     const [captchaUrl, setCaptchaUrl] = useState<string>('')
 
-    const { t } = useTranslation();
+    const {t} = useTranslation();
 
     const onSubmit = (data: PropertiesLogin) => {
         dispatch(login(data)).then((message) => {
@@ -57,6 +57,11 @@ export const LoginForm = () => {
         defaultValue: false,
     })
 
+    const [inputValue, setInputValue] = useState({
+        email: 'free@samuraijs.com',
+        password: 'free'
+    })
+
 
     return (
         <div className={s.login}>
@@ -65,18 +70,19 @@ export const LoginForm = () => {
             </Typography>
             <form className={s.loginForm} onSubmit={handleSubmit(onSubmit)}>
 
-                <TextField type={'email'} label={'Email'}
+                <TextField value={inputValue.email} onValueChange={(value)=>setInputValue({...inputValue, email: value})} type={'email'} label={'Email'}
                            {...register('email', {required: 'Email is required'})}
                            errorMessage={errors.email?.message}/>
 
-                <TextField type={"password"} label= {t("login.password")}
+                <TextField value={inputValue.password} onValueChange={(value)=>setInputValue({...inputValue, password: value})} type={"password"} label={t("login.password")}
                            {...register('password', {
                                required: 'Password is required',
                                minLength: {value: 3, message: 'Min length 3'}
                            })}
                            errorMessage={errors.password?.message}/>
 
-                <Checkbox label= {t("login.rememberMe")} {...register('rememberMe')} onValueChange={onChange} checked={value}/>
+                <Checkbox label={t("login.rememberMe")} {...register('rememberMe')} onValueChange={onChange}
+                          checked={value}/>
                 <img src={captchaUrl} alt=""/>
                 {generalError && <Typography variant='error'>{generalError}</Typography>}
                 {captchaUrl && <TextField type={'text'} {...register('captcha', {required: 'Captcha is required'})}

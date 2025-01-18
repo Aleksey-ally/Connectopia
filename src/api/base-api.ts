@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const SOCIAL_NETWORK_API_KEY = process.env.REACT_APP_SOCIAL_NETWORK_API_KEY;
+const SOCIAL_NETWORK_API_KEY = process.env.REACT_APP_VERCEL_ENV_SOCIAL_NETWORK_API_KEY;
 
 export const instance = axios.create(
     {

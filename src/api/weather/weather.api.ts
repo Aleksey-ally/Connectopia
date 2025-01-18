@@ -1,7 +1,7 @@
 import axios from "axios";
 import {ForecastData, WeatherData} from "./weather.types";
 
-const WEATHER_API_KEY = 'abc4057370fdbfe74e1443602ae54753'
+const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
 const instance = axios.create({
     baseURL: 'https://api.openweathermap.org/data/2.5/',

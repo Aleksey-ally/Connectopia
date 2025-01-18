@@ -5,8 +5,8 @@ import {createRoot} from 'react-dom/client'
 import {Provider} from "react-redux";
 import 'i18n/i18n';
 import {reduxStore} from "redux/reduxStore";
-import {ToastContainer} from "react-toastify";
 import {Router} from "router";
+import {ToastContainer} from "react-toastify";
 
 const root = createRoot(document.getElementById('root') as HTMLElement)
 root.render(

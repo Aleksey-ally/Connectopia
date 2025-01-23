@@ -5,7 +5,6 @@ const SOCIAL_NETWORK_API_KEY = process.env.REACT_APP_VERCEL_ENV_SOCIAL_NETWORK_A
 export const instance = axios.create(
     {
         baseURL: 'https://social-network.samuraijs.com/api/1.0/',
-        withCredentials: true,
         headers: {
             'API-KEY': SOCIAL_NETWORK_API_KEY
         }
